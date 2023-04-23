@@ -157,7 +157,8 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(l_Ray, out l_RayCastHit, m_MaxShootDistance, m_WaterLayerMask.value))
         {
-            waterParticles.transform.LookAt(l_RayCastHit.point);
+            Vector3 lookAtWater = new Vector3(l_RayCastHit.point.x, transform.position.y, l_RayCastHit.point.z);
+            waterParticles.transform.LookAt(lookAtWater);
             Vector3 targetPosition = new Vector3(l_RayCastHit.point.x, transform.position.y, l_RayCastHit.point.z);
             transform.LookAt(targetPosition);
 
@@ -172,16 +173,6 @@ public class PlayerController : MonoBehaviour
                 l_RayCastHit.transform.GetChild(0).gameObject.SetActive(false);
             }
         }
-    }
-
-    public void JetpackForce()
-    {
-        p_Rigidbody.constraints = ~RigidbodyConstraints.FreezePositionY;
-        p_Rigidbody.AddForce(Vector3.up * elevateForce, ForceMode.Force);
-        p_Rigidbody.useGravity = false;
-        //Debug.Log(elevateForce);
-        //elevateForce += elevateIncrementForce * Time.deltaTime;
-        //elevateForce = Mathf.Clamp(elevateForce, 0, elevateMaxForce);
     }
 
 }
