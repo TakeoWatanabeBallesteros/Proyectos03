@@ -75,21 +75,14 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            //KnockBackv2();
             ShootWater();
         }
 
-        
+
         if (Input.GetMouseButtonUp(0))
         {
-            /*
-            Force = initialForce;
-            elevateForce = elevateInitialForce;
-            p_Rigidbody.useGravity = true;
-            Physics.gravity = Vector3.Lerp(Physics.gravity, new Vector3(0f, -10f, 0), 2f);*/
             chorroAgua.Stop();
         }
-
 
         IsGrounded();
         GatherInput();
@@ -99,15 +92,7 @@ public class PlayerController : MonoBehaviour
         {
             Move();
         }
-
-        /*
-        if (!m_OnGround && Input.GetKey(KeyCode.Space))
-        {
-            if (Input.GetMouseButton(0))
-            {
-                KnockBackv2();
-            }
-        }*/
+                
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -131,7 +116,7 @@ public class PlayerController : MonoBehaviour
         else
             m_OnGround = false;
     }
-      
+
 
     private void GatherInput()
     {
@@ -148,7 +133,7 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        p_Rigidbody.MovePosition(transform.position + transform.forward * _input.normalized.magnitude * m_WalkSpeed * Time.deltaTime);
+        p_Rigidbody.MovePosition(transform.position + transform.forward * _input.normalized.magnitude * m_WalkSpeed * Time.deltaTime);        
     }
 
     void LookAtMouse()
@@ -157,46 +142,12 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(_cameraRay, out _cameraRayHit))
         {
-            if (_cameraRayHit.transform.tag == "Ground")
-            {
-                Vector3 targetPosition = new Vector3(_cameraRayHit.point.x, transform.position.y, _cameraRayHit.point.z);
-                transform.LookAt(targetPosition);
-            }
+            Debug.Log("Lookingatmouse");
+            Vector3 targetPosition = new Vector3(_cameraRayHit.point.x, transform.position.y, _cameraRayHit.point.z);
+            transform.LookAt(targetPosition);
         }
     }
 
-    public void KnockBackv2()
-    {               
-        Ray l_Ray = m_Camera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit l_RayCastHit;
-        //Debug.DrawRay(m_Camera.transform.position, direction * 100, Color.green, 5f);
-        p_Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-        chorroAgua.Play();
-
-        if (Physics.Raycast(l_Ray, out l_RayCastHit, m_MaxShootDistance, m_WaterLayerMask.value))
-        {
-
-            if (l_RayCastHit.transform.tag == "CanMove")
-            {
-                m_MoveDir = (l_RayCastHit.transform.position - transform.position).normalized;
-                l_RayCastHit.rigidbody.AddForce(m_MoveDir, ForceMode.Impulse);
-
-            }
-            else if (l_RayCastHit.transform.tag == "Fire")
-            {
-                l_RayCastHit.transform.gameObject.SetActive(false);
-            }
-            else
-            {
-                Knockback = (l_RayCastHit.point - transform.position).normalized;
-                Force += incrementForce * Time.deltaTime;
-                p_Rigidbody.AddForce(-Knockback * Force, ForceMode.Force);
-                Force = Mathf.Clamp(Force, 0, maxForce);
-                waterParticles.transform.LookAt(l_RayCastHit.point);
-                //Debug.Log(Force);
-            }
-        }
-    }
 
     public void ShootWater()
     {
@@ -207,6 +158,9 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(l_Ray, out l_RayCastHit, m_MaxShootDistance, m_WaterLayerMask.value))
         {
             waterParticles.transform.LookAt(l_RayCastHit.point);
+            Vector3 targetPosition = new Vector3(l_RayCastHit.point.x, transform.position.y, l_RayCastHit.point.z);
+            transform.LookAt(targetPosition);
+
             if (l_RayCastHit.transform.tag == "CanMove")
             {
                 m_MoveDir = (l_RayCastHit.transform.position - transform.position).normalized;
@@ -214,9 +168,9 @@ public class PlayerController : MonoBehaviour
 
             }
             if (l_RayCastHit.transform.tag == "Burning")
-            {              
+            {
                 l_RayCastHit.transform.GetChild(0).gameObject.SetActive(false);
-            }            
+            }
         }
     }
 
