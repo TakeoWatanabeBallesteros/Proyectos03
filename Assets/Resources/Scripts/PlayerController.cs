@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     float distToGround = 1f;
 
     public Camera m_Camera;
-    CameraController m_CameraController;
+    CameraControllerv2 m_CameraController;
     public float m_LerRotationPct = 0.85f;
     public float m_WalkSpeed = 2.5f;
     public float m_RunSpeed = 6.5f;
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         p_Rigidbody = GetComponent<Rigidbody>();
-        m_CameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
+        m_CameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraControllerv2>();
         mainCameraGO = GameObject.FindGameObjectWithTag("MainCamera");
         m_Camera = Camera.main;
         Force = initialForce;
