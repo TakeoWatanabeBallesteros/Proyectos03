@@ -5,6 +5,7 @@ using TMPro;
 
 public class PickupKid : MonoBehaviour
 {
+    public GameController GM;
     public Transform Shoulder;
     public Transform DropPoint;
     public TMP_Text PickupText;
@@ -24,21 +25,25 @@ public class PickupKid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CanPickup && Input.GetKeyDown(KeyCode.E))
+        if (CanPickup /*&& Input.GetKeyDown(KeyCode.E)*/)
         {
             PickupText.enabled = false;
             TargetKid.transform.SetParent(gameObject.transform);
             TargetKid.transform.position = Shoulder.position;
             TargetKid.transform.rotation = Quaternion.Euler(-90, 0, 0);
+            TargetKid.GetComponent<BoxCollider>().enabled = false;
             CarringKid = true;
+            CanPickup = false;
         }
-        if (CanExtract && Input.GetKeyDown(KeyCode.E))
+        if (CanExtract /*&& Input.GetKeyDown(KeyCode.E)*/)
         {
             PickupText.enabled = false;
             TargetKid.transform.SetParent(null);
             TargetKid.transform.position = DropPoint.position;
             TargetKid.transform.rotation = Quaternion.Euler(-90, 90, 0);
             CarringKid = false;
+            GM.AddChild();
+            CanExtract = false;
         }
     }
     private void OnTriggerEnter(Collider other)
