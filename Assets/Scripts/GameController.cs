@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
     private int SavedKids;
     private int TotalKids;
-    public Text kids;
+    public TMP_Text kids;
 
     // Start is called before the first frame update
     void Start()

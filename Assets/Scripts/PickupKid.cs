@@ -1,28 +1,71 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PickupKid : MonoBehaviour
 {
     public Transform Shoulder;
+    public Transform DropPoint;
+    public TMP_Text PickupText;
+    private bool CarringKid;
+    [SerializeField] private bool CanExtract;
+    [SerializeField]private bool CanPickup;
+    private GameObject TargetKid;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        CarringKid = false;
+        CanExtract = false;
+        CanPickup = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (CanPickup && Input.GetKeyDown(KeyCode.E))
+        {
+            PickupText.enabled = false;
+            TargetKid.transform.SetParent(gameObject.transform);
+            TargetKid.transform.position = Shoulder.position;
+            TargetKid.transform.rotation = Quaternion.Euler(-90, 0, 0);
+            CarringKid = true;
+        }
+        if (CanExtract && Input.GetKeyDown(KeyCode.E))
+        {
+            PickupText.enabled = false;
+            TargetKid.transform.SetParent(null);
+            TargetKid.transform.position = DropPoint.position;
+            TargetKid.transform.rotation = Quaternion.Euler(-90, 90, 0);
+            CarringKid = false;
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag ==  "Kid")
+        if (other.tag ==  "Kid" && !CarringKid)
         {
-            other.transform.SetParent(gameObject.transform);
-            other.transform.position = Shoulder.position;
-            other.transform.rotation = Quaternion.Euler(-90,0,0);
+            PickupText.text = "Press E to pickup Kid";
+            PickupText.enabled = true;
+            CanPickup = true;
+            TargetKid = other.gameObject;
         }
+        if (other.tag == "Extraction" && CarringKid)
+        {
+            PickupText.text = "Press E to Drop Kid";
+            PickupText.enabled = true;
+            CanExtract = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Kid" || other.tag == "Extraction")
+        {
+            PickupText.enabled = false;
+            CanPickup = false;
+            CanExtract = false;
+        }
+
     }
 }
