@@ -18,7 +18,9 @@ public class FirePropagation : MonoBehaviour
     public bool secondGrade;
     public bool thirdGrade;
 
-    float rndPercentage;
+    float rndPercentage1;
+    float rndPercentage2;
+    float rndPercentage3;
 
     float fireHP = 100f;
 
@@ -26,14 +28,26 @@ public class FirePropagation : MonoBehaviour
     void Start()
     {
         firePrefab = Resources.Load("Prefabs/Firee") as GameObject;
-        //rndPercentage = Random.Range(5f, 20f);        
+        //rndPercentage = Random.Range(5f, 20f);
+        if (firstGrade)
+        {
+            rndPercentage1 = Random.Range(5f, 20f);
+        }
+        else if (secondGrade)
+        {
+            rndPercentage2 = Random.Range(5f, 20f);
+        }
+        else if (thirdGrade)
+        {
+            rndPercentage3 = Random.Range(5f, 20f);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         CalculateFireProp();
-        //fireHP -= Time.deltaTime * 1.2f;
+        fireHP -= Time.deltaTime;
     }
 
 
