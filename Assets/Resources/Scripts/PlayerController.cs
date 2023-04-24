@@ -56,6 +56,10 @@ public class PlayerController : MonoBehaviour
     ParticleSystem chorroAgua;
     bool canShootWater = true;
 
+    public Transform m_LifeBarAnchorPosition;
+    public RectTransform m_LifeBarRectPosition;
+    public GameObject m_LifeBar;
+
 
     // Start is called before the first frame update
     void Start()
@@ -87,6 +91,7 @@ public class PlayerController : MonoBehaviour
         IsGrounded();
         GatherInput();
         Look();
+        UpdateLifeBarPosition();
 
         if (m_OnGround)
         {
@@ -173,6 +178,13 @@ public class PlayerController : MonoBehaviour
                 l_RayCastHit.transform.GetChild(0).gameObject.SetActive(false);
             }
         }
+    }
+
+    void UpdateLifeBarPosition()
+    {
+        Vector3 l_Position = m_Camera.WorldToViewportPoint(m_LifeBarAnchorPosition.position);
+        m_LifeBarRectPosition.anchoredPosition = new Vector3(l_Position.x * 1920f, -(1080f - l_Position.y * 1080f), l_Position.z * 1920f);
+        m_LifeBarRectPosition.gameObject.SetActive(l_Position.z > 0.0f);
     }
 
 }

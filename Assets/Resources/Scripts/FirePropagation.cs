@@ -10,14 +10,23 @@ public class FirePropagation : MonoBehaviour
     public GameObject sonFire;
     GameObject firePrefab;
     float distance;
-    float nearDistance = 5f;
+    public float nearDistance = 5f;
 
     bool created = false;
+
+    public bool firstGrade;
+    public bool secondGrade;
+    public bool thirdGrade;
+
+    float rndPercentage;
 
     // Start is called before the first frame update
     void Start()
     {
         firePrefab = Resources.Load("Prefabs/Firee") as GameObject;
+
+        //rndPercentage = Random.Range(5f, 20f);
+        
     }
 
     // Update is called once per frame
@@ -50,10 +59,13 @@ public class FirePropagation : MonoBehaviour
 
     IEnumerator Instantiations()
     {
+        if (nearFire.GetComponent<FirePropagation>() == null)
+        {
+            nearFire.AddComponent<FirePropagation>();
+        }
         yield return new WaitForSeconds(2f);
         sonFire = nearFire.transform.GetChild(0).gameObject;     
-        nearFire.transform.tag = "Burning";
-        nearFire.AddComponent<FirePropagation>();
+        nearFire.transform.tag = "Burning";        
         sonFire.SetActive(true);
     }
 
