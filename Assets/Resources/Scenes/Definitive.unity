@@ -798,6 +798,10 @@ MonoBehaviour:
   Fire: []
   nearFire: {fileID: 0}
   sonFire: {fileID: 0}
+  nearDistance: 5
+  firstGrade: 0
+  secondGrade: 0
+  thirdGrade: 0
 --- !u!1 &645686610
 GameObject:
   m_ObjectHideFlags: 0
@@ -1877,6 +1881,9 @@ MonoBehaviour:
   elevateMaxForce: 100
   elevateIncrementForce: 3
   waterParticles: {fileID: 660219784}
+  m_LifeBarAnchorPosition: {fileID: 0}
+  m_LifeBarRectPosition: {fileID: 0}
+  m_LifeBar: {fileID: 0}
 --- !u!136 &1401661895
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2957,7 +2964,7 @@ GameObject:
   - component: {fileID: 2109058986}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Extraction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
