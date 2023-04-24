@@ -9,6 +9,8 @@ public class InputPlayerController : MonoBehaviour
     private PlayerControls controls = null;
     
     public Vector2 movement { get; private set; }
+    public bool shoot { get; private set; }
+    public bool interact { get; private set; }
     
     private void OnEnable()
     {
@@ -27,6 +29,10 @@ public class InputPlayerController : MonoBehaviour
         controls = new PlayerControls();
         controls.Player.Movement.performed += ctx => movement = ctx.ReadValue<Vector2>();
         controls.Player.Movement.canceled += ctx => movement = ctx.ReadValue<Vector2>();
+        controls.Player.Shoot.performed += ctx => shoot = ctx.ReadValueAsButton();
+        controls.Player.Shoot.canceled += ctx => shoot = ctx.ReadValueAsButton();
+        controls.Player.Interact.performed += ctx => interact = ctx.ReadValueAsButton();
+        controls.Player.Interact.canceled += ctx => interact = ctx.ReadValueAsButton();
     }
 
     // Start is called before the first frame update
