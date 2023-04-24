@@ -90,7 +90,6 @@ public class PlayerController : MonoBehaviour
 
         IsGrounded();
         GatherInput();
-        Look();
         UpdateLifeBarPosition();
 
         if (m_OnGround)
@@ -127,14 +126,7 @@ public class PlayerController : MonoBehaviour
     {
         _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
     }
-
-    private void Look()
-    {
-        if (_input == Vector3.zero) return;
-
-        var rot = Quaternion.LookRotation(_input.ToIso(), Vector3.up);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, _turnSpeed * Time.deltaTime);
-    }
+       
 
     private void Move()
     {
