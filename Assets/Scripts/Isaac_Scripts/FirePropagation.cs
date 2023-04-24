@@ -20,19 +20,20 @@ public class FirePropagation : MonoBehaviour
 
     float rndPercentage;
 
+    float fireHP = 100f;
+
     // Start is called before the first frame update
     void Start()
     {
         firePrefab = Resources.Load("Prefabs/Firee") as GameObject;
-
-        //rndPercentage = Random.Range(5f, 20f);
-        
+        //rndPercentage = Random.Range(5f, 20f);        
     }
 
     // Update is called once per frame
     void Update()
     {
         CalculateFireProp();
+        //fireHP -= Time.deltaTime * 1.2f;
     }
 
 
