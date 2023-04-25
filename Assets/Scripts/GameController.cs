@@ -6,7 +6,7 @@ using TMPro;
 public class GameController : MonoBehaviour
 {
     [SerializeField]private int SavedKids = 0;
-    [SerializeField] private List<GameObject> Kids;
+    [SerializeField] private GameObject[] Kids;
     [SerializeField] private int TotalKids = 0;
     public TMP_Text NumberOfkids;
 
@@ -14,9 +14,8 @@ public class GameController : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(this);
-        Kids = new List<GameObject>();
-        Kids.Add(GameObject.FindGameObjectWithTag("Kid"));
-        TotalKids = Kids.Count;
+        Kids = GameObject.FindGameObjectsWithTag("Kid");
+        TotalKids = Kids.Length;
     }
 
     // Update is called once per frame
