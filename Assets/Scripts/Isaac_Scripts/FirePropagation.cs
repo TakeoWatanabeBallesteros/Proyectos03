@@ -10,7 +10,6 @@ public class FirePropagation : MonoBehaviour
     public GameObject[] lowFire;
     public GameObject nearFire;
     public GameObject sonFire;
-    GameObject firePrefab;
     float distance;
     float nearDistance = 5f;
      
@@ -28,7 +27,7 @@ public class FirePropagation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        firePrefab = Resources.Load("Prefabs/Firee") as GameObject;
+        //firePrefab = Resources.Load("Prefabs/Firee") as GameObject;
         //rndPercentage = Random.Range(5f, 20f);        
     }
 
@@ -40,7 +39,7 @@ public class FirePropagation : MonoBehaviour
     }
 
 
-    void CalculateFireProp()
+    public void CalculateFireProp()
     {
         highFire = GameObject.FindGameObjectsWithTag("HighF");
         midFire = GameObject.FindGameObjectsWithTag("MidF");
@@ -57,7 +56,7 @@ public class FirePropagation : MonoBehaviour
 
                 if (nearFire.transform.tag == "HighF")
                 {
-                    StartCoroutine(Instantiations());
+                    StartCoroutine(ExplosionInstantions());
                 }
             }
         }
@@ -91,10 +90,6 @@ public class FirePropagation : MonoBehaviour
                 {
                     StartCoroutine(Instantiations());
                 }
-                else
-                {
-                    Debug.Log("KeepWaiting");
-                }
             }
         }
     }
@@ -105,13 +100,33 @@ public class FirePropagation : MonoBehaviour
         {
             nearFire.AddComponent<FirePropagation>();
         }
+
         yield return new WaitForSeconds(2f);
+
         sonFire = nearFire.transform.GetChild(0).gameObject;
         nearFire.transform.tag = "Burning";
         sonFire.SetActive(true);
-        Debug.Log(nearDistance);
+
+        if(nearFire.GetComponent<Explosion>() == null )
+            nearFire.AddComponent<Explosion>();
+    }   
+    
+    IEnumerator ExplosionInstantions()
+    {
+        if (nearFire.GetComponent<FirePropagation>() == null)
+        {
+            nearFire.AddComponent<FirePropagation>();
+        }
+
+        yield return new WaitForSeconds(4f);
+
+        sonFire = nearFire.transform.GetChild(0).gameObject;
+        nearFire.transform.tag = "Burning";
+        sonFire.SetActive(true);
+
+        if (nearFire.GetComponent<Explosion>() == null)
+            nearFire.AddComponent<Explosion>();
     }
-     
 
 
 }
