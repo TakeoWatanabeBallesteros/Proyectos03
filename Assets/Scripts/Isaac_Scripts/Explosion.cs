@@ -78,17 +78,20 @@ public class Explosion : MonoBehaviour
             {
                 if (distance <= nearFireRadius)
                 {
-                    StartCoroutine(goList[i].transform.gameObject.GetComponent<FirePropagation>().Instantiations());                    
+                    StartCoroutine(goList[i].transform.gameObject.GetComponent<FirePropagation>().Instantiations());
+                    Debug.Log("somethingnear");
                 }
 
                 if (distance <= midFireRadius && rndValue < 5)
                 {
                     StartCoroutine(goList[i].transform.gameObject.GetComponent<FirePropagation>().Instantiations());
+                    Debug.Log("somethingclose");
                 }
 
                 if (distance <= farFireRadius && rndValue < 3)
                 {
                     StartCoroutine(goList[i].transform.gameObject.GetComponent<FirePropagation>().Instantiations());
+                    Debug.Log("somethingfar");
                 }
             }
             
