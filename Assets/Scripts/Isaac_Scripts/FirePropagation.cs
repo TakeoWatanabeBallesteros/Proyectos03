@@ -5,7 +5,9 @@ using UnityEngine;
 public class FirePropagation : MonoBehaviour
 {
 
-    public GameObject[] Fire;
+    public GameObject[] highFire;
+    public GameObject[] midFire;
+    public GameObject[] lowFire;
     public GameObject nearFire;
     public GameObject sonFire;
     GameObject firePrefab;
@@ -18,9 +20,8 @@ public class FirePropagation : MonoBehaviour
     public bool secondGrade;
     public bool thirdGrade;
 
-    float rndPercentage1;
-    float rndPercentage2;
-    float rndPercentage3;
+    int rndPercentage1;
+    int rndPercentage2; 
 
     float fireHP = 100f;
 
@@ -28,19 +29,7 @@ public class FirePropagation : MonoBehaviour
     void Start()
     {
         firePrefab = Resources.Load("Prefabs/Firee") as GameObject;
-        //rndPercentage = Random.Range(5f, 20f);
-        if (firstGrade)
-        {
-            rndPercentage1 = Random.Range(5f, 20f);
-        }
-        else if (secondGrade)
-        {
-            rndPercentage2 = Random.Range(5f, 20f);
-        }
-        else if (thirdGrade)
-        {
-            rndPercentage3 = Random.Range(5f, 20f);
-        }
+        //rndPercentage = Random.Range(5f, 20f);        
     }
 
     // Update is called once per frame
@@ -48,25 +37,64 @@ public class FirePropagation : MonoBehaviour
     {
         CalculateFireProp();
         fireHP -= Time.deltaTime;
+        Debug.Log(rndPercentage2);
     }
 
 
     void CalculateFireProp()
     {
-        Fire = GameObject.FindGameObjectsWithTag("Inflamable");
+        highFire = GameObject.FindGameObjectsWithTag("HighF");
+        midFire = GameObject.FindGameObjectsWithTag("MidF");
+        lowFire = GameObject.FindGameObjectsWithTag("LowF");
 
-        for (int i = 0; i < Fire.Length; i++)
+        for (int i = 0; i < highFire.Length; i++)
         {
-            distance = Vector3.Distance(transform.position, Fire[i].transform.position);
+            distance = Vector3.Distance(transform.position, highFire[i].transform.position);
 
             if (distance < nearDistance)
             {
-                nearFire = Fire[i];
-                nearDistance = distance;
-
-                if (nearFire.transform.tag == "Inflamable")
+                nearFire = highFire[i];
+                nearDistance = distance;                
+               
+                if (nearFire.transform.tag == "HighF")
                 {
                     StartCoroutine(Instantiations());
+                }
+            }
+        }
+        for (int i = 0; i < midFire.Length; i++)
+        {
+            distance = Vector3.Distance(transform.position, midFire[i].transform.position);
+
+            if (distance < nearDistance)
+            {
+                nearFire = midFire[i];
+                nearDistance = distance;
+                StartCoroutine(ExpansionWithPercentages());
+
+                if (nearFire.transform.tag == "MidF" && rndPercentage1 <= 70f)
+                {
+                    StartCoroutine(Instantiations());
+                }                
+            }
+        }
+        for (int i = 0; i < lowFire.Length; i++)
+        {
+            distance = Vector3.Distance(transform.position, lowFire[i].transform.position);
+
+            if (distance < nearDistance)
+            {
+                nearFire = lowFire[i];
+                nearDistance = distance;
+                StartCoroutine(ExpansionWithPercentages());
+
+                if (nearFire.transform.tag == "LowF" && rndPercentage2 <= 40f)
+                {
+                    StartCoroutine(Instantiations());
+                }
+                else
+                {
+                    Debug.Log("KeepWaiting");
                 }
             }
         }
@@ -83,5 +111,13 @@ public class FirePropagation : MonoBehaviour
         nearFire.transform.tag = "Burning";        
         sonFire.SetActive(true);
     }
+
+    IEnumerator ExpansionWithPercentages()
+    {
+        yield return new WaitForSeconds(.1f);
+        rndPercentage1 = Random.Range(0, 101);
+        rndPercentage2 = Random.Range(0, 101);
+    }
+      
 
 }
