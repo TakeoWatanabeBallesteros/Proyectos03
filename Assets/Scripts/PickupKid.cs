@@ -80,4 +80,8 @@ public class PickupKid : MonoBehaviour
         }
 
     }
+    public bool HasKid()
+    {
+        return CarringKid;
+    }
 }

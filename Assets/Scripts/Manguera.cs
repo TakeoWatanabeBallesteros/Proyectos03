@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using TMPro;
 
 public class Manguera : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class Manguera : MonoBehaviour
     private float WaterAmount;
     public float NormalWaterConsumption;
     public float StrongWaterConsumption;
+    private bool canRecharge;
+    public TMP_Text ChargeText;
+    private PickupKid Kid;
 
     private void OnEnable()
     {
@@ -29,6 +33,8 @@ public class Manguera : MonoBehaviour
 
     private void Start()
     {
+        Kid = gameObject.GetComponent<PickupKid>();
+        canRecharge = false;
         WaterAmount = 1;
     }
 
@@ -50,7 +56,7 @@ public class Manguera : MonoBehaviour
 
     private void StrongShootPerformed(InputAction.CallbackContext obj)
     {
-        if (!UsingPrimary)
+        if (!UsingPrimary && !Kid.HasKid())
         {
             UsingSecondary = true;
             StartCoroutine(StrongParticles());
@@ -91,10 +97,27 @@ public class Manguera : MonoBehaviour
 
     private void OnInteract(InputValue valor)
     {
-        WaterAmount = 1;
+        if (canRecharge)
+            WaterAmount = 1;
     }
-
-        private void OnDisable()
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Recharge")
+        {
+            ChargeText.text = "Press E to Recharge Water";
+            ChargeText.enabled = true;
+            canRecharge = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Recharge")
+        {
+            ChargeText.enabled = false;
+            canRecharge = false;
+        }
+    }
+    private void OnDisable()
     {
         primaryShoot.action.performed -= StandardShootPerformed;
         primaryShoot.action.canceled -= StandardShootCancelled;
