@@ -12,16 +12,16 @@ public class FirePropagation : MonoBehaviour
     public GameObject sonFire;
     GameObject firePrefab;
     float distance;
-    public float nearDistance = 5f;
-
+    float nearDistance = 5f;
+     
     bool created = false;
 
     public bool firstGrade;
     public bool secondGrade;
     public bool thirdGrade;
 
-    int rndPercentage1;
-    int rndPercentage2; 
+    public int rndPercentage1;
+    public int rndPercentage2;
 
     float fireHP = 100f;
 
@@ -37,7 +37,6 @@ public class FirePropagation : MonoBehaviour
     {
         CalculateFireProp();
         fireHP -= Time.deltaTime;
-        Debug.Log(rndPercentage2);
     }
 
 
@@ -54,8 +53,8 @@ public class FirePropagation : MonoBehaviour
             if (distance < nearDistance)
             {
                 nearFire = highFire[i];
-                nearDistance = distance;                
-               
+                nearDistance = distance;
+
                 if (nearFire.transform.tag == "HighF")
                 {
                     StartCoroutine(Instantiations());
@@ -70,12 +69,12 @@ public class FirePropagation : MonoBehaviour
             {
                 nearFire = midFire[i];
                 nearDistance = distance;
-                StartCoroutine(ExpansionWithPercentages());
+                //StartCoroutine(ExpansionWithPercentages());
 
                 if (nearFire.transform.tag == "MidF" && rndPercentage1 <= 70f)
                 {
                     StartCoroutine(Instantiations());
-                }                
+                }
             }
         }
         for (int i = 0; i < lowFire.Length; i++)
@@ -86,7 +85,7 @@ public class FirePropagation : MonoBehaviour
             {
                 nearFire = lowFire[i];
                 nearDistance = distance;
-                StartCoroutine(ExpansionWithPercentages());
+                //StartCoroutine(ExpansionWithPercentages());
 
                 if (nearFire.transform.tag == "LowF" && rndPercentage2 <= 40f)
                 {
@@ -107,17 +106,12 @@ public class FirePropagation : MonoBehaviour
             nearFire.AddComponent<FirePropagation>();
         }
         yield return new WaitForSeconds(2f);
-        sonFire = nearFire.transform.GetChild(0).gameObject;     
-        nearFire.transform.tag = "Burning";        
+        sonFire = nearFire.transform.GetChild(0).gameObject;
+        nearFire.transform.tag = "Burning";
         sonFire.SetActive(true);
+        Debug.Log(nearDistance);
     }
+     
 
-    IEnumerator ExpansionWithPercentages()
-    {
-        yield return new WaitForSeconds(.1f);
-        rndPercentage1 = Random.Range(0, 101);
-        rndPercentage2 = Random.Range(0, 101);
-    }
-      
 
 }
