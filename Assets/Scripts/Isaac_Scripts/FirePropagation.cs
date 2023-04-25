@@ -128,5 +128,4 @@ public class FirePropagation : MonoBehaviour
             nearFire.AddComponent<Explosion>();
     }
 
-
 }
