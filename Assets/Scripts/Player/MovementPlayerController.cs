@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MovementPlayerController : MonoBehaviour
 {
@@ -48,7 +49,7 @@ public class MovementPlayerController : MonoBehaviour
     private void RotatePlayer()
     {
         //Sending a raycast
-        camRay = cam.ScreenPointToRay(Input.mousePosition);
+        camRay = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
 
         //Setting groundPlane
         groundPlane = new Plane(Vector3.up, Vector3.zero);
