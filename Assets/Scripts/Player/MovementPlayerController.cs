@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MovementPlayerController : MonoBehaviour
 {
@@ -32,7 +32,11 @@ public class MovementPlayerController : MonoBehaviour
         RotatePlayer();
         
         direction = Vector3.zero;
-        direction = (transform.right * input.movement.y) + (transform.forward * input.movement.x);
+        if(input.movement != Vector2.zero)
+        {
+            direction = (transform.right.normalized * input.movement.x).normalized + (transform.forward.normalized * input.movement.y).normalized;
+            direction.y = 0;
+        }
     }
 
     private void FixedUpdate()
@@ -48,7 +52,7 @@ public class MovementPlayerController : MonoBehaviour
     private void RotatePlayer()
     {
         //Sending a raycast
-        camRay = cam.ScreenPointToRay(Input.mousePosition);
+        camRay = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
 
         //Setting groundPlane
         groundPlane = new Plane(Vector3.up, Vector3.zero);
@@ -60,6 +64,6 @@ public class MovementPlayerController : MonoBehaviour
         }
 
         //Rotating the player
-        transform.LookAt(new Vector3(pointToLook.x, pointToLook.y, pointToLook.z));
+        transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
     }
 }
