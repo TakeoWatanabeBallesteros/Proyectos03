@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -33,7 +32,11 @@ public class MovementPlayerController : MonoBehaviour
         RotatePlayer();
         
         direction = Vector3.zero;
-        direction = (-transform.right * input.movement.x) + (transform.forward * input.movement.y);
+        if(input.movement != Vector2.zero)
+        {
+            direction = (transform.right.normalized * input.movement.x).normalized + (transform.forward.normalized * input.movement.y).normalized;
+            direction.y = 0;
+        }
     }
 
     private void FixedUpdate()
