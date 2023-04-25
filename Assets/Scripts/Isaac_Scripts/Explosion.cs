@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-
     float Timer = 3.5f;
 
     float explosionRadius = 10;
     float maxDistance = 30;
     LayerMask _layerMask = ~0; //Para pillar todas las layers
 
+    float nearFireRadius = 5f;
+    float midFireRadius = 10f;
+    float farFireRadius = 15f;
+
     public List<GameObject> goList;
+
+    float distance;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +35,7 @@ public class Explosion : MonoBehaviour
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
             gameObject.transform.GetChild(1).gameObject.SetActive(true);
             FindGameObjectsInLayer(6);
+            //ApplyFirePropagation();
         }
     }
 
@@ -51,5 +57,17 @@ public class Explosion : MonoBehaviour
         return goList.ToArray();
     }
 
+    void ApplyFirePropagation()
+    {
+        for(int i=0; i < goList.Count; i++)
+        {
+            distance = Vector3.Distance(goList[i].transform.position, transform.position);
+
+            if (distance <= nearFireRadius)
+            {
+                goList[i].transform.gameObject.GetComponent<FirePropagation>().CalculateFireProp();
+            }
+        }
+    }
 }
 

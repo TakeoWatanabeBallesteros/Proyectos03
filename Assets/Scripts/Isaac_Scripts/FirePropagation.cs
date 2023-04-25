@@ -11,8 +11,8 @@ public class FirePropagation : MonoBehaviour
     public GameObject nearFire;
     public GameObject sonFire;
     float distance;
-    float nearDistance = 5f;
-     
+    float nearDistance = 3f;
+
     bool created = false;
 
     public bool firstGrade;
@@ -23,12 +23,12 @@ public class FirePropagation : MonoBehaviour
     public int rndPercentage2;
 
     float fireHP = 100f;
+    float timeToExplote;
 
     // Start is called before the first frame update
     void Start()
     {
         //firePrefab = Resources.Load("Prefabs/Firee") as GameObject;
-        //rndPercentage = Random.Range(5f, 20f);        
     }
 
     // Update is called once per frame
@@ -37,7 +37,6 @@ public class FirePropagation : MonoBehaviour
         CalculateFireProp();
         fireHP -= Time.deltaTime;
     }
-
 
     public void CalculateFireProp()
     {
@@ -52,12 +51,7 @@ public class FirePropagation : MonoBehaviour
             if (distance < nearDistance)
             {
                 nearFire = highFire[i];
-                nearDistance = distance;
-
-                if (nearFire.transform.tag == "HighF")
-                {
-                    StartCoroutine(ExplosionInstantions());
-                }
+                StartCoroutine(Instantiations());
             }
         }
         for (int i = 0; i < midFire.Length; i++)
@@ -67,13 +61,7 @@ public class FirePropagation : MonoBehaviour
             if (distance < nearDistance)
             {
                 nearFire = midFire[i];
-                nearDistance = distance;
-                //StartCoroutine(ExpansionWithPercentages());
-
-                if (nearFire.transform.tag == "MidF" && rndPercentage1 <= 70f)
-                {
-                    StartCoroutine(Instantiations());
-                }
+                StartCoroutine(Instantiations());
             }
         }
         for (int i = 0; i < lowFire.Length; i++)
@@ -83,49 +71,44 @@ public class FirePropagation : MonoBehaviour
             if (distance < nearDistance)
             {
                 nearFire = lowFire[i];
-                nearDistance = distance;
-                //StartCoroutine(ExpansionWithPercentages());
-
-                if (nearFire.transform.tag == "LowF" && rndPercentage2 <= 40f)
-                {
-                    StartCoroutine(Instantiations());
-                }
+                StartCoroutine(Instantiations());
             }
         }
     }
 
-    IEnumerator Instantiations()
+    public IEnumerator Instantiations()
     {
         if (nearFire.GetComponent<FirePropagation>() == null)
         {
             nearFire.AddComponent<FirePropagation>();
         }
 
-        yield return new WaitForSeconds(2f);
-
-        sonFire = nearFire.transform.GetChild(0).gameObject;
-        nearFire.transform.tag = "Burning";
-        sonFire.SetActive(true);
-
-        if(nearFire.GetComponent<Explosion>() == null )
-            nearFire.AddComponent<Explosion>();
-    }   
-    
-    IEnumerator ExplosionInstantions()
-    {
-        if (nearFire.GetComponent<FirePropagation>() == null)
+        if (nearFire.transform.tag == "HighF")
         {
-            nearFire.AddComponent<FirePropagation>();
+            timeToExplote = Random.Range(.5f, 1f);
+            if (nearFire.GetComponent<Explosion>() == null)
+                nearFire.AddComponent<Explosion>();
+        }
+        else if (nearFire.transform.tag == "MidF")
+        {
+            timeToExplote = Random.Range(2f, 3f);
+        }
+        else if (nearFire.transform.tag == "LowF")
+        {
+            timeToExplote = Random.Range(4f, 5f);
         }
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(timeToExplote);
 
         sonFire = nearFire.transform.GetChild(0).gameObject;
         nearFire.transform.tag = "Burning";
         sonFire.SetActive(true);
 
-        if (nearFire.GetComponent<Explosion>() == null)
+        if (nearFire.GetComponent<Explosion>() == null && nearFire.transform.gameObject.tag == "HighF")
             nearFire.AddComponent<Explosion>();
+
+        yield return new WaitForSeconds(1f);
     }
+        
 
 }
