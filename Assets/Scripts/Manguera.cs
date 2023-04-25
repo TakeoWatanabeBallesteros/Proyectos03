@@ -16,6 +16,8 @@ public class Manguera : MonoBehaviour
     public ParticleSystem WeakWater;
     public Slider WaterBar;
     private float WaterAmount;
+    public float NormalWaterConsumption;
+    public float StrongWaterConsumption;
 
     private void OnEnable()
     {
@@ -36,6 +38,7 @@ public class Manguera : MonoBehaviour
         {
             UsingPrimary = true;
             WeakWater.Play();
+            StartCoroutine(ConsumeWater(NormalWaterConsumption));
         }
     }
 
@@ -61,6 +64,16 @@ public class Manguera : MonoBehaviour
         if (UsingSecondary == true)
         {
             StrongWater.Play();
+            StartCoroutine(ConsumeWater(StrongWaterConsumption));
+        }
+    }
+    IEnumerator ConsumeWater(float WaterConsumtion)
+    {
+        yield return new WaitForSeconds(.1f);
+        WaterAmount -= WaterConsumtion;
+        if (UsingPrimary || UsingSecondary)
+        {
+            StartCoroutine(ConsumeWater(WaterConsumtion));
         }
     }
 
@@ -70,7 +83,18 @@ public class Manguera : MonoBehaviour
         StrongWater.Stop();
     }
 
-    private void OnDisable()
+    private void Update()
+    {
+        WaterBar.value = WaterAmount;
+
+    }
+
+    private void OnInteract(InputValue valor)
+    {
+        WaterAmount = 1;
+    }
+
+        private void OnDisable()
     {
         primaryShoot.action.performed -= StandardShootPerformed;
         primaryShoot.action.canceled -= StandardShootCancelled;
