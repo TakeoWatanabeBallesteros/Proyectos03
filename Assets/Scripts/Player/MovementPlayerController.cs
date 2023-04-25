@@ -33,7 +33,7 @@ public class MovementPlayerController : MonoBehaviour
         RotatePlayer();
         
         direction = Vector3.zero;
-        direction = (transform.right * input.movement.y) + (transform.forward * input.movement.x);
+        direction = (transform.right * input.movement.x) + (transform.forward * input.movement.y);
     }
 
     private void FixedUpdate()
@@ -61,6 +61,6 @@ public class MovementPlayerController : MonoBehaviour
         }
 
         //Rotating the player
-        transform.LookAt(new Vector3(pointToLook.x, pointToLook.y, pointToLook.z));
+        transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
     }
 }
