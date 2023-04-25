@@ -31,6 +31,7 @@ public class DamagePlayer : MonoBehaviour
     IEnumerator DamageOverTime()
     {
         PH.TakeDamage();
+        Debug.Log("Daño al player");
         yield return new WaitForSeconds(1f);
         if (OnDamageZone)
         {
