@@ -5,6 +5,7 @@ using UnityEngine;
 public class Explosion : MonoBehaviour
 {
     float Timer = 3.5f;
+    float explosionTimer = 7f;
 
     float explosionRadius = 10;
     float maxDistance = 30;
@@ -28,15 +29,24 @@ public class Explosion : MonoBehaviour
     void Update()
     {
         Timer -= Time.deltaTime;
+        explosionTimer -= Time.deltaTime;   
 
         if (Timer <= 0)
         {
             Timer = 0;
-            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+
             gameObject.transform.GetChild(1).gameObject.SetActive(true);
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
             FindGameObjectsInLayer(6);
-            //ApplyFirePropagation();
+            ApplyFirePropagation();
         }
+
+        if (explosionTimer <= 0)
+        {
+            explosionTimer = 0;
+            gameObject.GetComponent<FirePropagation>().enabled = false;
+        }
+
     }
 
     GameObject[] FindGameObjectsInLayer(int layer)
@@ -45,7 +55,7 @@ public class Explosion : MonoBehaviour
         goList = new System.Collections.Generic.List<GameObject>();
         for (int i = 0; i < goArray.Length; i++)
         {
-            if (goArray[i].layer == layer)
+            if (goArray[i].layer == layer && goArray[i].transform.tag != "Burning")
             {
                 goList.Add(goArray[i]);
             }
@@ -62,11 +72,26 @@ public class Explosion : MonoBehaviour
         for(int i=0; i < goList.Count; i++)
         {
             distance = Vector3.Distance(goList[i].transform.position, transform.position);
+            int rndValue = Random.Range(1, 10);
 
-            if (distance <= nearFireRadius)
+            if(explosionTimer > 0)
             {
-                goList[i].transform.gameObject.GetComponent<FirePropagation>().CalculateFireProp();
+                if (distance <= nearFireRadius)
+                {
+                    StartCoroutine(goList[i].transform.gameObject.GetComponent<FirePropagation>().Instantiations());                    
+                }
+
+                if (distance <= midFireRadius && rndValue < 5)
+                {
+                    StartCoroutine(goList[i].transform.gameObject.GetComponent<FirePropagation>().Instantiations());
+                }
+
+                if (distance <= farFireRadius && rndValue < 3)
+                {
+                    StartCoroutine(goList[i].transform.gameObject.GetComponent<FirePropagation>().Instantiations());
+                }
             }
+            
         }
     }
 }
