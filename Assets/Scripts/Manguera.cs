@@ -22,6 +22,7 @@ public class Manguera : MonoBehaviour
     private bool canRecharge;
     public TMP_Text ChargeText;
     private PickupKid Kid;
+    [SerializeField] private float StartWater;
 
     private void OnEnable()
     {
@@ -35,12 +36,12 @@ public class Manguera : MonoBehaviour
     {
         Kid = gameObject.GetComponent<PickupKid>();
         canRecharge = false;
-        WaterAmount = 1;
+        WaterAmount = StartWater;
     }
 
     private void StandardShootPerformed(InputAction.CallbackContext obj)
     {
-        if (!UsingSecondary)
+        if (!UsingSecondary && WaterAmount > 0)
         {
             UsingPrimary = true;
             WeakWater.Play();
@@ -56,7 +57,7 @@ public class Manguera : MonoBehaviour
 
     private void StrongShootPerformed(InputAction.CallbackContext obj)
     {
-        if (!UsingPrimary && !Kid.HasKid())
+        if (!UsingPrimary && !Kid.HasKid() && WaterAmount >0)
         {
             UsingSecondary = true;
             StartCoroutine(StrongParticles());
@@ -67,7 +68,7 @@ public class Manguera : MonoBehaviour
     {
         PreWater.Play();
         yield return new WaitForSeconds(1f);
-        if (UsingSecondary == true)
+        if (UsingSecondary == true && WaterAmount > 0)
         {
             StrongWater.Play();
             StartCoroutine(ConsumeWater(StrongWaterConsumption));
@@ -77,7 +78,7 @@ public class Manguera : MonoBehaviour
     {
         yield return new WaitForSeconds(.1f);
         WaterAmount -= WaterConsumtion;
-        if (UsingPrimary || UsingSecondary)
+        if (WaterAmount > 0 && (UsingPrimary || UsingSecondary))
         {
             StartCoroutine(ConsumeWater(WaterConsumtion));
         }
@@ -92,6 +93,11 @@ public class Manguera : MonoBehaviour
     private void Update()
     {
         WaterBar.value = WaterAmount;
+        if (WaterAmount < 0)
+        {
+            WeakWater.Stop();
+            StrongWater.Stop();
+        }
 
     }
 
