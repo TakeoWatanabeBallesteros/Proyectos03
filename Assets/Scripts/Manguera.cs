@@ -3,16 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Manguera : MonoBehaviour
 {
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private InputActionReference primaryShoot, sencondaryShoot;
-    [SerializeField] private bool UsingPrimary = false;
-    [SerializeField] private bool UsingSecondary = false;
+    private bool UsingPrimary = false;
+    private bool UsingSecondary = false;
     public ParticleSystem PreWater;
     public ParticleSystem StrongWater;
     public ParticleSystem WeakWater;
+    public Slider WaterBar;
+    private float WaterAmount;
 
     private void OnEnable()
     {
@@ -21,6 +24,12 @@ public class Manguera : MonoBehaviour
         sencondaryShoot.action.performed += StrongShootPerformed;
         sencondaryShoot.action.canceled += StrongShootCancelled;
     }
+
+    private void Start()
+    {
+        WaterAmount = 1;
+    }
+
     private void StandardShootPerformed(InputAction.CallbackContext obj)
     {
         if (!UsingSecondary)
@@ -60,6 +69,7 @@ public class Manguera : MonoBehaviour
         UsingSecondary = false;
         StrongWater.Stop();
     }
+
     private void OnDisable()
     {
         primaryShoot.action.performed -= StandardShootPerformed;
