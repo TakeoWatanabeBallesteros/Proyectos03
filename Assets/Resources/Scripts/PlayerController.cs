@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
         if (Input.GetMouseButton(0))
         {
             ShootWater();
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
         {
             chorroAgua.Stop();
         }
-
+         
         IsGrounded();
         GatherInput();
         Look();
@@ -97,8 +97,8 @@ public class PlayerController : MonoBehaviour
         {
             Move();
         }
-                
 
+        
         if (Input.GetKeyDown(KeyCode.Q))
         {
             mainCameraGO.transform.eulerAngles = Vector3.Lerp(mainCameraGO.transform.eulerAngles, mainCameraGO.transform.eulerAngles +
@@ -109,6 +109,7 @@ public class PlayerController : MonoBehaviour
         {
             mainCameraGO.transform.Rotate(0f, -90f, 0f, Space.World);
         }
+        
 
     }
 
@@ -122,12 +123,12 @@ public class PlayerController : MonoBehaviour
             m_OnGround = false;
     }
 
-
+    
     private void GatherInput()
     {
         _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
     }
-
+    
     private void Look()
     {
         if (_input == Vector3.zero) return;

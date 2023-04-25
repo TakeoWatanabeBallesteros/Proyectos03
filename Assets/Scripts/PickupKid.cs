@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class PickupKid : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PickupKid : MonoBehaviour
     [SerializeField] private bool CanExtract;
     [SerializeField]private bool CanPickup;
     private GameObject TargetKid;
+    [SerializeField] private PlayerInput playerInput;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +27,12 @@ public class PickupKid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CanPickup /*&& Input.GetKeyDown(KeyCode.E)*/)
+
+        
+    }
+    private void OnInteract(InputValue valor)
+    {
+        if (CanPickup)
         {
             PickupText.enabled = false;
             TargetKid.transform.SetParent(gameObject.transform);
@@ -35,7 +42,7 @@ public class PickupKid : MonoBehaviour
             CarringKid = true;
             CanPickup = false;
         }
-        if (CanExtract /*&& Input.GetKeyDown(KeyCode.E)*/)
+        if (CanExtract)
         {
             PickupText.enabled = false;
             TargetKid.transform.SetParent(null);
