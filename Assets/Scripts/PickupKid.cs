@@ -57,14 +57,14 @@ public class PickupKid : MonoBehaviour
     {
         if (other.tag ==  "Kid" && !CarringKid)
         {
-            PickupText.text = "Press E to pickup Kid";
+            PickupText.text = "Press Space to pickup Kid";
             PickupText.enabled = true;
             CanPickup = true;
             TargetKid = other.gameObject;
         }
         if (other.tag == "Extraction" && CarringKid)
         {
-            PickupText.text = "Press E to Drop Kid";
+            PickupText.text = "Press Space to Drop Kid";
             PickupText.enabled = true;
             CanExtract = true;
         }

@@ -101,7 +101,7 @@ public class Manguera : MonoBehaviour
 
     }
 
-    private void OnInteract(InputValue valor)
+    private void OnRecharge(InputValue valor)
     {
         if (canRecharge)
             WaterAmount = 1;
@@ -110,7 +110,7 @@ public class Manguera : MonoBehaviour
     {
         if (other.tag == "Recharge")
         {
-            ChargeText.text = "Press E to Recharge Water";
+            ChargeText.text = "Press R to Recharge Water";
             ChargeText.enabled = true;
             canRecharge = true;
         }
