@@ -8,69 +8,74 @@ using TMPro;
 
 public class Manguera : MonoBehaviour
 {
-    [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private InputActionReference primaryShoot, sencondaryShoot;
-    private bool UsingPrimary = false;
-    private bool UsingSecondary = false;
+    [SerializeField] private InputPlayerController playerInput;
+    bool UsingPrimary = false;
+    bool UsingSecondary = false;
     public ParticleSystem PreWater;
     public ParticleSystem StrongWater;
     public ParticleSystem WeakWater;
     public Slider WaterBar;
-    private float WaterAmount;
+    float WaterAmount;
     public float NormalWaterConsumption;
     public float StrongWaterConsumption;
-    private bool canRecharge;
+    bool canRecharge;
     public TMP_Text ChargeText;
-    private PickupKid Kid;
+    PickupKid Kid;
     [SerializeField] private float StartWater;
-    public FireExtinguish HittingWaterRay;
-
-    private void OnEnable()
-    {
-        primaryShoot.action.performed += StandardShootPerformed;
-        primaryShoot.action.canceled += StandardShootCancelled;
-        sencondaryShoot.action.performed += StrongShootPerformed;
-        sencondaryShoot.action.canceled += StrongShootCancelled;
-    }
 
     private void Start()
     {
-        Kid = gameObject.GetComponent<PickupKid>();
+        playerInput = GetComponent<InputPlayerController>();
+        Kid = GetComponent<PickupKid>();
         canRecharge = false;
         WaterAmount = StartWater;
     }
-
-    private void StandardShootPerformed(InputAction.CallbackContext obj)
+    private void Update()
     {
-        if (!UsingSecondary && WaterAmount > 0)
+        if (playerInput.shoot && !UsingPrimary && !UsingSecondary && WaterAmount > 0)
         {
-            if (HittingWaterRay.GetWeakHit())
-            {
-                //Apaga el fuego o bajale vida
-            }
-            UsingPrimary = true;
-            WeakWater.Play();
-            StartCoroutine(ConsumeWater(NormalWaterConsumption));
+            StandardShootPerformed();
+        }
+        else if (!playerInput.shoot && UsingPrimary)
+        {
+            StandardShootCancelled();
+        }
+
+        if (playerInput.secondaryShoot && !UsingSecondary && !UsingPrimary && WaterAmount > 0 && !Kid.HasKid())
+        {
+            StrongShootPerformed();
+        }
+        else if(!playerInput.secondaryShoot && UsingSecondary)
+        {
+            StrongShootCancelled();
+        }
+
+        WaterBar.value = WaterAmount;
+        if (WaterAmount < 0)
+        {
+            WeakWater.Stop();
+            StrongWater.Stop();
         }
     }
 
-    private void StandardShootCancelled(InputAction.CallbackContext obj)
+    private void StandardShootPerformed()
+    {
+        UsingPrimary = true;
+        WeakWater.Play();
+        StartCoroutine(ConsumeWater(NormalWaterConsumption));
+
+    }
+
+    private void StandardShootCancelled()
     {
         UsingPrimary = false;
         WeakWater.Stop();
     }
 
-    private void StrongShootPerformed(InputAction.CallbackContext obj)
+    private void StrongShootPerformed()
     {
-        if (!UsingPrimary && !Kid.HasKid() && WaterAmount >0)
-        {
-            if (HittingWaterRay.GetStrongHit())
-            {
-                //Apaga el fuego o bajale vida
-            }
-            UsingSecondary = true;
-            StartCoroutine(StrongParticles());
-        }
+        UsingSecondary = true;
+        StartCoroutine(StrongParticles());
     }
 
     IEnumerator StrongParticles()
@@ -93,22 +98,12 @@ public class Manguera : MonoBehaviour
         }
     }
 
-    private void StrongShootCancelled(InputAction.CallbackContext obj)
+    private void StrongShootCancelled()
     {
         UsingSecondary = false;
         StrongWater.Stop();
     }
 
-    private void Update()
-    {
-        WaterBar.value = WaterAmount;
-        if (WaterAmount < 0)
-        {
-            WeakWater.Stop();
-            StrongWater.Stop();
-        }
-
-    }
 
     private void OnRecharge(InputValue valor)
     {
@@ -137,11 +132,17 @@ public class Manguera : MonoBehaviour
             canRecharge = false;
         }
     }
-    private void OnDisable()
+    public bool GetPrimary()
     {
-        primaryShoot.action.performed -= StandardShootPerformed;
-        primaryShoot.action.canceled -= StandardShootCancelled;
-        sencondaryShoot.action.performed -= StrongShootPerformed;
-        sencondaryShoot.action.canceled -= StrongShootCancelled;
+        return UsingPrimary;
     }
+    public bool GetSecondary()
+    {
+        return UsingSecondary;
+    }
+    public float GetWaterAmount()
+    {
+        return WaterAmount;
+    }
+
 }

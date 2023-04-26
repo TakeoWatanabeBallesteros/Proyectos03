@@ -9,11 +9,16 @@ public class FireExtinguish : MonoBehaviour
     Vector3 mosuseWorldPos;
     public LayerMask GroundLayer;
     public LayerMask FireLayer;
-    private GameObject Player;
+    GameObject Player;
     public float WeakRayLenght;
-    private bool WeakHittingFire;
+    bool WeakHittingFire;
     public float StrongRayLenght;
-    private bool StrongHittingFire;
+    bool StrongHittingFire;
+    public GameObject WeakFireTarget;
+    public GameObject StrongFireTarget;
+    [SerializeField] private InputPlayerController playerInput;
+    PickupKid Kid;
+    Manguera Manguera;
 
     // Start is called before the first frame update
     void Start()
@@ -21,14 +26,23 @@ public class FireExtinguish : MonoBehaviour
         WeakHittingFire = false;
         StrongHittingFire = false;
         Player = GameObject.FindGameObjectWithTag("Player");
+        playerInput = Player.GetComponent<InputPlayerController>();
+        Kid = Player.GetComponent<PickupKid>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        WeakWaterRaycast();
-        StrongWaterRaycast();
         PositionMouse();
+        if (playerInput.shoot && !Manguera.GetPrimary() && !Manguera.GetSecondary() && Manguera.GetWaterAmount() > 0)
+        {
+            WeakWaterRaycast();
+        }
+        else if (playerInput.secondaryShoot && !Manguera.GetSecondary() && !Manguera.GetPrimary() && Manguera.GetWaterAmount() > 0 && !Kid.HasKid())
+        {
+            StrongWaterRaycast();
+        }
+
     }
 
     private void WeakWaterRaycast()
@@ -38,7 +52,8 @@ public class FireExtinguish : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, WeakRayLenght, FireLayer))
         {
             WeakHittingFire = true;
-            Debug.Log("weak");
+            WeakFireTarget = hit.collider.gameObject;
+            Debug.Log("normal");
         }
         else
             WeakHittingFire = false;        
@@ -50,7 +65,7 @@ public class FireExtinguish : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, StrongRayLenght, FireLayer))
         {
             StrongHittingFire = true;
-            Debug.Log("STRONG");
+            StrongFireTarget = hit.collider.gameObject;
         }
         else
             StrongHittingFire = false;
@@ -66,13 +81,5 @@ public class FireExtinguish : MonoBehaviour
         }
 
         transform.position = mosuseWorldPos;
-    }
-    public bool GetWeakHit()
-    {
-        return WeakHittingFire;
-    }
-    public bool GetStrongHit()
-    {
-        return StrongHittingFire;
     }
 }
