@@ -46,10 +46,13 @@ public class FirePropagationV2 : MonoBehaviour
         else
         {
             timer = delay;
-        }                
+            CalculateFireProp();
+        }   
+        
+
     }
 
-    public void CalculateFireProp(GameObject g)
+    public void CalculateFireProp()
     {     
         foreach (var x in allFires)
         {
@@ -88,7 +91,15 @@ public class FirePropagationV2 : MonoBehaviour
     {
         if(fireHP > 0)
         {
-            fireHP -= 25f;
+            if (timerFire > 0)
+            {
+                fireHP -= 25f;
+                timerFire -= Time.deltaTime;
+            }
+            else
+            {
+                timerFire = delayFire;
+            }
         }
     } 
     
