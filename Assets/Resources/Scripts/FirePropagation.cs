@@ -12,7 +12,7 @@ public class FirePropagation : MonoBehaviour
     float distance;
     public float nearDistance = 5f;
 
-    bool created = false;
+    //bool created = false;
 
     public bool firstGrade;
     public bool secondGrade;

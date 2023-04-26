@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     Vector3 m_MoveDir;
     //public Transform m_Orientation;
 
-    float m_VerticalSpeed = 0.0f;
+    //float m_VerticalSpeed = 0.0f;
     public bool m_OnGround = true;
     public float m_JumpSpeed = 15.0f;
     float distToGround = 1f;
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     public float m_MaxShootDistance;
     public LayerMask m_WaterLayerMask;
 
-    bool m_IsJumpEnabled = true;
+    //bool m_IsJumpEnabled = true;
 
     float Force;
     public float initialForce = 30f;
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject waterParticles;
     ParticleSystem chorroAgua;
-    bool canShootWater = true;
+    //bool canShootWater = true;
 
     public Transform m_LifeBarAnchorPosition;
     public RectTransform m_LifeBarRectPosition;
