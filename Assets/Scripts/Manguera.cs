@@ -23,6 +23,7 @@ public class Manguera : MonoBehaviour
     public TMP_Text ChargeText;
     private PickupKid Kid;
     [SerializeField] private float StartWater;
+    public FireExtinguish HittingWaterRay;
 
     private void OnEnable()
     {
@@ -43,6 +44,10 @@ public class Manguera : MonoBehaviour
     {
         if (!UsingSecondary && WaterAmount > 0)
         {
+            if (HittingWaterRay.GetWeakHit())
+            {
+                //Apaga el fuego o bajale vida
+            }
             UsingPrimary = true;
             WeakWater.Play();
             StartCoroutine(ConsumeWater(NormalWaterConsumption));
@@ -59,6 +64,10 @@ public class Manguera : MonoBehaviour
     {
         if (!UsingPrimary && !Kid.HasKid() && WaterAmount >0)
         {
+            if (HittingWaterRay.GetStrongHit())
+            {
+                //Apaga el fuego o bajale vida
+            }
             UsingSecondary = true;
             StartCoroutine(StrongParticles());
         }
