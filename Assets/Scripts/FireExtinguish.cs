@@ -13,10 +13,12 @@ public class FireExtinguish : MonoBehaviour
     [SerializeField] private InputPlayerController playerInput;
     PickupKid Kid;
     Manguera Manguera;
+    bool SecondaryActivated;
 
     // Start is called before the first frame update
     void Start()
     {
+        SecondaryActivated = false;
         Player = GameObject.FindGameObjectWithTag("Player");
         playerInput = Player.GetComponent<InputPlayerController>();
         Kid = Player.GetComponent<PickupKid>();
@@ -30,12 +32,35 @@ public class FireExtinguish : MonoBehaviour
         {
             WeakWaterRaycast();
         }
-        else if (playerInput.secondaryShoot && !Manguera.GetPrimary() && Manguera.GetWaterAmount() > 0 && !Kid.HasKid())
+
+        if (playerInput.secondaryShoot && !Manguera.GetPrimary() && Manguera.GetWaterAmount() > 0 && !Kid.HasKid())
         {
-            StrongWaterRaycast();
+            if (!SecondaryActivated)
+            {
+                StartCoroutine(SecondaryDelay());
+            }
+            else
+            {
+                StrongWaterRaycast();
+            }
+        }
+        if (!playerInput.secondaryShoot)
+        {
+            StopAllCoroutines();
+        }
+
+        IEnumerator SecondaryDelay()
+        {
+            yield return new WaitForSeconds(1f);
+            if (playerInput.secondaryShoot)
+            {
+                SecondaryActivated = true;
+            }
         }
 
     }
+
+  
 
     private void WeakWaterRaycast()
     {

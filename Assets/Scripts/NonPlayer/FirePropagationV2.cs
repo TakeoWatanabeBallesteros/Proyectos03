@@ -59,6 +59,7 @@ public class FirePropagationV2 : MonoBehaviour
             }
             if (fireHP <= 0)
             {
+                onFire = false;
                 CanBurn = false;
                 transform.GetChild(0).gameObject.SetActive(false);
                 StopAllCoroutines();
