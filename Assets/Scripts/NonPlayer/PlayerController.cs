@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     Vector3 m_MoveDir;
     //public Transform m_Orientation;
 
-    float m_VerticalSpeed = 0.0f;
+    //float m_VerticalSpeed = 0.0f;
     public bool m_OnGround = true;
     public float m_JumpSpeed = 15.0f;
     float distToGround = 1f;
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     public float m_MaxShootDistance;
     public LayerMask m_WaterLayerMask;
 
-    bool m_IsJumpEnabled = true;
+    //bool m_IsJumpEnabled = true;
 
     float Force;
     public float initialForce = 30f;
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject waterParticles;
     ParticleSystem chorroAgua;
-    bool canShootWater = true;
+    //bool canShootWater = true;
 
     public Transform m_LifeBarAnchorPosition;
     public RectTransform m_LifeBarRectPosition;
@@ -90,7 +90,6 @@ public class PlayerController : MonoBehaviour
 
         IsGrounded();
         GatherInput();
-        Look();
         UpdateLifeBarPosition();
 
         if (m_OnGround)
@@ -127,14 +126,7 @@ public class PlayerController : MonoBehaviour
     {
         _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
     }
-
-    private void Look()
-    {
-        if (_input == Vector3.zero) return;
-
-        var rot = Quaternion.LookRotation(_input.ToIso(), Vector3.up);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, _turnSpeed * Time.deltaTime);
-    }
+       
 
     private void Move()
     {

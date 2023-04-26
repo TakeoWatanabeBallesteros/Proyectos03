@@ -15,18 +15,36 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Shoot",
-                    "type": "PassThrough",
-                    "id": "be57c60a-0264-4307-919c-254c6c8534a7",
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "efb33678-d9a4-4454-bd65-5bba7ac9deb1",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
+                    "name": "Shoot",
                     "type": "Button",
-                    "id": "efb33678-d9a4-4454-bd65-5bba7ac9deb1",
+                    "id": "be57c60a-0264-4307-919c-254c6c8534a7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.1)",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SecondaryShot",
+                    "type": "Button",
+                    "id": "7c43dd1e-a359-4052-9c2d-84f90021bf74",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.1)",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Recharge",
+                    "type": "Button",
+                    "id": "b1b96303-278e-4d6a-850a-8c2c043cbc5d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -102,6 +120,50 @@
                 },
                 {
                     "name": "",
+                    "id": "5b975f62-14e3-47db-a916-56cfd8876369",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "80b2584f-1a78-4e98-9a9e-bb2ef5671677",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3ae08284-5806-4e68-ac33-36d26d61fdcc",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SecondaryShot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "75e4aa3a-0c6f-44c5-be86-f7efe7a82633",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SecondaryShot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "7a8f7f69-a9d8-4601-bec9-dbdca0400bdb",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -124,23 +186,23 @@
                 },
                 {
                     "name": "",
-                    "id": "5b975f62-14e3-47db-a916-56cfd8876369",
-                    "path": "<Keyboard>/e",
+                    "id": "22558551-d232-4ae8-817f-d2c42e9c8644",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Interact",
+                    "action": "Recharge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "80b2584f-1a78-4e98-9a9e-bb2ef5671677",
-                    "path": "<Gamepad>/buttonWest",
+                    "id": "cc90c066-3864-4ad2-9307-74ccbba81889",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Interact",
+                    "action": "Recharge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
