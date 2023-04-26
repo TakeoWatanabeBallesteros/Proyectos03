@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class FireExtinguish : MonoBehaviour
 {
+    public LayerMask ColisionLayer;
     public LayerMask FireLayer;
     GameObject Player;
     public float WeakRayLenght;
@@ -40,20 +41,26 @@ public class FireExtinguish : MonoBehaviour
     {
         Ray ray = new Ray(Player.transform.position, Player.transform.forward);
         Debug.DrawRay(Player.transform.position, Player.transform.forward* WeakRayLenght);
-        if (Physics.Raycast(ray, out RaycastHit hit, WeakRayLenght, FireLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, WeakRayLenght, ColisionLayer))
         {
-            hit.collider.GetComponent<FirePropagationV2>().TakeDamage();
-            Debug.Log("normal");
+            if (hit.collider.gameObject.GetComponent<FirePropagationV2>().onFire)
+            {
+                hit.collider.GetComponent<FirePropagationV2>().TakeDamage();
+                Debug.Log("normal");
+            }
         }
     }
     private void StrongWaterRaycast()
     {
         Ray ray = new Ray(Player.transform.position, Player.transform.forward);
         Debug.DrawRay(Player.transform.position, Player.transform.forward * StrongRayLenght);
-        if (Physics.Raycast(ray, out RaycastHit hit, StrongRayLenght, FireLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, StrongRayLenght, ColisionLayer))
         {
-            hit.collider.GetComponent<FirePropagationV2>().TakeDamage();
-            Debug.Log("fuerte");
+            if (hit.collider.gameObject.GetComponent<FirePropagationV2>().onFire)
+            {
+                hit.collider.GetComponent<FirePropagationV2>().TakeDamage();
+                Debug.Log("fuerte");
+            }
         }
     }
 }
