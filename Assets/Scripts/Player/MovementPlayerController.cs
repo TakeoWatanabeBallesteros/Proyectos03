@@ -34,19 +34,35 @@ public class MovementPlayerController : MonoBehaviour
         direction = Vector3.zero;
         if(input.movement != Vector2.zero)
         {
-            direction = (transform.right.normalized * input.movement.x).normalized + (transform.forward.normalized * input.movement.y).normalized;
-            direction.y = 0;
+            Vector3 forward = cam.transform.forward;
+            forward.y = 0;
+            forward.Normalize();
+
+            Vector3 right = cam.transform.right;
+            right.y = 0;
+            right.Normalize();
+
+            direction = forward * input.movement.y + right * input.movement.x;
+
+            // direction = (transform.right.normalized * input.movement.x).normalized + (transform.forward.normalized * input.movement.y).normalized;
+            // direction.y = 0;
         }
     }
 
     private void FixedUpdate()
     {
         MovePlayer(direction);
+        // ExperimentalMove();
     }
 
     private void MovePlayer(Vector3 direction)
     {
-        rb.velocity = this.direction * speed;
+        rb.velocity = direction * speed;
+    }
+
+    private void ExperimentalMove()
+    {
+        
     }
 
     private void RotatePlayer()
