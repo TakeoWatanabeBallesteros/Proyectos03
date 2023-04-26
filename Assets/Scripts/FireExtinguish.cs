@@ -46,6 +46,7 @@ public class FireExtinguish : MonoBehaviour
         }
         if (!playerInput.secondaryShoot)
         {
+            SecondaryActivated = false;
             StopAllCoroutines();
         }
 

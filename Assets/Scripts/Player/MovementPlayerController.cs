@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class MovementPlayerController : MonoBehaviour
 {
     public float speed;
+    float currentSpeed;
     public Camera cam;
     
     private Rigidbody rb;
@@ -47,17 +48,22 @@ public class MovementPlayerController : MonoBehaviour
             // direction = (transform.right.normalized * input.movement.x).normalized + (transform.forward.normalized * input.movement.y).normalized;
             // direction.y = 0;
         }
+        else
+        {
+           currentSpeed = 0;
+        }
     }
 
     private void FixedUpdate()
     {
-        MovePlayer(direction);
+        MovePlayer(direction.normalized);
         // ExperimentalMove();
     }
 
     private void MovePlayer(Vector3 direction)
     {
-        rb.velocity = direction * speed;
+        currentSpeed = Mathf.Lerp(currentSpeed, speed, Time.deltaTime * 10);
+        rb.velocity = direction * currentSpeed;
     }
 
     private void ExperimentalMove()
