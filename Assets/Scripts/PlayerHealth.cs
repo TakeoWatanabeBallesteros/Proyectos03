@@ -8,13 +8,15 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float Vida;
     public Slider LifeBar;
     public Image Fire;
-    private bool PlayingEfect;
+    public Image YouDied;
+    private bool Dead;
     private float Timer;
-    private float ElapsedTime;
+    private float Alfa;
 
     // Start is called before the first frame update
     void Start()
     {
+        Dead = false;
         Fire.color = new Color(1f, 1f, 1f, 0f);
         Timer = 0.5f;
         Vida = 1.00f;
@@ -24,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         LifeBar.value = Vida;
-        if (Vida <= 0.00f)
+        if (Vida <= 0.00f && Dead == false)
         {
             die();
         }
@@ -40,13 +42,27 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage()
     {
-        Vida -= 0.10f;
-        Timer = 0.5f;
-        Fire.color = new Color(1f, 1f, 1f, 1f);
+        if (!Dead)
+        {
+            Vida -= 0.10f;
+            Timer = 0.5f;
+            Fire.color = new Color(1f, 1f, 1f, 1f);
+        }
     }
 
     private void die()
     {
-
+        Dead = true;
+        StartCoroutine(FadeIN(YouDied));
+    }
+    IEnumerator FadeIN(Image image)
+    {
+        Alfa += .1f;
+        image.color = new Color(1f, 1f, 1f, Alfa);
+        yield return new WaitForSeconds(.1f);
+        if (Alfa < 1)
+        {
+            StartCoroutine(FadeIN(image));
+        }
     }
 }
