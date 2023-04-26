@@ -28,17 +28,18 @@ public class FireExtinguish : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
         playerInput = Player.GetComponent<InputPlayerController>();
         Kid = Player.GetComponent<PickupKid>();
+        Manguera = Player.GetComponent<Manguera>();
     }
 
     // Update is called once per frame
     void Update()
     {
         PositionMouse();
-        if (playerInput.shoot && !Manguera.GetPrimary() && !Manguera.GetSecondary() && Manguera.GetWaterAmount() > 0)
+        if (playerInput.shoot && !Manguera.GetSecondary() && Manguera.GetWaterAmount() > 0)
         {
             WeakWaterRaycast();
         }
-        else if (playerInput.secondaryShoot && !Manguera.GetSecondary() && !Manguera.GetPrimary() && Manguera.GetWaterAmount() > 0 && !Kid.HasKid())
+        else if (playerInput.secondaryShoot && !Manguera.GetPrimary() && Manguera.GetWaterAmount() > 0 && !Kid.HasKid())
         {
             StrongWaterRaycast();
         }
