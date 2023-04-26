@@ -35,10 +35,10 @@ public class Explosion : MonoBehaviour
         {
             Timer = 0;
 
-            gameObject.transform.GetChild(1).gameObject.SetActive(true);
+            gameObject.transform.GetChild(1).gameObject.SetActive(true); //Preguntar fuego en objetos explosivos
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
             FindGameObjectsInLayer(6);
-            ApplyFirePropagation();
+            //ApplyFirePropagation();
         }
 
         if (explosionTimer <= 0)
@@ -67,6 +67,7 @@ public class Explosion : MonoBehaviour
         return goList.ToArray();
     }
 
+    /*
     void ApplyFirePropagation()
     {
         for(int i=0; i < goList.Count; i++)
@@ -78,24 +79,24 @@ public class Explosion : MonoBehaviour
             {
                 if (distance <= nearFireRadius)
                 {
-                    StartCoroutine(goList[i].transform.gameObject.GetComponent<FirePropagation>().Instantiations());
+                    StartCoroutine(goList[i].transform.gameObject.GetComponent<FirePropagationV2>().Instantiations());
                     //Debug.Log("somethingnear");
                 }
 
                 if (distance <= midFireRadius && rndValue < 5)
                 {
-                    StartCoroutine(goList[i].transform.gameObject.GetComponent<FirePropagation>().Instantiations());
+                    StartCoroutine(goList[i].transform.gameObject.GetComponent<FirePropagationV2>().Instantiations());
                     //Debug.Log("somethingclose");
                 }
 
                 if (distance <= farFireRadius && rndValue < 3)
                 {
-                    StartCoroutine(goList[i].transform.gameObject.GetComponent<FirePropagation>().Instantiations());
+                    StartCoroutine(goList[i].transform.gameObject.GetComponent<FirePropagationV2>().Instantiations());
                     //Debug.Log("somethingfar");
                 }
             }
             
-        }
-    }
+        }*/
+    
 }
 
