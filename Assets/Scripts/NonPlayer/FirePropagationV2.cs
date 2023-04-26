@@ -7,7 +7,7 @@ public class FirePropagationV2 : MonoBehaviour
 {
     public List<FirePropagationV2> allFires;
     
-    //public GameObject fire;
+    public GameObject fire;
     float nearDistance = 10f;
         
     public int highPercentage;
@@ -49,7 +49,7 @@ public class FirePropagationV2 : MonoBehaviour
         }
 
         //fireHP -= Time.deltaTime;
-
+        
     }
 
     public void CalculateFireProp()
@@ -58,26 +58,28 @@ public class FirePropagationV2 : MonoBehaviour
         {
             float distance = Vector3.Distance(transform.position, x.transform.position);
 
-            if (distance < nearDistance && onFire)
+            if (distance < nearDistance && !x.onFire)
             {
                 if (x.fireType == FireType.HighFlammability && Random.Range(1,101) < highPercentage)
                 {
                     x.transform.GetChild(0).gameObject.SetActive(true);
-                    onFire = true;
+                    x.onFire = true;
                     allFires.Remove(x);
                     break;
                 }
                 else if(x.fireType == FireType.LowFlammability && Random.Range(1, 101) < lowPercentage)
                 {
                     x.transform.GetChild(0).gameObject.SetActive(true);
-                    onFire = true;
+                    x.onFire = true;
                     allFires.Remove(x);
                     break;
                 }
                 else if (x.fireType == FireType.Explosive)
                 {
-                    x.transform.GetChild(1).gameObject.SetActive(true);
-                    onFire = true;
+                    x.transform.GetChild(0).gameObject.SetActive(true);
+                    fire = x.transform.GetChild(1).gameObject;
+                    StartCoroutine(WaitToStartFire());
+                    x.onFire = true;
                     allFires.Remove(x);
                     break;
                 }
@@ -85,15 +87,20 @@ public class FirePropagationV2 : MonoBehaviour
         }          
 
     }   
-    
     public void TakeDamage()
     {
         if(fireHP > 0)
         {
             fireHP -= 25f;
         }
+    } 
+    
+    IEnumerator WaitToStartFire()
+    {
+        yield return new WaitForSeconds(2f);
+        fire.SetActive(true);
     }
-
+    
 }
 
 public enum FireType
