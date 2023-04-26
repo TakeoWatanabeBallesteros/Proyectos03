@@ -115,6 +115,11 @@ public class Manguera : MonoBehaviour
         if (canRecharge)
             WaterAmount = 1;
     }
+    private void OnInteract()
+    {
+        UsingSecondary = false;
+        StrongWater.Stop();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Recharge")
