@@ -1,114 +1,86 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FirePropagationV2 : MonoBehaviour
 {
-
-    public GameObject[] highFire;
-    public GameObject[] midFire;
-    public GameObject[] lowFire;
-    public GameObject nearFire;
-    public GameObject sonFire;
-    float distance;
-    float nearDistance = 3f;
-
-    bool created = false;
-
-    public bool firstGrade;
-    public bool secondGrade;
-    public bool thirdGrade;
-
-    public int rndPercentage1;
-    public int rndPercentage2;
+    public List<FirePropagationV2> allFires;
+    
+    //public GameObject fire;
+    float nearDistance = 10f;
+        
+    public int highPercentage;
+    public int lowPercentage;
 
     float fireHP = 100f;
     float timeToExplote;
+
+    public bool onFire = false;
+
+    public FireType fireType;
+
+    float timer;
+    public float delay;
 
     // Start is called before the first frame update
     void Start()
     {
         //firePrefab = Resources.Load("Prefabs/Firee") as GameObject;
+        allFires = FindObjectsOfType<FirePropagationV2>().ToList<FirePropagationV2>();
+        allFires.RemoveAll(item => item.onFire == true);
+        timer = delay;
     }
 
     // Update is called once per frame
     void Update()
     {
-        CalculateFireProp();
-        fireHP -= Time.deltaTime;
+        if (timer >= 0f)
+        {
+            timer -= Time.deltaTime;
+        }
+        else
+        {
+            timer = delay;
+            CalculateFireProp();
+        }
+
+        //fireHP -= Time.deltaTime;
+        
     }
 
     public void CalculateFireProp()
-    {
-        highFire = GameObject.FindGameObjectsWithTag("HighF");
-        midFire = GameObject.FindGameObjectsWithTag("MidF");
-        lowFire = GameObject.FindGameObjectsWithTag("LowF");
-
-        for (int i = 0; i < highFire.Length; i++)
+    {     
+        foreach (var x in allFires)
         {
-            distance = Vector3.Distance(transform.position, highFire[i].transform.position);
+            float distance = Vector3.Distance(transform.position, x.transform.position);
 
-            if (distance < nearDistance)
+            if (distance < nearDistance && onFire)
             {
-                nearFire = highFire[i];
-                StartCoroutine(Instantiations());
+                if (x.fireType == FireType.HighFlammability && Random.Range(1,101) < highPercentage)
+                {
+                    x.transform.GetChild(0).gameObject.SetActive(true);
+                    onFire = true;
+                    allFires.Remove(x);
+                    break;
+                }
+                else if(x.fireType == FireType.LowFlammability && Random.Range(1, 101) < lowPercentage)
+                {
+                    x.transform.GetChild(0).gameObject.SetActive(true);
+                    onFire = true;
+                    allFires.Remove(x);
+                    break;
+                }
             }
-        }
-        for (int i = 0; i < midFire.Length; i++)
-        {
-            distance = Vector3.Distance(transform.position, midFire[i].transform.position);
+        }          
 
-            if (distance < nearDistance)
-            {
-                nearFire = midFire[i];
-                StartCoroutine(Instantiations());
-            }
-        }
-        for (int i = 0; i < lowFire.Length; i++)
-        {
-            distance = Vector3.Distance(transform.position, lowFire[i].transform.position);
+    }    
 
-            if (distance < nearDistance)
-            {
-                nearFire = lowFire[i];
-                StartCoroutine(Instantiations());
-            }
-        }
-    }
+}
 
-    public IEnumerator Instantiations()
-    {
-        if (nearFire.GetComponent<FirePropagation>() == null)
-        {
-            nearFire.AddComponent<FirePropagation>();
-        }
-
-        if (nearFire.transform.tag == "HighF")
-        {
-            timeToExplote = Random.Range(.5f, 1f);
-            if (nearFire.GetComponent<Explosion>() == null)
-                nearFire.AddComponent<Explosion>();
-        }
-        else if (nearFire.transform.tag == "MidF")
-        {
-            timeToExplote = Random.Range(2f, 3f);
-        }
-        else if (nearFire.transform.tag == "LowF")
-        {
-            timeToExplote = Random.Range(4f, 5f);
-        }
-
-        yield return new WaitForSeconds(timeToExplote);
-
-        sonFire = nearFire.transform.GetChild(0).gameObject;
-        nearFire.transform.tag = "Burning";
-        sonFire.SetActive(true);
-
-        if (nearFire.GetComponent<Explosion>() == null && nearFire.transform.gameObject.tag == "HighF")
-            nearFire.AddComponent<Explosion>();
-
-        yield return new WaitForSeconds(1f);
-    }
-
-
+public enum FireType
+{    
+    Explosive,
+    HighFlammability,    
+    LowFlammability
 }
