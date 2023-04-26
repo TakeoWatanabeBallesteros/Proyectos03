@@ -42,6 +42,7 @@ public class FireExtinguish : MonoBehaviour
         Debug.DrawRay(Player.transform.position, Player.transform.forward* WeakRayLenght);
         if (Physics.Raycast(ray, out RaycastHit hit, WeakRayLenght, FireLayer))
         {
+            hit.collider.GetComponent<FirePropagationV2>().TakeDamage();
             Debug.Log("normal");
         }
     }
@@ -51,6 +52,7 @@ public class FireExtinguish : MonoBehaviour
         Debug.DrawRay(Player.transform.position, Player.transform.forward * StrongRayLenght);
         if (Physics.Raycast(ray, out RaycastHit hit, StrongRayLenght, FireLayer))
         {
+            hit.collider.GetComponent<FirePropagationV2>().TakeDamage();
             Debug.Log("fuerte");
         }
     }
