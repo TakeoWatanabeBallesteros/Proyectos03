@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FirePropagation : MonoBehaviour
+public class FirePropagationV2 : MonoBehaviour
 {
 
     public GameObject[] highFire;
@@ -109,6 +109,6 @@ public class FirePropagation : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
     }
-        
+
 
 }
