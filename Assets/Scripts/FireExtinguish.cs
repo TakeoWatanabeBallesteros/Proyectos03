@@ -22,9 +22,7 @@ public class FireExtinguish : MonoBehaviour
 
     private void WaterRaycast()
     {
-        Vector3 FixedPos = Pointer.transform.position;
-        FixedPos.y = Player.transform.position.y;
-        Ray ray = new Ray(Player.transform.position, FixedPos);
-        Debug.DrawRay(Player.transform.position,FixedPos);
+        Ray ray = new Ray(Player.transform.position, Player.transform.forward);
+        Debug.DrawRay(Player.transform.position, Player.transform.forward*5);
     }
 }
