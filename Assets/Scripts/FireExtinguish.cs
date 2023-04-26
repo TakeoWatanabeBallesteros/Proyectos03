@@ -66,6 +66,7 @@ public class FireExtinguish : MonoBehaviour
         {
             StrongHittingFire = true;
             StrongFireTarget = hit.collider.gameObject;
+            Debug.Log("fuerte");
         }
         else
             StrongHittingFire = false;
