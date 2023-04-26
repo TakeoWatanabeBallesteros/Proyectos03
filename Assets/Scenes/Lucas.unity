@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 76341806}
   - component: {fileID: 76341807}
   - component: {fileID: 76341808}
+  - component: {fileID: 76341809}
   - component: {fileID: 76341805}
   m_Layer: 6
   m_Name: Player
@@ -344,11 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0468bfdf9eab4448b4bd5fe25ca2da4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 76341805}
-  primaryShoot: {fileID: -8555768353991317252, guid: 74163727c12ec144bbb0083f037dd01c,
-    type: 3}
-  sencondaryShoot: {fileID: -8951913983384352886, guid: 74163727c12ec144bbb0083f037dd01c,
-    type: 3}
+  playerInput: {fileID: 0}
   PreWater: {fileID: 365374851}
   StrongWater: {fileID: 1001469133}
   WeakWater: {fileID: 811640711}
@@ -357,7 +354,6 @@ MonoBehaviour:
   StrongWaterConsumption: 0.007
   ChargeText: {fileID: 1340216076}
   StartWater: 1
-  HittingWaterRay: {fileID: 123418704}
 --- !u!114 &76341807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,6 +380,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bedd741704ec3e0459cd821e842a6c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &76341809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76341795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fae12579b9b5a749b2ed1cc6243097e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FireLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  WeakRayLenght: 15
+  StrongRayLenght: 100
+  playerInput: {fileID: 76341808}
 --- !u!1 &103564284
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,110 +550,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119236483}
   m_CullTransparentMesh: 1
---- !u!1 &123418699
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 123418703}
-  - component: {fileID: 123418702}
-  - component: {fileID: 123418701}
-  - component: {fileID: 123418704}
-  m_Layer: 0
-  m_Name: Sphere
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!23 &123418701
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 123418699}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &123418702
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 123418699}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &123418703
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 123418699}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15, y: 1.25, z: -19.75}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 14
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &123418704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 123418699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fae12579b9b5a749b2ed1cc6243097e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GroundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  FireLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  WeakRayLenght: 15
-  StrongRayLenght: 100
 --- !u!1 &165451172
 GameObject:
   m_ObjectHideFlags: 0
@@ -1786,16 +1696,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 625048091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fe7e504d69ff064b80332b5bd4d96a8, type: 3}
+  m_Script: {fileID: 11500000, guid: ff2839107c831114d835cb8086867675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Fire: []
-  nearFire: {fileID: 0}
-  sonFire: {fileID: 0}
-  nearDistance: 5
-  firstGrade: 0
-  secondGrade: 0
-  thirdGrade: 0
+  allFires: []
+  nearFiresExplosion: []
+  fire: {fileID: 0}
+  nearDistance: 0
+  highPercentage: 0
+  lowPercentage: 0
+  onFire: 0
+  fireType: 0
+  delay: 0
+  delayFire: 0
 --- !u!54 &625048094
 Rigidbody:
   m_ObjectHideFlags: 0
