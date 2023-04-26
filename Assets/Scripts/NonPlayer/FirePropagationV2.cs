@@ -23,6 +23,8 @@ public class FirePropagationV2 : MonoBehaviour
     float timer;
     public float delay;
 
+    float timerFire;
+    public float delayFire;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,7 @@ public class FirePropagationV2 : MonoBehaviour
         allFires = FindObjectsOfType<FirePropagationV2>().ToList<FirePropagationV2>();
         allFires.RemoveAll(item => item.onFire == true);
         timer = delay;
+        timerFire = delayFire;
     }
 
     // Update is called once per frame
@@ -46,7 +49,7 @@ public class FirePropagationV2 : MonoBehaviour
         }
 
         //fireHP -= Time.deltaTime;
-        
+
     }
 
     public void CalculateFireProp()
@@ -81,7 +84,15 @@ public class FirePropagationV2 : MonoBehaviour
             }
         }          
 
-    }    
+    }   
+    
+    public void TakeDamage()
+    {
+        if(fireHP > 0)
+        {
+            fireHP -= 25f;
+        }
+    }
 
 }
 
