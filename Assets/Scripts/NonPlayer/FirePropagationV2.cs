@@ -6,9 +6,10 @@ using UnityEngine;
 public class FirePropagationV2 : MonoBehaviour
 {
     public List<FirePropagationV2> allFires;
+    public List<GameObject> nearFiresExplosion;
     
     public GameObject fire;
-    float nearDistance = 10f;
+    public float nearDistance;
         
     public int highPercentage;
     public int lowPercentage;
@@ -45,14 +46,10 @@ public class FirePropagationV2 : MonoBehaviour
         else
         {
             timer = delay;
-            CalculateFireProp();
-        }
-
-        //fireHP -= Time.deltaTime;
-        
+        }                
     }
 
-    public void CalculateFireProp()
+    public void CalculateFireProp(GameObject g)
     {     
         foreach (var x in allFires)
         {
