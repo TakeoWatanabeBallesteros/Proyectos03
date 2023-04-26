@@ -71,6 +71,13 @@ public class FirePropagationV2 : MonoBehaviour
                     allFires.Remove(x);
                     break;
                 }
+                else if (x.fireType == FireType.Explosive)
+                {
+                    x.transform.GetChild(1).gameObject.SetActive(true);
+                    onFire = true;
+                    allFires.Remove(x);
+                    break;
+                }
             }
         }          
 
