@@ -41,7 +41,7 @@ public class PickupKid : MonoBehaviour
             PickupText.enabled = false;
             TargetKid.transform.SetParent(gameObject.transform);
             TargetKid.transform.position = Shoulder.position;
-            TargetKid.transform.rotation = Quaternion.Euler(-90, 0, 0);
+            TargetKid.transform.rotation = Shoulder.rotation;
             TargetKid.GetComponent<BoxCollider>().enabled = false;
             CarringKid = true;
             CanPickup = false;

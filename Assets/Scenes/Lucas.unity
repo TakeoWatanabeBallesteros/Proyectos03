@@ -5866,6 +5866,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 76341803}
   distance: 10
+  maxCamSize: 0
+  minCamSize: 0
+  timer: 0
 --- !u!81 &1828058352
 AudioListener:
   m_ObjectHideFlags: 0
@@ -6523,6 +6526,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5018670066232269016, guid: ed6fd7c96a0829246954d154207aa675,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071064
+      objectReference: {fileID: 0}
+    - target: {fileID: 5018670066232269016, guid: ed6fd7c96a0829246954d154207aa675,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.70710725
+      objectReference: {fileID: 0}
+    - target: {fileID: 5018670066232269016, guid: ed6fd7c96a0829246954d154207aa675,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1.45519135e-11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5018670066232269016, guid: ed6fd7c96a0829246954d154207aa675,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5018670066232269016, guid: ed6fd7c96a0829246954d154207aa675,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 5018670066439703046, guid: ed6fd7c96a0829246954d154207aa675,
         type: 3}
       propertyPath: WeakWater
