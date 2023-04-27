@@ -30,23 +30,35 @@ public class MovementPlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RotatePlayer();
+        /// Solo usar cuando disparas
+        // RotatePlayer();
         
         direction = Vector3.zero;
         if(input.movement != Vector2.zero)
         {
-            Vector3 forward = cam.transform.forward;
-            forward.y = 0;
-            forward.Normalize();
+            // Solo usar cuando disparas
+            // Vector3 forward = cam.transform.forward;
+            // forward.y = 0;
+            // forward.Normalize();
+ 
+            // Vector3 right = cam.transform.right;
+            // right.y = 0;
+            // right.Normalize();
+ 
+            // direction = forward * input.movement.y + right * input.movement.x;
 
-            Vector3 right = cam.transform.right;
-            right.y = 0;
-            right.Normalize();
+            
+            // Si no disparas usar este
+            Vector3 movementDirection = new Vector3(input .movement.x, 0, input.movement.y);
+            Vector3 realDirection = Camera.main.transform.TransformDirection(movementDirection);
+            // this line checks whether the player is making inputs.
+            if(realDirection.magnitude > 0.1f)
+            {
+                Quaternion newRotation = Quaternion.LookRotation(realDirection);
+                transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10);
+            }
 
-            direction = forward * input.movement.y + right * input.movement.x;
-
-            // direction = (transform.right.normalized * input.movement.x).normalized + (transform.forward.normalized * input.movement.y).normalized;
-            // direction.y = 0;
+            direction = transform.forward.normalized;
         }
         else
         {
