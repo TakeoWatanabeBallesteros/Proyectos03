@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     public TMP_Text TimeLeftText;
     [SerializeField] private float TimerEnSegundos;
     int minutes, seconds, cents;
+    public GameObject winScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class GameController : MonoBehaviour
         DontDestroyOnLoad(this);
         Kids = GameObject.FindGameObjectsWithTag("Kid");
         TotalKids = Kids.Length;
+        winScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -64,6 +66,6 @@ public class GameController : MonoBehaviour
 
     public void Win()
     {
-
+        winScreen.SetActive(true);
     }
 }
