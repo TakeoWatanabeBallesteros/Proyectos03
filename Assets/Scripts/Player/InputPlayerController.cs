@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
 public class InputPlayerController : MonoBehaviour
@@ -12,9 +13,9 @@ public class InputPlayerController : MonoBehaviour
     public bool shoot { get; private set; }
     public bool interact { get; private set; }
     public bool secondaryShoot { get; private set; }
+    public Vector2 zoom { get; private set; }
 
-   
-    
+
     private void OnEnable()
     {
         if(controls != null)
@@ -38,6 +39,8 @@ public class InputPlayerController : MonoBehaviour
         controls.Player.SecondaryShot.canceled += ctx => secondaryShoot = ctx.ReadValueAsButton();
         controls.Player.Interact.performed += ctx => interact = ctx.ReadValueAsButton();
         controls.Player.Interact.canceled += ctx => interact = ctx.ReadValueAsButton();
+        controls.Player.Zoom.performed += ctx => zoom = ctx.ReadValue<Vector2>();
+        controls.Player.Zoom.canceled += ctx => zoom = ctx.ReadValue<Vector2>();
     }
 
     // Start is called before the first frame update
