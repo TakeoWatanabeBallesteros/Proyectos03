@@ -14,6 +14,7 @@ public class FireExtinguish : MonoBehaviour
     PickupKid Kid;
     Manguera Manguera;
     bool SecondaryActivated;
+    public ParticleSystem WeakWater;
 
     // Start is called before the first frame update
     void Start()
@@ -23,11 +24,15 @@ public class FireExtinguish : MonoBehaviour
         playerInput = Player.GetComponent<InputPlayerController>();
         Kid = Player.GetComponent<PickupKid>();
         Manguera = Player.GetComponent<Manguera>();
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        var WeakMain = WeakWater.main;
+        WeakMain.startLifetime = WeakRayLenght / WeakMain.startSpeed.constant;
         if (playerInput.shoot && !Manguera.GetSecondary() && Manguera.GetWaterAmount() > 0)
         {
             WeakWaterRaycast();

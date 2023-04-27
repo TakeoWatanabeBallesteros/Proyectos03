@@ -6247,6 +6247,12 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!198 &2106086519 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6493567662282278496, guid: ed6fd7c96a0829246954d154207aa675,
+    type: 3}
+  m_PrefabInstance: {fileID: 5018670066515486775}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2127097557
 GameObject:
   m_ObjectHideFlags: 0
@@ -6517,6 +6523,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5018670066439703046, guid: ed6fd7c96a0829246954d154207aa675,
+        type: 3}
+      propertyPath: WeakWater
+      value: 
+      objectReference: {fileID: 2106086519}
     - target: {fileID: 5018670066439703057, guid: ed6fd7c96a0829246954d154207aa675,
         type: 3}
       propertyPath: m_UseGravity
