@@ -5,17 +5,27 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+    Vector3 initialPos;
     [SerializeField] private float Vida;
+    InputPlayerController inputPlayer;
+    MovementPlayerController playerMovement;
+    PickupKid Kid;
     public Slider LifeBar;
     public Image Fire;
     public Image YouDied;
-    private bool Dead;
-    private float Timer;
-    private float Alfa;
+    bool Dead;
+    float Timer;
+    float Alfa;
+    GameController GM;
 
     // Start is called before the first frame update
     void Start()
     {
+        Kid = GetComponent<PickupKid>();
+        GM = GameObject.Find("GameController").GetComponent<GameController>();
+        inputPlayer = GetComponent<InputPlayerController>();
+        playerMovement = GetComponent<MovementPlayerController>();
+        initialPos = transform.position;
         Dead = false;
         Fire.color = new Color(1f, 1f, 1f, 0f);
         Timer = 0.5f;
@@ -40,20 +50,40 @@ public class PlayerHealth : MonoBehaviour
             Fire.color = new Color(1f, 1f, 1f, 0f);
         }
     }
+    IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(4.5f);
+        transform.position = initialPos;
+        yield return new WaitForSeconds(.5f);
+        Vida = 1;
+        YouDied.color = new Color(1f, 1f, 1f, 0f);
+        inputPlayer.enabled = true;
+        playerMovement.enabled = true;
+        Dead = false;
+        GM.AddTime(999f);
+    }
     public void TakeDamage()
     {
         if (!Dead)
         {
-            Vida -= 0.10f;
-            Timer = 0.5f;
-            Fire.color = new Color(1f, 1f, 1f, 1f);
+            if (Kid.HasKid())
+                IntantDeath();
+            else
+            {
+                Vida -= 0.10f;
+                Timer = 0.5f;
+                Fire.color = new Color(1f, 1f, 1f, 1f);
+            }
         }
     }
 
     private void die()
     {
         Dead = true;
+        inputPlayer.enabled = false;
+        playerMovement.enabled = false;
         StartCoroutine(FadeIN(YouDied));
+        StartCoroutine(Respawn());
     }
     IEnumerator FadeIN(Image image)
     {
@@ -64,5 +94,9 @@ public class PlayerHealth : MonoBehaviour
         {
             StartCoroutine(FadeIN(image));
         }
+    }
+    public void IntantDeath()
+    {
+        Vida = 0;
     }
 }

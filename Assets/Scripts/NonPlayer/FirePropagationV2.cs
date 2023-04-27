@@ -110,13 +110,13 @@ public class FirePropagationV2 : MonoBehaviour
         }          
 
     }   
-    public void TakeDamage()
+    public void TakeDamage(float DMG)
     {
         if (DamageTimer > 0)
         {
             return;
         }
-        fireHP -= 25f;
+        fireHP -= DMG;
         DamageTimer = delayFire;
     }
 
