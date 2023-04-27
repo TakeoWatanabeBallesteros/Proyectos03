@@ -12,13 +12,15 @@ public class PlayerHealth : MonoBehaviour
     public Slider LifeBar;
     public Image Fire;
     public Image YouDied;
-    private bool Dead;
-    private float Timer;
-    private float Alfa;
+    bool Dead;
+    float Timer;
+    float Alfa;
+    GameController GM;
 
     // Start is called before the first frame update
     void Start()
     {
+        GM = GameObject.Find("GameController").GetComponent<GameController>();
         inputPlayer = GetComponent<InputPlayerController>();
         playerMovement = GetComponent<MovementPlayerController>();
         initialPos = transform.position;
@@ -56,6 +58,7 @@ public class PlayerHealth : MonoBehaviour
         inputPlayer.enabled = true;
         playerMovement.enabled = true;
         Dead = false;
+        GM.AddTime(999f);
     }
     public void TakeDamage()
     {
@@ -84,5 +87,9 @@ public class PlayerHealth : MonoBehaviour
         {
             StartCoroutine(FadeIN(image));
         }
+    }
+    public void IntantDeath()
+    {
+        Vida = 0;
     }
 }

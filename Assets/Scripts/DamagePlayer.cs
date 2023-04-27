@@ -34,15 +34,19 @@ public class DamagePlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (Valve)
+        if (other.tag ==  "Player")
         {
-            Valve = false;
-            Timer = 0;
+            if (Valve)
+            {
+                Valve = false;
+                Timer = 0;
+            }
+            OnDamageZone = true;
         }
-        OnDamageZone = true;
     }
     private void OnTriggerExit(Collider other)
     {
-        OnDamageZone = false;
+        if (other.tag == "Player")
+            OnDamageZone = false;
     }
 }
