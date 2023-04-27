@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+    Vector3 initialPos;
     [SerializeField] private float Vida;
+    InputPlayerController inputPlayer;
+    MovementPlayerController playerMovement;
     public Slider LifeBar;
     public Image Fire;
     public Image YouDied;
@@ -16,6 +19,9 @@ public class PlayerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        inputPlayer = GetComponent<InputPlayerController>();
+        playerMovement = GetComponent<MovementPlayerController>();
+        initialPos = transform.position;
         Dead = false;
         Fire.color = new Color(1f, 1f, 1f, 0f);
         Timer = 0.5f;
@@ -40,6 +46,17 @@ public class PlayerHealth : MonoBehaviour
             Fire.color = new Color(1f, 1f, 1f, 0f);
         }
     }
+    IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(4.5f);
+        transform.position = initialPos;
+        yield return new WaitForSeconds(.5f);
+        Vida = 1;
+        YouDied.color = new Color(1f, 1f, 1f, 0f);
+        inputPlayer.enabled = true;
+        playerMovement.enabled = true;
+        Dead = false;
+    }
     public void TakeDamage()
     {
         if (!Dead)
@@ -53,7 +70,10 @@ public class PlayerHealth : MonoBehaviour
     private void die()
     {
         Dead = true;
+        inputPlayer.enabled = false;
+        playerMovement.enabled = false;
         StartCoroutine(FadeIN(YouDied));
+        StartCoroutine(Respawn());
     }
     IEnumerator FadeIN(Image image)
     {
