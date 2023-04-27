@@ -34,32 +34,38 @@ public class MovementPlayerController : MonoBehaviour
         // RotatePlayer();
         
         direction = Vector3.zero;
-        if(input.movement != Vector2.zero)
+        if (input.shoot || input.secondaryShoot)
         {
             // Solo usar cuando disparas
-            // Vector3 forward = cam.transform.forward;
-            // forward.y = 0;
-            // forward.Normalize();
-  
-            // Vector3 right = cam.transform.right;
-            // right.y = 0;
-            // right.Normalize();
- 
-            // direction = forward * input.movement.y + right * input.movement.x;
+            Vector3 forward = cam.transform.forward;
+            forward.y = 0;
+            forward.Normalize();
 
-            
-            // Si no disparas usar este
-            Vector3 movementDirection = new Vector3(input .movement.x, 0, input.movement.y);
-            Vector3 realDirection = Camera.main.transform.TransformDirection(movementDirection);
-            realDirection.y = 0;
-            // this line checks whether the player is making inputs.
-            if(realDirection.magnitude > 0.1f)
+            Vector3 right = cam.transform.right;
+            right.y = 0;
+            right.Normalize();
+
+            direction = forward * input.movement.y + right * input.movement.x;
+            RotatePlayer();
+        }
+        if(input.movement != Vector2.zero)
+        {
+            if(!input.shoot && !input.secondaryShoot)
             {
-                Quaternion newRotation = Quaternion.LookRotation(realDirection);
-                transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10);
+                // Si no disparas usar este
+                Vector3 movementDirection = new Vector3(input.movement.x, 0, input.movement.y);
+                Vector3 realDirection = Camera.main.transform.TransformDirection(movementDirection);
+                realDirection.y = 0;
+                // this line checks whether the player is making inputs.
+                if(realDirection.magnitude > 0.1f)
+                {
+                    Quaternion newRotation = Quaternion.LookRotation(realDirection);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10);
+                }
+                direction = transform.forward.normalized;
             }
+            
 
-            direction = transform.forward.normalized;
         }
         else
         {
