@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class MovementPlayerController : MonoBehaviour
 {
     public float speed;
+    float currentSpeed;
     public Camera cam;
     
     private Rigidbody rb;
@@ -29,35 +30,53 @@ public class MovementPlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RotatePlayer();
+        /// Solo usar cuando disparas
+        // RotatePlayer();
         
         direction = Vector3.zero;
         if(input.movement != Vector2.zero)
         {
-            Vector3 forward = cam.transform.forward;
-            forward.y = 0;
-            forward.Normalize();
+            // Solo usar cuando disparas
+            // Vector3 forward = cam.transform.forward;
+            // forward.y = 0;
+            // forward.Normalize();
+  
+            // Vector3 right = cam.transform.right;
+            // right.y = 0;
+            // right.Normalize();
+ 
+            // direction = forward * input.movement.y + right * input.movement.x;
 
-            Vector3 right = cam.transform.right;
-            right.y = 0;
-            right.Normalize();
+            
+            // Si no disparas usar este
+            Vector3 movementDirection = new Vector3(input .movement.x, 0, input.movement.y);
+            Vector3 realDirection = Camera.main.transform.TransformDirection(movementDirection);
+            realDirection.y = 0;
+            // this line checks whether the player is making inputs.
+            if(realDirection.magnitude > 0.1f)
+            {
+                Quaternion newRotation = Quaternion.LookRotation(realDirection);
+                transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10);
+            }
 
-            direction = forward * input.movement.y + right * input.movement.x;
-
-            // direction = (transform.right.normalized * input.movement.x).normalized + (transform.forward.normalized * input.movement.y).normalized;
-            // direction.y = 0;
+            direction = transform.forward.normalized;
+        }
+        else
+        {
+           currentSpeed = 0;
         }
     }
 
     private void FixedUpdate()
     {
-        MovePlayer(direction);
+        MovePlayer(direction.normalized);
         // ExperimentalMove();
     }
 
     private void MovePlayer(Vector3 direction)
     {
-        rb.velocity = direction * speed;
+        currentSpeed = Mathf.Lerp(currentSpeed, speed, Time.deltaTime * 10);
+        rb.velocity = direction * currentSpeed;
     }
 
     private void ExperimentalMove()

@@ -5,81 +5,93 @@ using UnityEngine.InputSystem;
 
 public class FireExtinguish : MonoBehaviour
 {
-    Vector3 mouseScreenPos;
-    Vector3 mosuseWorldPos;
-    public LayerMask GroundLayer;
+    public LayerMask ColisionLayer;
     public LayerMask FireLayer;
     GameObject Player;
     public float WeakRayLenght;
-    bool WeakHittingFire;
     public float StrongRayLenght;
-    bool StrongHittingFire;
-    public GameObject WeakFireTarget;
-    public GameObject StrongFireTarget;
     [SerializeField] private InputPlayerController playerInput;
     PickupKid Kid;
     Manguera Manguera;
+    bool SecondaryActivated;
+    public ParticleSystem WeakWater;
 
     // Start is called before the first frame update
     void Start()
     {
-        WeakHittingFire = false;
-        StrongHittingFire = false;
+        SecondaryActivated = false;
         Player = GameObject.FindGameObjectWithTag("Player");
         playerInput = Player.GetComponent<InputPlayerController>();
         Kid = Player.GetComponent<PickupKid>();
+        Manguera = Player.GetComponent<Manguera>();
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        PositionMouse();
-        if (playerInput.shoot && !Manguera.GetPrimary() && !Manguera.GetSecondary() && Manguera.GetWaterAmount() > 0)
+        var WeakMain = WeakWater.main;
+        WeakMain.startLifetime = WeakRayLenght / WeakMain.startSpeed.constant;
+        if (playerInput.shoot && !Manguera.GetSecondary() && Manguera.GetWaterAmount() > 0)
         {
             WeakWaterRaycast();
         }
-        else if (playerInput.secondaryShoot && !Manguera.GetSecondary() && !Manguera.GetPrimary() && Manguera.GetWaterAmount() > 0 && !Kid.HasKid())
+
+        if (playerInput.secondaryShoot && !Manguera.GetPrimary() && Manguera.GetWaterAmount() > 0 && !Kid.HasKid())
         {
-            StrongWaterRaycast();
+            if (!SecondaryActivated)
+            {
+                StartCoroutine(SecondaryDelay());
+            }
+            else
+            {
+                StrongWaterRaycast();
+            }
+        }
+        if (!playerInput.secondaryShoot)
+        {
+            SecondaryActivated = false;
+            StopAllCoroutines();
+        }
+
+        IEnumerator SecondaryDelay()
+        {
+            yield return new WaitForSeconds(1f);
+            if (playerInput.secondaryShoot)
+            {
+                SecondaryActivated = true;
+            }
         }
 
     }
+
+  
 
     private void WeakWaterRaycast()
     {
         Ray ray = new Ray(Player.transform.position, Player.transform.forward);
         Debug.DrawRay(Player.transform.position, Player.transform.forward* WeakRayLenght);
-        if (Physics.Raycast(ray, out RaycastHit hit, WeakRayLenght, FireLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, WeakRayLenght, ColisionLayer))
         {
-            WeakHittingFire = true;
-            WeakFireTarget = hit.collider.gameObject;
-            Debug.Log("normal");
+            if (hit.collider.gameObject.GetComponent<FirePropagationV2>().onFire)
+            {
+                hit.collider.GetComponent<FirePropagationV2>().TakeDamage();
+                Debug.Log("normal");
+            }
         }
-        else
-            WeakHittingFire = false;        
     }
     private void StrongWaterRaycast()
     {
         Ray ray = new Ray(Player.transform.position, Player.transform.forward);
         Debug.DrawRay(Player.transform.position, Player.transform.forward * StrongRayLenght);
-        if (Physics.Raycast(ray, out RaycastHit hit, StrongRayLenght, FireLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, StrongRayLenght, ColisionLayer))
         {
-            StrongHittingFire = true;
-            StrongFireTarget = hit.collider.gameObject;
+            if (hit.collider.gameObject.GetComponent<FirePropagationV2>().onFire)
+            {
+                hit.collider.GetComponent<FirePropagationV2>().TakeDamage();
+                Debug.Log("fuerte");
+            }
         }
-        else
-            StrongHittingFire = false;
-    }
-    private void PositionMouse()
-    {
-        mouseScreenPos = Mouse.current.position.ReadValue();
-        Ray ray = Camera.main.ScreenPointToRay(mouseScreenPos);
-
-        if (Physics.Raycast(ray, out RaycastHit hit, 1000, GroundLayer))
-        {
-            mosuseWorldPos = hit.point;
-        }
-
-        transform.position = mosuseWorldPos;
     }
 }

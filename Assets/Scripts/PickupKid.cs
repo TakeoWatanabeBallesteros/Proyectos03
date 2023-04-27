@@ -16,12 +16,16 @@ public class PickupKid : MonoBehaviour
     private GameObject TargetKid;
     [SerializeField] private PlayerInput playerInput;
 
+    private MovementPlayerController _movementPlayerController;
+
     // Start is called before the first frame update
     void Start()
     {
         CarringKid = false;
         CanExtract = false;
         CanPickup = false;
+
+        _movementPlayerController = GetComponent<MovementPlayerController>();
     }
 
     // Update is called once per frame
@@ -37,10 +41,11 @@ public class PickupKid : MonoBehaviour
             PickupText.enabled = false;
             TargetKid.transform.SetParent(gameObject.transform);
             TargetKid.transform.position = Shoulder.position;
-            TargetKid.transform.rotation = Quaternion.Euler(-90, 0, 0);
+            TargetKid.transform.rotation = Shoulder.rotation;
             TargetKid.GetComponent<BoxCollider>().enabled = false;
             CarringKid = true;
             CanPickup = false;
+            _movementPlayerController.speed /= 2;
         }
         if (CanExtract)
         {
@@ -51,6 +56,7 @@ public class PickupKid : MonoBehaviour
             CarringKid = false;
             GM.AddChild();
             CanExtract = false;
+            _movementPlayerController.speed *= 2;
         }
     }
     private void OnTriggerEnter(Collider other)

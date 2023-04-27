@@ -7,49 +7,74 @@ public class FirePropagationV2 : MonoBehaviour
 {
     public List<FirePropagationV2> allFires;
     public List<GameObject> nearFiresExplosion;
-    
+
     public GameObject fire;
     public float nearDistance;
         
     public int highPercentage;
     public int lowPercentage;
 
-    float fireHP = 100f;
+    [SerializeField]float fireHP = 100f;
     float timeToExplote;
 
     public bool onFire = false;
 
     public FireType fireType;
 
-    float timer;
+    float expansionTimer;
     public float delay;
 
-    float timerFire;
+    float DamageTimer;
     public float delayFire;
+
+    public bool CanBurn;
     // Start is called before the first frame update
     void Start()
     {
+        CanBurn = true;
         //firePrefab = Resources.Load("Prefabs/Firee") as GameObject;
         allFires = FindObjectsOfType<FirePropagationV2>().ToList<FirePropagationV2>();
         allFires.RemoveAll(item => item.onFire == true);
-        timer = delay;
-        timerFire = delayFire;
+        expansionTimer = delay;
+        DamageTimer = delayFire;
+        if (!onFire)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (timer >= 0f)
+        if (onFire)
         {
-            timer -= Time.deltaTime;
+            if (expansionTimer >= 0f)
+            {
+                expansionTimer -= Time.deltaTime;
+            }
+            else
+            {
+                expansionTimer = delay;
+                CalculateFireProp();
+            }
+            if (fireHP <= 0)
+            {
+                onFire = false;
+                CanBurn = false;
+                transform.GetChild(0).gameObject.SetActive(false);
+                StopAllCoroutines();
+            }
+
+            if (fireHP > 0 && DamageTimer > 0)
+            {
+                DamageTimer -= Time.deltaTime;
+            }
         }
-        else
-        {
-            timer = delay;
-        }                
+
+
     }
 
-    public void CalculateFireProp(GameObject g)
+    public void CalculateFireProp()
     {     
         foreach (var x in allFires)
         {
@@ -74,7 +99,8 @@ public class FirePropagationV2 : MonoBehaviour
                 else if (x.fireType == FireType.Explosive)
                 {
                     x.transform.GetChild(0).gameObject.SetActive(true);
-                    fire = x.transform.GetChild(1).gameObject;
+                    //x.transform.GetChild(1).gameObject.SetActive(true);
+
                     StartCoroutine(WaitToStartFire());
                     x.onFire = true;
                     allFires.Remove(x);
@@ -86,12 +112,14 @@ public class FirePropagationV2 : MonoBehaviour
     }   
     public void TakeDamage()
     {
-        if(fireHP > 0)
+        if (DamageTimer > 0)
         {
-            fireHP -= 25f;
+            return;
         }
-    } 
-    
+        fireHP -= 25f;
+        DamageTimer = delayFire;
+    }
+
     IEnumerator WaitToStartFire()
     {
         yield return new WaitForSeconds(2f);
