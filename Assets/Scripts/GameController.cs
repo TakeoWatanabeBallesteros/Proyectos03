@@ -38,6 +38,12 @@ public class GameController : MonoBehaviour
 
         TimeLeftText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, cents);
         NumberOfkids.text = ("Kids saved: " + SavedKids + "/" + TotalKids);
+
+        if(TimerEnSegundos>0 && SavedKids >= TotalKids)
+        {
+            Debug.Log("Conseguiste salvar a los niños");
+            Win();
+        }
     }
     public int GetTotalKids()
     {
@@ -54,5 +60,10 @@ public class GameController : MonoBehaviour
     public void AddTime(float Time)
     {
         TimerEnSegundos += Time;
+    }
+
+    public void Win()
+    {
+
     }
 }
