@@ -155,9 +155,10 @@ public class Manguera : MonoBehaviour
 
     IEnumerator AddForce()
     {
-        //_rb.AddForce(-transform.forward.normalized/100000, ForceMode.Impulse);
+        //_rb.AddForce(-transform.forward.normalized/100000, ForceMode.Impulse); Preguntar como hacer lerp para que quede smooth
         yield return new WaitForSeconds(1f);
-        Vector3 newPosition = Vector3.Lerp(transform.position, transform.position - (transform.forward * knockbackForce), 2f);
+        //Vector3 newPosition = Vector3.Lerp(transform.position, transform.position - (transform.forward * knockbackForce), 2f);
+        Vector3 newPosition = new Vector3(transform.position.x - (transform.forward.x * knockbackForce), transform.position.y, transform.position.z - (transform.forward.z * knockbackForce));
         transform.position = Vector3.Lerp(transform.position, newPosition, 2f);        
     }
 
