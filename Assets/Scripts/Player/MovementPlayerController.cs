@@ -40,7 +40,7 @@ public class MovementPlayerController : MonoBehaviour
             // Vector3 forward = cam.transform.forward;
             // forward.y = 0;
             // forward.Normalize();
- 
+  
             // Vector3 right = cam.transform.right;
             // right.y = 0;
             // right.Normalize();
@@ -51,6 +51,7 @@ public class MovementPlayerController : MonoBehaviour
             // Si no disparas usar este
             Vector3 movementDirection = new Vector3(input .movement.x, 0, input.movement.y);
             Vector3 realDirection = Camera.main.transform.TransformDirection(movementDirection);
+            realDirection.y = 0;
             // this line checks whether the player is making inputs.
             if(realDirection.magnitude > 0.1f)
             {
