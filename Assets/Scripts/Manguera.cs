@@ -22,11 +22,14 @@ public class Manguera : MonoBehaviour
     public TMP_Text ChargeText;
     PickupKid Kid;
     [SerializeField] private float StartWater;
+    Rigidbody _rb;
+    public float knockbackForce;
 
     private void Start()
     {
         playerInput = GetComponent<InputPlayerController>();
         Kid = GetComponent<PickupKid>();
+        _rb = GetComponent<Rigidbody>();
         canRecharge = false;
         WaterAmount = StartWater;
     }
@@ -84,6 +87,7 @@ public class Manguera : MonoBehaviour
         yield return new WaitForSeconds(1f);
         if (UsingSecondary == true && WaterAmount > 0)
         {
+            StartCoroutine(AddForce());
             StrongWater.Play();
             StartCoroutine(ConsumeWater(StrongWaterConsumption));
         }
@@ -143,6 +147,14 @@ public class Manguera : MonoBehaviour
     public float GetWaterAmount()
     {
         return WaterAmount;
+    }
+
+    IEnumerator AddForce()
+    {
+        //_rb.AddForce(-transform.forward.normalized/100000, ForceMode.Impulse);
+        Vector3 newPosition = Vector3.Lerp(transform.position, transform.position - (transform.forward * knockbackForce), 3f);
+        transform.position = Vector3.Lerp(transform.position, newPosition, 3f);
+        yield return new WaitForSeconds(1f);
     }
 
 }
