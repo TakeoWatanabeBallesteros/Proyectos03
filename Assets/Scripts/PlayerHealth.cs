@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float Vida;
     InputPlayerController inputPlayer;
     MovementPlayerController playerMovement;
+    PickupKid Kid;
     public Slider LifeBar;
     public Image Fire;
     public Image YouDied;
@@ -20,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Kid = GetComponent<PickupKid>();
         GM = GameObject.Find("GameController").GetComponent<GameController>();
         inputPlayer = GetComponent<InputPlayerController>();
         playerMovement = GetComponent<MovementPlayerController>();
@@ -64,9 +66,14 @@ public class PlayerHealth : MonoBehaviour
     {
         if (!Dead)
         {
-            Vida -= 0.10f;
-            Timer = 0.5f;
-            Fire.color = new Color(1f, 1f, 1f, 1f);
+            if (Kid.HasKid())
+                IntantDeath();
+            else
+            {
+                Vida -= 0.10f;
+                Timer = 0.5f;
+                Fire.color = new Color(1f, 1f, 1f, 1f);
+            }
         }
     }
 
