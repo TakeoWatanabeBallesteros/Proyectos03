@@ -15,6 +15,7 @@ public class FireExtinguish : MonoBehaviour
     Manguera Manguera;
     bool SecondaryActivated;
     public ParticleSystem WeakWater;
+    public Transform LasserOrigin;
 
     // Start is called before the first frame update
     void Start()
@@ -70,8 +71,8 @@ public class FireExtinguish : MonoBehaviour
 
     private void WeakWaterRaycast()
     {
-        Ray ray = new Ray(Player.transform.position, Player.transform.forward);
-        Debug.DrawRay(Player.transform.position, Player.transform.forward* WeakRayLenght);
+        Ray ray = new Ray(LasserOrigin.position, LasserOrigin.forward);
+        Debug.DrawRay(LasserOrigin.position, LasserOrigin.forward* WeakRayLenght);
         if (Physics.Raycast(ray, out RaycastHit hit, WeakRayLenght, ColisionLayer))
         {
             if (hit.collider.gameObject.GetComponent<FirePropagationV2>().onFire)
@@ -83,8 +84,8 @@ public class FireExtinguish : MonoBehaviour
     }
     private void StrongWaterRaycast()
     {
-        Ray ray = new Ray(Player.transform.position, Player.transform.forward);
-        Debug.DrawRay(Player.transform.position, Player.transform.forward * StrongRayLenght);
+        Ray ray = new Ray(LasserOrigin.position, LasserOrigin.forward);
+        Debug.DrawRay(LasserOrigin.position, LasserOrigin.forward * StrongRayLenght);
         if (Physics.Raycast(ray, out RaycastHit hit, StrongRayLenght, ColisionLayer))
         {
             if (hit.collider.gameObject.GetComponent<FirePropagationV2>().onFire)
