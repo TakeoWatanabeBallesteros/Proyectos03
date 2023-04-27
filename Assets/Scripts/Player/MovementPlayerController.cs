@@ -105,6 +105,12 @@ public class MovementPlayerController : MonoBehaviour
         }
 
         //Rotating the player
-        transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+        var targetRotation = Quaternion.LookRotation(new Vector3(pointToLook.x, transform.position.y, pointToLook.z) - transform.position);;
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, speed * Time.deltaTime);
+    }
+
+    public void KnockBack()
+    {
+        rb.AddForce(-transform.forward.normalized*0.1f);
     }
 }

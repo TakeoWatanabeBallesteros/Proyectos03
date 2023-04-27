@@ -10,6 +10,7 @@ using System.Threading;
 public class Manguera : MonoBehaviour
 {
     [SerializeField] private InputPlayerController playerInput;
+    private MovementPlayerController playerMovement;
     bool UsingPrimary = false;
     bool UsingSecondary = false;
     public ParticleSystem PreWater;
@@ -31,6 +32,7 @@ public class Manguera : MonoBehaviour
     private void Start()
     {
         playerInput = GetComponent<InputPlayerController>();
+        playerMovement = GetComponent<MovementPlayerController>();
         Kid = GetComponent<PickupKid>();
         _rb = GetComponent<Rigidbody>();
         canRecharge = false;
@@ -88,6 +90,7 @@ public class Manguera : MonoBehaviour
     IEnumerator StrongParticles()
     {
         PreWater.Play();
+        playerMovement.KnockBack();
         StartCoroutine(AddForce());
         yield return new WaitForSeconds(1f);
         if (UsingSecondary == true && WaterAmount > 0)
