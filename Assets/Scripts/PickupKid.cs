@@ -45,7 +45,7 @@ public class PickupKid : MonoBehaviour
             TargetKid.GetComponent<BoxCollider>().enabled = false;
             CarringKid = true;
             CanPickup = false;
-            _movementPlayerController.speed /= 2;
+            _movementPlayerController.speed *= 1.2f;
         }
         if (CanExtract)
         {
@@ -56,7 +56,7 @@ public class PickupKid : MonoBehaviour
             CarringKid = false;
             GM.AddChild();
             CanExtract = false;
-            _movementPlayerController.speed *= 2;
+            _movementPlayerController.speed /= 1.2f;
         }
     }
     private void OnTriggerEnter(Collider other)
