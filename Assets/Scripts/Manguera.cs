@@ -90,7 +90,6 @@ public class Manguera : MonoBehaviour
     IEnumerator StrongParticles()
     {
         PreWater.Play();
-        playerMovement.KnockBack();
         StartCoroutine(AddForce());
         yield return new WaitForSeconds(1f);
         if (UsingSecondary == true && WaterAmount > 0)
