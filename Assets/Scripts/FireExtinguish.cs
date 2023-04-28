@@ -78,7 +78,6 @@ public class FireExtinguish : MonoBehaviour
             if (hit.collider.gameObject.GetComponent<FirePropagationV2>().onFire)
             {
                 hit.collider.GetComponent<FirePropagationV2>().TakeDamage(25);
-                Debug.Log("normal");
             }
         }
     }
@@ -91,7 +90,6 @@ public class FireExtinguish : MonoBehaviour
             if (hit.collider.gameObject.GetComponent<FirePropagationV2>().onFire)
             {
                 hit.collider.GetComponent<FirePropagationV2>().TakeDamage(50);
-                Debug.Log("fuerte");
             }
         }
     }
