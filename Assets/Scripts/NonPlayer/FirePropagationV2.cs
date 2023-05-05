@@ -28,11 +28,12 @@ public class FirePropagationV2 : MonoBehaviour
     public float delayFire;
 
     public bool CanBurn;
+
+    [SerializeField] ParticleSystem[] fireParticles;
     // Start is called before the first frame update
     void Start()
     {
         CanBurn = true;
-        //firePrefab = Resources.Load("Prefabs/Firee") as GameObject;
         allFires = FindObjectsOfType<FirePropagationV2>().ToList<FirePropagationV2>();
         allFires.RemoveAll(item => item.onFire == true);
         expansionTimer = delay;
@@ -41,6 +42,9 @@ public class FirePropagationV2 : MonoBehaviour
         {
             transform.GetChild(0).gameObject.SetActive(false);
         }
+
+        fireParticles = gameObject.GetComponentsInChildren<ParticleSystem>();
+        
     }
 
     // Update is called once per frame
@@ -63,6 +67,7 @@ public class FirePropagationV2 : MonoBehaviour
                 CanBurn = false;
                 transform.GetChild(0).gameObject.SetActive(false);
                 StopAllCoroutines();
+                StartCoroutine(SmokeWork());
             }
 
             if (fireHP > 0 && DamageTimer > 0)
@@ -71,7 +76,10 @@ public class FirePropagationV2 : MonoBehaviour
             }
         }
 
-
+        foreach (ParticleSystem fireParticle in fireParticles)
+        {
+            fireParticle.transform.localScale = new Vector3(fireHP / 100, fireHP / 100, fireHP / 100);
+        }
     }
 
     public void CalculateFireProp()
@@ -99,7 +107,6 @@ public class FirePropagationV2 : MonoBehaviour
                 else if (x.fireType == FireType.Explosive)
                 {
                     x.transform.GetChild(0).gameObject.SetActive(true);
-                    //x.transform.GetChild(1).gameObject.SetActive(true);
 
                     StartCoroutine(WaitToStartFire());
                     x.onFire = true;
@@ -124,6 +131,13 @@ public class FirePropagationV2 : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         fire.SetActive(true);
+    }
+
+    IEnumerator SmokeWork()
+    {
+        transform.GetChild(1).gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        transform.GetChild(1).gameObject.SetActive(false);
     }
     
 }
