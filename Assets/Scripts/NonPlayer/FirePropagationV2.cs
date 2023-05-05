@@ -136,8 +136,7 @@ public class FirePropagationV2 : MonoBehaviour
     IEnumerator SmokeWork()
     {
         transform.GetChild(1).gameObject.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
-        transform.GetChild(1).gameObject.SetActive(false);
+        yield return new WaitForSeconds(1f);
     }
     
 }
