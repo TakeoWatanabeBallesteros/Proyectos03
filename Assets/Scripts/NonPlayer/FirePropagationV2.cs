@@ -106,9 +106,7 @@ public class FirePropagationV2 : MonoBehaviour
                 }
                 else if (x.fireType == FireType.Explosive)
                 {
-                    x.transform.GetChild(0).gameObject.SetActive(true);
-
-                    StartCoroutine(WaitToStartFire());
+                    x.transform.GetChild(1).gameObject.SetActive(true);
                     x.onFire = true;
                     allFires.Remove(x);
                     break;
@@ -125,12 +123,6 @@ public class FirePropagationV2 : MonoBehaviour
         }
         fireHP -= DMG;
         DamageTimer = delayFire;
-    }
-
-    IEnumerator WaitToStartFire()
-    {
-        yield return new WaitForSeconds(2f);
-        fire.SetActive(true);
     }
 
     IEnumerator SmokeWork()
