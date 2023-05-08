@@ -65,6 +65,12 @@ public class Manguera : MonoBehaviour
             WeakWater.Stop();
             StrongWater.Stop();
         }
+
+        if(playerInput.reacharge && canRecharge) WaterAmount = 1;
+        if (playerInput.interact) {
+            UsingSecondary = false;
+            StrongWater.Stop();
+        }
     }
 
     private void StandardShootPerformed()
@@ -114,17 +120,6 @@ public class Manguera : MonoBehaviour
         StrongWater.Stop();
     }
 
-
-    private void OnRecharge(InputValue valor)
-    {
-        if (canRecharge)
-            WaterAmount = 1;
-    }
-    private void OnInteract()
-    {
-        UsingSecondary = false;
-        StrongWater.Stop();
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Recharge")
