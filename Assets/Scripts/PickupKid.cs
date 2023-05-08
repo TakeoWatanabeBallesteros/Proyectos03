@@ -58,31 +58,7 @@ public class PickupKid : MonoBehaviour
         }
         
     }
-    private void OnInteract(InputValue valor)
-    {
-        if (CanPickup)
-        {
-            PickupText.enabled = false;
-            TargetKid.transform.SetParent(gameObject.transform);
-            TargetKid.transform.position = Shoulder.position;
-            TargetKid.transform.rotation = Shoulder.rotation;
-            TargetKid.GetComponent<BoxCollider>().enabled = false;
-            CarringKid = true;
-            CanPickup = false;
-            _movementPlayerController.speed *= 1.2f;
-        }
-        if (CanExtract)
-        {
-            PickupText.enabled = false;
-            TargetKid.transform.SetParent(null);
-            TargetKid.transform.position = DropPoint.position;
-            TargetKid.transform.rotation = Quaternion.Euler(-90, 90, 0);
-            CarringKid = false;
-            GM.AddChild();
-            CanExtract = false;
-            _movementPlayerController.speed /= 1.2f;
-        }
-    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag ==  "Kid" && !CarringKid)
