@@ -1,12 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Random = UnityEngine.Random;
 using UnityEngine;
+
 
 public class FirePropagationV2 : MonoBehaviour
 {
-    public List<FirePropagationV2> allFires;
-    public List<GameObject> nearFiresExplosion;
+    public List<FirePropagationV2> nearObjectsOnFire;
+    public List<FirePropagationV2> nearFiresExplosion;
 
     public GameObject fire;
     public float nearDistance;
@@ -34,8 +37,8 @@ public class FirePropagationV2 : MonoBehaviour
     void Start()
     {
         CanBurn = true;
-        allFires = FindObjectsOfType<FirePropagationV2>().ToList<FirePropagationV2>();
-        allFires.RemoveAll(item => item.onFire == true);
+        nearObjectsOnFire = FindObjectsOfType<FirePropagationV2>().ToList<FirePropagationV2>();
+        nearObjectsOnFire.RemoveAll(item => item.onFire == true);
         expansionTimer = delay;
         DamageTimer = delayFire;
         if (!onFire)
@@ -84,7 +87,7 @@ public class FirePropagationV2 : MonoBehaviour
 
     public void CalculateFireProp()
     {     
-        foreach (var x in allFires)
+        foreach (var x in nearObjectsOnFire)
         {
             float distance = Vector3.Distance(transform.position, x.transform.position);
 
@@ -94,21 +97,24 @@ public class FirePropagationV2 : MonoBehaviour
                 {
                     x.transform.GetChild(0).gameObject.SetActive(true);
                     x.onFire = true;
-                    allFires.Remove(x);
+                    nearObjectsOnFire.Remove(x);
+                    fire = x.gameObject;
                     break;
                 }
                 else if(x.fireType == FireType.LowFlammability && Random.Range(1, 101) < lowPercentage)
                 {
                     x.transform.GetChild(0).gameObject.SetActive(true);
                     x.onFire = true;
-                    allFires.Remove(x);
+                    nearObjectsOnFire.Remove(x);
+                    fire = x.gameObject;
                     break;
                 }
                 else if (x.fireType == FireType.Explosive)
                 {
-                    x.transform.GetChild(1).gameObject.SetActive(true);
+                    ExplosionCalculation();
                     x.onFire = true;
-                    allFires.Remove(x);
+                    nearObjectsOnFire.Remove(x); 
+                    fire = x.gameObject;
                     break;
                 }
             }
@@ -123,6 +129,19 @@ public class FirePropagationV2 : MonoBehaviour
         }
         fireHP -= DMG;
         DamageTimer = delayFire;
+    }
+
+    public void ExplosionCalculation()
+    {
+        StartCoroutine(ExplosionThings());
+    }
+
+    IEnumerator ExplosionThings()
+    {
+        Debug.Log("Preexplosion!");
+        yield return new WaitForSeconds(2f);
+        fire.transform.GetChild(1).gameObject.SetActive(true);
+        fire.GetComponent<ObjectsExplosion>().doExplote = true;
     }
 
     IEnumerator SmokeWork()

@@ -53695,6 +53695,7 @@ GameObject:
   - component: {fileID: 1658852576}
   - component: {fileID: 1658852580}
   - component: {fileID: 1658852581}
+  - component: {fileID: 1658852582}
   m_Layer: 7
   m_Name: Barrel
   m_TagString: Untagged
@@ -53811,7 +53812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff2839107c831114d835cb8086867675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allFires: []
+  nearObjectsOnFire: []
   nearFiresExplosion: []
   fire: {fileID: 0}
   nearDistance: 5
@@ -53824,6 +53825,24 @@ MonoBehaviour:
   delayFire: 0.2
   CanBurn: 0
   fireParticles: []
+--- !u!114 &1658852582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658852575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b166e848b796eea4fa75759565a9a687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doExplote: 0
+  nearObjectsOnFire: []
+  closeRange: 2
+  midRange: 5
+  highRange: 10
+  maxRangeExplosion: 10
 --- !u!1001 &1665009463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62939,7 +62958,7 @@ PrefabInstance:
     - target: {fileID: 1617076015490180270, guid: b4c6e1a08a4082f479084af1fe0b7950,
         type: 3}
       propertyPath: delay
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1617076015490180270, guid: b4c6e1a08a4082f479084af1fe0b7950,
         type: 3}
