@@ -53,9 +53,9 @@ public class Manguera : MonoBehaviour
         if (playerInput.secondaryShoot && !UsingSecondary && !UsingPrimary && WaterAmount > 0 && !Kid.HasKid())
         {
             StrongShootPerformed();
-
+            /*
             if (forceAdded == false)
-                StartCoroutine(AddForce());
+                StartCoroutine(AddForce());*/
         }
         else if (!playerInput.secondaryShoot && UsingSecondary)
         {
