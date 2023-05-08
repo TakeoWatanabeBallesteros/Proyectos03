@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
 public class MovementPlayerController : MonoBehaviour
@@ -36,30 +37,31 @@ public class MovementPlayerController : MonoBehaviour
         direction = Vector3.zero;
         if (input.shoot || input.secondaryShoot)
         {
+            RotatePlayer();
             // Solo usar cuando disparas
-            Vector3 forward = cam.transform.forward;
+            Vector3 forward = transform.forward;
             forward.y = 0;
             forward.Normalize();
 
-            Vector3 right = cam.transform.right;
+            Vector3 right = transform.right;
             right.y = 0;
             right.Normalize();
 
             direction = forward * input.movement.y + right * input.movement.x;
-            RotatePlayer();
         }
         if(input.movement != Vector2.zero)
         {
             if(!input.shoot && !input.secondaryShoot)
             {
                 // Si no disparas usar este
-                Vector3 movementDirection = new Vector3(input.movement.x, 0, input.movement.y);
-                Vector3 realDirection = Camera.main.transform.TransformDirection(movementDirection);
-                realDirection.y = 0;
+                Vector3 movementDirection = input.movement.x * Vector3.right  + input.movement.y * Vector3.forward;
+                movementDirection = Quaternion.Euler(0, 45, 0) *  movementDirection;
+                // Vector3 realDirection = Camera.main.transform.TransformDirection(movementDirection);
+                movementDirection.y = 0;
                 // this line checks whether the player is making inputs.
-                if(realDirection.magnitude > 0.1f)
+                if(movementDirection.magnitude > 0.1f)
                 {
-                    Quaternion newRotation = Quaternion.LookRotation(realDirection);
+                    Quaternion newRotation = Quaternion.LookRotation(movementDirection);
                     transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10);
                 }
                 direction = transform.forward.normalized;
