@@ -33,6 +33,7 @@ public class FirePropagationV2 : MonoBehaviour
     public bool CanBurn;
 
     [SerializeField] ParticleSystem[] fireParticles;
+    private float OriginalFireSize;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +49,7 @@ public class FirePropagationV2 : MonoBehaviour
         }
 
         fireParticles = gameObject.GetComponentsInChildren<ParticleSystem>();
+        OriginalFireSize = fireParticles[0].gameObject.transform.localScale.x;
     }
 
     // Update is called once per frame
@@ -81,7 +83,8 @@ public class FirePropagationV2 : MonoBehaviour
 
         foreach (ParticleSystem fireParticle in fireParticles)
         {
-            fireParticle.transform.localScale = new Vector3(fireHP / 100, fireHP / 100, fireHP / 100);
+            float scale = fireHP / 100 * OriginalFireSize;
+            fireParticle.transform.localScale = new Vector3(scale, scale, scale);
         }
     }
 
