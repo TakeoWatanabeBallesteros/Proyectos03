@@ -42,17 +42,12 @@ public class ObjectsExplosion : MonoBehaviour
         }*/
 
         if (preExplosion == true)
-<<<<<<< Updated upstream
         {
             /*
             float lerp = Mathf.PingPong(Time.deltaTime, duration) / duration;
             mat1.Lerp(mat1, mat2, lerp);*/
             //StartCoroutine(preExplosionAdvise());
-            animator.SetTrigger("Explote");
-=======
-        {            
-            StartCoroutine(preExplosionAdvise());
->>>>>>> Stashed changes
+            animator.SetTrigger("Explote");           
         }
 
         if (doExplote == true)
