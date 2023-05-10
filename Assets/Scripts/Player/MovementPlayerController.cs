@@ -39,11 +39,11 @@ public class MovementPlayerController : MonoBehaviour
         {
             RotatePlayer();
             // Solo usar cuando disparas
-            Vector3 forward = transform.forward;
+            Vector3 forward = cam.transform.forward;
             forward.y = 0;
             forward.Normalize();
 
-            Vector3 right = transform.right;
+            Vector3 right = cam.transform.right;
             right.y = 0;
             right.Normalize();
 
