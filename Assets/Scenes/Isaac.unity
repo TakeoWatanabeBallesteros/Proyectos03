@@ -53776,6 +53776,7 @@ GameObject:
   - component: {fileID: 1658852580}
   - component: {fileID: 1658852581}
   - component: {fileID: 1658852582}
+  - component: {fileID: 1658852583}
   m_Layer: 7
   m_Name: Barrel
   m_TagString: Untagged
@@ -53927,9 +53928,28 @@ MonoBehaviour:
   midRange: 5
   highRange: 10
   maxRangeExplosion: 10
-  mat1: {fileID: 2100000, guid: 6b90fbd95a09feb4e9b2b140aad4d6e2, type: 2}
-  mat2: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
-  rend: {fileID: 0}
+  animator: {fileID: 1658852583}
+--- !u!95 &1658852583
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658852575}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9ad908ba85f19f94ea659f26f12b7e46, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1665009463
 PrefabInstance:
   m_ObjectHideFlags: 0
