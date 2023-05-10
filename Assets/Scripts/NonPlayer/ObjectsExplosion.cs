@@ -11,6 +11,9 @@ public class ObjectsExplosion : MonoBehaviour
     public bool doExplote = false;
     public bool preExplosion = false;
     public List<FirePropagationV2> nearObjectsOnFire = new List<FirePropagationV2>();
+    public List<FirePropagationV2> closestObjects = new List<FirePropagationV2>();
+    public List<FirePropagationV2> secondObjects = new List<FirePropagationV2>();
+    public List<FirePropagationV2> farestObjects = new List<FirePropagationV2>();
 
     public float closeRange;
     public float midRange;
@@ -39,14 +42,18 @@ public class ObjectsExplosion : MonoBehaviour
         }*/
 
         if (preExplosion == true)
+<<<<<<< Updated upstream
         {
             /*
             float lerp = Mathf.PingPong(Time.deltaTime, duration) / duration;
             mat1.Lerp(mat1, mat2, lerp);*/
             //StartCoroutine(preExplosionAdvise());
             animator.SetTrigger("Explote");
+=======
+        {            
+            StartCoroutine(preExplosionAdvise());
+>>>>>>> Stashed changes
         }
-
 
         if (doExplote == true)
         {
@@ -68,6 +75,7 @@ public class ObjectsExplosion : MonoBehaviour
                     x.transform.GetChild(0).gameObject.SetActive(true);
                     x.onFire = true;
                     nearObjectsOnFire.Remove(x);
+                    secondObjects.Add(x);
                     break;
                 }
                 else if (distance <= highRange && distance > midRange) //si está más cerca del high range su flammability será su misma
@@ -75,12 +83,14 @@ public class ObjectsExplosion : MonoBehaviour
                     x.transform.GetChild(0).gameObject.SetActive(true);
                     x.onFire = true;
                     nearObjectsOnFire.Remove(x);
+                    farestObjects.Add(x);
                     break;
                 }
                 else if (distance <= closeRange) //aqui siempre se va a incendiar
                 {
                     x.onFire = true;
                     nearObjectsOnFire.Remove(x);
+                    closestObjects.Add(x);
                     break;
                 }
             }
