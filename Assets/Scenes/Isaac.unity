@@ -53792,7 +53792,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 6b90fbd95a09feb4e9b2b140aad4d6e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -53898,6 +53898,8 @@ MonoBehaviour:
   midRange: 5
   highRange: 10
   maxRangeExplosion: 10
+  mat1: {fileID: 2100000, guid: 6b90fbd95a09feb4e9b2b140aad4d6e2, type: 2}
+  mat2: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
 --- !u!1001 &1665009463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63015,6 +63017,16 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 1617076015490180270, guid: b4c6e1a08a4082f479084af1fe0b7950,
+        type: 3}
+      propertyPath: mat1
+      value: 
+      objectReference: {fileID: 2100000, guid: 6b90fbd95a09feb4e9b2b140aad4d6e2, type: 2}
+    - target: {fileID: 1617076015490180270, guid: b4c6e1a08a4082f479084af1fe0b7950,
+        type: 3}
+      propertyPath: mat2
+      value: 
+      objectReference: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
     - target: {fileID: 1617076015490180270, guid: b4c6e1a08a4082f479084af1fe0b7950,
         type: 3}
       propertyPath: delay
