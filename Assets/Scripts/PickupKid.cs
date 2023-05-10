@@ -49,7 +49,7 @@ public class PickupKid : MonoBehaviour
                 PickupText.enabled = false;
                 TargetKid.transform.SetParent(null);
                 TargetKid.transform.position = DropPoint.position;
-                TargetKid.transform.rotation = Quaternion.Euler(-90, 90, 0);
+                TargetKid.transform.rotation = DropPoint.rotation;
                 CarringKid = false;
                 GM.AddChild();
                 CanExtract = false;
