@@ -510,6 +510,36 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5830868622993774379, guid: aad32651b8cb19349b2d6dc8f426170d,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5830868622993774379, guid: aad32651b8cb19349b2d6dc8f426170d,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5830868622993774379, guid: aad32651b8cb19349b2d6dc8f426170d,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5830868622993774379, guid: aad32651b8cb19349b2d6dc8f426170d,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5830868622993774379, guid: aad32651b8cb19349b2d6dc8f426170d,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.minScalar
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5830868622993774379, guid: aad32651b8cb19349b2d6dc8f426170d,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aad32651b8cb19349b2d6dc8f426170d, type: 3}
 --- !u!4 &4096167984722386475 stripped
