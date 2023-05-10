@@ -24,20 +24,20 @@ public class Manguera : MonoBehaviour
     public TMP_Text ChargeText;
     PickupKid Kid;
     [SerializeField] private float StartWater;
-    Rigidbody _rb;
+    //Rigidbody _rb;
     public float knockbackForce;
-    [SerializeField] float timerKnockback;
-    float initialTimer = 2f;
-    bool forceAdded = false;
+    //[SerializeField] float timerKnockback;
+    //float initialTimer = 2f;
+    //bool forceAdded = false;
     private void Start()
     {
         playerInput = GetComponent<InputPlayerController>();
         playerMovement = GetComponent<MovementPlayerController>();
         Kid = GetComponent<PickupKid>();
-        _rb = GetComponent<Rigidbody>();
+        //_rb = GetComponent<Rigidbody>();
         canRecharge = false;
         WaterAmount = StartWater;
-        timerKnockback = initialTimer;
+        //timerKnockback = initialTimer;
     }
     private void Update()
     {
@@ -152,7 +152,7 @@ public class Manguera : MonoBehaviour
     {
         return WaterAmount;
     }
-
+    /*
     IEnumerator AddForce()
     {
         yield return new WaitForSeconds(1f);
@@ -164,5 +164,5 @@ public class Manguera : MonoBehaviour
         //Vector3 newPosition = new Vector3(transform.position.x - (transform.forward.x * knockbackForce), transform.position.y, transform.position.z - (transform.forward.z * knockbackForce));
         //transform.position = Vector3.Lerp(transform.position, newPosition, 2f);        
     }
-
+    */
 }
