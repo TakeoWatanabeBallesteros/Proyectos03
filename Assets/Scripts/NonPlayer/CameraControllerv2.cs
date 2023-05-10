@@ -30,6 +30,7 @@ public class CameraControllerv2 : MonoBehaviour
             transform.LookAt(target);
         }
 
+        /*
         if (controller.zoom.y < 0)
         {
             timer = delay;
@@ -52,7 +53,7 @@ public class CameraControllerv2 : MonoBehaviour
         if (timer <= 0)
         {
             StartCoroutine(ResetCamera());  
-        }
+        }*/
         
     }
 
