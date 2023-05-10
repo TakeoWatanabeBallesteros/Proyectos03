@@ -42,7 +42,7 @@ public class PruebaParedesDistancia : MonoBehaviour
         {
             Paredes[i].GetComponent<MeshRenderer>().material.SetFloat("_DisapearR", WallHeight);
         }
-        yield return new WaitForSeconds(.02f);
+        yield return new WaitForSeconds(.01f);
 
         if (Dir == 1 && WallHeight < -1)
         {
