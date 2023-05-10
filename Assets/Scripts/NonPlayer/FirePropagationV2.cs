@@ -48,7 +48,6 @@ public class FirePropagationV2 : MonoBehaviour
             transform.GetChild(0).gameObject.SetActive(false);
         }
 
-        fireParticles = gameObject.GetComponentsInChildren<ParticleSystem>();
         OriginalFireSize = fireParticles[0].gameObject.transform.localScale.x;
     }
 
