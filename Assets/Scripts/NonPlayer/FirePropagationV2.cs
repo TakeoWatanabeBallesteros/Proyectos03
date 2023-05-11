@@ -32,10 +32,9 @@ public class FirePropagationV2 : MonoBehaviour
 
     public bool CanBurn;
 
+    [SerializeField] ParticleSystem[] fireParticles;
     private float OriginalFireSize;
 
-
-    [SerializeField] ParticleSystem[] fireParticles;
     // Start is called before the first frame update
     void Start()
     {
@@ -98,26 +97,26 @@ public class FirePropagationV2 : MonoBehaviour
             {
                 if (x.fireType == FireType.HighFlammability && Random.Range(1,101) < highPercentage)
                 {
+                    fire = x.gameObject;
                     x.transform.GetChild(0).gameObject.SetActive(true);
                     x.onFire = true;
                     nearObjectsOnFire.Remove(x);
-                    fire = x.gameObject;
                     break;
                 }
                 else if(x.fireType == FireType.LowFlammability && Random.Range(1, 101) < lowPercentage)
                 {
+                    fire = x.gameObject;
                     x.transform.GetChild(0).gameObject.SetActive(true);
                     x.onFire = true;
                     nearObjectsOnFire.Remove(x);
-                    fire = x.gameObject;
                     break;
                 }
                 else if (x.fireType == FireType.Explosive)
                 {
+                    fire = x.gameObject;
                     ExplosionCalculation();
                     x.onFire = true;
-                    nearObjectsOnFire.Remove(x); 
-                    fire = x.gameObject;
+                    nearObjectsOnFire.Remove(x);                     
                     break;
                 }
             }
@@ -137,11 +136,13 @@ public class FirePropagationV2 : MonoBehaviour
     public void ExplosionCalculation()
     {
         StartCoroutine(ExplosionThings());
+        //fire.GetComponent<Renderer>().material.Lerp(mat1, mat2, 1f);
     }
 
     IEnumerator ExplosionThings()
     {
         Debug.Log("Preexplosion!");
+        fire.GetComponent<ObjectsExplosion>().preExplosion = true;
         yield return new WaitForSeconds(2f);
         fire.transform.GetChild(1).gameObject.SetActive(true);
         fire.GetComponent<ObjectsExplosion>().doExplote = true;

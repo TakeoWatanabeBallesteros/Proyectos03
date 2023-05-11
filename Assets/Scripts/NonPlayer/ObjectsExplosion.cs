@@ -8,6 +8,7 @@ public class ObjectsExplosion : MonoBehaviour
     // Start is called before the first frame update
 
     public bool doExplote = false;
+    public bool preExplosion = false;
     public List<FirePropagationV2> nearObjectsOnFire = new List<FirePropagationV2>();
 
     public float closeRange;
@@ -16,12 +17,18 @@ public class ObjectsExplosion : MonoBehaviour
 
     public float maxRangeExplosion;
 
+    public Material mat1;
+    public Material mat2;
+    float duration1 = 0.3f;
+    float duration2 = 0.35f;
+    [SerializeField] Renderer rend;
+
     void Start()
     {
         nearObjectsOnFire = FindObjectsOfType<FirePropagationV2>().ToList<FirePropagationV2>();
-        nearObjectsOnFire.RemoveAll(item => item.onFire == true);        
-        
-        
+        nearObjectsOnFire.RemoveAll(item => item.onFire == true);
+        rend = GetComponent<Renderer>();
+        rend.material = mat1;
     }
 
     // Update is called once per frame
@@ -36,10 +43,21 @@ public class ObjectsExplosion : MonoBehaviour
             }
         }*/
 
+        if (preExplosion == true)
+        {
+            /*
+            float lerp = Mathf.PingPong(Time.deltaTime, duration) / duration;
+            mat1.Lerp(mat1, mat2, lerp);*/
+            StartCoroutine(preExplosionAdvise());
+        }
+
+
         if (doExplote == true)
         {
+            preExplosion = false;
             Debug.Log("calculate");
             CalculateExpansion();
+
         }
     }
 
@@ -65,7 +83,7 @@ public class ObjectsExplosion : MonoBehaviour
                     nearObjectsOnFire.Remove(x);
                     break;
                 }
-                else if(distance <= closeRange) //aqui siempre se va a incendiar
+                else if (distance <= closeRange) //aqui siempre se va a incendiar
                 {
                     x.onFire = true;
                     nearObjectsOnFire.Remove(x);
@@ -73,5 +91,16 @@ public class ObjectsExplosion : MonoBehaviour
                 }
             }
         }
+    }
+
+    IEnumerator preExplosionAdvise()
+    {
+        
+        float lerp = Mathf.PingPong(Time.deltaTime, duration1) / duration1;
+        mat1.Lerp(mat1, mat2, lerp);
+        yield return new WaitForSeconds(.1f);
+        float lerp2 = Mathf.PingPong(Time.deltaTime, duration2) / duration2;
+        mat2.Lerp(mat2, mat1, lerp2);
+
     }
 }

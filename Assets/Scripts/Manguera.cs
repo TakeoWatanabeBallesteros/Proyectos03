@@ -104,6 +104,8 @@ public class Manguera : MonoBehaviour
         {
             StrongWater.Play();
             StartCoroutine(ConsumeWater(StrongWaterConsumption));
+            //StartCoroutine(AddForce());
+
         }
 
     }
@@ -152,7 +154,7 @@ public class Manguera : MonoBehaviour
     {
         return WaterAmount;
     }
-
+    
     IEnumerator AddForce()
     {
         yield return new WaitForSeconds(1f);
@@ -164,5 +166,5 @@ public class Manguera : MonoBehaviour
         //Vector3 newPosition = new Vector3(transform.position.x - (transform.forward.x * knockbackForce), transform.position.y, transform.position.z - (transform.forward.z * knockbackForce));
         //transform.position = Vector3.Lerp(transform.position, newPosition, 2f);        
     }
-
+    
 }
