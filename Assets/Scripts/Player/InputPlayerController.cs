@@ -19,12 +19,11 @@ public class InputPlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        // if(controls != null)
+        controls.Enable();
     }
 
     private void OnDisable()
     {
-        // if (controls != null)
             controls.Disable();
     }
 
