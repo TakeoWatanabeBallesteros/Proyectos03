@@ -4,62 +4,46 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
-    // Transform of the camera to shake. Grabs the gameObject's transform
-    // if null.
-    public Transform camTransform;
+    public static CameraShake instance;
+    public Transform ptrans;
 
-    // How long the object should shake for.
-    public float shakeDuration = 0f;
-
-    // Amplitude of the shake. A larger value shakes the camera harder.
-    public float shakeAmount = 0.7f;
-    public float decreaseFactor = 1.0f;
-
-    public bool shaketrue = false;
-
-    Vector3 originalPos;
-    Quaternion originalRot;
-    float originalShakeDuration; //<--add this
+    public Vector3 _originalPos;
+    private float _timeAtCurrentFrame;
+    private float _timeAtLastFrame;
+    private float _fakeDelta;
 
     void Awake()
     {
-        if (camTransform == null)
-        {
-            camTransform = GetComponent(typeof(Transform)) as Transform;
-        }
-    }
-
-    void OnEnable()
-    {
-        originalPos = camTransform.localPosition;   
-        //originalRot = camTransform.localRotation;
-        originalShakeDuration = shakeDuration; 
+        instance = this;
     }
 
     void Update()
     {
-        if (shaketrue)
-        {
-            if (shakeDuration > 0)
-            {
-                camTransform.localPosition = Vector3.Lerp(camTransform.localPosition, originalPos + Random.insideUnitSphere * shakeAmount, Time.deltaTime * 3);
-
-                shakeDuration -= Time.deltaTime * decreaseFactor;
-            }
-            else
-            {
-                shakeDuration = originalShakeDuration; 
-                camTransform.localPosition = originalPos;
-                //camTransform.localRotation = originalRot;
-                shaketrue = false;
-            }
-        }
+        _timeAtCurrentFrame = Time.realtimeSinceStartup;
+        _fakeDelta = _timeAtCurrentFrame - _timeAtLastFrame;
+        _timeAtLastFrame = _timeAtCurrentFrame;
     }
 
-    public void ShakeCamera(float _shakeDuration, float _shakeAmount)
+    public static void Shake(float duration, float amount)
     {
-        shaketrue = true;
-        shakeDuration = _shakeDuration;
-        shakeAmount = _shakeAmount;
+        instance._originalPos = instance.ptrans.localPosition;
+        instance.StopAllCoroutines();
+        instance.StartCoroutine(instance.cShake(duration, amount));
+    }
+
+    public IEnumerator cShake(float duration, float amount)
+    {
+        float endTime = Time.time + duration;
+
+        while (duration > 0)
+        {
+            transform.localPosition = _originalPos + Random.insideUnitSphere * amount;
+
+            duration -= _fakeDelta;
+
+            yield return null;
+        }
+
+        transform.localPosition = _originalPos;
     }
 }
