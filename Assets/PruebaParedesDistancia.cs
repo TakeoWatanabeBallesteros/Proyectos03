@@ -10,13 +10,13 @@ public class PruebaParedesDistancia : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        WallHeight = Paredes[0].GetComponent<MeshRenderer>().material.GetFloat("_DisapearR");
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        WallHeight = Paredes[0].GetComponent<MeshRenderer>().material.GetFloat("_DisapearR");
     }
     private void OnTriggerEnter(Collider other)
     {
