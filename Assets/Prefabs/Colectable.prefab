@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1584310598613898297}
   - component: {fileID: 3213348246364770512}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,8 @@ GameObject:
   - component: {fileID: 6928238384566053850}
   - component: {fileID: 6928238384566053849}
   - component: {fileID: 470427660761615291}
-  m_Layer: 0
+  - component: {fileID: 680252668917361053}
+  m_Layer: 9
   m_Name: Colectable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,6 +211,19 @@ MonoBehaviour:
   delayTimer: 0
   Destroyed: 0
   Sparks: {fileID: 1820804366940901285}
+--- !u!65 &680252668917361053
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6928238384566053855}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6181839556432337127
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -325,7 +339,7 @@ PrefabInstance:
     - target: {fileID: 5830868622993774379, guid: aad32651b8cb19349b2d6dc8f426170d,
         type: 3}
       propertyPath: moveWithTransform
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5830868622993774379, guid: aad32651b8cb19349b2d6dc8f426170d,
         type: 3}

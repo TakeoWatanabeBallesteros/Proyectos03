@@ -10,9 +10,12 @@ public class Collectable : MonoBehaviour
     public bool Destroyed;
     MeshRenderer texture;
     public GameObject Sparks;
+    GameController GM;
+
     // Start is called before the first frame update
     void Start()
     {
+        GM = GameObject.Find("GameController").GetComponent<GameController>();
         texture = GetComponent<MeshRenderer>();
         Destroyed = false;
     }
@@ -27,6 +30,10 @@ public class Collectable : MonoBehaviour
             texture.material.color = new Color(0f, 0f, 0f, 1f);
             Sparks.SetActive(true);
         }
+        if (HP > 0 && DamageTimer > 0)
+        {
+            DamageTimer -= Time.deltaTime;
+        }
 
     }
     public void TakeDamage(float DMG)
@@ -37,5 +44,13 @@ public class Collectable : MonoBehaviour
         }
         HP -= DMG;
         DamageTimer = delayTimer;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player" && !Destroyed)
+        {
+            GM.AddCollectable();
+            Destroy(gameObject);
+        }
     }
 }
