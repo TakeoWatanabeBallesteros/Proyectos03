@@ -20,6 +20,7 @@ public class CameraControllerv2 : MonoBehaviour
     {
         cam = Camera.main;
         timer = delay;
+        transform.position = Vector3.Lerp(transform.position, target.position, 1.5f * Time.deltaTime);
     }
 
     private void Update()
