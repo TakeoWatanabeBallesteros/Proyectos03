@@ -32,16 +32,7 @@ public class ObjectsExplosion : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        /*
-        for (int i = 0; i <= nearObjectsOnFire.Count(); i++)
-        {
-            if (Vector3.Distance(transform.position, nearObjectsOnFire[i].transform.position) <= maxRangeExplosion)
-            {
-                nearObjectsOnFire.Remove(nearObjectsOnFire[i]);
-            }
-        }*/
-
+    {        
         if (preExplosion == true)
         {            
             animator.SetTrigger("Explote");           

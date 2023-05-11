@@ -141,7 +141,6 @@ public class FirePropagationV2 : MonoBehaviour
     public void ExplosionCalculation()
     {
         StartCoroutine(ExplosionThings());
-        //fire.GetComponent<Renderer>().material.Lerp(mat1, mat2, 1f);
     }
 
     IEnumerator ExplosionThings()
@@ -152,8 +151,8 @@ public class FirePropagationV2 : MonoBehaviour
         fire.transform.GetChild(1).gameObject.SetActive(true);
         fire.GetComponent<ObjectsExplosion>().doExplote = true;
         camController.enabled = false;
-        camShake.ShakeCamera(1f, 3f);
-        yield return new WaitForSeconds(1.2f);
+        CameraShake.Shake(1f, .5f);
+        yield return new WaitForSeconds(1.5f);
         camController.enabled = true;
     }
 
