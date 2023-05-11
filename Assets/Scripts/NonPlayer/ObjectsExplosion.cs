@@ -26,7 +26,8 @@ public class ObjectsExplosion : MonoBehaviour
     void Start()
     {
         nearObjectsOnFire = FindObjectsOfType<FirePropagationV2>().ToList<FirePropagationV2>();
-        nearObjectsOnFire.RemoveAll(item => item.onFire == true);        
+        nearObjectsOnFire.RemoveAll(item => item.onFire == true);    
+        
     }
 
     // Update is called once per frame
