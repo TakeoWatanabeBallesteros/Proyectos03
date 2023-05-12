@@ -24,10 +24,11 @@ public class Manguera : MonoBehaviour
     public TMP_Text ChargeText;
     PickupKid Kid;
     [SerializeField] private float StartWater;
+    
     Rigidbody _rb;
     public float knockbackForce;
     [SerializeField] float timerKnockback;
-    float initialTimer = 2f;
+    float initialTimer = 0f;
     bool forceAdded = false;
     private void Start()
     {
@@ -53,6 +54,7 @@ public class Manguera : MonoBehaviour
         if (playerInput.secondaryShoot && !UsingSecondary && !UsingPrimary && WaterAmount > 0 && !Kid.HasKid())
         {
             StrongShootPerformed();
+            StartCoroutine(KnockBackForce());
             /*
             if (forceAdded == false)
                 StartCoroutine(AddForce());*/
@@ -60,6 +62,7 @@ public class Manguera : MonoBehaviour
         else if (!playerInput.secondaryShoot && UsingSecondary)
         {
             StrongShootCancelled();
+            timerKnockback = initialTimer;
         }
 
         WaterBar.value = WaterAmount;
@@ -73,7 +76,7 @@ public class Manguera : MonoBehaviour
         if (playerInput.interact) {
             UsingSecondary = false;
             StrongWater.Stop();
-        }
+        }        
     }
 
     private void StandardShootPerformed()
@@ -154,7 +157,8 @@ public class Manguera : MonoBehaviour
     {
         return WaterAmount;
     }
-    
+
+    /*
     IEnumerator AddForce()
     {
         yield return new WaitForSeconds(1f);
@@ -162,9 +166,28 @@ public class Manguera : MonoBehaviour
         _rb.AddForce(-transform.forward.normalized/100000, ForceMode.Impulse); //Preguntar como hacer lerp para que quede smooth
         yield return new WaitForSeconds(1.5f);
         forceAdded = false;
-        //Vector3 newPosition = Vector3.Lerp(transform.position, transform.position - (transform.forward * knockbackForce), 2f);
-        //Vector3 newPosition = new Vector3(transform.position.x - (transform.forward.x * knockbackForce), transform.position.y, transform.position.z - (transform.forward.z * knockbackForce));
-        //transform.position = Vector3.Lerp(transform.position, newPosition, 2f);        
+        Vector3 newPosition = Vector3.Lerp(transform.position, transform.position - (transform.forward * knockbackForce), 2f);
+        Vector3 newPosition = new Vector3(transform.position.x - (transform.forward.x * knockbackForce), transform.position.y, transform.position.z - (transform.forward.z * knockbackForce));
+        transform.position = Vector3.Lerp(transform.position, newPosition, 2f);        
+    }*/
+
+    IEnumerator KnockBackForce()
+    {
+        float waitTime = .2f;
+        yield return new WaitForSeconds(1f);
+
+        while (timerKnockback < waitTime)
+        {
+            timerKnockback += Time.deltaTime;
+
+            if (UsingSecondary == true)
+            {
+                _rb.AddForce(-transform.forward/5000 * Time.deltaTime, ForceMode.Impulse);
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
+
     }
     
 }
