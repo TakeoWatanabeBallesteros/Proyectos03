@@ -63,7 +63,7 @@ public class MovementPlayerController : MonoBehaviour
         {
            currentSpeed = 0;
         }
-        rb.velocity = direction * currentSpeed;
+        rb.velocity = direction.normalized * currentSpeed;
     }
 
     private void FixedUpdate()
