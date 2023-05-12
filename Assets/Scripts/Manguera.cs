@@ -46,6 +46,7 @@ public class Manguera : MonoBehaviour
         {
             StandardShootPerformed();
         }
+
         else if (!playerInput.shoot && UsingPrimary)
         {
             StandardShootCancelled();
@@ -55,10 +56,8 @@ public class Manguera : MonoBehaviour
         {
             StrongShootPerformed();
             StartCoroutine(KnockBackForce());
-            /*
-            if (forceAdded == false)
-                StartCoroutine(AddForce());*/
         }
+
         else if (!playerInput.secondaryShoot && UsingSecondary)
         {
             StrongShootCancelled();
@@ -66,6 +65,7 @@ public class Manguera : MonoBehaviour
         }
 
         WaterBar.value = WaterAmount;
+
         if (WaterAmount < 0)
         {
             WeakWater.Stop();
@@ -73,7 +73,9 @@ public class Manguera : MonoBehaviour
         }
 
         if(playerInput.reacharge && canRecharge) WaterAmount = 1;
-        if (playerInput.interact) {
+
+        if (playerInput.interact) 
+        {
             UsingSecondary = false;
             StrongWater.Stop();
         }        
@@ -173,7 +175,7 @@ public class Manguera : MonoBehaviour
 
     IEnumerator KnockBackForce()
     {
-        float waitTime = .2f;
+        float waitTime = .15f;
         yield return new WaitForSeconds(1f);
 
         while (timerKnockback < waitTime)
