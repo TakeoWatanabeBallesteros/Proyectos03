@@ -7,16 +7,15 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_ShaderWallPrueba
-  m_Shader: {fileID: -6465566751694194690, guid: 69554442a6e42c64b9c1d523db97e565,
+  m_Name: Shader Graphs_SeeThrowWallsShader
+  m_Shader: {fileID: -6465566751694194690, guid: f3395a338cfb97e42b8c54ca52c1c80a,
     type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _SURFACE_TYPE_TRANSPARENT
+  m_InvalidKeywords: []
   m_LightmapFlags: 2
-  m_EnableInstancingVariants: 1
+  m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -36,27 +35,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaClip: 0
-    - _Blend: 0
-    - _CastShadows: 1
-    - _Cull: 2
-    - _DisapearPercentage: -7.29
-    - _DisapearR: -9.204506
-    - _DstBlend: 10
+    - _Alpha: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ReceiveShadows: 1
-    - _SrcBlend: 5
-    - _Surface: 1
-    - _WorkflowMode: 1
-    - _ZTest: 4
-    - _ZWrite: 1
-    - _ZWriteControl: 1
     m_Colors:
-    - _ColorA: {r: 0.45567232, g: 0.6415094, b: 0.19063723, a: 1}
-    - _ColorB: {r: 0.45490196, g: 0.6431373, b: 0.19215687, a: 0}
+    - _Color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &4071409169405008957
+--- !u!114 &1518332442438340143
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
