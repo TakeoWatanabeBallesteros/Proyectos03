@@ -5,17 +5,18 @@ using UnityEngine;
 public class PruebaParedesDistancia : MonoBehaviour
 {
     public GameObject[] Paredes;
-    public float WallHeight;
+    private float WallHeight;
+    public float OcludedHeight;
     // Start is called before the first frame update
     void Start()
     {
+        WallHeight = Paredes[0].GetComponent<MeshRenderer>().material.GetFloat("_DisapearR");
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        WallHeight = Paredes[0].GetComponent<MeshRenderer>().material.GetFloat("_DisapearR");
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -44,11 +45,11 @@ public class PruebaParedesDistancia : MonoBehaviour
         }
         yield return new WaitForSeconds(.01f);
 
-        if (Dir == 1 && WallHeight < -1)
+        if (Dir == 1 && WallHeight < -OcludedHeight)
         {
             StartCoroutine(OcludeWall(Dir));
         }
-        if (Dir == -1 && WallHeight > -10)
+        if (Dir == -1 && WallHeight > -20)
         {
             StartCoroutine(OcludeWall(Dir));
         }

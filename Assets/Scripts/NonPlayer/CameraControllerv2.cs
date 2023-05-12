@@ -20,6 +20,7 @@ public class CameraControllerv2 : MonoBehaviour
     {
         cam = Camera.main;
         timer = delay;
+        transform.position = Vector3.Lerp(transform.position, target.position, 1.5f * Time.deltaTime);
     }
 
     private void Update()
@@ -30,6 +31,7 @@ public class CameraControllerv2 : MonoBehaviour
             transform.LookAt(target);
         }
 
+        /*
         if (controller.zoom.y < 0)
         {
             timer = delay;
@@ -52,7 +54,7 @@ public class CameraControllerv2 : MonoBehaviour
         if (timer <= 0)
         {
             StartCoroutine(ResetCamera());  
-        }
+        }*/
         
     }
 
