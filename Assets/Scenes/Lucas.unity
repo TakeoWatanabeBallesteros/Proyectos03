@@ -1289,7 +1289,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1727,8 +1727,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
-        key1: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0.19215687}
+        key0: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
+        key1: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 0.19215687}
         key2: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -7164,7 +7164,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -7602,8 +7602,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
-        key1: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0.19215687}
+        key0: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
+        key1: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 0.19215687}
         key2: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -14119,6 +14119,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1778756773}
+  - component: {fileID: 1778756774}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -14145,6 +14146,23 @@ Transform:
   m_Father: {fileID: 1828058353}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1778756774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778756772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71605042a2d54a142b9ca1246cb8008d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  P1: {fileID: 1827933184}
+  P2: {fileID: 148671440}
+  P3: {fileID: 373281196}
+  P4: {fileID: 1973037827}
+  Fuegos: []
 --- !u!1001 &1791142986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15153,7 +15171,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -15591,8 +15609,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
-        key1: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0.19215687}
+        key0: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
+        key1: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 0.19215687}
         key2: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -20215,7 +20233,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -20653,8 +20671,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
-        key1: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0.19215687}
+        key0: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
+        key1: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 0.19215687}
         key2: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
