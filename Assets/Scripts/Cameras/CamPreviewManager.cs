@@ -32,10 +32,10 @@ public class CamPreviewManager : MonoBehaviour
     {
         cameraList[currentCam].enabled = true;
         yield return new WaitForSeconds(timeOnEachCamera);
+        cameraList[currentCam].enabled = false;
         currentCam++;
         if (currentCam < cameraList.Length)
         {
-            cameraList[currentCam].enabled = false;
             StartCoroutine(Cameras());
         }
         else
