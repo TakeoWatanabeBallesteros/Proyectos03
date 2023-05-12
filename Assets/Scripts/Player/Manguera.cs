@@ -79,14 +79,7 @@ public class Manguera : MonoBehaviour
             //isReloading = true;
             WaterAmount += waterReload * Time.deltaTime;
             //StartCoroutine(Recharge());
-            // WaterAmount = Mathf.Lerp(WaterAmount, 1, 2f * Time.deltaTime);
         }
-
-        /*
-        if (isReloading == true && canRecharge)
-        {
-            WaterAmount += waterReload * Time.deltaTime;
-        }*/
 
         if (playerInput.interact)
         {
