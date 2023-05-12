@@ -16,12 +16,18 @@ public class FSM_Player : MonoBehaviour
     {
         #region FSM
         player_FSM = new StateMachine();
-
+        AddStates();
+        AddTransitions();   
 
         #endregion
     }
 
     private void AddStates()
+    {
+        
+    }
+
+    private void AddTransitions()
     {
         
     }
