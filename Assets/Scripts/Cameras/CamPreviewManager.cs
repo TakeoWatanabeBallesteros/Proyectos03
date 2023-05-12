@@ -6,7 +6,7 @@ public class CamPreviewManager : MonoBehaviour
 {
     public Camera[] cameraList;
     public Camera playerCam;
-    public float timeOnEachCamera;
+    public float[] timeOnCamera;
     int currentCam = 0;
 
     //When the level begins all the cameras are disabled
@@ -31,7 +31,7 @@ public class CamPreviewManager : MonoBehaviour
     IEnumerator Cameras()
     {
         cameraList[currentCam].enabled = true;
-        yield return new WaitForSeconds(timeOnEachCamera);
+        yield return new WaitForSeconds(timeOnCamera[currentCam]);
         cameraList[currentCam].enabled = false;
         currentCam++;
         if (currentCam < cameraList.Length)
