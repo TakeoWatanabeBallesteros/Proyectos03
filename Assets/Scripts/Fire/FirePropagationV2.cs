@@ -35,6 +35,9 @@ public class FirePropagationV2 : MonoBehaviour
     [SerializeField] ParticleSystem[] fireParticles;
     private float OriginalFireSize;
 
+    [SerializeField] CameraShake camShake;
+    CameraControllerv2 camController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +52,8 @@ public class FirePropagationV2 : MonoBehaviour
         }
 
         OriginalFireSize = fireParticles[0].gameObject.transform.localScale.x;
+        camShake = Camera.main.GetComponent<CameraShake>();
+        camController = Camera.main.GetComponent<CameraControllerv2>();
     }
 
     // Update is called once per frame
@@ -136,7 +141,6 @@ public class FirePropagationV2 : MonoBehaviour
     public void ExplosionCalculation()
     {
         StartCoroutine(ExplosionThings());
-        //fire.GetComponent<Renderer>().material.Lerp(mat1, mat2, 1f);
     }
 
     IEnumerator ExplosionThings()
@@ -146,6 +150,10 @@ public class FirePropagationV2 : MonoBehaviour
         yield return new WaitForSeconds(2f);
         fire.transform.GetChild(1).gameObject.SetActive(true);
         fire.GetComponent<ObjectsExplosion>().doExplote = true;
+        camController.enabled = false;
+        CameraShake.Shake(1f, .5f);
+        yield return new WaitForSeconds(1.5f);
+        camController.enabled = true;
     }
 
     IEnumerator SmokeWork()

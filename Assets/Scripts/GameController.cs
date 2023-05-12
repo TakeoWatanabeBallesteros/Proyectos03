@@ -8,8 +8,14 @@ public class GameController : MonoBehaviour
     [SerializeField] private int SavedKids = 0;
     [SerializeField] private GameObject[] Kids;
     [SerializeField] private int TotalKids = 0;
+
+    [SerializeField] private int Collected = 0;
+    [SerializeField] private GameObject[] Collectables;
+    [SerializeField] private int TotalCollectables = 0;
+
     PlayerHealth PH;
     public TMP_Text NumberOfkids;
+    public TMP_Text NumberOfCollectables;
     public TMP_Text TimeLeftText;
     [SerializeField] private float TimerEnSegundos;
     int minutes, seconds, cents;
@@ -20,8 +26,13 @@ public class GameController : MonoBehaviour
     {
         PH = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         DontDestroyOnLoad(this);
+
         Kids = GameObject.FindGameObjectsWithTag("Kid");
         TotalKids = Kids.Length;
+
+        Collectables = GameObject.FindGameObjectsWithTag("Collectable");
+        TotalCollectables = Collectables.Length;
+
         winScreen.SetActive(false);
     }
 
@@ -40,6 +51,7 @@ public class GameController : MonoBehaviour
 
         TimeLeftText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, cents);
         NumberOfkids.text = ("Kids saved: " + SavedKids + "/" + TotalKids);
+        NumberOfCollectables.text = ("Collectables: " + Collected + "/" + TotalCollectables);
 
         if(TimerEnSegundos>0 && SavedKids >= TotalKids)
         {
@@ -58,6 +70,10 @@ public class GameController : MonoBehaviour
     public void AddChild()
     {
         SavedKids++;
+    }
+    public void AddCollectable()
+    {
+        Collected++;
     }
     public void AddTime(float Time)
     {

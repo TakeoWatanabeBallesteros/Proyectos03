@@ -17,17 +17,20 @@ public class Manguera : MonoBehaviour
     public ParticleSystem StrongWater;
     public ParticleSystem WeakWater;
     public Slider WaterBar;
-    float WaterAmount;
+    [SerializeField] float WaterAmount;
     public float NormalWaterConsumption;
     public float StrongWaterConsumption;
     bool canRecharge;
     public TMP_Text ChargeText;
     PickupKid Kid;
     [SerializeField] private float StartWater;
+    [SerializeField] private float waterReload; // The increas of water per second
+    bool isReloading = false;
+
     Rigidbody _rb;
     public float knockbackForce;
     [SerializeField] float timerKnockback;
-    float initialTimer = 2f;
+    float initialTimer = 0f;
     bool forceAdded = false;
     private void Start()
     {
@@ -45,6 +48,7 @@ public class Manguera : MonoBehaviour
         {
             StandardShootPerformed();
         }
+
         else if (!playerInput.shoot && UsingPrimary)
         {
             StandardShootCancelled();
@@ -53,27 +57,37 @@ public class Manguera : MonoBehaviour
         if (playerInput.secondaryShoot && !UsingSecondary && !UsingPrimary && WaterAmount > 0 && !Kid.HasKid())
         {
             StrongShootPerformed();
-            /*
-            if (forceAdded == false)
-                StartCoroutine(AddForce());*/
+            StartCoroutine(KnockBackForce());
         }
+
         else if (!playerInput.secondaryShoot && UsingSecondary)
         {
             StrongShootCancelled();
+            timerKnockback = initialTimer;
         }
 
         WaterBar.value = WaterAmount;
+
         if (WaterAmount < 0)
         {
             WeakWater.Stop();
             StrongWater.Stop();
         }
 
-        if(playerInput.reacharge && canRecharge) WaterAmount = 1;
-        if (playerInput.interact) {
+        if (playerInput.reacharge && canRecharge)
+        {
+            //isReloading = true;
+            WaterAmount += waterReload * Time.deltaTime;
+            //StartCoroutine(Recharge());
+        }
+
+        if (playerInput.interact)
+        {
             UsingSecondary = false;
             StrongWater.Stop();
         }
+
+        WaterAmount = Mathf.Clamp(WaterAmount, 0f, 1f);
     }
 
     private void StandardShootPerformed()
@@ -154,7 +168,8 @@ public class Manguera : MonoBehaviour
     {
         return WaterAmount;
     }
-    
+
+    /*
     IEnumerator AddForce()
     {
         yield return new WaitForSeconds(1f);
@@ -162,9 +177,40 @@ public class Manguera : MonoBehaviour
         _rb.AddForce(-transform.forward.normalized/100000, ForceMode.Impulse); //Preguntar como hacer lerp para que quede smooth
         yield return new WaitForSeconds(1.5f);
         forceAdded = false;
-        //Vector3 newPosition = Vector3.Lerp(transform.position, transform.position - (transform.forward * knockbackForce), 2f);
-        //Vector3 newPosition = new Vector3(transform.position.x - (transform.forward.x * knockbackForce), transform.position.y, transform.position.z - (transform.forward.z * knockbackForce));
-        //transform.position = Vector3.Lerp(transform.position, newPosition, 2f);        
+        Vector3 newPosition = Vector3.Lerp(transform.position, transform.position - (transform.forward * knockbackForce), 2f);
+        Vector3 newPosition = new Vector3(transform.position.x - (transform.forward.x * knockbackForce), transform.position.y, transform.position.z - (transform.forward.z * knockbackForce));
+        transform.position = Vector3.Lerp(transform.position, newPosition, 2f);        
+    }*/
+
+    IEnumerator KnockBackForce()
+    {
+        float waitTime = .15f;
+        yield return new WaitForSeconds(1f);
+
+        while (timerKnockback < waitTime)
+        {
+            timerKnockback += Time.deltaTime;
+
+            if (UsingSecondary == true)
+            {
+                _rb.AddForce(-transform.forward / 5000 * Time.deltaTime, ForceMode.Impulse);
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
+
     }
-    
+    /*
+    IEnumerator Recharge()
+    {
+        float waitTime = 2f;
+        float timerRecharging = 0f;
+
+        while (timerRecharging < waitTime)
+        {
+            timerRecharging += Time.deltaTime;
+            WaterAmount = Mathf.Lerp(WaterAmount, 1, timerRecharging/waitTime);
+            yield return null;
+        }
+    }*/
 }
