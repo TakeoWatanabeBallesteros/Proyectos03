@@ -14,10 +14,10 @@ public class CamPreviewManager : MonoBehaviour
    
     void Start()
     {
-        playerCam.SetActive(false);
+        playerCam.GetComponent<Camera>().enabled = false;
         for (int i = 0; i < cameraList.Length; i++)
         {
-            cameraList[i].cam.SetActive(false);
+            cameraList[i].cam.GetComponent<Camera>().enabled = false;
         }
         StartCoroutine(Cameras());
     }
@@ -49,11 +49,12 @@ public class CamPreviewManager : MonoBehaviour
     {
         foreach (CameraPreview cam in cameraList)
         {
-            cam.cam.SetActive(true);
+            cam.cam.GetComponent<Camera>().enabled = true;
             yield return new WaitForSeconds(cam.timeOfView);
+            cam.cam.GetComponent<Camera>().enabled = false;
             cam.cam.SetActive(false);
         }
-        playerCam.SetActive(true);
+        playerCam.GetComponent<Camera>().enabled = true;
     }
 }
 
@@ -62,4 +63,5 @@ public class CamPreviewManager : MonoBehaviour
 public class CameraPreview{
     public GameObject cam;
     public float timeOfView;
+    public Animation anim;
 }
