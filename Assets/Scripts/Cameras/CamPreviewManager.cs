@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class CamPreviewManager : MonoBehaviour
 {
-    public Camera[] cameraList;
-    public Camera playerCam;
-    public float timeOnEachCamera;
+    public CameraPreview [] cameraList;
+    public GameObject playerCam;
     int currentCam = 0;
 
     //When the level begins all the cameras are disabled
@@ -15,10 +14,10 @@ public class CamPreviewManager : MonoBehaviour
    
     void Start()
     {
-        playerCam.enabled = false;
+        playerCam.SetActive(false);
         for (int i = 0; i < cameraList.Length; i++)
         {
-            cameraList[i].enabled = false;
+            cameraList[i].cam.SetActive(false);
         }
         StartCoroutine(Cameras());
     }
@@ -28,14 +27,15 @@ public class CamPreviewManager : MonoBehaviour
     {
         
     }
+    /*
     IEnumerator Cameras()
     {
-        cameraList[currentCam].enabled = true;
-        yield return new WaitForSeconds(timeOnEachCamera);
+        cameraList[currentCam].cam.enabled = true;
+        yield return new WaitForSeconds(cameraList[currentCam].timeOfView);
+        cameraList[currentCam].cam.enabled = false;
         currentCam++;
         if (currentCam < cameraList.Length)
         {
-            cameraList[currentCam].enabled = false;
             StartCoroutine(Cameras());
         }
         else
@@ -43,4 +43,23 @@ public class CamPreviewManager : MonoBehaviour
             playerCam.enabled = true;
         }
     }
+    */
+
+    IEnumerator Cameras()
+    {
+        foreach (CameraPreview cam in cameraList)
+        {
+            cam.cam.SetActive(true);
+            yield return new WaitForSeconds(cam.timeOfView);
+            cam.cam.SetActive(false);
+        }
+        playerCam.SetActive(true);
+    }
+}
+
+
+[System.Serializable]
+public class CameraPreview{
+    public GameObject cam;
+    public float timeOfView;
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PruebaParedesDistancia : MonoBehaviour
+public class WallShaderManager : MonoBehaviour
 {
     public GameObject[] Paredes;
     private float WallHeight;
@@ -33,7 +33,7 @@ public class PruebaParedesDistancia : MonoBehaviour
         {
             StopAllCoroutines();
             StartCoroutine(OcludeWall(-1));
-            
+
         }
     }
     private IEnumerator OcludeWall(int Dir)
