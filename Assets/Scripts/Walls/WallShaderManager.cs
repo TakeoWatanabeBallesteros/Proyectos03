@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PruebaParedesDistancia : MonoBehaviour
+public class WallShaderManager : MonoBehaviour
 {
     public GameObject[] Paredes;
     private float WallHeight;
@@ -10,13 +10,13 @@ public class PruebaParedesDistancia : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        WallHeight = Paredes[0].GetComponent<MeshRenderer>().material.GetFloat("_DisapearR");
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        WallHeight = Paredes[0].GetComponent<MeshRenderer>().material.GetFloat("_DisapearR");
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -33,7 +33,7 @@ public class PruebaParedesDistancia : MonoBehaviour
         {
             StopAllCoroutines();
             StartCoroutine(OcludeWall(-1));
-            
+
         }
     }
     private IEnumerator OcludeWall(int Dir)
