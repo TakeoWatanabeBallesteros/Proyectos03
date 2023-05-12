@@ -20,12 +20,24 @@ public class MovementPlayerController : MonoBehaviour
     private float rayLength;
     private Vector3 pointToLook;
 
-    
+    Vector3 forward;
+    Vector3 right;
+
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         input = GetComponent<InputPlayerController>();
+
+        // Solo usar cuando disparas
+        forward = cam.transform.forward;
+        forward.y = 0;
+        forward.Normalize();
+
+        right = cam.transform.right;
+        right.y = 0;
+        right.Normalize();
     }
 
     // Update is called once per frame
@@ -33,58 +45,35 @@ public class MovementPlayerController : MonoBehaviour
     {
         /// Solo usar cuando disparas
         // RotatePlayer();
+
         
-        direction = Vector3.zero;
+
+        direction = forward * input.movement.y + right * input.movement.x;
         if (input.shoot || input.secondaryShoot)
         {
+            RotatePlayerShooting();
+        }
+        else{
+
             RotatePlayer();
-            // Solo usar cuando disparas
-            Vector3 forward = cam.transform.forward;
-            forward.y = 0;
-            forward.Normalize();
-
-            Vector3 right = cam.transform.right;
-            right.y = 0;
-            right.Normalize();
-
-            direction = forward * input.movement.y + right * input.movement.x;
+   
         }
-        if(input.movement != Vector2.zero)
-        {
-            if(!input.shoot && !input.secondaryShoot)
-            {
-                // Si no disparas usar este
-                Vector3 movementDirection = input.movement.x * Vector3.right  + input.movement.y * Vector3.forward;
-                movementDirection = Quaternion.Euler(0, 45, 0) *  movementDirection;
-                // Vector3 realDirection = Camera.main.transform.TransformDirection(movementDirection);
-                movementDirection.y = 0;
-                // this line checks whether the player is making inputs.
-                if(movementDirection.magnitude > 0.1f)
-                {
-                    Quaternion newRotation = Quaternion.LookRotation(movementDirection);
-                    transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10);
-                }
-                direction = transform.forward.normalized;
-            }
-            
-
-        }
+        if(input.movement != Vector2.zero) MovePlayer(direction.normalized);
         else
         {
            currentSpeed = 0;
         }
+        rb.velocity = direction * currentSpeed;
     }
 
     private void FixedUpdate()
     {
-        MovePlayer(direction.normalized);
         // ExperimentalMove();
     }
 
     private void MovePlayer(Vector3 direction)
     {
         currentSpeed = Mathf.Lerp(currentSpeed, speed, Time.deltaTime * 10);
-        rb.velocity = direction * currentSpeed;
     }
 
     private void ExperimentalMove()
@@ -92,7 +81,7 @@ public class MovementPlayerController : MonoBehaviour
         
     }
 
-    private void RotatePlayer()
+    private void RotatePlayerShooting()
     {
         //Sending a raycast
         camRay = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -109,6 +98,21 @@ public class MovementPlayerController : MonoBehaviour
         //Rotating the player
         var targetRotation = Quaternion.LookRotation(new Vector3(pointToLook.x, transform.position.y, pointToLook.z) - transform.position);;
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, speed * Time.deltaTime);
+    }
+
+    private void RotatePlayer()
+    {
+        // Si no disparas usar este
+        Vector3 movementDirection = input.movement.x * Vector3.right + input.movement.y * Vector3.forward;
+        movementDirection = Quaternion.Euler(0, 45, 0) * movementDirection;
+        // Vector3 realDirection = Camera.main.transform.TransformDirection(movementDirection);
+        movementDirection.y = 0;
+        // this line checks whether the player is making inputs.
+        if (movementDirection.magnitude > 0.1f)
+        {
+            Quaternion newRotation = Quaternion.LookRotation(movementDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10);
+        }
     }
 
     public void KnockBack()

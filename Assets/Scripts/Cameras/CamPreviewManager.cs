@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class CamPreviewManager : MonoBehaviour
 {
-    public Camera[] cameraList;
-    public Camera playerCam;
-    public float timeOnEachCamera;
+    public CameraPreview [] cameraList;
+    public GameObject playerCam;
     int currentCam = 0;
 
     //When the level begins all the cameras are disabled
@@ -15,10 +14,10 @@ public class CamPreviewManager : MonoBehaviour
    
     void Start()
     {
-        playerCam.enabled = false;
+        playerCam.GetComponent<Camera>().enabled = false;
         for (int i = 0; i < cameraList.Length; i++)
         {
-            cameraList[i].enabled = false;
+            cameraList[i].cam.GetComponent<Camera>().enabled = false;
         }
         StartCoroutine(Cameras());
     }
@@ -28,14 +27,15 @@ public class CamPreviewManager : MonoBehaviour
     {
         
     }
+    /*
     IEnumerator Cameras()
     {
-        cameraList[currentCam].enabled = true;
-        yield return new WaitForSeconds(timeOnEachCamera);
+        cameraList[currentCam].cam.enabled = true;
+        yield return new WaitForSeconds(cameraList[currentCam].timeOfView);
+        cameraList[currentCam].cam.enabled = false;
         currentCam++;
         if (currentCam < cameraList.Length)
         {
-            cameraList[currentCam].enabled = false;
             StartCoroutine(Cameras());
         }
         else
@@ -43,4 +43,25 @@ public class CamPreviewManager : MonoBehaviour
             playerCam.enabled = true;
         }
     }
+    */
+
+    IEnumerator Cameras()
+    {
+        foreach (CameraPreview cam in cameraList)
+        {
+            cam.cam.GetComponent<Camera>().enabled = true;
+            yield return new WaitForSeconds(cam.timeOfView);
+            cam.cam.GetComponent<Camera>().enabled = false;
+            cam.cam.SetActive(false);
+        }
+        playerCam.GetComponent<Camera>().enabled = true;
+    }
+}
+
+
+[System.Serializable]
+public class CameraPreview{
+    public GameObject cam;
+    public float timeOfView;
+    public Animation anim;
 }

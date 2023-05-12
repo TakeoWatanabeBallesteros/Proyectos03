@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18152764, g: 0.2271672, b: 0.30740198, a: 1}
+  m_IndirectSpecularColor: {r: 0.18152787, g: 0.22716753, b: 0.30740255, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15897,6 +15897,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 484315693}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!198 &492011848 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6252905236465301074, guid: 1076d262b9a5cf8429243ba293471d78,
+    type: 3}
+  m_PrefabInstance: {fileID: 2493191779382742116}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &494887103
 GameObject:
   m_ObjectHideFlags: 0
@@ -18019,6 +18025,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 573658338}
   m_CullTransparentMesh: 1
+--- !u!198 &578355024 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6252905235515683950, guid: 1076d262b9a5cf8429243ba293471d78,
+    type: 3}
+  m_PrefabInstance: {fileID: 2493191779382742116}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &580457102
 GameObject:
   m_ObjectHideFlags: 0
@@ -38308,6 +38320,11 @@ PrefabInstance:
       propertyPath: ChargeText
       value: 
       objectReference: {fileID: 267660519}
+    - target: {fileID: 5018670066439703065, guid: ed6fd7c96a0829246954d154207aa675,
+        type: 3}
+      propertyPath: waterReload
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5018670066439703066, guid: ed6fd7c96a0829246954d154207aa675,
         type: 3}
       propertyPath: m_Camera
@@ -68516,7 +68533,7 @@ PrefabInstance:
     - target: {fileID: 2493191778936274755, guid: 1076d262b9a5cf8429243ba293471d78,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.67
+      value: -20.43
       objectReference: {fileID: 0}
     - target: {fileID: 2493191778936274755, guid: 1076d262b9a5cf8429243ba293471d78,
         type: 3}
@@ -68526,7 +68543,7 @@ PrefabInstance:
     - target: {fileID: 2493191778936274755, guid: 1076d262b9a5cf8429243ba293471d78,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -36.62
+      value: -45.76
       objectReference: {fileID: 0}
     - target: {fileID: 2493191778936274755, guid: 1076d262b9a5cf8429243ba293471d78,
         type: 3}
@@ -68568,15 +68585,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barrel
       objectReference: {fileID: 0}
+    - target: {fileID: 2493191778936274765, guid: 1076d262b9a5cf8429243ba293471d78,
+        type: 3}
+      propertyPath: closeRange
+      value: 3.54
+      objectReference: {fileID: 0}
     - target: {fileID: 2493191778936274766, guid: 1076d262b9a5cf8429243ba293471d78,
         type: 3}
       propertyPath: fireParticles.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 578355024}
     - target: {fileID: 2493191778936274766, guid: 1076d262b9a5cf8429243ba293471d78,
         type: 3}
       propertyPath: fireParticles.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 492011848}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1076d262b9a5cf8429243ba293471d78, type: 3}
