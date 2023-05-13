@@ -10,6 +10,8 @@ public class SmokeEfectController : MonoBehaviour
     public ParticleSystem P4;
     public GameObject[] Fuegos;
 
+    [SerializeField] float smokeMultiplier;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,12 +23,13 @@ public class SmokeEfectController : MonoBehaviour
     {
         Fuegos = GameObject.FindGameObjectsWithTag("Fire");
         var p1 = P1.emission;
-        p1.rateOverTime = Fuegos.Length;
+        p1.rateOverTime = Fuegos.Length * Mathf.Pow(smokeMultiplier, 2f);
         var p2 = P2.emission;
-        p2.rateOverTime = Fuegos.Length;
+        p2.rateOverTime = Fuegos.Length * Mathf.Pow(smokeMultiplier, 2f);
         var p3 = P3.emission;
-        p3.rateOverTime = Fuegos.Length;
+        p3.rateOverTime = Fuegos.Length * Mathf.Pow(smokeMultiplier, 2f);
         var p4 = P4.emission;
-        p4.rateOverTime = Fuegos.Length;
+        p4.rateOverTime = Fuegos.Length * Mathf.Pow(smokeMultiplier, 2f);
+
     }
 }
