@@ -8,17 +8,15 @@ public class WallDisapear : MonoBehaviour
     private float WallOpacity = 1;
     public float OcludedHeight;
     // Start is called before the first frame update
-
-    private void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        if (other.tag == "Player")
+        for (int i = 0; i < Paredes.Length; i++)
         {
-            StopAllCoroutines();
-            StartCoroutine(OcludeWall(1));
-
+            Paredes[i].GetComponent<MeshRenderer>().material.SetFloat("_Alpha", WallOpacity);
         }
     }
-    private void OnTriggerExit(Collider other)
+
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
@@ -27,22 +25,31 @@ public class WallDisapear : MonoBehaviour
 
         }
     }
-    private IEnumerator OcludeWall(int Dir)
+    private void OnTriggerExit(Collider other)
     {
-        WallOpacity += Dir * .02f;
+        if (other.tag == "Player")
+        {
+            StopAllCoroutines();
+            StartCoroutine(OcludeWall(1));
+
+        }
+    }
+    private IEnumerator OcludeWall(int OP)
+    {
+        WallOpacity += .05f * OP;
         for (int i = 0; i < Paredes.Length; i++)
         {
             Paredes[i].GetComponent<MeshRenderer>().material.SetFloat("_Alpha", WallOpacity);
         }
         yield return new WaitForSeconds(.01f);
 
-        if (Dir == 1 && WallOpacity < 0)
+        if (OP == 1 && WallOpacity < 1)
         {
-            StartCoroutine(OcludeWall(Dir));
+            StartCoroutine(OcludeWall(OP));
         }
-        if (Dir == -1 && WallOpacity > 1)
+        if (OP == -1 && WallOpacity > 0)
         {
-            StartCoroutine(OcludeWall(Dir));
+            StartCoroutine(OcludeWall(OP));
         }
     }
 }
