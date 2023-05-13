@@ -5922,7 +5922,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &382722826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6172,7 +6172,7 @@ GameObject:
   - component: {fileID: 402451431}
   - component: {fileID: 402451434}
   - component: {fileID: 402451433}
-  - component: {fileID: 402451432}
+  - component: {fileID: 402451435}
   m_Layer: 0
   m_Name: Cam02
   m_TagString: Untagged
@@ -6195,27 +6195,6 @@ Transform:
   m_Father: {fileID: 327867822}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
---- !u!95 &402451432
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 402451430}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d1c589db8d0e7dd43ad1a71edd8f3a36, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &402451433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6292,6 +6271,21 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!111 &402451435
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402451430}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 2adedc81c2f49eb4fbb6cf5f158a84c4, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &405923687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6866,7 +6860,7 @@ GameObject:
   - component: {fileID: 433090346}
   - component: {fileID: 433090350}
   - component: {fileID: 433090349}
-  - component: {fileID: 433090348}
+  - component: {fileID: 433090351}
   - component: {fileID: 433090347}
   m_Layer: 0
   m_Name: Cam03
@@ -6882,7 +6876,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 433090345}
-  m_LocalRotation: {x: 0.4025467, y: -0.53387475, z: 0.3202309, w: 0.6711081}
+  m_LocalRotation: {x: 0.40254644, y: -0.533875, z: 0.32023072, w: 0.6711082}
   m_LocalPosition: {x: -14.59261, y: 7.28694, z: 37.730225}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6909,27 +6903,6 @@ LookAtConstraint:
   m_Sources:
   - sourceTransform: {fileID: 1886261426}
     weight: 1
---- !u!95 &433090348
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 433090345}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d4729fbb624ee7a46add59c377a33339, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &433090349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7006,6 +6979,21 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!111 &433090351
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433090345}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &446182982
 GameObject:
   m_ObjectHideFlags: 0
@@ -21808,7 +21796,7 @@ Animation:
   m_Animations:
   - {fileID: 7400000, guid: 2d33fa2deed5c1a45a04449dae7e90f3, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!114 &1390291717
@@ -31516,7 +31504,7 @@ GameObject:
   - component: {fileID: 2113097950}
   - component: {fileID: 2113097949}
   - component: {fileID: 2113097948}
-  - component: {fileID: 2113097947}
+  - component: {fileID: 2113097951}
   m_Layer: 0
   m_Name: Cam04
   m_TagString: Untagged
@@ -31524,27 +31512,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &2113097947
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2113097946}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4122dc0d3e89fb24cbcd27ea851f2b54, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &2113097948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31636,6 +31603,21 @@ Transform:
   m_Father: {fileID: 327867822}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!111 &2113097951
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113097946}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 4be9f20d57f6ed64bb17bb40f22fea3f, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &2126477487
 GameObject:
   m_ObjectHideFlags: 0
