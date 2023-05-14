@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CamPreviewManager : MonoBehaviour
+public class CameraPreviewManager : MonoBehaviour
 {
     private PreviewCamera [] cameraList;
     private Camera playerCamera;
@@ -17,6 +18,7 @@ public class CamPreviewManager : MonoBehaviour
     {
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         cameraList = FindObjectsOfType<PreviewCamera>();
+        Array.Reverse(cameraList);
         playerCamera.enabled = false;
         StartCoroutine(StartPreview());
     }
