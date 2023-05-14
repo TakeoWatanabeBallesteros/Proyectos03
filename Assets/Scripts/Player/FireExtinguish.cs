@@ -82,7 +82,7 @@ public class FireExtinguish : MonoBehaviour
     {
         Ray ray = new Ray(LasserOrigin.position, LasserOrigin.forward);
         Debug.DrawRay(LasserOrigin.position, LasserOrigin.forward* WeakRayLenght);
-        if (Physics.Raycast(ray, out RaycastHit hit, WeakRayLenght, ColisionLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, WeakRayLenght, FireLayer))
         {
             if (hit.collider.gameObject.GetComponentInParent<FirePropagationV2>())
             {
@@ -101,7 +101,7 @@ public class FireExtinguish : MonoBehaviour
     {
         Ray ray = new Ray(LasserOrigin.position, LasserOrigin.forward);
         Debug.DrawRay(LasserOrigin.position, LasserOrigin.forward * StrongRayLenght);
-        if (Physics.Raycast(ray, out RaycastHit hit, StrongRayLenght, ColisionLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, StrongRayLenght, FireLayer))
         {
             if (hit.collider.gameObject.GetComponentInParent<FirePropagationV2>())
             {
