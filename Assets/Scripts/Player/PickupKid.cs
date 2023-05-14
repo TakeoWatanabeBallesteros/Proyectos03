@@ -56,7 +56,7 @@ public class PickupKid : MonoBehaviour
                 TargetKid.SetActive(true);
                 TargetKid.tag = "KidExtracted";
                 TargetKid.transform.position = DropPoint.position;
-                TargetKid.transform.rotation = DropPoint.rotation;
+                //TargetKid.transform.rotation = DropPoint.rotation;
                 CarringKid = false;
                 GM.AddChild();
                 CanExtract = false;
