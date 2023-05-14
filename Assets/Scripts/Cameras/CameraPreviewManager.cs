@@ -9,8 +9,11 @@ public class CameraPreviewManager : MonoBehaviour
     private PreviewCamera [] cameraList; // All the Preview Cameras on the scene
     private Camera playerCamera; // Main Camera
 
+    [SerializeField] private GameObject canvas;
+
     void Start()
     {
+        canvas.SetActive(false);
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         cameraList = FindObjectsOfType<PreviewCamera>();
         Array.Reverse(cameraList);
@@ -30,6 +33,7 @@ public class CameraPreviewManager : MonoBehaviour
             camera.Stop();
         }
         playerCamera.enabled = true;
+        canvas.SetActive(true);
     }
     
     /// <summary>
