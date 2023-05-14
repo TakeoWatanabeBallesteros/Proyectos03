@@ -49,8 +49,9 @@ public class Collectable : MonoBehaviour
     {
         if (other.tag == "Player" && !Destroyed)
         {
-            GM.AddCollectable();
             Destroy(gameObject);
+            Destroyed = true;
+            GM.AddCollectable();
         }
     }
 }
