@@ -10,12 +10,12 @@ public class Collectable : MonoBehaviour
     public bool Destroyed;
     MeshRenderer texture;
     public GameObject Sparks;
-    GameController GM;
+    GameManager GM;
 
     // Start is called before the first frame update
     void Start()
     {
-        GM = GameObject.Find("GameController").GetComponent<GameController>();
+        GM = GameObject.Find("GameController").GetComponent<GameManager>();
         texture = GetComponent<MeshRenderer>();
         Destroyed = false;
     }
