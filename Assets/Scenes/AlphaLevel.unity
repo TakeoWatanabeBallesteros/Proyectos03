@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44822478, g: 0.49824917, b: 0.5755773, a: 1}
+  m_IndirectSpecularColor: {r: 0.44822502, g: 0.49824977, b: 0.57557803, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -37965,7 +37965,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 66245512aa5008547bb62a49e98922b8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.780709
+      value: 13.86
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 66245512aa5008547bb62a49e98922b8,
         type: 3}
@@ -48610,8 +48610,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b82e0a081ae2654a95ce91fcb822fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ptrans: {fileID: 1150183796}
-  _originalPos: {x: 0, y: 0, z: 0}
+  camTransform: {fileID: 0}
+  shakeDuration: 0
+  shakeAmount: 0.7
+  decreaseFactor: 1
 --- !u!114 &1145272041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48675,6 +48677,10 @@ MonoBehaviour:
   maxCamSize: 20
   minCamSize: 7
   timer: 1
+  camTransform: {fileID: 0}
+  shakeDuration: 0
+  shakeAmount: 0.7
+  decreaseFactor: 1
 --- !u!81 &1145272044
 AudioListener:
   m_ObjectHideFlags: 0
