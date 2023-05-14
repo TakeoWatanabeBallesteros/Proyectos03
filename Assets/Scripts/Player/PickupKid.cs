@@ -12,11 +12,12 @@ public class PickupKid : MonoBehaviour
     public TMP_Text PickupText;
     private bool CarringKid;
     [SerializeField] private bool CanExtract;
-    [SerializeField]private bool CanPickup;
+    [SerializeField] private bool CanPickup;
     private GameObject TargetKid;
     [SerializeField] private InputPlayerController playerInput;
 
     private MovementPlayerController _movementPlayerController;
+    public GameObject prefabPoseKid;
 
     // Start is called before the first frame update
     void Start()
@@ -27,19 +28,23 @@ public class PickupKid : MonoBehaviour
 
         playerInput = GetComponent<InputPlayerController>();
         _movementPlayerController = GetComponent<MovementPlayerController>();
+        prefabPoseKid.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerInput.interact){
+        prefabPoseKid.transform.position = Shoulder.position;
+        prefabPoseKid.transform.rotation = Shoulder.rotation;
+        prefabPoseKid.transform.SetParent(gameObject.transform);
+
+        if (playerInput.interact)
+        {
             if (CanPickup)
             {
                 PickupText.enabled = false;
-                TargetKid.transform.SetParent(gameObject.transform);
-                TargetKid.transform.position = Shoulder.position;
-                TargetKid.transform.rotation = Shoulder.rotation;
-                TargetKid.GetComponent<BoxCollider>().enabled = false;
+                TargetKid.SetActive(false);
+                prefabPoseKid.SetActive(true);                
                 CarringKid = true;
                 CanPickup = false;
                 _movementPlayerController.speed *= 1.2f;
@@ -47,21 +52,24 @@ public class PickupKid : MonoBehaviour
             if (CanExtract)
             {
                 PickupText.enabled = false;
-                TargetKid.transform.SetParent(null);
+                prefabPoseKid.SetActive(false);
+                TargetKid.SetActive(true);
+                TargetKid.tag = "KidExtracted";
                 TargetKid.transform.position = DropPoint.position;
-                TargetKid.transform.rotation = DropPoint.rotation;
+                //TargetKid.transform.rotation = DropPoint.rotation;
                 CarringKid = false;
                 GM.AddChild();
                 CanExtract = false;
                 _movementPlayerController.speed /= 1.2f;
             }
         }
-        
+
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag ==  "Kid" && !CarringKid)
+        if (other.tag == "Kid" && !CarringKid)
         {
             PickupText.text = "Press Space to pickup Kid";
             PickupText.enabled = true;
