@@ -50,6 +50,7 @@ public class CamPreviewManager : MonoBehaviour
         foreach (CameraPreview cam in cameraList)
         {
             cam.cam.GetComponent<Camera>().enabled = true;
+            cam.cam.GetComponent<Animation>().Play();
             yield return new WaitForSeconds(cam.timeOfView);
             cam.cam.GetComponent<Camera>().enabled = false;
             cam.cam.SetActive(false);
