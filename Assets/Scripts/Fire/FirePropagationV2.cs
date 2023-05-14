@@ -81,13 +81,15 @@ public class FirePropagationV2 : MonoBehaviour
             {
                 DamageTimer -= Time.deltaTime;
             }
+
+            CalculateExplosiveFire();
         }
 
         foreach (ParticleSystem fireParticle in fireParticles)
         {
             float scale = fireHP / 100 * OriginalFireSize;
             fireParticle.transform.localScale = new Vector3(scale, scale, scale);
-        }
+        }        
     }
 
     public void CalculateFireProp()
@@ -113,19 +115,32 @@ public class FirePropagationV2 : MonoBehaviour
                     x.onFire = true;
                     nearObjectsOnFire.Remove(x);
                     break;
-                }
-                else if (x.fireType == FireType.Explosive)
+                }                
+            }
+        }      
+
+    }  
+    
+    public void CalculateExplosiveFire()
+    {
+        foreach (var x in nearObjectsOnFire)
+        {
+            float distance = Vector3.Distance(transform.position, x.transform.position);
+
+            if (distance < nearDistance && !x.onFire)
+            {
+                if (x.fireType == FireType.Explosive)
                 {
                     fire = x.gameObject;
                     ExplosionCalculation();
                     x.onFire = true;
-                    nearObjectsOnFire.Remove(x);                     
+                    nearObjectsOnFire.Remove(x);
                     break;
                 }
             }
-        }          
+        }
+    }
 
-    }   
     public void TakeDamage(float DMG)
     {
         if (DamageTimer > 0)
