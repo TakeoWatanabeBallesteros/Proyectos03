@@ -34,8 +34,7 @@ public class FirePropagationV2 : MonoBehaviour
 
     [SerializeField] ParticleSystem[] fireParticles;
     private float OriginalFireSize;
-
-    [SerializeField] CameraShake camShake;
+        
     CameraControllerv2 camController;
 
     // Start is called before the first frame update
@@ -52,7 +51,6 @@ public class FirePropagationV2 : MonoBehaviour
         }
 
         OriginalFireSize = fireParticles[0].gameObject.transform.localScale.x;
-        camShake = Camera.main.GetComponent<CameraShake>();
         camController = Camera.main.GetComponent<CameraControllerv2>();
     }
 
@@ -150,18 +148,15 @@ public class FirePropagationV2 : MonoBehaviour
         yield return new WaitForSeconds(2f);
         fire.transform.GetChild(1).gameObject.SetActive(true);
         fire.GetComponent<ObjectsExplosion>().doExplote = true;
-        camController.enabled = false;
-        CameraShake.Shake(1f, .5f);
+        camController.shakeDuration = 1f;
         yield return new WaitForSeconds(1.5f);
-        camController.enabled = true;
     }
 
     IEnumerator SmokeWork()
     {
         transform.GetChild(1).gameObject.SetActive(true);
         yield return new WaitForSeconds(1f);
-    }
-    
+    }    
 }
 
 public enum FireType

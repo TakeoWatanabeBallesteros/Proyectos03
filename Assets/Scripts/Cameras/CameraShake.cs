@@ -4,46 +4,44 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
-    public static CameraShake instance;
-    public Transform ptrans;
+    // Transform of the camera to shake. Grabs the gameObject's transform
+    // if null.
+    public Transform camTransform;
 
-    public Vector3 _originalPos;
-    private float _timeAtCurrentFrame;
-    private float _timeAtLastFrame;
-    private float _fakeDelta;
+    // How long the object should shake for.
+    public float shakeDuration = 0f;
+
+    // Amplitude of the shake. A larger value shakes the camera harder.
+    public float shakeAmount = 0.7f;
+    public float decreaseFactor = 1.0f;
+
+    Vector3 originalPos;
 
     void Awake()
     {
-        instance = this;
-    }
-
-    void Update()
-    {
-        _timeAtCurrentFrame = Time.realtimeSinceStartup;
-        _fakeDelta = _timeAtCurrentFrame - _timeAtLastFrame;
-        _timeAtLastFrame = _timeAtCurrentFrame;
-    }
-
-    public static void Shake(float duration, float amount)
-    {
-        instance._originalPos = instance.ptrans.localPosition;
-        instance.StopAllCoroutines();
-        instance.StartCoroutine(instance.cShake(duration, amount));
-    }
-
-    public IEnumerator cShake(float duration, float amount)
-    {
-        float endTime = Time.time + duration;
-
-        while (duration > 0)
+        if (camTransform == null)
         {
-            transform.localPosition = _originalPos + Random.insideUnitSphere * amount;
-
-            duration -= _fakeDelta;
-
-            yield return null;
+            camTransform = GetComponent(typeof(Transform)) as Transform;
         }
+    }
 
-        transform.localPosition = _originalPos;
+    void OnEnable()
+    {
+        originalPos = camTransform.localPosition;
+    }
+
+    void LateUpdate()
+    {
+        if (shakeDuration > 0)
+        {
+            camTransform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
+
+            shakeDuration -= Time.deltaTime * decreaseFactor;
+        }
+        else
+        {
+            shakeDuration = 0f;
+            camTransform.localPosition = originalPos;
+        }
     }
 }

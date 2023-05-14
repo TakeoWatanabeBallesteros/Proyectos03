@@ -16,19 +16,29 @@ public class CameraControllerv2 : MonoBehaviour
     [SerializeField] float timer;
     float delay = 5f;
 
+    public Transform camTransform;
+
+    // How long the object should shake for.
+    public float shakeDuration = 0f;
+
+    // Amplitude of the shake. A larger value shakes the camera harder.
+    public float shakeAmount = 0.7f;
+    public float decreaseFactor = 1.0f;
+
+    Vector3 originalPos;
+       
+
     private void Start()
     {
         cam = Camera.main;
         timer = delay;
-        transform.position = Vector3.Lerp(transform.position, target.position, 1.5f * Time.deltaTime);
     }
 
     private void Update()
     {
         if (target != null)
-        {
-            transform.position = target.position;
-            transform.LookAt(target);
+        {            
+            transform.position = Vector3.Lerp(transform.position, target.position, 10f * Time.deltaTime);
         }
 
         /*
@@ -55,13 +65,26 @@ public class CameraControllerv2 : MonoBehaviour
         {
             StartCoroutine(ResetCamera());  
         }*/
-        
+
     }
 
     IEnumerator ResetCamera()
     {
-        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, 13f, 2f * Time.deltaTime);        
+        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, 13f, 2f * Time.deltaTime);
         yield return new WaitForSeconds(2.5f);
         timer = delay;
     }
+       
+
+    void LateUpdate()
+    {
+        if (shakeDuration > 0)
+        {
+            camTransform.localPosition = target.position + Random.insideUnitSphere * shakeAmount;
+
+            shakeDuration -= Time.deltaTime * decreaseFactor;
+        }
+    }
+
+
 }
