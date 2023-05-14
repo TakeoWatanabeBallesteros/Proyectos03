@@ -24,7 +24,7 @@ public class InputPlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-            controls.Disable();
+        controls.Disable();
     }
 
     private void Awake()

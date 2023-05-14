@@ -38,7 +38,8 @@ public class CameraControllerv2 : MonoBehaviour
     {
         if (target != null)
         {            
-            transform.position = Vector3.Lerp(transform.position, target.position, 10f * Time.deltaTime);
+            //transform.position = Vector3.Lerp(transform.position, target.position, 10f * Time.deltaTime);
+            transform.position = target.position;
         }
 
         /*
