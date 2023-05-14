@@ -29,6 +29,8 @@ public class PickupKid : MonoBehaviour
         playerInput = GetComponent<InputPlayerController>();
         _movementPlayerController = GetComponent<MovementPlayerController>();
         prefabPoseKid.SetActive(false);
+
+        GM = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
