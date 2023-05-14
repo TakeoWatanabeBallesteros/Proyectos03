@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     private PlayerControls controls = null;
     public event Action PauseEvent;
     public event Action UnpauseEvent;
-    
+
     private void Awake()
     {
         controls = new PlayerControls();
@@ -49,14 +49,15 @@ public class GameManager : MonoBehaviour
                     break;
             }
         };
-        Singleton.Instance.GameManager.gameState = GameState.InGame;
-        Singleton.Instance.GameManager.PauseEvent += OnPause;
-        Singleton.Instance.GameManager.UnpauseEvent += OnUnpause;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        Singleton.Instance.GameManager.gameState = GameState.InGame;
+        Singleton.Instance.GameManager.PauseEvent += OnPause;
+        Singleton.Instance.GameManager.UnpauseEvent += OnUnpause;
+        
         PH = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         DontDestroyOnLoad(this);
  
