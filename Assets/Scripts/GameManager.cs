@@ -28,8 +28,13 @@ public class GameManager : MonoBehaviour
     
     // That maybe should not be here
     private PlayerControls controls = null;
+
+    #region Events
     public event Action PauseEvent;
     public event Action UnpauseEvent;
+    public event Action LevelPreviewStartEvent;
+    public event Action LevelPreviewEndEvent; 
+    #endregion
 
     private void Awake()
     {
@@ -54,7 +59,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Singleton.Instance.GameManager.gameState = GameState.InGame;
         Singleton.Instance.GameManager.PauseEvent += OnPause;
         Singleton.Instance.GameManager.UnpauseEvent += OnUnpause;
         
@@ -68,6 +72,9 @@ public class GameManager : MonoBehaviour
         TotalCollectables = Collectables.Length;
  
         winScreen.SetActive(false);
+        
+        Singleton.Instance.GameManager.gameState = GameState.LevelPreview;
+        Singleton.Instance.GameManager.LevelPreviewStartEvent?.Invoke();
     }
 
     // Update is called once per frame
@@ -118,6 +125,11 @@ public class GameManager : MonoBehaviour
         winScreen.SetActive(true);
     }
 
+    public void LevelPreviewEnded(){
+        Singleton.Instance.GameManager.LevelPreviewEndEvent?.Invoke();
+        Singleton.Instance.GameManager.gameState = GameState.InGame;
+    }
+
     private void OnPause()
     {
         Time.timeScale = 0;
@@ -138,5 +150,6 @@ public class GameManager : MonoBehaviour
 public enum GameState{
     MainMenu,
     PauseMenu,
+    LevelPreview,
     InGame
 }

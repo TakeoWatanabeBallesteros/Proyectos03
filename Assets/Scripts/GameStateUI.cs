@@ -10,14 +10,19 @@ public class GameStateUI : MonoBehaviour
 
     private void OnEnable()
     {
-        Singleton.Instance.GameManager.PauseEvent += UpdateText;;
-        Singleton.Instance.GameManager.UnpauseEvent += UpdateText;;
+        if(Singleton.Instance.GameManager == null) return;
+        Singleton.Instance.GameManager.PauseEvent += UpdateText;
+        Singleton.Instance.GameManager.UnpauseEvent += UpdateText;
+        Singleton.Instance.GameManager.LevelPreviewStartEvent += UpdateText;
+        Singleton.Instance.GameManager.LevelPreviewEndEvent += UpdateText;
     }
     
     private void OnDisable()
     {
         Singleton.Instance.GameManager.PauseEvent -= UpdateText;
-        Singleton.Instance.GameManager.UnpauseEvent -= UpdateText;;
+        Singleton.Instance.GameManager.UnpauseEvent -= UpdateText;
+        Singleton.Instance.GameManager.LevelPreviewStartEvent -= UpdateText;
+        Singleton.Instance.GameManager.LevelPreviewEndEvent -= UpdateText;
     }
 
     // Start is called before the first frame update

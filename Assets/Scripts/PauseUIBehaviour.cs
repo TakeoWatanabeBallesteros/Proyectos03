@@ -11,6 +11,7 @@ public class PauseUIBehaviour : MonoBehaviour
     private void OnEnable()
     {
         // If the game is "PauseMenu" calls EnablePauseUI, else Disable it.
+        if(Singleton.Instance.GameManager == null) return;
         Singleton.Instance.GameManager.PauseEvent += EnablePauseUI;
         Singleton.Instance.GameManager.UnpauseEvent += DisablePauseUI;
     }
