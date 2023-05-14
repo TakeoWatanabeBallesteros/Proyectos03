@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CamPreviewManager : MonoBehaviour
+public class CameraPreviewManager : MonoBehaviour
 {
     private PreviewCamera [] cameraList;
     private Camera playerCamera;
