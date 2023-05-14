@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PickupKid : MonoBehaviour
 {
-    public GameController GM;
+    public GameManager GM;
     public Transform Shoulder;
     public Transform DropPoint;
     public TMP_Text PickupText;

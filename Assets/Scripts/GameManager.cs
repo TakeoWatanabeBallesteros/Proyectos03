@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
-public class GameController : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     [SerializeField] private int SavedKids = 0;
     [SerializeField] private GameObject[] Kids;
@@ -20,6 +21,17 @@ public class GameController : MonoBehaviour
     [SerializeField] private float TimerEnSegundos;
     int minutes, seconds, cents;
     public GameObject winScreen;
+    
+    // That maybe should not be here
+    private PlayerControls controls = null;
+    
+    
+    private void Awake()
+    {
+        controls = new PlayerControls();
+        controls.Enable();
+        //controls.Player.Pause
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -83,5 +95,10 @@ public class GameController : MonoBehaviour
     public void Win()
     {
         winScreen.SetActive(true);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
     }
 }

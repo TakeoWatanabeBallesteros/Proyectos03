@@ -16,13 +16,13 @@ public class PlayerHealth : MonoBehaviour
     bool Dead;
     float Timer;
     float Alfa;
-    GameController GM;
+    GameManager GM;
 
     // Start is called before the first frame update
     void Start()
     {
         Kid = GetComponent<PickupKid>();
-        GM = GameObject.Find("GameController").GetComponent<GameController>();
+        GM = GameObject.Find("GameController").GetComponent<GameManager>();
         inputPlayer = GetComponent<InputPlayerController>();
         playerMovement = GetComponent<MovementPlayerController>();
         initialPos = transform.position;
