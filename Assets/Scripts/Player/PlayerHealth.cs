@@ -11,7 +11,7 @@ public class PlayerHealth : MonoBehaviour
     MovementPlayerController playerMovement;
     PickupKid Kid;
     public Slider LifeBar;
-    public Image Fire;
+    public GameObject Fire;
     public Image YouDied;
     bool Dead;
     float Timer;
@@ -27,7 +27,8 @@ public class PlayerHealth : MonoBehaviour
         playerMovement = GetComponent<MovementPlayerController>();
         initialPos = transform.position;
         Dead = false;
-        Fire.color = new Color(1f, 1f, 1f, 0f);
+        //Fire.color = new Color(1f, 1f, 1f, 0f);
+        Fire.SetActive(false);
         Timer = 0.5f;
         Vida = 1.00f;
     }
@@ -47,7 +48,7 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
-            Fire.color = new Color(1f, 1f, 1f, 0f);
+            Fire.SetActive(false);
         }
     }
     IEnumerator Respawn()
@@ -72,7 +73,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 Vida -= 0.10f;
                 Timer = 0.5f;
-                Fire.color = new Color(1f, 1f, 1f, 1f);
+                Fire.SetActive(true);
             }
         }
     }
