@@ -9,16 +9,20 @@ public class CameraPreviewManager : MonoBehaviour
     private PreviewCamera [] cameraList; // All the Preview Cameras on the scene
     private Camera playerCamera; // Main Camera
 
-    [SerializeField] private GameObject canvas;
+    private void OnEnable()
+    {
+        if(Singleton.Instance == null) return;
+        Singleton.Instance.GameManager.LevelPreviewStartEvent += LoadPreviewCameras;
+    }
 
     void Start()
     {
-        canvas.SetActive(false);
-        playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        cameraList = FindObjectsOfType<PreviewCamera>();
-        Array.Reverse(cameraList);
-        playerCamera.enabled = false;
-        StartCoroutine(StartPreview());
+        Singleton.Instance.GameManager.LevelPreviewStartEvent += LoadPreviewCameras;
+        // playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        // cameraList = FindObjectsOfType<PreviewCamera>();
+        // Array.Reverse(cameraList);
+        // playerCamera.enabled = false;
+        // StartCoroutine(StartPreview());
     }
 
     /// <summary>
@@ -33,7 +37,8 @@ public class CameraPreviewManager : MonoBehaviour
             camera.Stop();
         }
         playerCamera.enabled = true;
-        canvas.SetActive(true);
+
+        Singleton.Instance.GameManager.LevelPreviewEnded();
     }
     
     /// <summary>

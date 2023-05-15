@@ -286,6 +286,7 @@ MonoBehaviour:
   fireParticles:
   - {fileID: 6764311268289789557}
   - {fileID: 6764311266806971465}
+  camShake: {fileID: 0}
 --- !u!1001 &2990664868636523450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -293,6 +294,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6764311268362156606}
     m_Modifications:
+    - target: {fileID: 8385509645653132751, guid: eeebe77c1c8542e4b953d98a574f492a,
+        type: 3}
+      propertyPath: ShapeModule.type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8385509645653132751, guid: eeebe77c1c8542e4b953d98a574f492a,
+        type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8385509645653132751, guid: eeebe77c1c8542e4b953d98a574f492a,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8385509645653132751, guid: eeebe77c1c8542e4b953d98a574f492a,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8385509645653132751, guid: eeebe77c1c8542e4b953d98a574f492a,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 8385509645822058060, guid: eeebe77c1c8542e4b953d98a574f492a,
         type: 3}
       propertyPath: m_Name
@@ -412,6 +438,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8385509646854670323, guid: eeebe77c1c8542e4b953d98a574f492a,
+        type: 3}
+      propertyPath: ShapeModule.type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8385509646854670323, guid: eeebe77c1c8542e4b953d98a574f492a,
+        type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8385509646854670323, guid: eeebe77c1c8542e4b953d98a574f492a,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8385509646854670323, guid: eeebe77c1c8542e4b953d98a574f492a,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8385509646854670323, guid: eeebe77c1c8542e4b953d98a574f492a,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: -2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eeebe77c1c8542e4b953d98a574f492a, type: 3}

@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         Kid = GetComponent<PickupKid>();
-        GM = GameObject.Find("GameController").GetComponent<GameManager>();
+        GM = FindObjectOfType<GameManager>();
         inputPlayer = GetComponent<InputPlayerController>();
         playerMovement = GetComponent<MovementPlayerController>();
         initialPos = transform.position;

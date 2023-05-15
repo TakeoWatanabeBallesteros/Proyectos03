@@ -6,26 +6,26 @@ using UnityEngine;
 [System.Serializable]
 public class PreviewCamera : MonoBehaviour
 {
-    private Camera camera;
-    private Animation animation;
+    private Camera _camera;
+    private Animation _animation;
     public float animationLenght {get; private set;}
 
     private void Awake()
     {
-        camera = GetComponent<Camera>();
-        animation = GetComponent<Animation>();
-        camera.enabled = false;
-        animationLenght = animation.clip.length;
+        _camera = GetComponent<Camera>();
+        _animation = GetComponent<Animation>();
+        _camera.enabled = false;
+        animationLenght = _animation.clip.length;
     }
 
     public void Play()
     {
-        camera.enabled = true;
-        animation.Play();
+        _camera.enabled = true;
+        _animation.Play();
     }
 
     public void Stop()
     {
-        camera.enabled = false;
+        _camera.enabled = false;
     }
 }
