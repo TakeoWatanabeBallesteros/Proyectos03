@@ -11,7 +11,7 @@ public class PauseUIBehaviour : MonoBehaviour
     private void OnEnable()
     {
         // If the game is "PauseMenu" calls EnablePauseUI, else Disable it.
-        if(Singleton.Instance.GameManager == null) return;
+        if(Singleton.Instance == null) return;
         Singleton.Instance.GameManager.PauseEvent += EnablePauseUI;
         Singleton.Instance.GameManager.UnpauseEvent += DisablePauseUI;
     }
@@ -25,6 +25,8 @@ public class PauseUIBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Singleton.Instance.GameManager.PauseEvent += EnablePauseUI;
+        Singleton.Instance.GameManager.UnpauseEvent += DisablePauseUI;
         pauseMenu.SetActive(false);
     }
 
@@ -37,4 +39,6 @@ public class PauseUIBehaviour : MonoBehaviour
     {
         pauseMenu.SetActive(false);
     }
+
+    public void OnRestart() => Singleton.Instance.GameManager.Restart();
 }
