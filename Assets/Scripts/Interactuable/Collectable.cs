@@ -15,7 +15,7 @@ public class Collectable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GM = GameObject.Find("GameController").GetComponent<GameManager>();
+        GM = FindObjectOfType<GameManager>();
         texture = GetComponent<MeshRenderer>();
         Destroyed = false;
     }

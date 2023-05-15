@@ -51,7 +51,7 @@ public class FirePropagationV2 : MonoBehaviour
         }
 
         OriginalFireSize = fireParticles[0].gameObject.transform.localScale.x;
-        camController = Camera.main.GetComponent<CameraControllerv2>();
+        camController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraControllerv2>();
     }
 
     // Update is called once per frame
