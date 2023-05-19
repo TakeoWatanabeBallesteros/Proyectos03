@@ -5,19 +5,16 @@ using FSM;
 
 public class FSM_UIManager : MonoBehaviour
 {
-    #region FSM
     private StateMachine uiManager_FSM;
-    #endregion
-    
+    public Blackboard_UIManager blackboard_UIManager { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
-        #region FSM
+        blackboard_UIManager = GetComponent<Blackboard_UIManager>();
         uiManager_FSM = new StateMachine();
         AddStates();
-        AddTransitions();   
-
-        #endregion
+        AddTransitions();
     }
 
     // Update is called once per frame
@@ -29,7 +26,8 @@ public class FSM_UIManager : MonoBehaviour
     #region FSM Initialization
     private void AddStates()
     {
-        
+        uiManager_FSM.AddState("MainMenu_FSM", GetComponent<FSM_MainMenu>().mainMenu_FSM);
+        uiManager_FSM.AddState("InGame_FSM", GetComponent<FSM_InGame>().inGame_FSM);
     }
 
     private void AddTransitions()

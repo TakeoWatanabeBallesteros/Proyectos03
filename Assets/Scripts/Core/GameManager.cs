@@ -34,8 +34,6 @@ public class GameManager : MonoBehaviour
     // That maybe should not be here
     private PlayerControls controls = null;
 
-    private GameState lastState;
-
     #region Events
     //Event for debug the game state, remove on Gold.
     public event Action GameStateChangedEvent;
@@ -83,20 +81,12 @@ public class GameManager : MonoBehaviour
         winScreen.SetActive(false);
         
         Singleton.Instance.GameManager.gameState = GameState.LevelPreview;
-        Singleton.Instance.GameManager.lastState = Singleton.Instance.GameManager.gameState;
         Singleton.Instance.GameManager.LevelPreviewStartEvent?.Invoke();
     }
     
     // Update is called once per frame
     private void Update()
     {
-        //Remove on Gold.
-        if ( Singleton.Instance.GameManager.lastState != Singleton.Instance.GameManager.gameState)
-        {
-            Singleton.Instance.GameManager.lastState = Singleton.Instance.GameManager.gameState;
-            Singleton.Instance.GameManager.GameStateChangedEvent?.Invoke();
-        }
-        
         if (TimerEnSegundos > 0)
             TimerEnSegundos -= Time.deltaTime;
         if ( TimerEnSegundos < 0)
@@ -164,11 +154,24 @@ public class GameManager : MonoBehaviour
         RestartEvent?.Invoke();
         SceneManager.LoadScene(0);
     }
+
+    public void ChangeGameState(GameState state)
+    {
+        Singleton.Instance.GameManager.gameState = state;
+        Singleton.Instance.GameManager.GameStateChangedEvent?.Invoke();
+    }
 }
 
 public enum GameState{
     MainMenu,
-    PauseMenu,
+    SettingMenu,
+    Credits,
+    ExitGame,
+    LvlsMenu,
+    LvlInfo,
     LevelPreview,
-    InGame
+    InGame,
+    PauseMenu,
+    SettingPause,
+    RestartLvl
 }
