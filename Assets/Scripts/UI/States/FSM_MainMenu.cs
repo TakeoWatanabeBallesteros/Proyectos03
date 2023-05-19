@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using FSM;
 
-public class FSM_UIManager : MonoBehaviour
+public class FSM_MainMenu : MonoBehaviour
 {
     #region FSM
-    private StateMachine uiManager_FSM;
+    private StateMachine mainMwnu_FSM;
     #endregion
     
     // Start is called before the first frame update
     void Start()
     {
         #region FSM
-        uiManager_FSM = new StateMachine();
+        mainMwnu_FSM = new StateMachine();
         AddStates();
         AddTransitions();   
 
