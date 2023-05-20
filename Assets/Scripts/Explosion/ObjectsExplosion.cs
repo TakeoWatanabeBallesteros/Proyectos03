@@ -85,7 +85,7 @@ public class ObjectsExplosion : MonoBehaviour
             {
                 if (distance <= midRange && distance > closeRange && Random.Range(1, 101) < midRangePercentage) //if it's between close and mid range then it's flammability increases
                 {
-                    Debug.Log("medium range");
+                    //Debug.Log("medium range");
                     x.transform.GetChild(0).gameObject.SetActive(true);
                     x.onFire = true;
                     nearObjectsOnFire.Remove(x);
@@ -94,7 +94,7 @@ public class ObjectsExplosion : MonoBehaviour
                 }
                 else if (distance <= highRange && distance > midRange && Random.Range(1, 101) < highRangePercentage) //if it's between mid and far range then it's flammability increases
                 {
-                    Debug.Log("far range");
+                    //Debug.Log("far range");
                     x.transform.GetChild(0).gameObject.SetActive(true);
                     x.onFire = true;
                     nearObjectsOnFire.Remove(x);
