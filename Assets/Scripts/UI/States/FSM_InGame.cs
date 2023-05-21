@@ -30,7 +30,8 @@ public class FSM_InGame : MonoBehaviour
     #region FSM Initialization
     private void AddStates()
     {
-        
+        inGame_FSM.AddState("Playing", new State_Playing());
+        inGame_FSM.AddState("LevelPreview", new State_LevelPreview());
     }
 
     private void AddTransitions()

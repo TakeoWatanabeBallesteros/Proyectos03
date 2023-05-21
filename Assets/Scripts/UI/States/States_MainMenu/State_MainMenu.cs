@@ -5,14 +5,17 @@ using FSM;
 
 public class State_MainMenu : StateBase
 {
-    private StateMachine uiManager_FSM;
-
+    private Singleton singleton;
+    
     public State_MainMenu() : base(needsExitTime: false)
     {
     }
     
     public override void OnEnter()
     {
+        singleton = Singleton.Instance;
+        Singleton.Instance.GameManager.ChangeGameState(GameState.MainMenu);
+        singleton.UIManager.blackboard_UIManager.MainMenuCanvas.SetActive(true);
         base.OnEnter();
     }
     
@@ -23,6 +26,7 @@ public class State_MainMenu : StateBase
 
     public override void OnExit()
     {
+        singleton.UIManager.blackboard_UIManager.MainMenuCanvas.SetActive(false);
         base.OnExit();
     }
 }

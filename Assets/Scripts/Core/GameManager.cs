@@ -53,10 +53,10 @@ public class GameManager : MonoBehaviour
             switch (Singleton.Instance.GameManager.gameState)
             {
                 case GameState.PauseMenu:
-                    Singleton.Instance.GameManager.gameState = GameState.InGame;
+                    Singleton.Instance.GameManager.gameState = GameState.Playing;
                     UnpauseEvent?.Invoke();
                     break;
-                case GameState.InGame:
+                case GameState.Playing:
                     Singleton.Instance.GameManager.gameState = GameState.PauseMenu;
                     PauseEvent?.Invoke();
                     break;
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
         Singleton.Instance.GameManager.PauseEvent += OnPause;
         Singleton.Instance.GameManager.UnpauseEvent += OnUnpause;
         
-        PH = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        /*PH = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
  
         Kids = GameObject.FindGameObjectsWithTag("Kid");
         TotalKids = Kids.Length;
@@ -81,13 +81,13 @@ public class GameManager : MonoBehaviour
         winScreen.SetActive(false);
         
         Singleton.Instance.GameManager.gameState = GameState.LevelPreview;
-        Singleton.Instance.GameManager.LevelPreviewStartEvent?.Invoke();
+        Singleton.Instance.GameManager.LevelPreviewStartEvent?.Invoke();*/
     }
     
     // Update is called once per frame
     private void Update()
     {
-        if (TimerEnSegundos > 0)
+        /*if (TimerEnSegundos > 0)
             TimerEnSegundos -= Time.deltaTime;
         if ( TimerEnSegundos < 0)
             TimerEnSegundos = 0;
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
         if(TimerEnSegundos>0 && SavedKids >= TotalKids)
         {
             Win();
-        }
+        }*/
         
     }
     public int GetTotalKids()
@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
 
     public void LevelPreviewEnded(){
         Singleton.Instance.GameManager.LevelPreviewEndEvent?.Invoke();
-        Singleton.Instance.GameManager.gameState = GameState.InGame;
+        Singleton.Instance.GameManager.gameState = GameState.Playing;
     }
 
     private void OnPause()
@@ -164,13 +164,13 @@ public class GameManager : MonoBehaviour
 
 public enum GameState{
     MainMenu,
-    SettingMenu,
+    SettingsMenu,
     Credits,
     ExitGame,
     LvlsMenu,
     LvlInfo,
     LevelPreview,
-    InGame,
+    Playing,
     PauseMenu,
     SettingPause,
     RestartLvl
