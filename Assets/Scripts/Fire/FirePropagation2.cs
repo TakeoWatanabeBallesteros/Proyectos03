@@ -33,6 +33,10 @@ public class FirePropagation2 : MonoBehaviour
     private float OriginalFireSize;
 
     CameraController camController;
+
+    public Material objMaterial;
+    public Material redMaterial;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,7 +53,7 @@ public class FirePropagation2 : MonoBehaviour
 
         if (fireType == FireType2.LowFlammability)
         {
-            fireHP = 100f;
+            fireHP = 10f;
         }
         
         else if (fireType == FireType2.HighFlammability)
@@ -57,7 +61,6 @@ public class FirePropagation2 : MonoBehaviour
             fireHP = 5f;
         }       
         
-
         OriginalFireSize = fireParticles[0].gameObject.transform.localScale.x;
         camController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
 
@@ -71,6 +74,8 @@ public class FirePropagation2 : MonoBehaviour
             CalculateFirePropagation();
             CalculateExplosiveFire();
         }
+
+        
         /*
         foreach (ParticleSystem fireParticle in fireParticles)
         {
@@ -122,16 +127,18 @@ public class FirePropagation2 : MonoBehaviour
                     fire = x.gameObject;
                     //x.transform.GetChild(0).gameObject.SetActive(true);
                     fire.GetComponent<FirePropagation2>().fireHP -= Time.deltaTime;
+                    fire.GetComponent<MaterialLerping>().canLerpMaterials = true;
                     //nearObjectsOnFire.Remove(x);
-                    break;
+                    //break;
                 }
                 else if (x.fireType == FireType2.LowFlammability && x.fireHP >= 0f)
                 {
                     fire = x.gameObject;
-                    x.transform.GetChild(0).gameObject.SetActive(true);
+                    //x.transform.GetChild(0).gameObject.SetActive(true);
                     fire.GetComponent<FirePropagation2>().fireHP -= Time.deltaTime;
-                    nearObjectsOnFire.Remove(x);
-                    break;
+                    fire.GetComponent<MaterialLerping>().canLerpMaterials = true;
+                    //nearObjectsOnFire.Remove(x);
+                    //break;
                 }
                 else if (x.fireHP <= 0)
                 {
