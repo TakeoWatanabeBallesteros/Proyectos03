@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class MaterialLerping : MonoBehaviour
 {
-
     public bool canLerpMaterials;
-    public Material materialObj;
     public Material materialRed;
-    [SerializeField]Color initialColor;
     Material _objectMaterial;
+    public float timeThatIsBurning;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +15,6 @@ public class MaterialLerping : MonoBehaviour
         canLerpMaterials = false;
         _objectMaterial = GetComponent<MeshRenderer>().material;
         _objectMaterial.EnableKeyword("_EMISSION");
-        initialColor = GetComponent<MeshRenderer>().material.GetColor("_Color");
     }
 
     // Update is called once per frame
@@ -25,7 +22,7 @@ public class MaterialLerping : MonoBehaviour
     {        
         if (canLerpMaterials)
         {
-            _objectMaterial.Lerp(_objectMaterial, materialRed, Time.deltaTime/10f);
+            _objectMaterial.Lerp(_objectMaterial, materialRed, Time.deltaTime/timeThatIsBurning);
         }
     }
 }
