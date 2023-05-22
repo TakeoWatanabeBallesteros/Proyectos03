@@ -1,41 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FireActivation : MonoBehaviour
 {
     bool m_Started;
     public LayerMask m_LayerMask;
-    [SerializeField] List<FirePropagation> _fires = new List<FirePropagation>();
+    public List<FirePropagation> _fires = new List<FirePropagation>();
+    public List<ObjectsExplosion> _explosions = new List<ObjectsExplosion>();
     bool playerIn;
     // Start is called before the first frame update
     void Start()
     {
         m_Started = true;
         playerIn = false;
-        MyCollisions();
+        //MyCollisions();
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {       
 
-        if (playerIn)
+        if (playerIn == true)
         {
             foreach (FirePropagation f in _fires)
             {
                 f.enabled = true;
             }
+            foreach (ObjectsExplosion o in _explosions)
+            {
+                o.enabled = true;
+                o.preExplosion = true;
+            }
         }
-
-        else if (!playerIn)
+        else
         {
             foreach (FirePropagation f in _fires)
             {
+                f.StopAllCoroutines();
                 f.enabled = false;
+            }
+            foreach (ObjectsExplosion o in _explosions)
+            {
+                o.enabled = false;
+                o.preExplosion = false;
             }
         }
     }
+
 
     void MyCollisions()
     {
@@ -44,7 +57,8 @@ public class FireActivation : MonoBehaviour
         while (i < hitcolliders.Length)
         {
             i++;
-            _fires.Add(hitcolliders[i + 1].gameObject.GetComponent<FirePropagation>());
+            _fires.Add(hitcolliders[i].gameObject.GetComponent<FirePropagation>());
+            _explosions.Add(hitcolliders[i].gameObject.GetComponent<ObjectsExplosion>());
         }
     }
 
