@@ -175,3 +175,8 @@ public enum GameState{
     SettingPause,
     RestartLvl
 }
+
+public enum LoadLevelType
+{
+    
+}

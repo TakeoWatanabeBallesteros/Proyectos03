@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using FSM;
 
 public class FSM_UIManager : MonoBehaviour
@@ -22,10 +23,11 @@ public class FSM_UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    
+
     #region FSM Initialization
+
     private void AddStates()
     {
         uiManager_FSM.AddState("MainMenu_FSM", GetComponent<FSM_MainMenu>().mainMenu_FSM);
@@ -34,24 +36,42 @@ public class FSM_UIManager : MonoBehaviour
 
     private void AddTransitions()
     {
-        
+
     }
+
     #endregion
 
     #region Buttons Methods
+
     public void MainMenuSettings()
     {
         uiManager_FSM.Trigger("MainMenu-SettingsMenu");
     }
     
+    public void MainMenuLevelsMenu()
+    {
+        uiManager_FSM.Trigger("MainMenu-LevelsMenu");
+    }
+
     public void MainMenuCredits()
     {
         uiManager_FSM.Trigger("MainMenu-Credits");
     }
 
+    // The LoadSceneAsync method maybe will be in the GameManager.
     public void GoLevel(int index)
     {
-        
+        SceneManager.LoadSceneAsync(index);
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void WantToExit()
@@ -73,5 +93,6 @@ public class FSM_UIManager : MonoBehaviour
         Singleton.Instance.UIManager.blackboard_UIManager.ExitGameCanvas.SetActive(false);
         Singleton.Instance.GameManager.ChangeGameState(GameState.MainMenu);
     }
+
     #endregion
 }

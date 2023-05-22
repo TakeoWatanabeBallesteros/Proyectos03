@@ -22,12 +22,14 @@ public class FSM_MainMenu : MonoBehaviour
     {
         mainMenu_FSM.AddState("MainMenu", new State_MainMenu());
         mainMenu_FSM.AddState("SettingsMenu", new State_SettingsMenu());
+        mainMenu_FSM.AddState("LevelsMenu", new State_LevelsMenu());
         mainMenu_FSM.AddState("Credits", new State_Credits());
     }
 
     private void AddTransitions()
     {
         mainMenu_FSM.AddTwoWayTriggerTransition("MainMenu-SettingsMenu","MainMenu", "SettingsMenu", t => Singleton.Instance.GameManager.gameState == GameState.MainMenu);
+        mainMenu_FSM.AddTwoWayTriggerTransition("MainMenu-LevelsMenu","MainMenu", "LevelsMenu", t => Singleton.Instance.GameManager.gameState == GameState.MainMenu);
         mainMenu_FSM.AddTwoWayTriggerTransition("MainMenu-Credits","MainMenu", "Credits", t => Singleton.Instance.GameManager.gameState == GameState.MainMenu);
     }
     #endregion
