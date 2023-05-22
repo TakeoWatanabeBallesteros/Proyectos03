@@ -19,7 +19,7 @@ public class FirePropagation2 : MonoBehaviour
 
     public bool onFire = false;
 
-    public FireType fireType;
+    public FireType2 fireType;
 
     float expansionTimer;
     public float delay;
@@ -47,14 +47,14 @@ public class FirePropagation2 : MonoBehaviour
             transform.GetChild(0).gameObject.SetActive(false);
         }
 
-        if (fireType == FireType.LowFlammability)
+        if (fireType == FireType2.LowFlammability)
         {
             fireHP = 100f;
         }
         
-        else if (fireType == FireType.HighFlammability)
+        else if (fireType == FireType2.HighFlammability)
         {
-            fireHP = 60f;
+            fireHP = 5f;
         }       
         
 
@@ -65,27 +65,18 @@ public class FirePropagation2 : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {        
         if (onFire)
-        {            
-            if (fireHP <= 0)
-            {
-                onFire = true;
-                CanBurn = false;
-                transform.GetChild(0).gameObject.SetActive(false);
-                StopAllCoroutines();
-                StartCoroutine(SmokeWork());
-            }
-
+        {      
             CalculateFirePropagation();
             CalculateExplosiveFire();
         }
-
+        /*
         foreach (ParticleSystem fireParticle in fireParticles)
         {
             float scale = fireHP / 100 * OriginalFireSize;
             fireParticle.transform.localScale = new Vector3(scale, scale, scale);
-        }
+        }*/
     }
 
     public void CalculateExplosiveFire()
@@ -96,7 +87,7 @@ public class FirePropagation2 : MonoBehaviour
 
             if (distance < nearDistance && !x.onFire)
             {
-                if (x.fireType == FireType.Explosive)
+                if (x.fireType == FireType2.Explosive)
                 {
                     fire = x.gameObject;
                     ExplosionCalculation();
@@ -126,7 +117,15 @@ public class FirePropagation2 : MonoBehaviour
 
             if (distance < nearDistance && !x.onFire)
             {
-                if (x.fireType == FireType.HighFlammability && x.fireHP >= 0f)
+                if (x.fireType == FireType2.HighFlammability && x.fireHP >= 0f)
+                {
+                    fire = x.gameObject;
+                    //x.transform.GetChild(0).gameObject.SetActive(true);
+                    fire.GetComponent<FirePropagation2>().fireHP -= Time.deltaTime;
+                    //nearObjectsOnFire.Remove(x);
+                    break;
+                }
+                else if (x.fireType == FireType2.LowFlammability && x.fireHP >= 0f)
                 {
                     fire = x.gameObject;
                     x.transform.GetChild(0).gameObject.SetActive(true);
@@ -134,15 +133,20 @@ public class FirePropagation2 : MonoBehaviour
                     nearObjectsOnFire.Remove(x);
                     break;
                 }
-                else if (x.fireType == FireType.LowFlammability && x.fireHP >= 0f)
+                else if (x.fireHP <= 0)
                 {
-                    fire = x.gameObject;
-                    x.transform.GetChild(0).gameObject.SetActive(true);
-                    fire.GetComponent<FirePropagation2>().fireHP -= Time.deltaTime;
-                    nearObjectsOnFire.Remove(x);
-                    break;
+                    CheckStartingFire(x.gameObject);
                 }
             }
+        }
+    }
+
+    void CheckStartingFire(GameObject fire)
+    {
+        if (fire != null)
+        {
+            fire.transform.GetChild(0).gameObject.SetActive(true);
+            fire.GetComponent<FirePropagation2>().onFire = true;
         }
     }
 
