@@ -39,32 +39,7 @@ public class CameraController : MonoBehaviour
         {            
             //transform.position = Vector3.Lerp(transform.position, target.position, 10f * Time.deltaTime);
             transform.position = target.position + addPosition;
-        }
-
-        /*
-        if (controller.zoom.y < 0)
-        {
-            timer = delay;
-            cam.orthographicSize += 1f;
-            cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minCamSize, maxCamSize);
-        }
-
-        if (controller.zoom.y > 0)
-        {
-            timer = delay;
-            cam.orthographicSize -= 1f;
-            cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minCamSize, maxCamSize);
-        }
-
-        else if(controller.zoom.y == 0)
-        {
-            timer -= Time.deltaTime;
-        }
-
-        if (timer <= 0)
-        {
-            StartCoroutine(ResetCamera());  
-        }*/
+        }            
 
     }
 
