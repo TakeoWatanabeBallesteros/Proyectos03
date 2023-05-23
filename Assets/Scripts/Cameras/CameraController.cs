@@ -25,8 +25,7 @@ public class CameraController : MonoBehaviour
     public float shakeAmount = 0.7f;
     public float decreaseFactor = 1.0f;
 
-    Vector3 originalPos;
-       
+    public Vector3 addPosition;
 
     private void Start()
     {
@@ -39,7 +38,7 @@ public class CameraController : MonoBehaviour
         if (target != null)
         {            
             //transform.position = Vector3.Lerp(transform.position, target.position, 10f * Time.deltaTime);
-            transform.position = target.position;
+            transform.position = target.position + addPosition;
         }
 
         /*
