@@ -34,6 +34,11 @@ public class ObjectsExplosion : MonoBehaviour
 
     public Animator animator;
 
+    public float knockbackRadius;
+    public float explosionForce;
+    [SerializeField] Collider[] colliders;
+    public LayerMask explosionMask;
+
     void Start()
     {
         nearObjectsOnFire = FindObjectsOfType<FirePropagation>().ToList<FirePropagation>();
@@ -55,6 +60,7 @@ public class ObjectsExplosion : MonoBehaviour
             Debug.Log("Expansion on explosion");
             preExplosion = false;
             expansionExplosionTimer -= Time.deltaTime;
+            ExplosionKnockBack();
 
             if (expansionTimer >= 0f)
             {
@@ -72,7 +78,7 @@ public class ObjectsExplosion : MonoBehaviour
             expansionExplosionTimer = delayExplosionTimer;
             doExplote = false;
         }
-        
+
     }
 
     void CalculateExpansion()
@@ -113,9 +119,35 @@ public class ObjectsExplosion : MonoBehaviour
         }
     }
 
+    void ExplosionKnockBack()
+    {
+        colliders = Physics.OverlapSphere(transform.position, knockbackRadius, explosionMask);
+        foreach (Collider target in colliders)
+        {
+            Rigidbody rb = target.GetComponent<Rigidbody>();
+            if (rb == null) continue;
+            rb.AddExplosionForce(explosionForce, transform.position, knockbackRadius);
+
+        }
+    }
+    
+    
+    public IEnumerator ExplosionKnockBackCor()
+    {
+        colliders = Physics.OverlapSphere(transform.position, knockbackRadius, explosionMask);
+        foreach (Collider target in colliders)
+        {
+            Rigidbody rb = target.GetComponent<Rigidbody>();
+            if (rb == null) continue;
+            rb.AddExplosionForce(explosionForce, transform.position, knockbackRadius);
+
+        }
+        yield return null;
+    }
+
 }
 
-//how to make a solid disc to checj radius from an object 
+//how to make a solid disc to check radius from an object 
 //
 #if UNITY_EDITOR
 [CustomEditor(typeof(ObjectsExplosion))]

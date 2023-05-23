@@ -162,6 +162,7 @@ public class FirePropagation : MonoBehaviour
         yield return new WaitForSeconds(2f);
         fire.transform.GetChild(1).gameObject.SetActive(true);
         fire.GetComponent<ObjectsExplosion>().doExplote = true;
+        StartCoroutine(fire.GetComponent<ObjectsExplosion>().ExplosionKnockBackCor());
         camController.shakeDuration = 1f;
         yield return new WaitForSeconds(1.5f);
     }
