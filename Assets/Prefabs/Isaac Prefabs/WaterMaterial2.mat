@@ -7,16 +7,18 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaterMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 5a4fe78e9fa79db4e92a940e270c0f6f,
+  m_Name: WaterMaterial2
+  m_Shader: {fileID: -6465566751694194690, guid: af6a3efd974d80b48a566360d3b4d8bd,
     type: 3}
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap: {}
+  m_CustomRenderQueue: -1
+  stringTagMap:
+    RenderType: Transparent
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -35,20 +37,40 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BottomBrightness: 4
-    - _BottomStrength: 2.5
+    - _AlphaClip: 0
+    - _Blend: 0
+    - _CastShadows: 1
+    - _Cull: 0
+    - _DstBlend: 10
+    - _Metallic: 0
+    - _NormalStrength: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RipplesAmount: 3.04
-    - _VertexOffSetAmount: 0.0005
-    - _VoronoiScale: 19.98
-    - _VoronoiSpeed: 4
-    - _alpha: 1
+    - _ReceiveShadows: 1
+    - _Smoothness: 1.4
+    - _SrcBlend: 5
+    - _Surface: 1
+    - _Transparency: 0
+    - _TransparencyMask: 0
+    - _VoronoiAgitation: 1
+    - _VoronoiPower: 2
+    - _VoronoiScale: 10
+    - _WobbleAmount: 0.001
+    - _WobbleHeight: 1
+    - _WobbleSpeed: 15
+    - _WobleFrequency: 4
+    - _WorkflowMode: 1
+    - _ZTest: 4
+    - _ZWrite: 1
+    - _ZWriteControl: 1
     m_Colors:
-    - _RippleSpeed: {r: 0, g: 1.7, b: 0, a: 0}
-    - _RipplesColor: {r: 0.117906675, g: 0.17542444, b: 0.8679245, a: 0}
+    - _BaseColor: {r: 0.116073415, g: 0.9285873, b: 1.6250278, a: 1}
+    - _NormalsSpeed: {r: 0, g: 1, b: 0, a: 0}
+    - _VoronoiColor: {r: 1.1058824, g: 1.4588236, b: 1.4980392, a: 0.77254903}
+    - _VoronoiSpeed: {r: 0, g: 3, b: 0, a: 0}
+    - _VoronoiTiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &1409101121204365076
+--- !u!114 &5970609989504300884
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
