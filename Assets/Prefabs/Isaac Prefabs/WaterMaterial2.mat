@@ -10,15 +10,14 @@ Material:
   m_Name: WaterMaterial2
   m_Shader: {fileID: -6465566751694194690, guid: af6a3efd974d80b48a566360d3b4d8bd,
     type: 3}
-  m_ValidKeywords:
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _SURFACE_TYPE_TRANSPARENT
-  m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Transparent
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -50,13 +49,13 @@ Material:
     - _Smoothness: 1.4
     - _SrcBlend: 5
     - _Surface: 1
-    - _Transparency: 0
-    - _TransparencyMask: 0
+    - _Transparency: 0.1
+    - _TransparencyMask: 0.1
     - _VoronoiAgitation: 1
     - _VoronoiPower: 2
-    - _VoronoiScale: 10
+    - _VoronoiScale: 3.6
     - _WobbleAmount: 0.001
-    - _WobbleHeight: 1
+    - _WobbleHeight: 0.5
     - _WobbleSpeed: 15
     - _WobleFrequency: 4
     - _WorkflowMode: 1
@@ -64,11 +63,11 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 1
     m_Colors:
-    - _BaseColor: {r: 0.116073415, g: 0.9285873, b: 1.6250278, a: 1}
+    - _BaseColor: {r: 0.119111925, g: 1.6250278, b: 1.5318806, a: 1}
     - _NormalsSpeed: {r: 0, g: 1, b: 0, a: 0}
-    - _VoronoiColor: {r: 1.1058824, g: 1.4588236, b: 1.4980392, a: 0.77254903}
+    - _VoronoiColor: {r: 1.4980392, g: 1.4012694, b: 1.1058824, a: 0.77254903}
     - _VoronoiSpeed: {r: 0, g: 3, b: 0, a: 0}
-    - _VoronoiTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _VoronoiTiling: {r: 2, g: 1.5, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5970609989504300884
 MonoBehaviour:
