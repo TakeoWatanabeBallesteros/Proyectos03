@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using FSM;
 
+[RequireComponent(typeof(Blackboard_UIManager))]
 public class FSM_UIManager : MonoBehaviour
 {
     public StateMachine uiManager_FSM { get; private set; }
@@ -30,8 +31,8 @@ public class FSM_UIManager : MonoBehaviour
 
     private void AddStates()
     {
-        uiManager_FSM.AddState("MainMenu_FSM", GetComponent<FSM_MainMenu>().mainMenu_FSM);
-        uiManager_FSM.AddState("InGame_FSM", GetComponent<FSM_InGame>().inGame_FSM);
+        uiManager_FSM.AddState("MainMenu_FSM", new FSM_MainMenu());
+        uiManager_FSM.AddState("InGame_FSM", new FSM_InGame());
     }
 
     private void AddTransitions()
