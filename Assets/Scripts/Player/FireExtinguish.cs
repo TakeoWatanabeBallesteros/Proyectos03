@@ -82,13 +82,13 @@ public class FireExtinguish : MonoBehaviour
     {
         Ray ray = new Ray(LasserOrigin.position, LasserOrigin.forward);
         Debug.DrawRay(LasserOrigin.position, LasserOrigin.forward* WeakRayLenght);
-        if (Physics.Raycast(ray, out RaycastHit hit, WeakRayLenght, ColisionLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, WeakRayLenght, FireLayer))
         {
-            if (hit.collider.gameObject.GetComponentInParent<FirePropagationV2>())
+            if (hit.collider.gameObject.GetComponentInParent<FirePropagation>())
             {
-                if (hit.collider.gameObject.GetComponentInParent<FirePropagationV2>().onFire)
+                if (hit.collider.gameObject.GetComponentInParent<FirePropagation>().onFire)
                 {
-                    hit.collider.GetComponentInParent<FirePropagationV2>().TakeDamage(25);
+                    hit.collider.GetComponentInParent<FirePropagation>().TakeDamage(25);
                 }
             }
             if (hit.collider.gameObject.GetComponentInParent<Collectable>())
@@ -101,13 +101,13 @@ public class FireExtinguish : MonoBehaviour
     {
         Ray ray = new Ray(LasserOrigin.position, LasserOrigin.forward);
         Debug.DrawRay(LasserOrigin.position, LasserOrigin.forward * StrongRayLenght);
-        if (Physics.Raycast(ray, out RaycastHit hit, StrongRayLenght, ColisionLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, StrongRayLenght, FireLayer))
         {
-            if (hit.collider.gameObject.GetComponentInParent<FirePropagationV2>())
+            if (hit.collider.gameObject.GetComponentInParent<FirePropagation>())
             {
-                if (hit.collider.gameObject.GetComponentInParent<FirePropagationV2>().onFire)
+                if (hit.collider.gameObject.GetComponentInParent<FirePropagation>().onFire)
                 {
-                    hit.collider.GetComponentInParent<FirePropagationV2>().TakeDamage(50);
+                    hit.collider.GetComponentInParent<FirePropagation>().TakeDamage(50);
                 }
             }
             if (hit.collider.gameObject.GetComponentInParent<Collectable>())
