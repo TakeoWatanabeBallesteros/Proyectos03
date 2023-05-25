@@ -60,7 +60,6 @@ public class ObjectsExplosion : MonoBehaviour
             Debug.Log("Expansion on explosion");
             preExplosion = false;
             expansionExplosionTimer -= Time.deltaTime;
-            //ExplosionKnockBack();
 
             if (expansionTimer >= 0f)
             {
@@ -117,21 +116,9 @@ public class ObjectsExplosion : MonoBehaviour
                 }
             }
         }
-    }
-
-    void ExplosionKnockBack()
-    {
-        colliders = Physics.OverlapSphere(transform.position, knockbackRadius, explosionMask);
-        foreach (Collider target in colliders)
-        {
-            Rigidbody rb = target.GetComponent<Rigidbody>();
-            if (rb == null) continue;
-            rb.AddExplosionForce(explosionForce, transform.position, knockbackRadius);
-
-        }
-    }    
+    }  
     
-    public IEnumerator ExplosionKnockBackCor()
+    public IEnumerator ExplosionKnockBackCor() //Apply force in x sphere radius
     {
         colliders = Physics.OverlapSphere(transform.position, knockbackRadius, explosionMask);
         foreach (Collider target in colliders)
