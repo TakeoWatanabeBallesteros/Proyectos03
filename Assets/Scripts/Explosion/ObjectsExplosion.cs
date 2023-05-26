@@ -34,6 +34,11 @@ public class ObjectsExplosion : MonoBehaviour
 
     public Animator animator;
 
+    public float knockbackRadius;
+    public float explosionForce;
+    [SerializeField] Collider[] colliders;
+    public LayerMask explosionMask;
+
     void Start()
     {
         nearObjectsOnFire = FindObjectsOfType<FirePropagation>().ToList<FirePropagation>();
@@ -72,7 +77,7 @@ public class ObjectsExplosion : MonoBehaviour
             expansionExplosionTimer = delayExplosionTimer;
             doExplote = false;
         }
-        
+
     }
 
     void CalculateExpansion()
@@ -85,7 +90,7 @@ public class ObjectsExplosion : MonoBehaviour
             {
                 if (distance <= midRange && distance > closeRange && Random.Range(1, 101) < midRangePercentage) //if it's between close and mid range then it's flammability increases
                 {
-                    Debug.Log("medium range");
+                    //Debug.Log("medium range");
                     x.transform.GetChild(0).gameObject.SetActive(true);
                     x.onFire = true;
                     nearObjectsOnFire.Remove(x);
@@ -94,7 +99,7 @@ public class ObjectsExplosion : MonoBehaviour
                 }
                 else if (distance <= highRange && distance > midRange && Random.Range(1, 101) < highRangePercentage) //if it's between mid and far range then it's flammability increases
                 {
-                    Debug.Log("far range");
+                    //Debug.Log("far range");
                     x.transform.GetChild(0).gameObject.SetActive(true);
                     x.onFire = true;
                     nearObjectsOnFire.Remove(x);
@@ -111,11 +116,24 @@ public class ObjectsExplosion : MonoBehaviour
                 }
             }
         }
+    }  
+    
+    public IEnumerator ExplosionKnockBackCor() //Apply force in x sphere radius
+    {
+        colliders = Physics.OverlapSphere(transform.position, knockbackRadius, explosionMask);
+        foreach (Collider target in colliders)
+        {
+            Rigidbody rb = target.GetComponentInParent<Rigidbody>();
+            if (rb == null) continue;
+            rb.AddExplosionForce(explosionForce, transform.position, knockbackRadius);
+
+        }
+        yield return null;
     }
 
 }
 
-//how to make a solid disc to checj radius from an object 
+//how to make a solid disc to check radius from an object 
 //
 #if UNITY_EDITOR
 [CustomEditor(typeof(ObjectsExplosion))]
