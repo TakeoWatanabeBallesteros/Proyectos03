@@ -84,12 +84,13 @@ public class FireExtinguish : MonoBehaviour
         Debug.DrawRay(LasserOrigin.position, LasserOrigin.forward* WeakRayLenght);
         if (Physics.Raycast(ray, out RaycastHit hit, WeakRayLenght, FireLayer))
         {
-            if (hit.collider.gameObject.GetComponentInParent<FirePropagation>())
+            if (hit.collider.gameObject.GetComponentInParent<FirePropagation2>())
             {
-                if (hit.collider.gameObject.GetComponentInParent<FirePropagation>().onFire)
+                if (hit.collider.gameObject.GetComponentInParent<FirePropagation2>().onFire)
                 {
-                    hit.collider.GetComponentInParent<FirePropagation>().TakeDamage(25);
-                    hit.collider.GetComponentInParent<FirePropagation2>().TakeDamage(25);
+                    //hit.collider.GetComponentInParent<FirePropagation>().TakeDamage(25);
+                    Debug.Log("Tocando el fuego");
+                    hit.collider.GetComponentInParent<FirePropagation2>().TakeDamage(1);
                 }
             }
             if (hit.collider.gameObject.GetComponentInParent<Collectable>())
@@ -104,11 +105,11 @@ public class FireExtinguish : MonoBehaviour
         Debug.DrawRay(LasserOrigin.position, LasserOrigin.forward * StrongRayLenght);
         if (Physics.Raycast(ray, out RaycastHit hit, StrongRayLenght, FireLayer))
         {
-            if (hit.collider.gameObject.GetComponentInParent<FirePropagation>())
+            if (hit.collider.gameObject.GetComponentInParent<FirePropagation2>())
             {
-                if (hit.collider.gameObject.GetComponentInParent<FirePropagation>().onFire)
+                if (hit.collider.gameObject.GetComponentInParent<FirePropagation2>().onFire)
                 {
-                    hit.collider.GetComponentInParent<FirePropagation>().TakeDamage(50);
+                    //hit.collider.GetComponentInParent<FirePropagation>().TakeDamage(50);
                     hit.collider.GetComponentInParent<FirePropagation2>().TakeDamage(50);                    
                 }
             }

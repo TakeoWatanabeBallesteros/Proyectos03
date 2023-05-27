@@ -73,15 +73,40 @@ public class FirePropagation2 : MonoBehaviour
         {      
             CalculateFirePropagation();
             CalculateExplosiveFire();
+
+            if (fireHP > 0 && DamageTimer > 0)
+            {
+                DamageTimer -= Time.deltaTime;
+            }
+
+            if (fireHP <= 0)
+            {
+                onFire = false;
+                CanBurn = false;
+                transform.GetChild(0).gameObject.SetActive(false);
+                StopAllCoroutines();
+                StartCoroutine(SmokeWork());
+            }
+
         }
 
-        
-        /*
-        foreach (ParticleSystem fireParticle in fireParticles)
+        if (fireType == FireType2.HighFlammability)
         {
-            float scale = fireHP / 100 * OriginalFireSize;
-            fireParticle.transform.localScale = new Vector3(scale, scale, scale);
-        }*/
+            foreach (ParticleSystem fireParticle in fireParticles)
+            {
+                float scale = fireHP / 5 * OriginalFireSize;
+                fireParticle.transform.localScale = new Vector3(scale, scale, scale);
+            }
+        }
+        
+        if (fireType == FireType2.LowFlammability)
+        {
+            foreach (ParticleSystem fireParticle in fireParticles)
+            {
+                float scale = fireHP / 10 * OriginalFireSize;
+                fireParticle.transform.localScale = new Vector3(scale, scale, scale);
+            }
+        }
     }
 
     public void CalculateExplosiveFire()
