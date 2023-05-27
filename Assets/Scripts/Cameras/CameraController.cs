@@ -25,8 +25,7 @@ public class CameraController : MonoBehaviour
     public float shakeAmount = 0.7f;
     public float decreaseFactor = 1.0f;
 
-    Vector3 originalPos;
-       
+    public Vector3 addPosition;
 
     private void Start()
     {
@@ -39,33 +38,8 @@ public class CameraController : MonoBehaviour
         if (target != null)
         {            
             //transform.position = Vector3.Lerp(transform.position, target.position, 10f * Time.deltaTime);
-            transform.position = target.position;
-        }
-
-        /*
-        if (controller.zoom.y < 0)
-        {
-            timer = delay;
-            cam.orthographicSize += 1f;
-            cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minCamSize, maxCamSize);
-        }
-
-        if (controller.zoom.y > 0)
-        {
-            timer = delay;
-            cam.orthographicSize -= 1f;
-            cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minCamSize, maxCamSize);
-        }
-
-        else if(controller.zoom.y == 0)
-        {
-            timer -= Time.deltaTime;
-        }
-
-        if (timer <= 0)
-        {
-            StartCoroutine(ResetCamera());  
-        }*/
+            transform.position = target.position + addPosition;
+        }            
 
     }
 
@@ -81,7 +55,7 @@ public class CameraController : MonoBehaviour
     {
         if (shakeDuration > 0)
         {
-            camTransform.localPosition = target.position + Random.insideUnitSphere * shakeAmount;
+            camTransform.localPosition = target.position + addPosition + Random.insideUnitSphere * shakeAmount;
 
             shakeDuration -= Time.deltaTime * decreaseFactor;
         }
