@@ -15,6 +15,7 @@ public class FirePropagation2 : MonoBehaviour
     public int lowPercentage;
 
     [SerializeField] float fireHP;
+    [SerializeField] float timeToBurn;
     float timeToExplote;
 
     public bool onFire = false;
@@ -45,6 +46,7 @@ public class FirePropagation2 : MonoBehaviour
         nearObjectsOnFire.RemoveAll(item => item.onFire == true);
         expansionTimer = delay;
         DamageTimer = delayFire;
+        fireHP = 100f;
 
         if (!onFire)
         {
@@ -53,14 +55,14 @@ public class FirePropagation2 : MonoBehaviour
 
         if (fireType == FireType2.LowFlammability)
         {
-            fireHP = 10f;
+            timeToBurn = 10f;
         }
-        
+
         else if (fireType == FireType2.HighFlammability)
         {
-            fireHP = 5f;
-        }       
-        
+            timeToBurn = 5f;
+        }
+
         OriginalFireSize = fireParticles[0].gameObject.transform.localScale.x;
         camController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
 
@@ -68,9 +70,9 @@ public class FirePropagation2 : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {        
+    {
         if (onFire)
-        {      
+        {
             CalculateFirePropagation();
             CalculateExplosiveFire();
 
@@ -81,7 +83,7 @@ public class FirePropagation2 : MonoBehaviour
 
             if (fireHP <= 0)
             {
-                onFire = false;
+                onFire = true;
                 CanBurn = false;
                 transform.GetChild(0).gameObject.SetActive(false);
                 StopAllCoroutines();
@@ -90,23 +92,12 @@ public class FirePropagation2 : MonoBehaviour
 
         }
 
-        if (fireType == FireType2.HighFlammability)
+        foreach (ParticleSystem fireParticle in fireParticles)
         {
-            foreach (ParticleSystem fireParticle in fireParticles)
-            {
-                float scale = fireHP / 5 * OriginalFireSize;
-                fireParticle.transform.localScale = new Vector3(scale, scale, scale);
-            }
+            float scale = fireHP / 100 * OriginalFireSize;
+            fireParticle.transform.localScale = new Vector3(scale, scale, scale);
         }
-        
-        if (fireType == FireType2.LowFlammability)
-        {
-            foreach (ParticleSystem fireParticle in fireParticles)
-            {
-                float scale = fireHP / 10 * OriginalFireSize;
-                fireParticle.transform.localScale = new Vector3(scale, scale, scale);
-            }
-        }
+
     }
 
     public void CalculateExplosiveFire()
@@ -147,11 +138,11 @@ public class FirePropagation2 : MonoBehaviour
 
             if (distance < nearDistance && !x.onFire)
             {
-                if (x.fireType == FireType2.HighFlammability && x.fireHP >= 0f)
+                if (x.fireType == FireType2.HighFlammability && x.timeToBurn >= 0f)
                 {
                     fire = x.gameObject;
                     //x.transform.GetChild(0).gameObject.SetActive(true);
-                    fire.GetComponent<FirePropagation2>().fireHP -= Time.deltaTime;
+                    fire.GetComponent<FirePropagation2>().timeToBurn -= Time.deltaTime;
                     fire.GetComponent<MaterialLerping>().canLerpMaterials = true;
                     //nearObjectsOnFire.Remove(x);
                     //break;
@@ -160,7 +151,7 @@ public class FirePropagation2 : MonoBehaviour
                 {
                     fire = x.gameObject;
                     //x.transform.GetChild(0).gameObject.SetActive(true);
-                    fire.GetComponent<FirePropagation2>().fireHP -= Time.deltaTime;
+                    fire.GetComponent<FirePropagation2>().timeToBurn -= Time.deltaTime;
                     fire.GetComponent<MaterialLerping>().canLerpMaterials = true;
                     //nearObjectsOnFire.Remove(x);
                     //break;
