@@ -5,14 +5,15 @@ using UnityEngine;
 public class WallDisapear : MonoBehaviour
 {
     public GameObject[] Paredes;
-    private float WallOpacity = 1;
-    public float OcludedHeight;
+    public float WallOpacity = 1;
+
     // Start is called before the first frame update
     private void Start()
     {
         for (int i = 0; i < Paredes.Length; i++)
         {
-            Paredes[i].GetComponent<MeshRenderer>().material.SetFloat("_Alpha", WallOpacity);
+            Paredes[i].GetComponent<MeshRenderer>().material.SetFloat("_Opacity", WallOpacity);
+            Debug.Log("Inicio");
         }
     }
 
@@ -22,6 +23,7 @@ public class WallDisapear : MonoBehaviour
         {
             StopAllCoroutines();
             StartCoroutine(OcludeWall(-1));
+            Debug.Log("In");
 
         }
     }
@@ -31,6 +33,7 @@ public class WallDisapear : MonoBehaviour
         {
             StopAllCoroutines();
             StartCoroutine(OcludeWall(1));
+            Debug.Log("Out");
 
         }
     }
@@ -39,7 +42,7 @@ public class WallDisapear : MonoBehaviour
         WallOpacity += .05f * OP;
         for (int i = 0; i < Paredes.Length; i++)
         {
-            Paredes[i].GetComponent<MeshRenderer>().material.SetFloat("_Alpha", WallOpacity);
+            Paredes[i].GetComponent<MeshRenderer>().material.SetFloat("_Opacity", WallOpacity);
         }
         yield return new WaitForSeconds(.01f);
 
@@ -47,7 +50,7 @@ public class WallDisapear : MonoBehaviour
         {
             StartCoroutine(OcludeWall(OP));
         }
-        if (OP == -1 && WallOpacity > 0)
+        if (OP == -1 && WallOpacity > .3f)
         {
             StartCoroutine(OcludeWall(OP));
         }
