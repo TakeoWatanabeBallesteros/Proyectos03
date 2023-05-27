@@ -92,6 +92,11 @@ public class FirePropagation2 : MonoBehaviour
 
         }
 
+        if(timeToBurn <= 0)
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
+
         foreach (ParticleSystem fireParticle in fireParticles)
         {
             float scale = fireHP / 100 * OriginalFireSize;
