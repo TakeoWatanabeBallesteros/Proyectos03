@@ -16,6 +16,9 @@ public class FireExtinguish : MonoBehaviour
     bool SecondaryActivated;
     public ParticleSystem WeakWater;
     public Transform LasserOrigin;
+    public float fireWeakExtinguishPower;
+    public float fireStrongExtinguishPower;
+
 
     //This script uses raycasts to detect the fire and send the order of extinguish it
 
@@ -89,8 +92,7 @@ public class FireExtinguish : MonoBehaviour
                 if (hit.collider.gameObject.GetComponentInParent<FirePropagation2>().onFire)
                 {
                     //hit.collider.GetComponentInParent<FirePropagation>().TakeDamage(25);
-                    Debug.Log("Tocando el fuego");
-                    hit.collider.GetComponentInParent<FirePropagation2>().TakeDamage(1);
+                    hit.collider.GetComponentInParent<FirePropagation2>().TakeDamage(fireWeakExtinguishPower);
                 }
             }
             if (hit.collider.gameObject.GetComponentInParent<Collectable>())
@@ -110,7 +112,7 @@ public class FireExtinguish : MonoBehaviour
                 if (hit.collider.gameObject.GetComponentInParent<FirePropagation2>().onFire)
                 {
                     //hit.collider.GetComponentInParent<FirePropagation>().TakeDamage(50);
-                    hit.collider.GetComponentInParent<FirePropagation2>().TakeDamage(50);                    
+                    hit.collider.GetComponentInParent<FirePropagation2>().TakeDamage(fireStrongExtinguishPower);                    
                 }
             }
             if (hit.collider.gameObject.GetComponentInParent<Collectable>())
