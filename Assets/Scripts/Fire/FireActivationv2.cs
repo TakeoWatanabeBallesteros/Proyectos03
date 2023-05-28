@@ -8,7 +8,7 @@ public class FireActivationv2 : MonoBehaviour
     bool m_Started;
     public LayerMask m_LayerMask;
     public List<FirePropagation2> _fires = new List<FirePropagation2>();
-    public List<ObjectsExplosion> _explosions = new List<ObjectsExplosion>();
+    public List<ObjectsExplosionv2> _explosions = new List<ObjectsExplosionv2>();
     public List<MaterialLerping> _materialLerping = new List<MaterialLerping>();
     bool playerIn;
     // Start is called before the first frame update
@@ -29,14 +29,14 @@ public class FireActivationv2 : MonoBehaviour
             {
                 f.enabled = true;
             }
-            foreach (ObjectsExplosion o in _explosions)
+            foreach (ObjectsExplosionv2 o in _explosions)
             {
                 o.enabled = true;
-                o.preExplosion = true;
+                //o.preExplosion = true;
             }
             foreach (MaterialLerping m in _materialLerping)
             {
-                m.canLerpMaterials = true;
+                //m.canLerpMaterials = true;
                 m.enabled = true;
             }
         }
@@ -44,10 +44,9 @@ public class FireActivationv2 : MonoBehaviour
         {
             foreach (FirePropagation2 f in _fires)
             {
-                f.StopAllCoroutines();
                 f.enabled = false;
             }
-            foreach (ObjectsExplosion o in _explosions)
+            foreach (ObjectsExplosionv2 o in _explosions)
             {
                 o.enabled = false;
                 o.preExplosion = false;
@@ -60,7 +59,7 @@ public class FireActivationv2 : MonoBehaviour
         }
     }
 
-
+    /*
     void MyCollisions()
     {
         Collider[] hitcolliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, m_LayerMask);
@@ -69,9 +68,9 @@ public class FireActivationv2 : MonoBehaviour
         {
             i++;
             _fires.Add(hitcolliders[i].gameObject.GetComponent<FirePropagation2>());
-            _explosions.Add(hitcolliders[i].gameObject.GetComponent<ObjectsExplosion>());
+            _explosions.Add(hitcolliders[i].gameObject.GetComponent<ObjectsExplosionv2>());
         }
-    }
+    }*/
 
     private void OnDrawGizmos()
     {

@@ -36,6 +36,8 @@ public class ObjectsExplosionv2 : MonoBehaviour
     [SerializeField] Collider[] colliders;
     public LayerMask explosionMask;
 
+    public bool oneLoopDone = false;
+
     void Start()
     {
         nearObjectsOnFire = FindObjectsOfType<FirePropagation>().ToList<FirePropagation>();
@@ -47,33 +49,38 @@ public class ObjectsExplosionv2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (preExplosion == true)
+        if(oneLoopDone == false)
         {
-            animator.SetTrigger("Explote");
-        }
-
-        if (doExplote == true && expansionExplosionTimer >= 0f)
-        {
-            Debug.Log("Expansion on explosion");
-            preExplosion = false;
-            expansionExplosionTimer -= Time.deltaTime;
-
-            if (expansionTimer >= 0f)
+            if (preExplosion == true)
             {
-                expansionTimer -= Time.deltaTime;
+                animator.SetTrigger("Explote");
+            }
+
+            if (doExplote == true && expansionExplosionTimer >= 0f)
+            {
+                Debug.Log("Expansion on explosion");
+                preExplosion = false;
+                expansionExplosionTimer -= Time.deltaTime;
+
+                if (expansionTimer >= 0f)
+                {
+                    expansionTimer -= Time.deltaTime;
+                }
+                else
+                {
+                    Debug.Log("Expansion");
+                    expansionTimer = delay;
+                    CalculateExpansion();
+                }
             }
             else
             {
-                Debug.Log("Expansion");
-                expansionTimer = delay;
-                CalculateExpansion();
+                expansionExplosionTimer = delayExplosionTimer;
+                doExplote = false;
             }
-        }
-        else
-        {
-            expansionExplosionTimer = delayExplosionTimer;
-            doExplote = false;
-        }
+
+            oneLoopDone = true;
+        }        
 
     }
 
