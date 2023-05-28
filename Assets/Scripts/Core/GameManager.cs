@@ -53,13 +53,34 @@ public class GameManager : MonoBehaviour
             switch (Singleton.Instance.GameManager.gameState)
             {
                 case GameState.PauseMenu:
-                    Singleton.Instance.GameManager.gameState = GameState.Playing;
+                    Singleton.Instance.GameManager.ChangeGameState(GameState.Playing);
                     UnpauseEvent?.Invoke();
                     break;
                 case GameState.Playing:
-                    Singleton.Instance.GameManager.gameState = GameState.PauseMenu;
+                    Singleton.Instance.GameManager.ChangeGameState(GameState.PauseMenu);
                     PauseEvent?.Invoke();
                     break;
+                case GameState.MainMenu:
+                    
+                    break;
+                case GameState.SettingsMenu:
+                    break;
+                case GameState.Credits:
+                    break;
+                case GameState.ExitGame:
+                    break;
+                case GameState.LvlsMenu:
+                    break;
+                case GameState.LvlInfo:
+                    break;
+                case GameState.LevelPreview:
+                    break;
+                case GameState.SettingPause:
+                    break;
+                case GameState.RestartLvl:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         };
     }
@@ -70,7 +91,8 @@ public class GameManager : MonoBehaviour
         Singleton.Instance.GameManager.PauseEvent += OnPause;
         Singleton.Instance.GameManager.UnpauseEvent += OnUnpause;
         
-        /*PH = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        /*
+        PH = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
  
         Kids = GameObject.FindGameObjectsWithTag("Kid");
         TotalKids = Kids.Length;
@@ -79,32 +101,21 @@ public class GameManager : MonoBehaviour
         TotalCollectables = Collectables.Length;
  
         winScreen.SetActive(false);
-        
-        Singleton.Instance.GameManager.gameState = GameState.LevelPreview;
-        Singleton.Instance.GameManager.LevelPreviewStartEvent?.Invoke();*/
+        */
     }
     
     // Update is called once per frame
     private void Update()
     {
-        /*if (TimerEnSegundos > 0)
-            TimerEnSegundos -= Time.deltaTime;
-        if ( TimerEnSegundos < 0)
-            TimerEnSegundos = 0;
-        if (TimerEnSegundos == 0)
-            PH.IntantDeath();
-        minutes = (int)(TimerEnSegundos / 60f);
-        seconds = (int)(TimerEnSegundos - minutes * 60f);
-        cents = (int)((TimerEnSegundos - (int)TimerEnSegundos) * 100f);
-    
-        TimeLeftText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, cents);
+        /*
         NumberOfkids.text = ("Kids saved: " + SavedKids + "/" + TotalKids);
         NumberOfCollectables.text = ("Collectables: " + Collected + "/" + TotalCollectables);
     
         if(TimerEnSegundos>0 && SavedKids >= TotalKids)
         {
             Win();
-        }*/
+        }
+        */
         
     }
     public int GetTotalKids()
@@ -133,9 +144,15 @@ public class GameManager : MonoBehaviour
         winScreen.SetActive(true);
     }
 
+    public void StartLevelPreview()
+    {
+        Singleton.Instance.GameManager.ChangeGameState(GameState.LevelPreview);
+        Singleton.Instance.GameManager.LevelPreviewStartEvent?.Invoke();
+    }
+
     public void LevelPreviewEnded(){
+        Singleton.Instance.GameManager.ChangeGameState(GameState.Playing);
         Singleton.Instance.GameManager.LevelPreviewEndEvent?.Invoke();
-        Singleton.Instance.GameManager.gameState = GameState.Playing;
     }
 
     private void OnPause()

@@ -10,6 +10,8 @@ public class FSM_UIManager : MonoBehaviour
     public StateMachine uiManager_FSM { get; private set; }
     public Blackboard_UIManager blackboard_UIManager { get; private set; }
 
+    public bool testingLevel = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,7 @@ public class FSM_UIManager : MonoBehaviour
         uiManager_FSM = new StateMachine();
         AddStates();
         AddTransitions();
-        uiManager_FSM.SetStartState("MainMenu_FSM");
+        uiManager_FSM.SetStartState(testingLevel ? "InGame_FSM" : "MainMenu_FSM");
         uiManager_FSM.Init();
     }
 
@@ -37,7 +39,7 @@ public class FSM_UIManager : MonoBehaviour
 
     private void AddTransitions()
     {
-
+        
     }
 
     #endregion

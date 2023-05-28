@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Blackboard_UIManager : DynamicBlackboard
 {
+    [Header("UI GameObjects")]
     #region MainMenuCanvas
     public GameObject MainMenuCanvas;
     public GameObject SettingsMenuCanvas;
@@ -22,6 +24,10 @@ public class Blackboard_UIManager : DynamicBlackboard
     public GameObject RestartLevelCanvas;
     public GameObject GoMainMenuCanvas;
     #endregion
+    
+    [Space(5)]
+    [Header("Gameplay Objects")] 
+    public Slider lifeBar;
     
     
     // Start is called before the first frame update

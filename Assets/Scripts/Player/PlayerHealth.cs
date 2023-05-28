@@ -28,7 +28,6 @@ public class PlayerHealth : MonoBehaviour
         initialPos = transform.position;
         Dead = false;
         //Fire.color = new Color(1f, 1f, 1f, 0f);
-        Fire.SetActive(false);
         Timer = 0.5f;
         Vida = 1.00f;
     }
@@ -74,8 +73,14 @@ public class PlayerHealth : MonoBehaviour
                 Vida -= 0.10f;
                 Timer = 0.5f;
                 Fire.SetActive(true);
+                StopAllCoroutines();
             }
         }
+    }
+
+    private IEnumerator ShowBurnIndicator()
+    {
+        
     }
 
     private void die()

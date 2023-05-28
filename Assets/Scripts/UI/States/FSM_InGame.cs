@@ -17,8 +17,8 @@ public class FSM_InGame : StateMachine
     #region FSM Initialization
     private void AddStates()
     {
-        AddState("Playing", new State_Playing());
         AddState("LevelPreview", new State_LevelPreview());
+        AddState("Playing", new State_Playing());
     }
 
     private void AddTransitions()
