@@ -151,18 +151,18 @@ public class FirePropagation : MonoBehaviour
         DamageTimer = delayFire;
     }
 
-    public void ExplosionCalculation()
+    void ExplosionCalculation()
     {
         StartCoroutine(ExplosionThings());
     }
 
-    IEnumerator ExplosionThings()
+    public IEnumerator ExplosionThings()
     {
-        Debug.Log("Preexplosion!");
         fire.GetComponent<ObjectsExplosion>().preExplosion = true;
         yield return new WaitForSeconds(2f);
         fire.transform.GetChild(1).gameObject.SetActive(true);
         fire.GetComponent<ObjectsExplosion>().doExplote = true;
+        StartCoroutine(fire.GetComponent<ObjectsExplosion>().ExplosionKnockBackCor());
         camController.shakeDuration = 1f;
         yield return new WaitForSeconds(1.5f);
     }
