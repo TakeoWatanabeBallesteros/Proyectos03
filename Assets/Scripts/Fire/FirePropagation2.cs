@@ -149,13 +149,8 @@ public class FirePropagation2 : MonoBehaviour
     }
 
     public void IncrementHeat(float heat)
-    {
-        if (DamageTimer > 0)
-        {
-            return;
-        }
-        timeToBurn -= heat;
-        DamageTimer = delayFire;
+    {        
+        timeToBurn -= (timeToBurn * (heat/100));
     }
 
     void CalculateFirePropagation()
