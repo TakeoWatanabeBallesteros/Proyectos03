@@ -36,7 +36,7 @@ public class ObjectsExplosionv2 : MonoBehaviour
     [SerializeField] Collider[] colliders;
     public LayerMask explosionMask;
 
-    public bool oneLoopDone = false;
+    public bool isOneLoopDone = false;
 
     void Start()
     {
@@ -49,7 +49,7 @@ public class ObjectsExplosionv2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(oneLoopDone == false)
+        if(isOneLoopDone == false)
         {
             if (preExplosion == true)
             {
@@ -79,7 +79,7 @@ public class ObjectsExplosionv2 : MonoBehaviour
                 doExplote = false;
             }
 
-            oneLoopDone = true;
+            isOneLoopDone = true;
         }        
 
     }

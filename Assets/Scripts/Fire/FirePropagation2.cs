@@ -126,7 +126,7 @@ public class FirePropagation2 : MonoBehaviour
 
             if (distance < nearDistance && !x.preExplosion)
             {
-                if (x.oneLoopDone == false)
+                if (x.isOneLoopDone == false)
                 {
                     explosive = x.gameObject;
                     StartCoroutine(ExplosionThings());

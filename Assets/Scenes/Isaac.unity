@@ -87947,11 +87947,12 @@ MonoBehaviour:
   maxRangeExplosion: 10
   animator: {fileID: 1514094278}
   knockbackRadius: 5
-  explosionForce: 1200
+  explosionForce: 2000
   colliders: []
   explosionMask:
     serializedVersion: 2
     m_Bits: 1
+  isOneLoopDone: 0
 --- !u!1001 &1518016488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -116412,6 +116413,11 @@ PrefabInstance:
       propertyPath: ChargeText
       value: 
       objectReference: {fileID: 1112234803}
+    - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
+        type: 3}
+      propertyPath: divisionForce
+      value: 5000
+      objectReference: {fileID: 0}
     - target: {fileID: 4657523373009156727, guid: 38542bac2387436449dc2f0519cfcf07,
         type: 3}
       propertyPath: GM

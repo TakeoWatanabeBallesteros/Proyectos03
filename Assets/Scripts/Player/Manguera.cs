@@ -30,7 +30,9 @@ public class Manguera : MonoBehaviour
     Rigidbody _rb;
     [SerializeField] float timerKnockback;
     float initialTimer = 0f;
-    bool forceAdded = false;
+
+    public float divisionForce;
+    public float waitTime;
     private void Start()
     {
         playerInput = GetComponent<InputPlayerController>();
@@ -182,8 +184,7 @@ public class Manguera : MonoBehaviour
     }*/
 
     IEnumerator KnockBackForce()
-    {
-        float waitTime = .15f;
+    {        
         yield return new WaitForSeconds(1f);
 
         while (timerKnockback < waitTime)
@@ -192,7 +193,7 @@ public class Manguera : MonoBehaviour
 
             if (UsingSecondary == true)
             {
-                _rb.AddForce(-transform.forward / 5000 * Time.deltaTime, ForceMode.Impulse);
+                _rb.AddForce(-transform.forward / divisionForce * Time.deltaTime, ForceMode.Impulse);
             }
 
             yield return new WaitForFixedUpdate();
