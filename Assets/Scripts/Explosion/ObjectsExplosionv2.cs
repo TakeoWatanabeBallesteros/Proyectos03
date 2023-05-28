@@ -13,10 +13,10 @@ public class ObjectsExplosionv2 : MonoBehaviour
 
     public bool doExplote = false;
     public bool preExplosion = false;
-    public List<FirePropagation> nearObjectsOnFire = new List<FirePropagation>();
-    public List<FirePropagation> closestObjects = new List<FirePropagation>();
-    public List<FirePropagation> secondObjects = new List<FirePropagation>();
-    public List<FirePropagation> farestObjects = new List<FirePropagation>();
+    public List<FirePropagation2> nearObjectsOnFire = new List<FirePropagation2>();
+    public List<FirePropagation2> closestObjects = new List<FirePropagation2>();
+    public List<FirePropagation2> secondObjects = new List<FirePropagation2>();
+    public List<FirePropagation2> farestObjects = new List<FirePropagation2>();
 
     public float closeRange;
     public float midRange;
@@ -40,7 +40,7 @@ public class ObjectsExplosionv2 : MonoBehaviour
 
     void Start()
     {
-        nearObjectsOnFire = FindObjectsOfType<FirePropagation>().ToList<FirePropagation>();
+        nearObjectsOnFire = FindObjectsOfType<FirePropagation2>().ToList<FirePropagation2>();
         nearObjectsOnFire.RemoveAll(item => item.onFire == true);
         expansionTimer = delay;
         expansionExplosionTimer = delayExplosionTimer;
@@ -54,6 +54,7 @@ public class ObjectsExplosionv2 : MonoBehaviour
             if (preExplosion == true)
             {
                 animator.SetTrigger("Explote");
+                CalculateExpansion();
             }
 
             if (doExplote == true && expansionExplosionTimer >= 0f)
@@ -61,7 +62,8 @@ public class ObjectsExplosionv2 : MonoBehaviour
                 Debug.Log("Expansion on explosion");
                 preExplosion = false;
                 expansionExplosionTimer -= Time.deltaTime;
-
+                
+                /*
                 if (expansionTimer >= 0f)
                 {
                     expansionTimer -= Time.deltaTime;
@@ -70,8 +72,8 @@ public class ObjectsExplosionv2 : MonoBehaviour
                 {
                     Debug.Log("Expansion");
                     expansionTimer = delay;
-                    CalculateExpansion();
-                }
+                    
+                }*/
             }
             else
             {
@@ -97,20 +99,22 @@ public class ObjectsExplosionv2 : MonoBehaviour
                     //Debug.Log("medium range");
                     //x.transform.GetChild(0).gameObject.SetActive(true);
                     //x.onFire = true;
+                    x.IncrementHeat(60);
                     nearObjectsOnFire.Remove(x);
                     secondObjects.Add(x);
                     //break;
                 }
-                else if (distance <= highRange && distance > midRange) //if it's between mid and far range then it's flammability increases
+                if (distance <= highRange && distance > midRange) //if it's between mid and far range then it's flammability increases
                 {
                     //Debug.Log("far range");
                     //x.transform.GetChild(0).gameObject.SetActive(true);
                     //x.onFire = true;
+                    x.IncrementHeat(30);
                     nearObjectsOnFire.Remove(x);
                     farestObjects.Add(x);
                     //break;
                 }
-                else if (distance <= closeRange) //if it's too close you get on fire instant
+                if (distance <= closeRange) //if it's too close you get on fire instant
                 {
                     x.transform.GetChild(0).gameObject.SetActive(true);
                     x.onFire = true;
