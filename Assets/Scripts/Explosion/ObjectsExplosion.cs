@@ -132,7 +132,7 @@ public class ObjectsExplosion : MonoBehaviour
     }
 
 }
-
+/*
 //how to make a solid disc to check radius from an object 
 //
 #if UNITY_EDITOR
@@ -147,4 +147,4 @@ public class HandlessDemoEditor : Editor
         Handles.DrawSolidDisc(linkedObject.transform.position, Vector3.up, linkedObject.closeRange);
     }
 }
-#endif
+#endif*/

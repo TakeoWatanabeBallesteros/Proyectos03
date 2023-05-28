@@ -6,15 +6,17 @@ using UnityEngine;
 public class FirePropagation2 : MonoBehaviour
 {
     public List<FirePropagation2> nearObjectsOnFire;
-    public List<FirePropagation2> nearFiresExplosion;
+    public List<ObjectsExplosionv2> nearFiresExplosion;
 
     public GameObject fire;
+    public GameObject explosive;
     public float nearDistance;
 
     public int highPercentage;
     public int lowPercentage;
 
     [SerializeField] float fireHP;
+    [SerializeField] float timeToBurn;
     float timeToExplote;
 
     public bool onFire = false;
@@ -37,14 +39,23 @@ public class FirePropagation2 : MonoBehaviour
     public Material objMaterial;
     public Material redMaterial;
 
+    public bool startRoomFires;
+
     // Start is called before the first frame update
     void Start()
     {
         CanBurn = true;
+        startRoomFires = false;
+
         nearObjectsOnFire = FindObjectsOfType<FirePropagation2>().ToList();
         nearObjectsOnFire.RemoveAll(item => item.onFire == true);
+
+        nearFiresExplosion = FindObjectsOfType<ObjectsExplosionv2>().ToList();
+        nearFiresExplosion.RemoveAll(item => item.doExplote == true);
+
         expansionTimer = delay;
         DamageTimer = delayFire;
+        fireHP = 100f;
 
         if (!onFire)
         {
@@ -53,14 +64,14 @@ public class FirePropagation2 : MonoBehaviour
 
         if (fireType == FireType2.LowFlammability)
         {
-            fireHP = 10f;
+            timeToBurn = 10f;
         }
-        
+
         else if (fireType == FireType2.HighFlammability)
         {
-            fireHP = 5f;
-        }       
-        
+            timeToBurn = 5f;
+        }
+
         OriginalFireSize = fireParticles[0].gameObject.transform.localScale.x;
         camController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
 
@@ -68,39 +79,62 @@ public class FirePropagation2 : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {        
+    {
         if (onFire)
-        {      
+        {
             CalculateFirePropagation();
-            CalculateExplosiveFire();
+
+            if (fireHP > 0 && DamageTimer > 0)
+            {
+                DamageTimer -= Time.deltaTime;
+            }
+
+            if (fireHP <= 0)
+            {
+                transform.GetChild(0).gameObject.SetActive(false);
+                StopAllCoroutines();
+                StartCoroutine(SmokeWork());
+            }
+
+            if (nearFiresExplosion.Count >= 1)
+            {
+                CalculateExplosiveFire();
+            }
         }
 
-        
-        /*
+        if (timeToBurn <= 0)
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+            onFire = true;
+            CanBurn = false;
+        }
+
         foreach (ParticleSystem fireParticle in fireParticles)
         {
             float scale = fireHP / 100 * OriginalFireSize;
             fireParticle.transform.localScale = new Vector3(scale, scale, scale);
-        }*/
+        }
+
     }
 
     public void CalculateExplosiveFire()
     {
-        foreach (var x in nearObjectsOnFire)
+        foreach (var x in nearFiresExplosion)
         {
             float distance = Vector3.Distance(transform.position, x.transform.position);
+            //nearFiresExplosion.RemoveAll(x => !x);
 
-            if (distance < nearDistance && !x.onFire)
+            if (distance < nearDistance && !x.preExplosion)
             {
-                if (x.fireType == FireType2.Explosive)
+                if (x.isOneLoopDone == false)
                 {
-                    fire = x.gameObject;
-                    ExplosionCalculation();
-                    x.onFire = true;
-                    nearObjectsOnFire.Remove(x);
+                    explosive = x.gameObject;
+                    StartCoroutine(ExplosionThings());
+                    x.enabled = false;
+                    nearFiresExplosion.Remove(x);                    
                     break;
-                }
-            }
+                }                
+            }            
         }
     }
 
@@ -114,6 +148,11 @@ public class FirePropagation2 : MonoBehaviour
         DamageTimer = delayFire;
     }
 
+    public void IncrementHeat(float heat)
+    {        
+        timeToBurn -= (timeToBurn * (heat/100));
+    }
+
     void CalculateFirePropagation()
     {
         foreach (var x in nearObjectsOnFire)
@@ -122,11 +161,11 @@ public class FirePropagation2 : MonoBehaviour
 
             if (distance < nearDistance && !x.onFire)
             {
-                if (x.fireType == FireType2.HighFlammability && x.fireHP >= 0f)
+                if (x.fireType == FireType2.HighFlammability && x.timeToBurn >= 0f)
                 {
                     fire = x.gameObject;
                     //x.transform.GetChild(0).gameObject.SetActive(true);
-                    fire.GetComponent<FirePropagation2>().fireHP -= Time.deltaTime;
+                    fire.GetComponent<FirePropagation2>().timeToBurn -= Time.deltaTime;
                     fire.GetComponent<MaterialLerping>().canLerpMaterials = true;
                     //nearObjectsOnFire.Remove(x);
                     //break;
@@ -135,7 +174,7 @@ public class FirePropagation2 : MonoBehaviour
                 {
                     fire = x.gameObject;
                     //x.transform.GetChild(0).gameObject.SetActive(true);
-                    fire.GetComponent<FirePropagation2>().fireHP -= Time.deltaTime;
+                    fire.GetComponent<FirePropagation2>().timeToBurn -= Time.deltaTime;
                     fire.GetComponent<MaterialLerping>().canLerpMaterials = true;
                     //nearObjectsOnFire.Remove(x);
                     //break;
@@ -157,20 +196,17 @@ public class FirePropagation2 : MonoBehaviour
         }
     }
 
-    void ExplosionCalculation()
-    {
-        StartCoroutine(ExplosionThings());
-    }
-
-    IEnumerator ExplosionThings()
+    public IEnumerator ExplosionThings()
     {
         Debug.Log("Preexplosion!");
-        fire.GetComponent<ObjectsExplosion>().preExplosion = true;
+        explosive.GetComponent<ObjectsExplosionv2>().preExplosion = true;
         yield return new WaitForSeconds(2f);
-        fire.transform.GetChild(1).gameObject.SetActive(true);
-        fire.GetComponent<ObjectsExplosion>().doExplote = true;
+        explosive.transform.GetChild(1).gameObject.SetActive(true);
+        explosive.GetComponent<ObjectsExplosionv2>().doExplote = true;
+        StartCoroutine(explosive.GetComponent<ObjectsExplosionv2>().ExplosionKnockBackCor());
         camController.shakeDuration = 1f;
         yield return new WaitForSeconds(1.5f);
+        
     }
 
     IEnumerator SmokeWork()
