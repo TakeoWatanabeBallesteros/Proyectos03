@@ -28,7 +28,6 @@ public class Manguera : MonoBehaviour
     bool isReloading = false;
 
     Rigidbody _rb;
-    public float knockbackForce;
     [SerializeField] float timerKnockback;
     float initialTimer = 0f;
     bool forceAdded = false;
