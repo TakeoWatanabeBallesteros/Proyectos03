@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEditor;
 #endif 
 
-public class ObjectsExplosion : MonoBehaviour
+public class ObjectsExplosionv2 : MonoBehaviour
 {
     // Start is called before the first frame update
 
@@ -21,9 +21,6 @@ public class ObjectsExplosion : MonoBehaviour
     public float closeRange;
     public float midRange;
     public float highRange;
-
-    public float midRangePercentage;
-    public float highRangePercentage;
 
     float expansionTimer;
     public float delay;
@@ -39,6 +36,8 @@ public class ObjectsExplosion : MonoBehaviour
     [SerializeField] Collider[] colliders;
     public LayerMask explosionMask;
 
+    public bool isOneLoopDone = false;
+
     void Start()
     {
         nearObjectsOnFire = FindObjectsOfType<FirePropagation>().ToList<FirePropagation>();
@@ -50,33 +49,38 @@ public class ObjectsExplosion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (preExplosion == true)
+        if(isOneLoopDone == false)
         {
-            animator.SetTrigger("Explote");
-        }
-
-        if (doExplote == true && expansionExplosionTimer >= 0f)
-        {
-            Debug.Log("Expansion on explosion");
-            preExplosion = false;
-            expansionExplosionTimer -= Time.deltaTime;
-
-            if (expansionTimer >= 0f)
+            if (preExplosion == true)
             {
-                expansionTimer -= Time.deltaTime;
+                animator.SetTrigger("Explote");
+            }
+
+            if (doExplote == true && expansionExplosionTimer >= 0f)
+            {
+                Debug.Log("Expansion on explosion");
+                preExplosion = false;
+                expansionExplosionTimer -= Time.deltaTime;
+
+                if (expansionTimer >= 0f)
+                {
+                    expansionTimer -= Time.deltaTime;
+                }
+                else
+                {
+                    Debug.Log("Expansion");
+                    expansionTimer = delay;
+                    CalculateExpansion();
+                }
             }
             else
             {
-                Debug.Log("Expansion");
-                expansionTimer = delay;
-                CalculateExpansion();
+                expansionExplosionTimer = delayExplosionTimer;
+                doExplote = false;
             }
-        }
-        else
-        {
-            expansionExplosionTimer = delayExplosionTimer;
-            doExplote = false;
-        }
+
+            isOneLoopDone = true;
+        }        
 
     }
 
@@ -88,23 +92,23 @@ public class ObjectsExplosion : MonoBehaviour
 
             if (distance < maxRangeExplosion && !x.onFire)
             {
-                if (distance <= midRange && distance > closeRange && Random.Range(1, 101) < midRangePercentage) //if it's between close and mid range then it's flammability increases
+                if (distance <= midRange && distance > closeRange) //if it's between close and mid range then it's flammability increases
                 {
                     //Debug.Log("medium range");
-                    x.transform.GetChild(0).gameObject.SetActive(true);
-                    x.onFire = true;
+                    //x.transform.GetChild(0).gameObject.SetActive(true);
+                    //x.onFire = true;
                     nearObjectsOnFire.Remove(x);
                     secondObjects.Add(x);
-                    break;
+                    //break;
                 }
-                else if (distance <= highRange && distance > midRange && Random.Range(1, 101) < highRangePercentage) //if it's between mid and far range then it's flammability increases
+                else if (distance <= highRange && distance > midRange) //if it's between mid and far range then it's flammability increases
                 {
                     //Debug.Log("far range");
-                    x.transform.GetChild(0).gameObject.SetActive(true);
-                    x.onFire = true;
+                    //x.transform.GetChild(0).gameObject.SetActive(true);
+                    //x.onFire = true;
                     nearObjectsOnFire.Remove(x);
                     farestObjects.Add(x);
-                    break;
+                    //break;
                 }
                 else if (distance <= closeRange) //if it's too close you get on fire instant
                 {
@@ -112,7 +116,7 @@ public class ObjectsExplosion : MonoBehaviour
                     x.onFire = true;
                     nearObjectsOnFire.Remove(x);
                     closestObjects.Add(x);
-                    break;
+                    //break;
                 }
             }
         }
@@ -132,7 +136,7 @@ public class ObjectsExplosion : MonoBehaviour
     }
 
 }
-/*
+
 //how to make a solid disc to check radius from an object 
 //
 #if UNITY_EDITOR
@@ -147,4 +151,4 @@ public class HandlessDemoEditor : Editor
         Handles.DrawSolidDisc(linkedObject.transform.position, Vector3.up, linkedObject.closeRange);
     }
 }
-#endif*/
+#endif
