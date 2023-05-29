@@ -22,6 +22,13 @@ public class FSM_Player : MonoBehaviour
         #endregion
     }
 
+    // Update is called once per frame
+    private void Update()
+    {
+        
+    }
+    
+    #region FSM Initialization
     private void AddStates()
     {
         
@@ -31,10 +38,5 @@ public class FSM_Player : MonoBehaviour
     {
         
     }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        
-    }
+    #endregion
 }
