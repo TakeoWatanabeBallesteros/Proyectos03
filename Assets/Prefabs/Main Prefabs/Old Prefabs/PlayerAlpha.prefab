@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 4657523373009156723}
   - component: {fileID: 4657523373009156720}
   - component: {fileID: 4657523373009156721}
+  - component: {fileID: 1888043538}
   m_Layer: 6
   m_Name: PlayerAlpha
   m_TagString: Player
@@ -186,10 +187,11 @@ MonoBehaviour:
   Shoulder: {fileID: 4657523372503999528}
   DropPoint: {fileID: 0}
   PickupText: {fileID: 0}
+  DropText: {fileID: 0}
   CanExtract: 0
   CanPickup: 0
   playerInput: {fileID: 0}
-  prefabPoseKid: {fileID: 0}
+  prefabPoseKid: {fileID: 1722170699133360205}
 --- !u!114 &4657523373009156724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,6 +287,23 @@ MonoBehaviour:
   LasserOrigin: {fileID: 4657523372121006129}
   fireWeakExtinguishPower: 0
   fireStrongExtinguishPower: 0
+--- !u!114 &1888043538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4657523373009156683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed755b063b8929448a7e8526d8051647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endPoint: {fileID: 0}
+  projectile: {fileID: 0}
+  lineVisual: {fileID: 0}
+  lineSegments: 30
+  ThisProjectile: {fileID: 0}
 --- !u!1001 &807137872
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -367,6 +386,12 @@ PrefabInstance:
 --- !u!4 &1722170699133360203 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1722170699402308123, guid: bd3d5ba68c508e34a9e0f012c433f5a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 807137872}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1722170699133360205 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1722170699402308125, guid: bd3d5ba68c508e34a9e0f012c433f5a6,
     type: 3}
   m_PrefabInstance: {fileID: 807137872}
   m_PrefabAsset: {fileID: 0}
