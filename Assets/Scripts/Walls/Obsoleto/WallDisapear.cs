@@ -13,7 +13,6 @@ public class WallDisapear : MonoBehaviour
         for (int i = 0; i < Paredes.Length; i++)
         {
             Paredes[i].GetComponent<MeshRenderer>().material.SetFloat("_Opacity", WallOpacity);
-            Debug.Log("Inicio");
         }
     }
 
@@ -23,7 +22,6 @@ public class WallDisapear : MonoBehaviour
         {
             StopAllCoroutines();
             StartCoroutine(OcludeWall(-1));
-            Debug.Log("In");
 
         }
     }
@@ -33,7 +31,6 @@ public class WallDisapear : MonoBehaviour
         {
             StopAllCoroutines();
             StartCoroutine(OcludeWall(1));
-            Debug.Log("Out");
 
         }
     }

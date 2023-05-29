@@ -11,7 +11,6 @@ public class DynamicBlackboard : MonoBehaviour
     
     private void Initialize()
     {
-       
         // Reflection-based discovery of public fields
         FieldInfo[] allFields = this.GetType().GetFields();
         foreach (FieldInfo field in allFields)
