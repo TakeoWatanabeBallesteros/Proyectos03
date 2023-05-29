@@ -23,12 +23,7 @@ public class GameStateUI : MonoBehaviour
     void Start()
     {
         Singleton.Instance.GameManager.GameStateChangedEvent += UpdateText;
-        gameState_Text.text = Singleton.Instance.GameManager.gameState.ToString();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        UpdateText();
     }
 
     private void UpdateText()

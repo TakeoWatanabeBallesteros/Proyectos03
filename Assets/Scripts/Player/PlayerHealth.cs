@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [SerializeField] private bool immortal;
     Vector3 initialPos;
     [SerializeField] private float Vida;
     InputPlayerController inputPlayer;
@@ -14,7 +15,7 @@ public class PlayerHealth : MonoBehaviour
     public GameObject Fire;
     public Image YouDied;
     bool Dead;
-    float Timer;
+    [SerializeField] private float burnIndicatorTime;
     float Alfa;
     GameManager GM;
 
@@ -28,29 +29,9 @@ public class PlayerHealth : MonoBehaviour
         initialPos = transform.position;
         Dead = false;
         //Fire.color = new Color(1f, 1f, 1f, 0f);
-        Fire.SetActive(false);
-        Timer = 0.5f;
         Vida = 1.00f;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        LifeBar.value = Vida;
-        if (Vida <= 0.00f && Dead == false)
-        {
-            die();
-        }
-
-        if (Timer > 0)
-        {
-            Timer -= Time.deltaTime;
-        }
-        else
-        {
-            Fire.SetActive(false);
-        }
-    }
+    
     IEnumerator Respawn()
     {
         yield return new WaitForSeconds(4.5f);
@@ -65,17 +46,26 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage()
     {
-        if (!Dead)
+        if (Dead) return;
+        if (Kid.HasKid()) IntantDeath();
+        else
         {
-            if (Kid.HasKid())
-                IntantDeath();
-            else
-            {
-                Vida -= 0.10f;
-                Timer = 0.5f;
-                Fire.SetActive(true);
-            }
+            Vida -= 0.10f;
+            LifeBar.value = Vida;
+            StopAllCoroutines();
+            StartCoroutine(ShowBurnIndicator());
         }
+        if (Vida <= 0.00f && Dead == false && !immortal)
+        {
+            die();
+        }
+    }
+
+    private IEnumerator ShowBurnIndicator()
+    {
+        Fire.SetActive(true);
+        yield return new WaitForSeconds(burnIndicatorTime);
+        Fire.SetActive(false);
     }
 
     private void die()
@@ -99,5 +89,6 @@ public class PlayerHealth : MonoBehaviour
     public void IntantDeath()
     {
         Vida = 0;
+        LifeBar.value = Vida;
     }
 }
