@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1807369399}
-  m_IndirectSpecularColor: {r: 0.44300318, g: 0.49219626, b: 0.57192606, a: 1}
+  m_IndirectSpecularColor: {r: 0.44300285, g: 0.49219584, b: 0.5719256, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1869,6 +1869,7 @@ MonoBehaviour:
   objMaterial: {fileID: 2100000, guid: 86e07de9ee656854eadf8df018621540, type: 2}
   redMaterial: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
   startRoomFires: 0
+  parentParticlesGameObject: {fileID: 0}
 --- !u!114 &32837603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18558,12 +18559,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 304337607}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &309989514 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5115390600801519191, guid: b5b85f8f958fc144e8d556a417a36bbb,
-    type: 3}
-  m_PrefabInstance: {fileID: 2952911249075846196}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &313062549
 GameObject:
   m_ObjectHideFlags: 0
@@ -20301,6 +20296,7 @@ MonoBehaviour:
   objMaterial: {fileID: 2100000, guid: 86e07de9ee656854eadf8df018621540, type: 2}
   redMaterial: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
   startRoomFires: 0
+  parentParticlesGameObject: {fileID: 0}
 --- !u!114 &350569575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31675,6 +31671,7 @@ MonoBehaviour:
   objMaterial: {fileID: 2100000, guid: 86e07de9ee656854eadf8df018621540, type: 2}
   redMaterial: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
   startRoomFires: 0
+  parentParticlesGameObject: {fileID: 0}
 --- !u!114 &516145109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32757,6 +32754,7 @@ MonoBehaviour:
   objMaterial: {fileID: 2100000, guid: 86e07de9ee656854eadf8df018621540, type: 2}
   redMaterial: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
   startRoomFires: 0
+  parentParticlesGameObject: {fileID: 0}
 --- !u!114 &540725321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33035,12 +33033,6 @@ MeshFilter:
 --- !u!4 &556428872 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6675893458143112111, guid: b5b85f8f958fc144e8d556a417a36bbb,
-    type: 3}
-  m_PrefabInstance: {fileID: 2952911249075846196}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &561360929 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 235884603822162813, guid: b5b85f8f958fc144e8d556a417a36bbb,
     type: 3}
   m_PrefabInstance: {fileID: 2952911249075846196}
   m_PrefabAsset: {fileID: 0}
@@ -46283,6 +46275,7 @@ MonoBehaviour:
   objMaterial: {fileID: 2100000, guid: 86e07de9ee656854eadf8df018621540, type: 2}
   redMaterial: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
   startRoomFires: 0
+  parentParticlesGameObject: {fileID: 0}
 --- !u!1 &850222546
 GameObject:
   m_ObjectHideFlags: 0
@@ -46330,13 +46323,11 @@ MonoBehaviour:
   delay: 8
   delayFire: 0.2
   CanBurn: 0
-  fireParticles:
-  - {fileID: 1053354394}
-  - {fileID: 561360929}
-  - {fileID: 309989514}
+  fireParticles: []
   objMaterial: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   redMaterial: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
   startRoomFires: 0
+  parentParticlesGameObject: {fileID: 2952911249075846197}
 --- !u!65 &850222548
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -57522,12 +57513,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1053016407}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!198 &1053354394 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6675893457974259758, guid: b5b85f8f958fc144e8d556a417a36bbb,
-    type: 3}
-  m_PrefabInstance: {fileID: 2952911249075846196}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1059800675
 GameObject:
   m_ObjectHideFlags: 0
@@ -116280,6 +116265,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5b85f8f958fc144e8d556a417a36bbb, type: 3}
+--- !u!1 &2952911249075846197 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6675893458143112109, guid: b5b85f8f958fc144e8d556a417a36bbb,
+    type: 3}
+  m_PrefabInstance: {fileID: 2952911249075846196}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4657523373011137941
 PrefabInstance:
   m_ObjectHideFlags: 0
