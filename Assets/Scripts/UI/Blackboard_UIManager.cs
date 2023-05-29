@@ -28,8 +28,8 @@ public class Blackboard_UIManager : DynamicBlackboard
     [Space(5)]
     [Header("Gameplay Objects")] 
     public Slider lifeBar;
-    
-    
+    public Slider waterBar;
+
     // Start is called before the first frame update
     void Start()
     {
