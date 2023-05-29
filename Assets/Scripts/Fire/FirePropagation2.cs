@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,11 @@ public class FirePropagation2 : MonoBehaviour
     public Material redMaterial;
 
     public bool startRoomFires;
+
+    private void Awake()
+    {
+        fireParticles = GetComponentsInChildren<ParticleSystem>();
+    }
 
     // Start is called before the first frame update
     void Start()
