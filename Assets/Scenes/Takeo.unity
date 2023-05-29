@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44822502, g: 0.49824965, b: 0.5755779, a: 1}
+  m_IndirectSpecularColor: {r: 0.4482246, g: 0.4982491, b: 0.57557696, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -29685,7 +29685,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 415433889}
-  m_LocalRotation: {x: 0.40254644, y: -0.533875, z: 0.32023072, w: 0.6711082}
+  m_LocalRotation: {x: 0.4025467, y: -0.53387475, z: 0.3202309, w: 0.6711081}
   m_LocalPosition: {x: -14.59261, y: 7.28694, z: 37.730225}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -31676,7 +31676,7 @@ MonoBehaviour:
   shakeDuration: 0
   shakeAmount: 0.7
   decreaseFactor: 1
-  addPosition: {x: 0, y: 0, z: 0}
+  addPosition: {x: -23, y: 23, z: -19}
 --- !u!20 &460610096
 Camera:
   m_ObjectHideFlags: 0
@@ -31728,7 +31728,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 460610091}
   m_LocalRotation: {x: 0.23863867, y: 0.3653488, z: -0.10019433, w: 0.89416605}
-  m_LocalPosition: {x: -39.45, y: 13.94, z: 11.63}
+  m_LocalPosition: {x: -23.46, y: 23.43, z: -19.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -55691,7 +55691,7 @@ PrefabInstance:
         type: 3}
       propertyPath: LifeBar
       value: 
-      objectReference: {fileID: 1040792068}
+      objectReference: {fileID: 0}
     - target: {fileID: 4657523373009156724, guid: 38542bac2387436449dc2f0519cfcf07,
         type: 3}
       propertyPath: YouDied
@@ -55706,7 +55706,7 @@ PrefabInstance:
         type: 3}
       propertyPath: WaterBar
       value: 
-      objectReference: {fileID: 1885293510}
+      objectReference: {fileID: 0}
     - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
         type: 3}
       propertyPath: ChargeText
@@ -56259,18 +56259,6 @@ ParticleSystem:
     type: 3}
   m_PrefabInstance: {fileID: 560706401}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1040792068 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 342341697284744045, guid: 86441ed85ae99f74ba23ddcab065adfd,
-    type: 3}
-  m_PrefabInstance: {fileID: 1088182014}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1043656691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -104429,18 +104417,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1885274456}
   m_Mesh: {fileID: 5060444177187149915, guid: 57a1a180e9ae2eb4db9ddeb3854044d6, type: 3}
---- !u!114 &1885293510 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 342341697729762536, guid: 86441ed85ae99f74ba23ddcab065adfd,
-    type: 3}
-  m_PrefabInstance: {fileID: 1088182014}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!198 &1887221873 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 7354993247770195698, guid: b4c6e1a08a4082f479084af1fe0b7950,
