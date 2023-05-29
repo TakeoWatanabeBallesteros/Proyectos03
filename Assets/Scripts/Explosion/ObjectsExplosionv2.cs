@@ -34,7 +34,9 @@ public class ObjectsExplosionv2 : MonoBehaviour
     public float knockbackRadius;
     public float explosionForce;
     [SerializeField] Collider[] colliders;
+    [SerializeField] Collider[] playerCollider;
     public LayerMask explosionMask;
+    public LayerMask playerMask;
 
     public bool isOneLoopDone = false;
 
@@ -143,6 +145,16 @@ public class ObjectsExplosionv2 : MonoBehaviour
             rb.AddExplosionForce(explosionForce, transform.position, knockbackRadius);
 
         }
+
+        playerCollider = Physics.OverlapSphere(transform.position, knockbackRadius, playerMask);
+        foreach (Collider target in playerCollider)
+        {
+            Rigidbody rb = target.GetComponentInParent<Rigidbody>();
+            if (rb == null) continue;
+            rb.AddExplosionForce(explosionForce, transform.position, knockbackRadius);
+
+        }
+
         yield return null;
     }
 
