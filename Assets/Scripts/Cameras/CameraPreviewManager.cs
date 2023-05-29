@@ -9,10 +9,9 @@ public class CameraPreviewManager : MonoBehaviour
     private PreviewCamera [] cameraList; // All the Preview Cameras on the scene
     private Camera playerCamera; // Main Camera
 
-    private void OnEnable()
+    private void OnDisable()
     {
-        if(Singleton.Instance == null) return;
-        Singleton.Instance.GameManager.LevelPreviewStartEvent += LoadPreviewCameras;
+        Singleton.Instance.GameManager.LevelPreviewStartEvent -= LoadPreviewCameras;
     }
 
     void Start()

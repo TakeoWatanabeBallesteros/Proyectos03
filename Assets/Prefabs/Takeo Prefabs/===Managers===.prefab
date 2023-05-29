@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382722825}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -25.007395, y: 3.1830597, z: -41.130226}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -70,7 +70,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1251093190}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.6, y: -2.5300002, z: -58.4}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -158,7 +158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4439854176528945338}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 519.7014, y: 375.28357, z: -39.845314}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -179,14 +179,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SavedKids: 0
   Kids: []
-  TotalKids: 9
+  TotalKids: 0
   Collected: 0
   Collectables: []
   TotalCollectables: 0
   NumberOfkids: {fileID: 0}
   NumberOfCollectables: {fileID: 0}
   TimeLeftText: {fileID: 0}
-  TimerEnSegundos: 120
+  TimerEnSegundos: 600
   winScreen: {fileID: 0}
 --- !u!1 &5848782916533904706
 GameObject:
@@ -237,3 +237,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameManager: {fileID: 4439854176528945339}
   _cameraPreviewManager: {fileID: 382722826}
+  _uiManager: {fileID: 0}

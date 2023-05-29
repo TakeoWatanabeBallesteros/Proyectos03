@@ -8,14 +8,6 @@ public class PauseUIBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
 
-    private void OnEnable()
-    {
-        // If the game is "PauseMenu" calls EnablePauseUI, else Disable it.
-        if(Singleton.Instance == null) return;
-        Singleton.Instance.GameManager.PauseEvent += EnablePauseUI;
-        Singleton.Instance.GameManager.UnpauseEvent += DisablePauseUI;
-    }
-
     private void OnDisable()
     {
         Singleton.Instance.GameManager.PauseEvent -= EnablePauseUI;

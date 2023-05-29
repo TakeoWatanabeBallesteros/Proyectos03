@@ -37,13 +37,13 @@ public class CameraController : MonoBehaviour
     {
         if (target != null)
         {            
-            //transform.position = Vector3.Lerp(transform.position, target.position, 10f * Time.deltaTime);
+            // transform.position = Vector3.Lerp(transform.position, target.position, 10f * Time.deltaTime);
             transform.position = target.position + addPosition;
         }            
 
     }
 
-    IEnumerator ResetCamera()
+    private IEnumerator ResetCamera()
     {
         cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, 13f, 2f * Time.deltaTime);
         yield return new WaitForSeconds(2.5f);
@@ -51,14 +51,12 @@ public class CameraController : MonoBehaviour
     }
        
 
-    void LateUpdate()
+    private void LateUpdate()
     {
-        if (shakeDuration > 0)
-        {
-            camTransform.localPosition = target.position + addPosition + Random.insideUnitSphere * shakeAmount;
+        if (!(shakeDuration > 0)) return;
+        camTransform.localPosition = target.position + addPosition + Random.insideUnitSphere * shakeAmount;
 
-            shakeDuration -= Time.deltaTime * decreaseFactor;
-        }
+        shakeDuration -= Time.deltaTime * decreaseFactor;
     }
 
 

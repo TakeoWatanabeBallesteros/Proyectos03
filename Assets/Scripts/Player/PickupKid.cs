@@ -9,7 +9,8 @@ public class PickupKid : MonoBehaviour
     public GameManager GM;
     public Transform Shoulder;
     public Transform DropPoint;
-    public TMP_Text PickupText;
+    public GameObject PickupText;
+    public GameObject DropText;
     private bool CarringKid;
     [SerializeField] private bool CanExtract;
     [SerializeField] private bool CanPickup;
@@ -36,15 +37,11 @@ public class PickupKid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        prefabPoseKid.transform.position = Shoulder.position;
-        prefabPoseKid.transform.rotation = Shoulder.rotation;
-        prefabPoseKid.transform.SetParent(gameObject.transform);
-
         if (playerInput.interact)
         {
             if (CanPickup)
             {
-                PickupText.enabled = false;
+                PickupText.SetActive(false);
                 TargetKid.SetActive(false);
                 prefabPoseKid.SetActive(true);                
                 CarringKid = true;
@@ -53,7 +50,7 @@ public class PickupKid : MonoBehaviour
             }
             if (CanExtract)
             {
-                PickupText.enabled = false;
+                DropText.SetActive(false);
                 prefabPoseKid.SetActive(false);
                 TargetKid.SetActive(true);
                 TargetKid.tag = "KidExtracted";
@@ -73,28 +70,24 @@ public class PickupKid : MonoBehaviour
     {
         if (other.tag == "Kid" && !CarringKid)
         {
-            PickupText.text = "Press Space to pickup Kid";
-            PickupText.enabled = true;
+            PickupText.SetActive(true);
             CanPickup = true;
             TargetKid = other.gameObject;
         }
         if (other.tag == "Extraction" && CarringKid)
         {
-            PickupText.text = "Press Space to Drop Kid";
-            PickupText.enabled = true;
+            DropText.SetActive(true);
             CanExtract = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Kid" || other.tag == "Extraction")
-        {
-            PickupText.enabled = false;
-            CanPickup = false;
-            CanExtract = false;
-        }
-
+        if (other.tag != "Kid" && other.tag != "Extraction") return;
+        PickupText.SetActive(false);
+        PickupText.SetActive(false);
+        CanPickup = false;
+        CanExtract = false;
     }
     public bool HasKid()
     {
