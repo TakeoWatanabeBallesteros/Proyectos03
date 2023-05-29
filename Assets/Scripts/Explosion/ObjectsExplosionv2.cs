@@ -38,12 +38,15 @@ public class ObjectsExplosionv2 : MonoBehaviour
 
     public bool isOneLoopDone = false;
 
+    CameraController camController;
+    public bool doExplosion = false;
     void Start()
     {
         nearObjectsOnFire = FindObjectsOfType<FirePropagation2>().ToList<FirePropagation2>();
         nearObjectsOnFire.RemoveAll(item => item.onFire == true);
         expansionTimer = delay;
         expansionExplosionTimer = delayExplosionTimer;
+        camController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
     }
 
     // Update is called once per frame
@@ -81,8 +84,12 @@ public class ObjectsExplosionv2 : MonoBehaviour
                 doExplote = false;
             }
 
-            isOneLoopDone = true;
-        }        
+        }  
+        
+        if(doExplosion && !isOneLoopDone)
+        {
+            StartCoroutine(ExplosionCoroutine());
+        }
 
     }
 
@@ -137,6 +144,20 @@ public class ObjectsExplosionv2 : MonoBehaviour
 
         }
         yield return null;
+    }
+
+    public IEnumerator ExplosionCoroutine()
+    {
+        Debug.Log("Preexplosion!");
+        preExplosion = true;
+        yield return new WaitForSeconds(2f);
+        transform.GetChild(1).gameObject.SetActive(true);
+        doExplote = true;
+        StartCoroutine(ExplosionKnockBackCor());
+        camController.shakeDuration = 0.5f;
+        yield return new WaitForSeconds(0.1f);
+        isOneLoopDone = true;
+        doExplosion = false;
     }
 
 }

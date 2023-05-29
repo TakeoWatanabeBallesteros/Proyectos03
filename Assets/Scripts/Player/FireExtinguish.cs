@@ -98,7 +98,11 @@ public class FireExtinguish : MonoBehaviour
             if (hit.collider.gameObject.GetComponentInParent<Collectable>())
             {
                 hit.collider.GetComponentInParent<Collectable>().TakeDamage(25);
-            }
+            } 
+            if (hit.collider.gameObject.GetComponentInParent<ObjectsExplosionv2>())
+            {
+                hit.collider.GetComponentInParent<ObjectsExplosionv2>().doExplosion = true;
+            }            
         }
     }
     private void StrongWaterRaycast()
@@ -118,6 +122,10 @@ public class FireExtinguish : MonoBehaviour
             if (hit.collider.gameObject.GetComponentInParent<Collectable>())
             {
                 hit.collider.GetComponentInParent<Collectable>().TakeDamage(50);
+            }
+            if (hit.collider.gameObject.GetComponentInParent<ObjectsExplosionv2>())
+            {
+                hit.collider.GetComponentInParent<ObjectsExplosionv2>().doExplosion = true;
             }
         }
     }
