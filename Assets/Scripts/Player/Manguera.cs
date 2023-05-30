@@ -37,6 +37,8 @@ public class Manguera : MonoBehaviour
     public VisualEffect waterMesh;
     public VisualEffect particlesWater;
     private Blackboard_UIManager blackboardUI;
+
+    private Vector3 waterMeshScale;
     private void Start()
     {
         playerInput = GetComponent<InputPlayerController>();
@@ -96,6 +98,7 @@ public class Manguera : MonoBehaviour
         }
 
         WaterAmount = Mathf.Clamp(WaterAmount, 0f, 1f);
+        AdjustMeshScale();
     }
 
     private void StandardShootPerformed()
@@ -183,6 +186,11 @@ public class Manguera : MonoBehaviour
     public float GetWaterAmount()
     {
         return WaterAmount;
+    }
+
+    void AdjustMeshScale()
+    {
+        waterMesh.SetVector3("Scale", waterMeshScale);
     }
 
     /*

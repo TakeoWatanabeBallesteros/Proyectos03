@@ -19,6 +19,7 @@ public class FireExtinguish : MonoBehaviour
     public Transform LasserOrigin;
     public float fireWeakExtinguishPower;
     public float fireStrongExtinguishPower;
+    [SerializeField] Vector3 distanceImpactPoint;
 
 
     //This script uses raycasts to detect the fire and send the order of extinguish it
@@ -31,8 +32,6 @@ public class FireExtinguish : MonoBehaviour
         playerInput = Player.GetComponent<InputPlayerController>();
         Kid = Player.GetComponent<PickupKid>();
         Manguera = Player.GetComponent<Manguera>();
-
-
     }
 
     // Update is called once per frame
@@ -103,7 +102,9 @@ public class FireExtinguish : MonoBehaviour
             if (hit.collider.gameObject.GetComponentInParent<ObjectsExplosionv2>())
             {
                 hit.collider.GetComponentInParent<ObjectsExplosionv2>().doExplosion = true;
-            }            
+            }   
+            
+            distanceImpactPoint = hit.transform.position - LasserOrigin.transform.position;
         }
     }
     private void StrongWaterRaycast()
@@ -128,6 +129,8 @@ public class FireExtinguish : MonoBehaviour
             {
                 hit.collider.GetComponentInParent<ObjectsExplosionv2>().doExplosion = true;
             }
+
+            distanceImpactPoint = hit.transform.position - LasserOrigin.transform.position;
         }
-    }
+    }    
 }
