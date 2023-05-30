@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1807369399}
-  m_IndirectSpecularColor: {r: 0.44300318, g: 0.49219626, b: 0.57192606, a: 1}
+  m_IndirectSpecularColor: {r: 0.44300285, g: 0.49219584, b: 0.5719256, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3614,6 +3614,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AlphaCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 342341696443396112, guid: 86441ed85ae99f74ba23ddcab065adfd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 342341696443396116, guid: 86441ed85ae99f74ba23ddcab065adfd,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3719,6 +3724,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 342341697194123308, guid: 86441ed85ae99f74ba23ddcab065adfd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 342341697747759034, guid: 86441ed85ae99f74ba23ddcab065adfd,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -3742,37 +3752,37 @@ PrefabInstance:
     - target: {fileID: 1607889284515679757, guid: 86441ed85ae99f74ba23ddcab065adfd,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1607889284515679757, guid: 86441ed85ae99f74ba23ddcab065adfd,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1607889284515679757, guid: 86441ed85ae99f74ba23ddcab065adfd,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4239961655183680231, guid: 86441ed85ae99f74ba23ddcab065adfd,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4239961655183680231, guid: 86441ed85ae99f74ba23ddcab065adfd,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8446896232884947489, guid: 86441ed85ae99f74ba23ddcab065adfd,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8446896232884947489, guid: 86441ed85ae99f74ba23ddcab065adfd,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86441ed85ae99f74ba23ddcab065adfd, type: 3}
@@ -57506,7 +57516,33 @@ VisualEffect:
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
-      m_Array: []
+      m_Array:
+      - m_Value:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 2
+            outSlope: 2
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        m_Name: AnimationCurveScaleZ
+        m_Overridden: 1
     m_Gradient:
       m_Array: []
     m_NamedObject:
@@ -57523,14 +57559,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1035387337}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.58335, y: 2.42, z: -36.71}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
+  m_LocalPosition: {x: -20.984991, y: 2.51, z: -36.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 27
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
 --- !u!1001 &1038411072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -117069,5 +117105,10 @@ PrefabInstance:
       propertyPath: prefabPoseKid
       value: 
       objectReference: {fileID: 1553823593}
+    - target: {fileID: 6853058490083562531, guid: 38542bac2387436449dc2f0519cfcf07,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
