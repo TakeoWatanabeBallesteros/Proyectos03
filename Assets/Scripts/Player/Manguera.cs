@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 using System.Threading;
+using UnityEngine.VFX;
 
 public class Manguera : MonoBehaviour
 {
@@ -33,7 +34,11 @@ public class Manguera : MonoBehaviour
     public float divisionForce;
     public float waitTime;
 
+    public VisualEffect waterMesh;
+    public VisualEffect particlesWater;
     private Blackboard_UIManager blackboardUI;
+
+    private Vector3 waterMeshScale;
     private void Start()
     {
         playerInput = GetComponent<InputPlayerController>();
@@ -75,6 +80,8 @@ public class Manguera : MonoBehaviour
         {
             WeakWater.Stop();
             StrongWater.Stop();
+            particlesWater.Stop();
+            waterMesh.Stop();
         }
 
         if (playerInput.reacharge && canRecharge)
@@ -91,25 +98,32 @@ public class Manguera : MonoBehaviour
         }
 
         WaterAmount = Mathf.Clamp(WaterAmount, 0f, 1f);
+        AdjustMeshScale();
     }
 
     private void StandardShootPerformed()
     {
         UsingPrimary = true;
-        WeakWater.Play();
+        particlesWater.playRate = 2f;
+        //WeakWater.Play();
+        waterMesh.Play(); 
+        particlesWater.Play();
         StartCoroutine(ConsumeWater(NormalWaterConsumption));
-
     }
 
     private void StandardShootCancelled()
     {
         UsingPrimary = false;
         WeakWater.Stop();
+        waterMesh.SendEvent("OnStop");
+        particlesWater.Stop();
     }
 
     private void StrongShootPerformed()
     {
         UsingSecondary = true;
+        particlesWater.playRate = 3f;
+        particlesWater.Play();
         StartCoroutine(StrongParticles());
     }
 
@@ -139,7 +153,9 @@ public class Manguera : MonoBehaviour
     private void StrongShootCancelled()
     {
         UsingSecondary = false;
-        StrongWater.Stop();
+        StrongWater.Stop(); 
+        waterMesh.Stop();
+        particlesWater.Stop();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -170,6 +186,11 @@ public class Manguera : MonoBehaviour
     public float GetWaterAmount()
     {
         return WaterAmount;
+    }
+
+    void AdjustMeshScale()
+    {
+        waterMesh.SetVector3("Scale", waterMeshScale);
     }
 
     /*

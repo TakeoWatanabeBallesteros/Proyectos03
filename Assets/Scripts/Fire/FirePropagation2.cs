@@ -39,6 +39,7 @@ public class FirePropagation2 : MonoBehaviour
     bool canLerpMaterials;
     Material _objectMaterial;
     public Material redMaterial;
+    public Material burnedMaterial;
 
     private void Awake()
     {
@@ -90,7 +91,7 @@ public class FirePropagation2 : MonoBehaviour
     {
         if (onFire)
         {
-            CalculateFirePropagation();
+            CalculateFirePropagation();           
 
             if (fireHP > 0 && DamageTimer > 0)
             {
@@ -108,6 +109,8 @@ public class FirePropagation2 : MonoBehaviour
             {
                 CalculateExplosiveFire();
             }
+
+            _objectMaterial.Lerp(_objectMaterial, burnedMaterial, Time.deltaTime / 2);
         }
 
         if (timeToBurn <= 0)
