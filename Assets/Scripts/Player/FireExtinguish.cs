@@ -19,7 +19,7 @@ public class FireExtinguish : MonoBehaviour
     public Transform LasserOrigin;
     public float fireWeakExtinguishPower;
     public float fireStrongExtinguishPower;
-    [SerializeField] Vector3 distanceImpactPoint;
+    [SerializeField] public Vector3 distanceImpactPoint;
 
 
     //This script uses raycasts to detect the fire and send the order of extinguish it
