@@ -16,6 +16,7 @@ public class State_Playing : StateBase
         singleton = Singleton.Instance;
         Singleton.Instance.GameManager.ChangeGameState(GameState.Playing);
         singleton.UIManager.blackboard_UIManager.InGameCanvas.SetActive(true);
+        singleton.GameManager.OnUnpause();
         base.OnEnter();
     }
     

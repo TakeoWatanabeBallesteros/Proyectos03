@@ -11,13 +11,13 @@ public class PlayerHealth : MonoBehaviour
     InputPlayerController inputPlayer;
     MovementPlayerController playerMovement;
     PickupKid Kid;
-    public Slider LifeBar;
     public GameObject Fire;
     public Image YouDied;
     bool Dead;
     [SerializeField] private float burnIndicatorTime;
     float Alfa;
     GameManager GM;
+    private Blackboard_UIManager blackboardUI;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
         Dead = false;
         //Fire.color = new Color(1f, 1f, 1f, 0f);
         Vida = 1.00f;
+        blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
     }
     
     IEnumerator Respawn()
@@ -47,14 +48,11 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage()
     {
         if (Dead) return;
-        if (Kid.HasKid()) IntantDeath();
-        else
-        {
-            Vida -= 0.10f;
-            LifeBar.value = Vida;
-            StopAllCoroutines();
-            StartCoroutine(ShowBurnIndicator());
-        }
+        Vida -= 0.10f;
+        blackboardUI.SetLifeBar(Vida);
+        StopAllCoroutines();
+        StartCoroutine(ShowBurnIndicator());
+            
         if (Vida <= 0.00f && Dead == false && !immortal)
         {
             die();
@@ -85,10 +83,5 @@ public class PlayerHealth : MonoBehaviour
         {
             StartCoroutine(FadeIN(image));
         }
-    }
-    public void IntantDeath()
-    {
-        Vida = 0;
-        LifeBar.value = Vida;
     }
 }
