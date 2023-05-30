@@ -19,11 +19,13 @@ public class FSM_InGame : StateMachine
     {
         AddState("LevelPreview", new State_LevelPreview());
         AddState("Playing", new State_Playing());
+        AddState("PauseMenu", new State_PauseMenu());
     }
 
     private void AddTransitions()
     {
-        
+        this.AddTriggerTransition("LevelPreview-Playing","LevelPreview", "Playing", t => true);
+        this.AddTwoWayTriggerTransition("Playing-PauseMenu","Playing", "PauseMenu", t => Singleton.Instance.GameManager.gameState == GameState.Playing);
     }
     #endregion
 }

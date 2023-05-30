@@ -15,6 +15,8 @@ public override void OnEnter()
 {
     singleton = Singleton.Instance;
     singleton.UIManager.blackboard_UIManager.PauseMenuCanvas.SetActive(true);
+    singleton.GameManager.ChangeGameState(GameState.PauseMenu);
+    singleton.GameManager.OnPause();
     base.OnEnter();
 }
     
