@@ -17,7 +17,6 @@ public class Manguera : MonoBehaviour
     public ParticleSystem PreWater;
     public ParticleSystem StrongWater;
     public ParticleSystem WeakWater;
-    public Slider WaterBar;
     [SerializeField] float WaterAmount;
     public float NormalWaterConsumption;
     public float StrongWaterConsumption;
@@ -37,6 +36,7 @@ public class Manguera : MonoBehaviour
 
     public VisualEffect waterMesh;
     public VisualEffect particlesWater;
+    private Blackboard_UIManager blackboardUI;
     private void Start()
     {
         playerInput = GetComponent<InputPlayerController>();
@@ -46,6 +46,7 @@ public class Manguera : MonoBehaviour
         canRecharge = false;
         WaterAmount = StartWater;
         timerKnockback = initialTimer;
+        blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
     }
     private void Update()
     {
@@ -71,7 +72,7 @@ public class Manguera : MonoBehaviour
             timerKnockback = initialTimer;
         }
 
-        WaterBar.value = WaterAmount;
+        blackboardUI.SetWaterBar(WaterAmount);
 
         if (WaterAmount < 0)
         {
