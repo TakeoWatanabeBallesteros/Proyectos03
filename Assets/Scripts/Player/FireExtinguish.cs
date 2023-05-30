@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 public class FireExtinguish : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class FireExtinguish : MonoBehaviour
     public Transform LasserOrigin;
     public float fireWeakExtinguishPower;
     public float fireStrongExtinguishPower;
+    public VisualEffect waterMesh;
 
 
     //This script uses raycasts to detect the fire and send the order of extinguish it

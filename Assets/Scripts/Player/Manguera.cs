@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 using System.Threading;
+using UnityEngine.VFX;
 
 public class Manguera : MonoBehaviour
 {
@@ -33,6 +34,9 @@ public class Manguera : MonoBehaviour
 
     public float divisionForce;
     public float waitTime;
+
+    public VisualEffect waterMesh;
+    public VisualEffect particlesWater;
     private void Start()
     {
         playerInput = GetComponent<InputPlayerController>();
@@ -73,6 +77,8 @@ public class Manguera : MonoBehaviour
         {
             WeakWater.Stop();
             StrongWater.Stop();
+            particlesWater.Stop();
+            waterMesh.Stop();
         }
 
         if (playerInput.reacharge && canRecharge)
@@ -94,20 +100,25 @@ public class Manguera : MonoBehaviour
     private void StandardShootPerformed()
     {
         UsingPrimary = true;
-        WeakWater.Play();
+        //WeakWater.Play();
+        waterMesh.Play(); 
+        particlesWater.Play();
         StartCoroutine(ConsumeWater(NormalWaterConsumption));
-
     }
 
     private void StandardShootCancelled()
     {
         UsingPrimary = false;
         WeakWater.Stop();
+        waterMesh.Stop();
+        particlesWater.Stop();
     }
 
     private void StrongShootPerformed()
     {
         UsingSecondary = true;
+        particlesWater.playRate = 15f;
+        particlesWater.Play();
         StartCoroutine(StrongParticles());
     }
 
