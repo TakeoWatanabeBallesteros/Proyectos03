@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform target;
+    private Transform target;
     public float distance = 10f;
     [SerializeField] private InputPlayerController controller;
     private Camera cam;
@@ -31,6 +31,7 @@ public class CameraController : MonoBehaviour
     {
         cam = Camera.main;
         timer = delay;
+        target = Singleton.Instance.Player.transform;
     }
 
     private void Update()
