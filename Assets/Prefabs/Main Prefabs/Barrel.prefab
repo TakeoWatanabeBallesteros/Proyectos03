@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 2493191778936274753}
   - component: {fileID: 2493191778936274752}
   - component: {fileID: 2493191778936274759}
-  - component: {fileID: 2493191778936274766}
-  - component: {fileID: 2493191778936274765}
   - component: {fileID: 2493191778936274764}
+  - component: {fileID: 662141225387826415}
   m_Layer: 7
   m_Name: Barrel
   m_TagString: Untagged
@@ -120,61 +119,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2493191778936274766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2493191778936274758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff2839107c831114d835cb8086867675, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nearObjectsOnFire: []
-  nearFiresExplosion: []
-  fire: {fileID: 0}
-  nearDistance: 5
-  highPercentage: 70
-  lowPercentage: 40
-  fireHP: 100
-  onFire: 0
-  fireType: 0
-  delay: 4
-  delayFire: 0.2
-  CanBurn: 0
-  fireParticles:
-  - {fileID: 0}
-  - {fileID: 0}
-  camShake: {fileID: 0}
---- !u!114 &2493191778936274765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2493191778936274758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b166e848b796eea4fa75759565a9a687, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doExplote: 0
-  preExplosion: 0
-  nearObjectsOnFire: []
-  closestObjects: []
-  secondObjects: []
-  farestObjects: []
-  closeRange: 3
-  midRange: 5
-  highRange: 10
-  midRangePercentage: 60
-  highRangePercentage: 30
-  delay: 0.35
-  delayExplosionTimer: 2
-  maxRangeExplosion: 10
-  animator: {fileID: 2493191778936274764}
 --- !u!95 &2493191778936274764
 Animator:
   serializedVersion: 5
@@ -196,6 +140,38 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &662141225387826415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2493191778936274758}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d59aae21334bb849a86eda914296658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doExplote: 0
+  preExplosion: 0
+  nearObjectsOnFire: []
+  closestObjects: []
+  secondObjects: []
+  farestObjects: []
+  closeRange: 3
+  midRange: 5
+  highRange: 10
+  delay: 0.35
+  delayExplosionTimer: 0.5
+  maxRangeExplosion: 10
+  animator: {fileID: 2493191778936274764}
+  knockbackRadius: 5
+  explosionForce: 2000
+  colliders: []
+  explosionMask:
+    serializedVersion: 2
+    m_Bits: 1
+  isOneLoopDone: 0
 --- !u!1 &2493191779592335729
 GameObject:
   m_ObjectHideFlags: 0
