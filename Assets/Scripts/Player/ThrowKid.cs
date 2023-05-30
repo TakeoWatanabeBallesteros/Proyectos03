@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class ThrowKid : MonoBehaviour
 {
-    
-
-    private Camera cam;
     // Start is called before the first frame update
     void Start()
     {
