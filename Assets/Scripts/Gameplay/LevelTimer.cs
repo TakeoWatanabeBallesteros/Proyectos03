@@ -5,14 +5,16 @@ using TMPro;
 
 public class LevelTimer : MonoBehaviour
 {
-    public TMP_Text TimeLeftText;
     [SerializeField] private float TimerEnSegundos;
     int minutes, seconds, cents;
+    
+    
+    private Blackboard_UIManager blackboardUI;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
     }
 
     // Update is called once per frame
@@ -29,6 +31,6 @@ public class LevelTimer : MonoBehaviour
         seconds = (int)(TimerEnSegundos - minutes * 60f);
         cents = (int)((TimerEnSegundos - (int)TimerEnSegundos) * 100f);
 
-        TimeLeftText.text = $"{minutes:00}:{seconds:00}:{cents:00}";
+         blackboardUI.SetTimer($"{minutes:00}:{seconds:00}:{cents:00}"); 
     }
 }

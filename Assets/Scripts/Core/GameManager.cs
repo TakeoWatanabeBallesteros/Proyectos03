@@ -46,50 +46,12 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        controls = new PlayerControls();
-        controls.Enable();
-        controls.Player.Pause.performed += ctx =>
-        {
-            switch (Singleton.Instance.GameManager.gameState)
-            {
-                case GameState.PauseMenu:
-                    Singleton.Instance.GameManager.ChangeGameState(GameState.Playing);
-                    UnpauseEvent?.Invoke();
-                    break;
-                case GameState.Playing:
-                    Singleton.Instance.GameManager.ChangeGameState(GameState.PauseMenu);
-                    PauseEvent?.Invoke();
-                    break;
-                case GameState.MainMenu:
-                    
-                    break;
-                case GameState.SettingsMenu:
-                    break;
-                case GameState.Credits:
-                    break;
-                case GameState.ExitGame:
-                    break;
-                case GameState.LvlsMenu:
-                    break;
-                case GameState.LvlInfo:
-                    break;
-                case GameState.LevelPreview:
-                    break;
-                case GameState.SettingPause:
-                    break;
-                case GameState.RestartLvl:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        };
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        Singleton.Instance.GameManager.PauseEvent += OnPause;
-        Singleton.Instance.GameManager.UnpauseEvent += OnUnpause;
         
         /*
         PH = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
@@ -146,21 +108,15 @@ public class GameManager : MonoBehaviour
 
     public void StartLevelPreview()
     {
-        Singleton.Instance.GameManager.ChangeGameState(GameState.LevelPreview);
         Singleton.Instance.GameManager.LevelPreviewStartEvent?.Invoke();
     }
 
-    public void LevelPreviewEnded(){
-        Singleton.Instance.GameManager.ChangeGameState(GameState.Playing);
-        Singleton.Instance.GameManager.LevelPreviewEndEvent?.Invoke();
-    }
-
-    private void OnPause()
+    public void OnPause()
     {
         Time.timeScale = 0;
     }
     
-    private void OnUnpause()
+    public void OnUnpause()
     {
         Time.timeScale = 1;
     }

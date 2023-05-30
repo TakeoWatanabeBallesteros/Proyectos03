@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,10 +13,14 @@ public class FSM_UIManager : MonoBehaviour
 
     public bool testingLevel = false;
 
+    private void Awake()
+    {
+        blackboard_UIManager = GetComponent<Blackboard_UIManager>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        blackboard_UIManager = GetComponent<Blackboard_UIManager>();
         uiManager_FSM = new StateMachine();
         AddStates();
         AddTransitions();
