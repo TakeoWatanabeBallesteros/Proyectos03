@@ -24,6 +24,7 @@ public class ThrowKid : MonoBehaviour
     {
         if (Holding && !Input.secondaryShoot)
         {
+            Debug.Log("Spawn");
             var ball = Instantiate(MyBalls);
             ball.transform.position = Hombro.transform.position;
             ball.GetComponent<Rigidbody>().AddForce(transform.forward.normalized * Fuerza, ForceMode.Impulse);
