@@ -100,6 +100,7 @@ public class Manguera : MonoBehaviour
     private void StandardShootPerformed()
     {
         UsingPrimary = true;
+        particlesWater.playRate = 2f;
         //WeakWater.Play();
         waterMesh.Play(); 
         particlesWater.Play();
@@ -110,14 +111,14 @@ public class Manguera : MonoBehaviour
     {
         UsingPrimary = false;
         WeakWater.Stop();
-        waterMesh.Stop();
+        waterMesh.SendEvent("OnStop");
         particlesWater.Stop();
     }
 
     private void StrongShootPerformed()
     {
         UsingSecondary = true;
-        particlesWater.playRate = 15f;
+        particlesWater.playRate = 3f;
         particlesWater.Play();
         StartCoroutine(StrongParticles());
     }
@@ -148,7 +149,9 @@ public class Manguera : MonoBehaviour
     private void StrongShootCancelled()
     {
         UsingSecondary = false;
-        StrongWater.Stop();
+        StrongWater.Stop(); 
+        waterMesh.Stop();
+        particlesWater.Stop();
     }
 
     private void OnTriggerEnter(Collider other)
