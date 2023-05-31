@@ -20,7 +20,7 @@ public class FireExtinguish : MonoBehaviour
     public float fireWeakExtinguishPower;
     public float fireStrongExtinguishPower;
     public Vector3 distanceImpactPoint;
-
+    public float distancePlayerRaycastHit;
 
     //This script uses raycasts to detect the fire and send the order of extinguish it
 
@@ -105,6 +105,7 @@ public class FireExtinguish : MonoBehaviour
             }   
             
             distanceImpactPoint = hit.transform.position - LasserOrigin.transform.position;
+            distancePlayerRaycastHit = Vector3.Distance(hit.transform.position, LasserOrigin.transform.position);
         }
     }
     private void StrongWaterRaycast()
@@ -131,6 +132,7 @@ public class FireExtinguish : MonoBehaviour
             }
 
             distanceImpactPoint = hit.transform.position - LasserOrigin.transform.position;
+            distancePlayerRaycastHit = Vector3.Distance(hit.transform.position, LasserOrigin.transform.position);
         }
     }    
 }

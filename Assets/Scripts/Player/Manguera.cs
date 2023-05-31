@@ -40,6 +40,7 @@ public class Manguera : MonoBehaviour
     private Blackboard_UIManager blackboardUI;
 
     [SerializeField] private float waterMeshScaleZ = 1f;
+    [SerializeField] float distanceHitPlayer;
     private void Start()
     {
         playerInput = GetComponent<InputPlayerController>();
@@ -100,7 +101,8 @@ public class Manguera : MonoBehaviour
         }
 
         WaterAmount = Mathf.Clamp(WaterAmount, 0f, 1f);
-        AdjustMeshScale();
+        distanceHitPlayer = fireExtinguish.distancePlayerRaycastHit;
+        //AdjustMeshScale();
     }
 
     private void StandardShootPerformed()
@@ -191,7 +193,8 @@ public class Manguera : MonoBehaviour
     }
 
     void AdjustMeshScale()
-    {  
+    {
+        waterMeshScaleZ = fireExtinguish.distanceImpactPoint.z;
         waterMesh.SetFloat("ScaleZ", waterMeshScaleZ);
     }
 
