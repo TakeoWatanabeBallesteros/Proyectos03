@@ -24,7 +24,6 @@ public class PickupKid : MonoBehaviour
     void Start()
     {
         CarringKid = false;
-        CanExtract = false;
         CanPickup = false;
 
         playerInput = GetComponent<InputPlayerController>();
@@ -37,33 +36,16 @@ public class PickupKid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerInput.interact)
+        if (CanPickup && playerInput.interact)
         {
-            if (CanPickup)
-            {
-                PickupText.SetActive(false);
-                TargetKid.SetActive(false);
-                prefabPoseKid.SetActive(true);                
-                CarringKid = true;
-                CanPickup = false;
-                _movementPlayerController.speed *= 1.2f;
-            }
-            if (CanExtract)
-            {
-                DropText.SetActive(false);
-                prefabPoseKid.SetActive(false);
-                TargetKid.SetActive(true);
-                TargetKid.tag = "KidExtracted";
-                TargetKid.transform.position = DropPoint.position;
-                //TargetKid.transform.rotation = DropPoint.rotation;
-                CarringKid = false;
-                GM.AddChild();
-                CanExtract = false;
-                _movementPlayerController.speed /= 1.2f;
-            }
+            PickupText.SetActive(false);
+            TargetKid.SetActive(false);
+            prefabPoseKid.SetActive(true);     
+            CarringKid = true;
+            CanPickup = false;
+            _movementPlayerController.speed *= 1.2f;
+
         }
-
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -72,18 +54,13 @@ public class PickupKid : MonoBehaviour
         {
             PickupText.SetActive(true);
             CanPickup = true;
-            TargetKid = other.gameObject;
-        }
-        if (other.tag == "Extraction" && CarringKid)
-        {
-            DropText.SetActive(true);
-            CanExtract = true;
+            TargetKid = other.transform.parent.gameObject;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag != "Kid" && other.tag != "Extraction") return;
+        if (other.tag != "Kid") return;
         PickupText.SetActive(false);
         PickupText.SetActive(false);
         CanPickup = false;
@@ -92,5 +69,10 @@ public class PickupKid : MonoBehaviour
     public bool HasKid()
     {
         return CarringKid;
+    }
+    public void KidYeet()
+    {
+        CarringKid = false;
+        prefabPoseKid.SetActive(false);
     }
 }
