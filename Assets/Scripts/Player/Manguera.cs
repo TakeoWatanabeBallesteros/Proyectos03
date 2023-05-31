@@ -12,7 +12,7 @@ public class Manguera : MonoBehaviour
 {
     [SerializeField] private InputPlayerController playerInput;
     private MovementPlayerController playerMovement;
-    private FireExtinguish fireExtinguish;
+    [SerializeField] private FireExtinguish fireExtinguish;
     bool UsingPrimary = false;
     bool UsingSecondary = false;
     public ParticleSystem PreWater;
@@ -39,7 +39,7 @@ public class Manguera : MonoBehaviour
     public VisualEffect particlesWater;
     private Blackboard_UIManager blackboardUI;
 
-    private float waterMeshScaleZ;
+    [SerializeField] private float waterMeshScaleZ = 1f;
     private void Start()
     {
         playerInput = GetComponent<InputPlayerController>();
@@ -83,7 +83,7 @@ public class Manguera : MonoBehaviour
             WeakWater.Stop();
             StrongWater.Stop();
             particlesWater.Stop();
-            waterMesh.Stop();
+            //waterMesh.Stop();
         }
 
         if (playerInput.reacharge && canRecharge)
@@ -117,7 +117,7 @@ public class Manguera : MonoBehaviour
     {
         UsingPrimary = false;
         WeakWater.Stop();
-        waterMesh.SendEvent("OnStop");
+        //waterMesh.SendEvent("OnStop");
         particlesWater.Stop();
     }
 
@@ -156,7 +156,7 @@ public class Manguera : MonoBehaviour
     {
         UsingSecondary = false;
         StrongWater.Stop(); 
-        waterMesh.Stop();
+        //waterMesh.Stop();
         particlesWater.Stop();
     }
 
@@ -191,8 +191,7 @@ public class Manguera : MonoBehaviour
     }
 
     void AdjustMeshScale()
-    {
-        waterMeshScaleZ = fireExtinguish.distanceImpactPoint.z;
+    {  
         waterMesh.SetFloat("ScaleZ", waterMeshScaleZ);
     }
 
