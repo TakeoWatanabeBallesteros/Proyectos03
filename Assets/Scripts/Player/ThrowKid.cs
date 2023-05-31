@@ -9,7 +9,7 @@ public class ThrowKid : MonoBehaviour
     InputPlayerController Input;
     public Transform Hombro;
     public float Fuerza = 1f;
-    const float MaxFuerza = 900f;
+    const float MaxFuerza = 1000f;
     public bool Holding = false;
     public float FuerzaPerSecond;
     // Start is called before the first frame update
@@ -24,10 +24,9 @@ public class ThrowKid : MonoBehaviour
     {
         if (Holding && !Input.secondaryShoot)
         {
-            Debug.Log("Spawn");
             var ball = Instantiate(MyBalls);
             ball.transform.position = Hombro.transform.position;
-            ball.GetComponent<Rigidbody>().AddForce(transform.forward.normalized * Fuerza, ForceMode.Impulse);
+            ball.transform.Find("Root").GetComponent<Rigidbody>().AddForce(transform.forward.normalized * Fuerza, ForceMode.Impulse);
         }
         Holding = Input.secondaryShoot;
         if (Holding) Fuerza = Mathf.Clamp(Fuerza += FuerzaPerSecond * Time.deltaTime, 0, MaxFuerza);
