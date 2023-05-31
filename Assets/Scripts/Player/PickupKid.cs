@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PickupKid : MonoBehaviour
 {
+    AnimatorController CharacterAnim;
     public GameManager GM;
     public Transform Shoulder;
     public Transform DropPoint;
@@ -17,17 +18,18 @@ public class PickupKid : MonoBehaviour
     private GameObject TargetKid;
     [SerializeField] private InputPlayerController playerInput;
 
-    private MovementPlayerController _movementPlayerController;
+    private MovementPlayerController movementPlayerController;
     public GameObject prefabPoseKid;
 
     // Start is called before the first frame update
     void Start()
     {
+        CharacterAnim = GetComponent<AnimatorController>();
         CarringKid = false;
         CanPickup = false;
 
         playerInput = GetComponent<InputPlayerController>();
-        _movementPlayerController = GetComponent<MovementPlayerController>();
+        movementPlayerController = GetComponent<MovementPlayerController>();
         prefabPoseKid.SetActive(false);
 
         GM = FindObjectOfType<GameManager>();
@@ -43,7 +45,8 @@ public class PickupKid : MonoBehaviour
             prefabPoseKid.SetActive(true);     
             CarringKid = true;
             CanPickup = false;
-            _movementPlayerController.speed *= 1.2f;
+            movementPlayerController.speed *= 1.2f;
+            CharacterAnim.PickChild();
 
         }
     }
