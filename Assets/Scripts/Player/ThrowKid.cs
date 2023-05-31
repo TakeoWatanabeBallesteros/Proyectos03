@@ -12,6 +12,7 @@ public class ThrowKid : MonoBehaviour
     const float MaxFuerza = 900f;
     public bool Holding = false;
     public float FuerzaPerSecond;
+    public Rigidbody DEBUGCULO;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +28,9 @@ public class ThrowKid : MonoBehaviour
             Debug.Log("Spawn");
             var ball = Instantiate(MyBalls);
             ball.transform.position = Hombro.transform.position;
-            ball.GetComponent<Rigidbody>().AddForce(transform.forward.normalized * Fuerza, ForceMode.Impulse);
+            DEBUGCULO = ball.transform.Find("root").GetComponent<Rigidbody>();
+            Debug.Log("CULOlisto");
+            DEBUGCULO.AddForce(transform.forward.normalized * Fuerza, ForceMode.Impulse);
         }
         Holding = Input.secondaryShoot;
         if (Holding) Fuerza = Mathf.Clamp(Fuerza += FuerzaPerSecond * Time.deltaTime, 0, MaxFuerza);
