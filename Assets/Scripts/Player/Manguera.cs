@@ -6,17 +6,18 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 using System.Threading;
+using UnityEngine.VFX;
 
 public class Manguera : MonoBehaviour
 {
     [SerializeField] private InputPlayerController playerInput;
     private MovementPlayerController playerMovement;
+    private FireExtinguish fireExtinguish;
     bool UsingPrimary = false;
     bool UsingSecondary = false;
     public ParticleSystem PreWater;
     public ParticleSystem StrongWater;
     public ParticleSystem WeakWater;
-    public Slider WaterBar;
     [SerializeField] float WaterAmount;
     public float NormalWaterConsumption;
     public float StrongWaterConsumption;
@@ -33,15 +34,23 @@ public class Manguera : MonoBehaviour
 
     public float divisionForce;
     public float waitTime;
+
+    public VisualEffect waterMesh;
+    public VisualEffect particlesWater;
+    private Blackboard_UIManager blackboardUI;
+
+    private float waterMeshScaleZ;
     private void Start()
     {
         playerInput = GetComponent<InputPlayerController>();
         playerMovement = GetComponent<MovementPlayerController>();
+        fireExtinguish = GetComponent<FireExtinguish>();
         Kid = GetComponent<PickupKid>();
         _rb = GetComponent<Rigidbody>();
         canRecharge = false;
         WaterAmount = StartWater;
         timerKnockback = initialTimer;
+        blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
     }
     private void Update()
     {
@@ -67,12 +76,14 @@ public class Manguera : MonoBehaviour
             timerKnockback = initialTimer;
         }
 
-        WaterBar.value = WaterAmount;
+        blackboardUI.SetWaterBar(WaterAmount);
 
         if (WaterAmount < 0)
         {
             WeakWater.Stop();
             StrongWater.Stop();
+            particlesWater.Stop();
+            waterMesh.Stop();
         }
 
         if (playerInput.reacharge && canRecharge)
@@ -89,25 +100,32 @@ public class Manguera : MonoBehaviour
         }
 
         WaterAmount = Mathf.Clamp(WaterAmount, 0f, 1f);
+        AdjustMeshScale();
     }
 
     private void StandardShootPerformed()
     {
         UsingPrimary = true;
-        WeakWater.Play();
+        particlesWater.playRate = 2f;
+        //WeakWater.Play();
+        waterMesh.Play(); 
+        particlesWater.Play();
         StartCoroutine(ConsumeWater(NormalWaterConsumption));
-
     }
 
     private void StandardShootCancelled()
     {
         UsingPrimary = false;
         WeakWater.Stop();
+        waterMesh.SendEvent("OnStop");
+        particlesWater.Stop();
     }
 
     private void StrongShootPerformed()
     {
         UsingSecondary = true;
+        particlesWater.playRate = 3f;
+        particlesWater.Play();
         StartCoroutine(StrongParticles());
     }
 
@@ -137,7 +155,9 @@ public class Manguera : MonoBehaviour
     private void StrongShootCancelled()
     {
         UsingSecondary = false;
-        StrongWater.Stop();
+        StrongWater.Stop(); 
+        waterMesh.Stop();
+        particlesWater.Stop();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -168,6 +188,12 @@ public class Manguera : MonoBehaviour
     public float GetWaterAmount()
     {
         return WaterAmount;
+    }
+
+    void AdjustMeshScale()
+    {
+        waterMeshScaleZ = fireExtinguish.distanceImpactPoint.z;
+        waterMesh.SetFloat("ScaleZ", waterMeshScaleZ);
     }
 
     /*
