@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class MovementPlayerController : MonoBehaviour
 {
+    public float Maxspeed;
     public float speed;
     float currentSpeed;
     public Camera cam;
@@ -27,6 +28,7 @@ public class MovementPlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        speed = Maxspeed;
         rb = GetComponent<Rigidbody>();
         input = GetComponent<InputPlayerController>();
 

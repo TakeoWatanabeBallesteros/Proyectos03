@@ -17,7 +17,7 @@ public class PickupKid : MonoBehaviour
     private GameObject TargetKid;
     [SerializeField] private InputPlayerController playerInput;
 
-    private MovementPlayerController _movementPlayerController;
+    private MovementPlayerController movementPlayerController;
     public GameObject prefabPoseKid;
 
     // Start is called before the first frame update
@@ -27,7 +27,7 @@ public class PickupKid : MonoBehaviour
         CanPickup = false;
 
         playerInput = GetComponent<InputPlayerController>();
-        _movementPlayerController = GetComponent<MovementPlayerController>();
+        movementPlayerController = GetComponent<MovementPlayerController>();
         prefabPoseKid.SetActive(false);
 
         GM = FindObjectOfType<GameManager>();
@@ -43,7 +43,7 @@ public class PickupKid : MonoBehaviour
             prefabPoseKid.SetActive(true);     
             CarringKid = true;
             CanPickup = false;
-            _movementPlayerController.speed *= 1.2f;
+            movementPlayerController.speed *= 1.2f;
 
         }
     }

@@ -15,9 +15,11 @@ public class ThrowKid : MonoBehaviour
     public bool Holding = false;
     public float FuerzaPerSecond;
     PickupKid pickupKid;
+    MovementPlayerController movementPlayerController;
     // Start is called before the first frame update
     void Start()
     {
+        movementPlayerController = GetComponent<MovementPlayerController>();
         pickupKid = GetComponent<PickupKid>();
         Input = GetComponent<InputPlayerController>();
         Fuerza = 0;
@@ -47,6 +49,7 @@ public class ThrowKid : MonoBehaviour
             ball.transform.position = Hombro.transform.position;
             ball.transform.Find("Root").GetComponent<Rigidbody>().AddForce(transform.forward.normalized * Fuerza, ForceMode.Impulse);
             pickupKid.KidYeet();
+            movementPlayerController.speed = movementPlayerController.Maxspeed;
         }
         Holding = Input.secondaryShoot;
         if (Holding)
