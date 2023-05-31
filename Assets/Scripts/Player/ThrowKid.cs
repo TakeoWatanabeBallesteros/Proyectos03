@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class ThrowKid : MonoBehaviour
 {
+    Slider ForceBar;
     public GameObject MyBalls;
     InputPlayerController Input;
     public Transform Hombro;
@@ -19,10 +21,25 @@ public class ThrowKid : MonoBehaviour
         pickupKid = GetComponent<PickupKid>();
         Input = GetComponent<InputPlayerController>();
         Fuerza = 0;
+        ForceBar = GameObject.Find("ForceBar").GetComponent<Slider>();
+        ForceBar.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
+    {
+        if (!pickupKid.HasKid())
+        {
+            return;
+        }
+        else
+        {
+            ThrowTheKid();
+        }
+
+
+    }
+    public void ThrowTheKid()
     {
         if (Holding && !Input.secondaryShoot && pickupKid.HasKid())
         {
@@ -32,10 +49,16 @@ public class ThrowKid : MonoBehaviour
             pickupKid.KidYeet();
         }
         Holding = Input.secondaryShoot;
-        if (Holding) Fuerza = Mathf.Clamp(Fuerza += FuerzaPerSecond * Time.deltaTime, 0, MaxFuerza);
-        
-        else Fuerza = 0;
-
-
+        if (Holding)
+        {
+            ForceBar.gameObject.SetActive(true);
+            Fuerza = Mathf.Clamp(Fuerza += FuerzaPerSecond * Time.deltaTime, 0, MaxFuerza);
+        }
+        else
+        {
+            ForceBar.gameObject.SetActive(false);
+            Fuerza = 0;
+        }
+        ForceBar.value = Fuerza;
     }
 }
