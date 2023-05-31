@@ -12,6 +12,7 @@ public class Manguera : MonoBehaviour
 {
     [SerializeField] private InputPlayerController playerInput;
     private MovementPlayerController playerMovement;
+    private FireExtinguish fireExtinguish;
     bool UsingPrimary = false;
     bool UsingSecondary = false;
     public ParticleSystem PreWater;
@@ -38,11 +39,12 @@ public class Manguera : MonoBehaviour
     public VisualEffect particlesWater;
     private Blackboard_UIManager blackboardUI;
 
-    private Vector3 waterMeshScale;
+    private float waterMeshScaleZ;
     private void Start()
     {
         playerInput = GetComponent<InputPlayerController>();
         playerMovement = GetComponent<MovementPlayerController>();
+        fireExtinguish = GetComponent<FireExtinguish>();
         Kid = GetComponent<PickupKid>();
         _rb = GetComponent<Rigidbody>();
         canRecharge = false;
@@ -190,7 +192,8 @@ public class Manguera : MonoBehaviour
 
     void AdjustMeshScale()
     {
-        waterMesh.SetVector3("Scale", waterMeshScale);
+        waterMeshScaleZ = fireExtinguish.distanceImpactPoint.z;
+        waterMesh.SetFloat("ScaleZ", waterMeshScaleZ);
     }
 
     /*
