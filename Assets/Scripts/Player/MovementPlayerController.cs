@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class MovementPlayerController : MonoBehaviour
 {
+    AnimatorController CharacterAnim;
+    public float Maxspeed;
     public float speed;
     float currentSpeed;
     public Camera cam;
@@ -27,6 +29,8 @@ public class MovementPlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CharacterAnim = GetComponent<AnimatorController>();
+        speed = Maxspeed;
         rb = GetComponent<Rigidbody>();
         input = GetComponent<InputPlayerController>();
 
@@ -58,27 +62,23 @@ public class MovementPlayerController : MonoBehaviour
             RotatePlayer();
    
         }
-        if(input.movement != Vector2.zero) MovePlayer(direction.normalized);
+        if (input.movement != Vector2.zero)
+        {
+            CharacterAnim.SetSpeed(1);
+            MovePlayer(direction.normalized);
+        }
         else
         {
-           currentSpeed = 0;
+            CharacterAnim.SetSpeed(0);
+            currentSpeed = 0;
         }
         rb.velocity = direction.normalized * currentSpeed;
     }
 
-    private void FixedUpdate()
-    {
-        // ExperimentalMove();
-    }
-
     private void MovePlayer(Vector3 direction)
     {
-        currentSpeed = Mathf.Lerp(currentSpeed, speed, Time.deltaTime * 10);
-    }
 
-    private void ExperimentalMove()
-    {
-        
+        currentSpeed = Mathf.Lerp(currentSpeed, speed, Time.deltaTime * 10);
     }
 
     private void RotatePlayerShooting()
