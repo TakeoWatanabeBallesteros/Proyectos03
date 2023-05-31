@@ -106,7 +106,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 82d3ec1aa3a2c5b4b8515b99d333a72e, type: 2}
+  - {fileID: 2100000, guid: 73d4cbf97701b464083a248573d7f644, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -171,6 +171,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1395559137445980454}
+  - component: {fileID: 322611270240361798}
+  - component: {fileID: 2242611527527829401}
   m_Layer: 0
   m_Name: C_DoorWall
   m_TagString: Untagged
@@ -195,6 +197,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &322611270240361798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395559137445980455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be0a9d99c8160084b989a97ca9042b49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Paredes:
+  - {fileID: 1395559136875247303}
+  WallOpacity: 1
+--- !u!65 &2242611527527829401
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395559137445980455}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.302917, y: 1, z: 11.15924}
+  m_Center: {x: -3.2208533, y: 0, z: -0.0000009536743}
 --- !u!1 &1395559138233805652
 GameObject:
   m_ObjectHideFlags: 0
