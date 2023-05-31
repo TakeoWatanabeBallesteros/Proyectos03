@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PickupKid : MonoBehaviour
 {
+    AnimatorController CharacterAnim;
     public GameManager GM;
     public Transform Shoulder;
     public Transform DropPoint;
@@ -23,6 +24,7 @@ public class PickupKid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CharacterAnim = GetComponent<AnimatorController>();
         CarringKid = false;
         CanPickup = false;
 
@@ -44,6 +46,7 @@ public class PickupKid : MonoBehaviour
             CarringKid = true;
             CanPickup = false;
             movementPlayerController.speed *= 1.2f;
+            CharacterAnim.PickChild();
 
         }
     }

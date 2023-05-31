@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class ThrowKid : MonoBehaviour
 {
+    AnimatorController CharacterAnim;
     Slider ForceBar;
     public GameObject MyBalls;
     InputPlayerController Input;
@@ -19,6 +20,7 @@ public class ThrowKid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CharacterAnim = GetComponent<AnimatorController>();
         movementPlayerController = GetComponent<MovementPlayerController>();
         pickupKid = GetComponent<PickupKid>();
         Input = GetComponent<InputPlayerController>();
@@ -50,12 +52,14 @@ public class ThrowKid : MonoBehaviour
             ball.transform.Find("Root").GetComponent<Rigidbody>().AddForce(transform.forward.normalized * Fuerza, ForceMode.Impulse);
             pickupKid.KidYeet();
             movementPlayerController.speed = movementPlayerController.Maxspeed;
+            CharacterAnim.YeetChild();
         }
         Holding = Input.secondaryShoot;
         if (Holding)
         {
             ForceBar.gameObject.SetActive(true);
             Fuerza = Mathf.Clamp(Fuerza += FuerzaPerSecond * Time.deltaTime, 0, MaxFuerza);
+            CharacterAnim.PrepareChild();
         }
         else
         {
