@@ -24011,6 +24011,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Paredes Ocultables (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 446272666218235017, guid: ea9f004c30495b84db37daf18ec1a066,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 446272666218235018, guid: ea9f004c30495b84db37daf18ec1a066,
         type: 3}
       propertyPath: m_RootOrder
@@ -90596,6 +90601,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546776011}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1548828939 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1659171715, guid: 38542bac2387436449dc2f0519cfcf07,
+    type: 3}
+  m_PrefabInstance: {fileID: 4657523373011137941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1553823592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -92354,6 +92365,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Paredes Ocultables (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 446272666218235017, guid: ea9f004c30495b84db37daf18ec1a066,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 446272666218235018, guid: ea9f004c30495b84db37daf18ec1a066,
         type: 3}
@@ -117224,6 +117240,24 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 507835568, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 507835570, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4334808371477387079, guid: 38542bac2387436449dc2f0519cfcf07,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4334808371477387079, guid: 38542bac2387436449dc2f0519cfcf07,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Overridden
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4657523373009156682, guid: 38542bac2387436449dc2f0519cfcf07,
         type: 3}
       propertyPath: m_RootOrder
@@ -117296,6 +117330,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
         type: 3}
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: 450584839}
+    - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
+        type: 3}
       propertyPath: waterObject
       value: 
       objectReference: {fileID: 507835569}
@@ -117307,8 +117346,13 @@ PrefabInstance:
     - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
         type: 3}
       propertyPath: waterVelocity
-      value: 35
+      value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
+        type: 3}
+      propertyPath: mangueraObject
+      value: 
+      objectReference: {fileID: 1548828939}
     - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
         type: 3}
       propertyPath: NormalWaterConsumption
@@ -117329,5 +117373,20 @@ PrefabInstance:
       propertyPath: prefabPoseKid
       value: 
       objectReference: {fileID: 1553823593}
+    - target: {fileID: 4979230932608599804, guid: 38542bac2387436449dc2f0519cfcf07,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5026431714805739841, guid: 38542bac2387436449dc2f0519cfcf07,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8488138692936874209, guid: 38542bac2387436449dc2f0519cfcf07,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}

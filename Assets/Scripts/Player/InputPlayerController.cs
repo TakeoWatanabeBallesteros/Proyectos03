@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class InputPlayerController : MonoBehaviour
 {
-    private PlayerControls controls = null;
+    public PlayerControls controls { get; private set; }
     
     public Vector2 movement { get; private set; }
     public bool shoot { get; private set; }
@@ -16,16 +16,6 @@ public class InputPlayerController : MonoBehaviour
     public bool reacharge { get; private set; }
     public Vector2 zoom { get; private set; }
 
-
-    private void OnEnable()
-    {
-        controls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controls.Disable();
-    }
 
     private void Awake()
     {

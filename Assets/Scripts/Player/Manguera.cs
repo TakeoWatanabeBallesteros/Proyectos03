@@ -39,14 +39,22 @@ public class Manguera : MonoBehaviour
     public VisualEffect particlesWater;
     private Blackboard_UIManager blackboardUI;
     public Transform waterObject;
+    public Transform mangueraObject;
 
     [SerializeField] private float waterMeshScaleZ = 1f;
     [SerializeField] float distanceHitPlayer;
     public float waterVelocity = 1f; //Meters per second
     private Vector3 startPosition;
+        
+
+    private void OnDisable()
+    {
+        playerInput.controls.Player.Shoot.started -= ctx => ResetWater();
+    }
 
     private void Start()
     {
+        playerInput.controls.Player.Shoot.started += ctx => ResetWater();
         playerInput = GetComponent<InputPlayerController>();
         playerMovement = GetComponent<MovementPlayerController>();
         fireExtinguish = GetComponent<FireExtinguish>();
@@ -60,6 +68,7 @@ public class Manguera : MonoBehaviour
         waterMeshScaleZ = 0f;
         waterMesh.SetFloat("ScaleZ", waterMeshScaleZ);
         startPosition = waterObject.localPosition;
+
     }
     private void Update()
     {
@@ -81,26 +90,15 @@ public class Manguera : MonoBehaviour
             StartCoroutine(KnockBackForce());
         }
 
-        else if (!playerInput.secondaryShoot)
+        else if ((!playerInput.secondaryShoot || WaterAmount <= 0) && waterMeshScaleZ > 0)
         {
             StrongShootCancelled();
             timerKnockback = initialTimer;
         }
-               
-
-        if (WaterAmount < 0)
-        {
-            WeakWater.Stop();
-            StrongWater.Stop();
-            particlesWater.Stop();
-            //waterMesh.Stop();
-        }
 
         if (playerInput.reacharge && canRecharge)
         {
-            //isReloading = true;
             WaterAmount += waterReload * Time.deltaTime;
-            //StartCoroutine(Recharge());
         }
 
         if (playerInput.interact)
@@ -109,15 +107,17 @@ public class Manguera : MonoBehaviour
             StrongWater.Stop();
         }
 
-        distanceHitPlayer = fireExtinguish.distancePlayerRaycastHit;        
+        distanceHitPlayer = fireExtinguish.distancePlayerRaycastHit;
     }
 
     private void StandardShootPerformed()
     {
-        particlesWater.playRate = 2f;
-        //WeakWater.Play();
-        //waterMesh.Play(); 
-        particlesWater.Play();
+        if (!particlesWater.GetSpawnSystemInfo("Spawn system").playing)
+        {
+            particlesWater.Play();
+            particlesWater.playRate = 3;
+        }
+        
         ConsumeWater(NormalWaterConsumption);
         MoveWater();
 
@@ -126,17 +126,19 @@ public class Manguera : MonoBehaviour
     private void StandardShootCancelled()
     {
         UsingPrimary = false;
-        //WeakWater.Stop();
         particlesWater.Stop();
         waterMeshScaleZ = Mathf.Clamp(waterMeshScaleZ - Time.deltaTime * waterVelocity, 0, fireExtinguish.distancePlayerRaycastHit);
-        waterMesh.SetFloat("ScaleZ", waterMeshScaleZ/5);
+        waterMesh.SetFloat("ScaleZ", waterMeshScaleZ / 5);
     }
 
     private void StrongShootPerformed()
     {
         UsingSecondary = true;
-        particlesWater.playRate = 3f;
-        particlesWater.Play();
+        if (!particlesWater.GetSpawnSystemInfo("Spawn system").playing)
+        {
+            particlesWater.Play();
+            particlesWater.playRate = 7;
+        }
         StartCoroutine(StrongParticles());
     }
 
@@ -154,14 +156,13 @@ public class Manguera : MonoBehaviour
     void ConsumeWater(float WaterConsumption)
     {
         WaterAmount = Mathf.Clamp(WaterAmount - Time.deltaTime * WaterConsumption, 0, StartWater);
-        blackboardUI.SetWaterBar(WaterAmount/100);
+        blackboardUI.SetWaterBar(WaterAmount / 100);
     }
 
     private void StrongShootCancelled()
     {
         UsingSecondary = false;
-        StrongWater.Stop(); 
-        //waterMesh.Stop();
+        StrongWater.Stop();
         particlesWater.Stop();
     }
 
@@ -200,7 +201,7 @@ public class Manguera : MonoBehaviour
         Vector3 newPos = new Vector3(0, 0, Mathf.Clamp(waterObject.localPosition.z + Time.deltaTime * waterVelocity, 0, fireExtinguish.distancePlayerRaycastHit));
         waterObject.localPosition = newPos;
         waterMeshScaleZ = Mathf.Clamp(waterMeshScaleZ + Time.deltaTime * waterVelocity, 0, fireExtinguish.distancePlayerRaycastHit);
-        waterMesh.SetFloat("ScaleZ", waterMeshScaleZ/5);
+        waterMesh.SetFloat("ScaleZ", waterMeshScaleZ / 5);
     }
 
     /*
@@ -217,7 +218,7 @@ public class Manguera : MonoBehaviour
     }*/
 
     IEnumerator KnockBackForce()
-    {        
+    {
         yield return new WaitForSeconds(1f);
 
         while (timerKnockback < waitTime)
@@ -233,17 +234,12 @@ public class Manguera : MonoBehaviour
         }
 
     }
-    /*
-    IEnumerator Recharge()
-    {
-        float waitTime = 2f;
-        float timerRecharging = 0f;
 
-        while (timerRecharging < waitTime)
-        {
-            timerRecharging += Time.deltaTime;
-            WaterAmount = Mathf.Lerp(WaterAmount, 1, timerRecharging/waitTime);
-            yield return null;
-        }
-    }*/
+    private void ResetWater()
+    {
+        waterObject.localPosition = startPosition;
+        waterMeshScaleZ = 0f;
+        waterMesh.SetFloat("ScaleZ", waterMeshScaleZ / 5);
+    }
+
 }

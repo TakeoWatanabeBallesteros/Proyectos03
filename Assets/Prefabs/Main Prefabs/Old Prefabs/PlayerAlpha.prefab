@@ -182,7 +182,7 @@ Transform:
   - {fileID: 507835569}
   - {fileID: 4657523372121006129}
   m_Father: {fileID: 4657523373009156682}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3529871429895015119
 GameObject:
@@ -215,7 +215,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4657523373009156682}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!2083052967 &4334808371477387079
 VisualEffect:
@@ -440,7 +440,6 @@ Transform:
   - {fileID: 6853058489556740140}
   - {fileID: 4657523372503999528}
   - {fileID: 5127455557780422378}
-  - {fileID: 4815659442468409222}
   - {fileID: 1047254818281367818}
   - {fileID: 1659171715}
   m_Father: {fileID: 0}
@@ -543,6 +542,7 @@ MonoBehaviour:
   waterMesh: {fileID: 507835571}
   particlesWater: {fileID: 4334808371477387079}
   waterObject: {fileID: 507835568}
+  mangueraObject: {fileID: 0}
   waterMeshScaleZ: 1
   distanceHitPlayer: 0
   waterVelocity: 1
@@ -615,157 +615,6 @@ MonoBehaviour:
   Fuerza: 1
   Holding: 0
   FuerzaPerSecond: 0
---- !u!1 &5026431714805739841
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4815659442468409222}
-  - component: {fileID: 6148174998229945732}
-  - component: {fileID: 4979230932608599804}
-  m_Layer: 0
-  m_Name: WeakWaterMesh
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &4815659442468409222
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5026431714805739841}
-  m_LocalRotation: {x: -0, y: -0, z: -1, w: 0}
-  m_LocalPosition: {x: -0.68, y: 1.614, z: 0.519}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4657523373009156682}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
---- !u!2083052967 &6148174998229945732
-VisualEffect:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5026431714805739841}
-  m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 62c414ef7453075409635af7ef90d02d, type: 3}
-  m_InitialEventName: 
-  m_InitialEventNameOverriden: 1
-  m_StartSeed: 0
-  m_ResetSeedOnPlay: 1
-  m_ResourceVersion: 1
-  m_PropertySheet:
-    m_Float:
-      m_Array:
-      - m_Value: 1
-        m_Name: Rate
-        m_Overridden: 1
-      - m_Value: 1
-        m_Name: ScaleZ
-        m_Overridden: 1
-      - m_Value: 1
-        m_Name: Scale
-        m_Overridden: 1
-    m_Vector2f:
-      m_Array: []
-    m_Vector3f:
-      m_Array:
-      - m_Value: {x: 1, y: 1, z: 1}
-        m_Name: Scale
-        m_Overridden: 0
-    m_Vector4f:
-      m_Array: []
-    m_Uint:
-      m_Array: []
-    m_Int:
-      m_Array: []
-    m_Matrix4x4f:
-      m_Array: []
-    m_AnimationCurve:
-      m_Array:
-      - m_Value:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0
-            inSlope: 1.3062409
-            outSlope: 1.3062409
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0.40624997
-          - serializedVersion: 3
-            time: 0.2
-            value: 1
-            inSlope: 12.452826
-            outSlope: 12.452826
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.05208336
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        m_Name: AnimationCurveScaleZ
-        m_Overridden: 1
-    m_Gradient:
-      m_Array: []
-    m_NamedObject:
-      m_Array: []
-    m_Bool:
-      m_Array:
-      - m_Value: 1
-        m_Name: Loop
-        m_Overridden: 0
---- !u!73398921 &4979230932608599804
-VFXRenderer:
-  serializedVersion: 1
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5026431714805739841}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 0
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!1001 &807137872
 PrefabInstance:
   m_ObjectHideFlags: 0
