@@ -94,7 +94,7 @@ public class Manguera : MonoBehaviour
         if (playerInput.secondaryShoot && WaterAmount > 0 && !Kid.HasKid() && !playerInput.shoot)
         {
             StrongShootPerformed();
-            StartCoroutine(KnockBackForce());
+            StartCoroutine(KnockBackForce()); //Hay que tocar esto para mirar de tener un valor decente para el movimiento para atrás
         }
 
         else if ((!playerInput.secondaryShoot || WaterAmount <= 0) && waterMeshScaleZ > 0)
@@ -125,7 +125,7 @@ public class Manguera : MonoBehaviour
         if (!particlesWater.GetSpawnSystemInfo("Spawn system").playing)
         {
             particlesWater.Play();
-            particlesWater.playRate = 2;
+            particlesWater.SetFloat("Rate", 2);
         }
 
         ConsumeWater(NormalWaterConsumption);
@@ -146,7 +146,7 @@ public class Manguera : MonoBehaviour
         if (!particlesWater.GetSpawnSystemInfo("Spawn system").playing)
         {
             particlesWater.Play();
-            particlesWater.playRate = 4;
+            particlesWater.SetFloat("Rate", 4f);
         }
         StartCoroutine(StrongParticles());
     }
@@ -155,6 +155,7 @@ public class Manguera : MonoBehaviour
     {
         PreWater.Play();
         yield return new WaitForSeconds(1f);
+        PreWater.Stop();
         MoveWater(waterStrongMesh, strongWaterTransform, distanceHitPlayerStrong);
         ConsumeWater(StrongWaterConsumption);
 
