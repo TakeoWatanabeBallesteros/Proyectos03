@@ -4821,160 +4821,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 132645212}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &139040497
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 139040498}
-  - component: {fileID: 139040500}
-  - component: {fileID: 139040499}
-  m_Layer: 0
-  m_Name: StrongWaterMesh
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &139040498
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139040497}
-  m_LocalRotation: {x: -0, y: -0, z: -1, w: 0}
-  m_LocalPosition: {x: 0, y: -0.437, z: -0.235}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1548828939}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
---- !u!73398921 &139040499
-VFXRenderer:
-  serializedVersion: 1
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139040497}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 0
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!2083052967 &139040500
-VisualEffect:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139040497}
-  m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: f7ed291db31cc5e4fb69e719a135ef44, type: 3}
-  m_InitialEventName: 
-  m_InitialEventNameOverriden: 1
-  m_StartSeed: 0
-  m_ResetSeedOnPlay: 1
-  m_ResourceVersion: 1
-  m_PropertySheet:
-    m_Float:
-      m_Array:
-      - m_Value: 1
-        m_Name: Rate
-        m_Overridden: 1
-      - m_Value: 1
-        m_Name: ScaleZ
-        m_Overridden: 1
-      - m_Value: 1
-        m_Name: Scale
-        m_Overridden: 1
-    m_Vector2f:
-      m_Array: []
-    m_Vector3f:
-      m_Array:
-      - m_Value: {x: 1, y: 1, z: 1}
-        m_Name: Scale
-        m_Overridden: 0
-    m_Vector4f:
-      m_Array:
-      - m_Value: {x: 0, y: 0.007007221, z: 0.16862746, w: 1}
-        m_Name: MainColor
-        m_Overridden: 1
-    m_Uint:
-      m_Array: []
-    m_Int:
-      m_Array: []
-    m_Matrix4x4f:
-      m_Array: []
-    m_AnimationCurve:
-      m_Array:
-      - m_Value:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0
-            inSlope: 1.3062409
-            outSlope: 1.3062409
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0.40624997
-          - serializedVersion: 3
-            time: 0.2
-            value: 1
-            inSlope: 12.452826
-            outSlope: 12.452826
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.05208336
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        m_Name: AnimationCurveScaleZ
-        m_Overridden: 1
-    m_Gradient:
-      m_Array: []
-    m_NamedObject:
-      m_Array: []
-    m_Bool:
-      m_Array:
-      - m_Value: 1
-        m_Name: Loop
-        m_Overridden: 0
 --- !u!1 &139581966
 GameObject:
   m_ObjectHideFlags: 0
@@ -31635,18 +31481,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507360995}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &507835569 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 507835569, guid: 38542bac2387436449dc2f0519cfcf07,
-    type: 3}
-  m_PrefabInstance: {fileID: 4657523373011137941}
-  m_PrefabAsset: {fileID: 0}
---- !u!2083052967 &507835571 stripped
-VisualEffect:
-  m_CorrespondingSourceObject: {fileID: 507835571, guid: 38542bac2387436449dc2f0519cfcf07,
-    type: 3}
-  m_PrefabInstance: {fileID: 4657523373011137941}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &508521288
 GameObject:
   m_ObjectHideFlags: 0
@@ -48878,12 +48712,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7354993246623985797, guid: b4c6e1a08a4082f479084af1fe0b7950,
     type: 3}
   m_PrefabInstance: {fileID: 895226330}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &899604607 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4657523372503999528, guid: 38542bac2387436449dc2f0519cfcf07,
-    type: 3}
-  m_PrefabInstance: {fileID: 4657523373011137941}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &899687086
 GameObject:
@@ -90632,12 +90460,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546776011}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1548828939 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1659171715, guid: 38542bac2387436449dc2f0519cfcf07,
-    type: 3}
-  m_PrefabInstance: {fileID: 4657523373011137941}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1553823592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -117351,105 +117173,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 507835568, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: m_Name
-      value: WeakWaterMesh
-      objectReference: {fileID: 0}
-    - target: {fileID: 507835568, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 507835569, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 507835570, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 507835571, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 507835571, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Name
-      value: MainColor
-      objectReference: {fileID: 0}
-    - target: {fileID: 507835571, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 507835571, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 507835571, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.y
-      value: 0.94305634
-      objectReference: {fileID: 0}
-    - target: {fileID: 507835571, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 507835571, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Overridden
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1888043538, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: Fuerza
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1888043538, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: Hombro
-      value: 
-      objectReference: {fileID: 899604607}
-    - target: {fileID: 1888043538, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: Holding
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1888043538, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: MyBalls
-      value: 
-      objectReference: {fileID: 1262934260706686329, guid: 1a455f1d083f0824781554fea99c0cfd,
-        type: 3}
-    - target: {fileID: 1888043538, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1888043538, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: FuerzaPerSecond
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 1391169309409038033, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 1b79e06bfd236b54aa62e719033e609a, type: 2}
-    - target: {fileID: 1722170699133360202, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1722170699133360205, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4334808371477387079, guid: 38542bac2387436449dc2f0519cfcf07,
         type: 3}
-      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4334808371477387079, guid: 38542bac2387436449dc2f0519cfcf07,
+      propertyPath: m_Asset
+      value: 
+      objectReference: {fileID: 8926484042661614526, guid: a79be5c193512014eaa8246d69c6864a,
         type: 3}
-      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Overridden
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657523372121006129, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4657523373009156682, guid: 38542bac2387436449dc2f0519cfcf07,
         type: 3}
       propertyPath: m_RootOrder
@@ -117510,81 +117239,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerAlpha
       objectReference: {fileID: 0}
-    - target: {fileID: 4657523373009156721, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: StrongRayLenght
-      value: 40
-      objectReference: {fileID: 0}
     - target: {fileID: 4657523373009156723, guid: 38542bac2387436449dc2f0519cfcf07,
         type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 322375636}
-    - target: {fileID: 4657523373009156723, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: Maxspeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: StartWater
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: playerInput
-      value: 
-      objectReference: {fileID: 450584839}
-    - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: waterObject
-      value: 
-      objectReference: {fileID: 507835569}
-    - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: waterReload
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: waterVelocity
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: waterWeakMesh
-      value: 
-      objectReference: {fileID: 507835571}
-    - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: mangueraObject
-      value: 
-      objectReference: {fileID: 1548828939}
-    - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: waterStrongMesh
-      value: 
-      objectReference: {fileID: 139040500}
-    - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: weakWaterTransform
-      value: 
-      objectReference: {fileID: 507835569}
-    - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: strongWaterTransform
-      value: 
-      objectReference: {fileID: 139040498}
-    - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: NormalWaterConsumption
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: StrongWaterConsumption
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 4657523373009156727, guid: 38542bac2387436449dc2f0519cfcf07,
         type: 3}
       propertyPath: DropText
@@ -117602,43 +117261,8 @@ PrefabInstance:
       objectReference: {fileID: 1394159432}
     - target: {fileID: 4657523373009156727, guid: 38542bac2387436449dc2f0519cfcf07,
         type: 3}
-      propertyPath: playerInput
-      value: 
-      objectReference: {fileID: 450584839}
-    - target: {fileID: 4657523373009156727, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
       propertyPath: prefabPoseKid
       value: 
       objectReference: {fileID: 1553823593}
-    - target: {fileID: 4979230932608599804, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5026431714805739841, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5504437805845767248, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6853058490486500645, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: EmissionModule.rateOverDistance.minCurve.m_PreInfinity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6853058490486500645, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: EmissionModule.rateOverDistance.minCurve.m_PostInfinity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8488138692936874209, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
