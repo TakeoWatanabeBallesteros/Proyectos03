@@ -69,7 +69,7 @@ VisualEffect:
         m_Overridden: 0
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 0.008997798, y: 0, z: 0.16862746, w: 1}
+      - m_Value: {x: 0, y: 0.025739731, z: 0.3207547, w: 1}
         m_Name: MainColor
         m_Overridden: 1
     m_Uint:
@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 4334808371477387079}
   - component: {fileID: 8488138692936874209}
   m_Layer: 0
-  m_Name: WaterGraph
+  m_Name: WaterParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -370,7 +370,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3529871429895015119}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.7047272, y: 1.64, z: 0.45928955}
+  m_LocalPosition: {x: -0.7047272, y: 1.773, z: 0.45928955}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -652,7 +652,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GM: {fileID: 0}
   Shoulder: {fileID: 4657523372503999528}
-  PickupText: {fileID: 0}
   DropText: {fileID: 0}
   CanExtract: 0
   CanPickup: 0
@@ -714,8 +713,8 @@ MonoBehaviour:
   distanceHitPlayerStrong: 0
   weakWaterVelocity: 40
   strongWaterVelocity: 100
-  weakSplash: {fileID: 6260826433133062867}
-  strongSplash: {fileID: 3564862282838916988}
+  weakSplash: {fileID: 3564862282838916988}
+  strongSplash: {fileID: 6260826433133062867}
 --- !u!114 &4657523373009156723
 MonoBehaviour:
   m_ObjectHideFlags: 0
