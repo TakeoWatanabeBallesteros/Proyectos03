@@ -44,7 +44,7 @@ public class FSM_UIManager : MonoBehaviour
 
     private void AddTransitions()
     {
-        uiManager_FSM.AddTriggerTransition("InGame-MainMenu","InGame_FSM", "MainMenu_FSM", t => true);
+        uiManager_FSM.AddTwoWayTriggerTransition("MainMenu_FSM-InGame_FSM","MainMenu_FSM", "InGame_FSM", t => Singleton.Instance.GameManager.gameState != GameState.Win);
     }
 
     #endregion
@@ -69,6 +69,7 @@ public class FSM_UIManager : MonoBehaviour
     // The LoadSceneAsync method maybe will be in the GameManager.
     public void GoLevel(int index)
     {
+        uiManager_FSM.Trigger("MainMenu_FSM-InGame_FSM");
         SceneManager.LoadSceneAsync(index);
     }
 
@@ -84,6 +85,7 @@ public class FSM_UIManager : MonoBehaviour
 
     public void GoMainMenu()
     {
+        uiManager_FSM.Trigger("MainMenu_FSM-InGame_FSM");
         SceneManager.LoadSceneAsync(0);
     }
 
