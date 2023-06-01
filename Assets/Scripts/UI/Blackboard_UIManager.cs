@@ -35,6 +35,8 @@ public class Blackboard_UIManager : DynamicBlackboard
     public TMP_Text NumberOfKids;
     public TMP_Text NumberOfColectables;
     public TMP_Text pointsText;
+    public GameObject PickUpText;
+    public GameObject ReloadText;
     
     
     private PlayerControls controls = null;
