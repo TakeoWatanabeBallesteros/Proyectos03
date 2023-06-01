@@ -20669,6 +20669,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 355553215}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &356175939 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1722170699133360205, guid: 38542bac2387436449dc2f0519cfcf07,
+    type: 3}
+  m_PrefabInstance: {fileID: 4657523373011137941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &356749259
 GameObject:
   m_ObjectHideFlags: 0
@@ -90523,17 +90529,17 @@ PrefabInstance:
     - target: {fileID: 1722170699402308123, guid: bd3d5ba68c508e34a9e0f012c433f5a6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.71
+      value: -9.9
       objectReference: {fileID: 0}
     - target: {fileID: 1722170699402308123, guid: bd3d5ba68c508e34a9e0f012c433f5a6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.03
+      value: -9.54
       objectReference: {fileID: 0}
     - target: {fileID: 1722170699402308123, guid: bd3d5ba68c508e34a9e0f012c433f5a6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -26.71
+      value: -12.31
       objectReference: {fileID: 0}
     - target: {fileID: 1722170699402308123, guid: bd3d5ba68c508e34a9e0f012c433f5a6,
         type: 3}
@@ -90577,12 +90583,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd3d5ba68c508e34a9e0f012c433f5a6, type: 3}
---- !u!1 &1553823593 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1722170699402308125, guid: bd3d5ba68c508e34a9e0f012c433f5a6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1553823592}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1556479784
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -117238,6 +117238,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1722170699133360205, guid: 38542bac2387436449dc2f0519cfcf07,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4334808371477387079, guid: 38542bac2387436449dc2f0519cfcf07,
         type: 3}
       propertyPath: m_Asset
@@ -117324,6 +117329,11 @@ PrefabInstance:
       propertyPath: burnIndicatorTime
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4657523373009156724, guid: 38542bac2387436449dc2f0519cfcf07,
+        type: 3}
+      propertyPath: invulnearabilityDuration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
         type: 3}
       propertyPath: ChargeText
@@ -117348,6 +117358,6 @@ PrefabInstance:
         type: 3}
       propertyPath: prefabPoseKid
       value: 
-      objectReference: {fileID: 1553823593}
+      objectReference: {fileID: 356175939}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
