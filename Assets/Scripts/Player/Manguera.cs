@@ -136,7 +136,7 @@ public class Manguera : MonoBehaviour
         if (!particlesWater.GetSpawnSystemInfo("Spawn system").playing)
         {
             particlesWater.Play();
-            particlesWater.SetFloat("Rate", 2);
+            particlesWater.SetFloat("Rate", 4f);
         }
 
         MoveWater(waterWeakMesh, weakWaterTransform, distanceHitPlayerWeak, weakWaterVelocity, ref weakWaterMeshScaleZ);
@@ -158,7 +158,7 @@ public class Manguera : MonoBehaviour
         if (!particlesWater.GetSpawnSystemInfo("Spawn system").playing)
         {
             particlesWater.Play();
-            particlesWater.SetFloat("Rate", 4f);
+            particlesWater.SetFloat("Rate", 6f);
         }
         StartCoroutine(StrongParticles());
     }
