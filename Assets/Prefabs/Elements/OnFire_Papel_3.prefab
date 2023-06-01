@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1039403313671875264}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.5, z: 0.2}
+  m_LocalScale: {x: 0.3, y: 0.5, z: 0.04}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1039403314231148471}
@@ -132,8 +132,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.69555473, y: 0.9613879, z: 0.7224808}
-  m_Center: {x: -0.010027885, y: -0.33350646, z: -0.0042209625}
+  m_Size: {x: 0.69555473, y: 0.24303865, z: 0.6919861}
+  m_Center: {x: -0.010027885, y: -0.07937348, z: 0.011026382}
 --- !u!54 &1039403314231148464
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -177,6 +177,7 @@ MonoBehaviour:
   fireParticles: []
   startRoomFires: 0
   redMaterial: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
+  burnedMaterial: {fileID: 0}
 --- !u!114 &1039403314231148470
 MonoBehaviour:
   m_ObjectHideFlags: 0
