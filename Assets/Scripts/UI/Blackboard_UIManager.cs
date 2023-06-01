@@ -110,10 +110,12 @@ public class Blackboard_UIManager : DynamicBlackboard
         TimeLeftText.text = time;
     }
 
-    public void SetKids(int kids)
+    public void SetKids(int kids, int totalKids)
     {
-        NumberOfKids.text = kids.ToString();
+        NumberOfKids.text = kids+" / "+totalKids;
+
     }
+
 
     public IEnumerator FadeIN()
     {
