@@ -43,10 +43,12 @@ public class Manguera : MonoBehaviour
     public Transform strongWaterTransform;
     public Transform mangueraObject;
 
-    [SerializeField] private float waterMeshScaleZ = 1f;
+    [SerializeField] private float weakWaterMeshScaleZ = 1f;
+    [SerializeField] private float strongWaterMeshScaleZ = 1f;
     [SerializeField] float distanceHitPlayerWeak;
     [SerializeField] float distanceHitPlayerStrong;
-    public float waterVelocity = 1f; //Meters per second
+    public float weakWaterVelocity = 1f; //Meters per second
+    public float strongWaterVelocity = 1f; //Meters per second
     private Vector3 startPosition;
 
 
@@ -69,11 +71,11 @@ public class Manguera : MonoBehaviour
         blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
 
         waterWeakMesh.Play();
-        waterMeshScaleZ = 0f;
-        waterWeakMesh.SetFloat("ScaleZ", waterMeshScaleZ);
+        weakWaterMeshScaleZ = 0f;
+        waterWeakMesh.SetFloat("ScaleZ", weakWaterMeshScaleZ);
         waterStrongMesh.Play();
-        waterMeshScaleZ = 0f;
-        waterStrongMesh.SetFloat("ScaleZ", waterMeshScaleZ);
+        strongWaterMeshScaleZ = 0f;
+        waterStrongMesh.SetFloat("ScaleZ", strongWaterMeshScaleZ);
         startPosition = weakWaterTransform.localPosition;
 
     }
@@ -81,11 +83,13 @@ public class Manguera : MonoBehaviour
     {
         if (playerInput.shoot && WaterAmount > 0 && !playerInput.secondaryShoot)
         {
+            Debug.Log("1");
             StandardShootPerformed();
         }
 
-        else if ((!playerInput.shoot || WaterAmount <= 0) && waterMeshScaleZ > 0)
+        else if ((!playerInput.shoot || WaterAmount <= 0) && weakWaterMeshScaleZ > 0 && !playerInput.secondaryShoot)
         {
+            Debug.Log("2");
             StandardShootCancelled();
         }
 
@@ -93,12 +97,14 @@ public class Manguera : MonoBehaviour
 
         if (playerInput.secondaryShoot && WaterAmount > 0 && !Kid.HasKid() && !playerInput.shoot)
         {
+            Debug.Log("3");
             StrongShootPerformed();
             StartCoroutine(KnockBackForce()); //Hay que tocar esto para mirar de tener un valor decente para el movimiento para atrás
         }
 
-        else if ((!playerInput.secondaryShoot || WaterAmount <= 0) && waterMeshScaleZ > 0)
+        else if ((!playerInput.secondaryShoot || WaterAmount <= 0) && strongWaterMeshScaleZ > 0 && !playerInput.shoot)
         {
+            Debug.Log("4");
             StrongShootCancelled();
             timerKnockback = initialTimer;
         }
@@ -128,16 +134,16 @@ public class Manguera : MonoBehaviour
             particlesWater.SetFloat("Rate", 2);
         }
 
+        MoveWater(waterWeakMesh, weakWaterTransform, distanceHitPlayerWeak, weakWaterVelocity, ref weakWaterMeshScaleZ);
         ConsumeWater(NormalWaterConsumption);
-        MoveWater(waterWeakMesh, weakWaterTransform, distanceHitPlayerWeak);
     }
 
     private void StandardShootCancelled()
     {
         UsingPrimary = false;
         particlesWater.Stop();
-        waterMeshScaleZ = Mathf.Clamp(waterMeshScaleZ - Time.deltaTime * waterVelocity, 0, distanceHitPlayerWeak);
-        waterWeakMesh.SetFloat("ScaleZ", waterMeshScaleZ / 5);
+        weakWaterMeshScaleZ = Mathf.Clamp(weakWaterMeshScaleZ - Time.deltaTime * weakWaterVelocity, 0, distanceHitPlayerWeak);
+        waterWeakMesh.SetFloat("ScaleZ", weakWaterMeshScaleZ / 5);
     }
 
     private void StrongShootPerformed()
@@ -156,7 +162,7 @@ public class Manguera : MonoBehaviour
         PreWater.Play();
         yield return new WaitForSeconds(1f);
         PreWater.Stop();
-        MoveWater(waterStrongMesh, strongWaterTransform, distanceHitPlayerStrong);
+        MoveWater( waterStrongMesh, strongWaterTransform, distanceHitPlayerStrong, strongWaterVelocity,ref strongWaterMeshScaleZ);
         ConsumeWater(StrongWaterConsumption);
 
     }
@@ -170,6 +176,8 @@ public class Manguera : MonoBehaviour
     {
         UsingSecondary = false;
         particlesWater.Stop();
+        strongWaterMeshScaleZ = Mathf.Clamp(strongWaterMeshScaleZ - Time.deltaTime * strongWaterVelocity, 0, distanceHitPlayerStrong);
+        waterStrongMesh.SetFloat("ScaleZ", strongWaterMeshScaleZ / 5);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -202,12 +210,12 @@ public class Manguera : MonoBehaviour
         return WaterAmount;
     }
 
-    void MoveWater(VisualEffect vfxmesh, Transform waterTransform, float distance)
+    void MoveWater(VisualEffect vfxmesh,Transform waterTransform,float maxDistance,float waterVelocity,ref float waterScaleZ)
     {
-        Vector3 newPos = new Vector3(0, 0, Mathf.Clamp(waterTransform.localPosition.z + Time.deltaTime * waterVelocity, 0, distance));
+        Vector3 newPos = new Vector3(0, 0, Mathf.Clamp(waterTransform.localPosition.z + Time.deltaTime * waterVelocity, 0, maxDistance));
         waterTransform.localPosition = newPos;
-        waterMeshScaleZ = Mathf.Clamp(waterMeshScaleZ + Time.deltaTime * waterVelocity, 0, distance);
-        vfxmesh.SetFloat("ScaleZ", waterMeshScaleZ / 5);
+        waterScaleZ = Mathf.Clamp(waterScaleZ + Time.deltaTime * waterVelocity, 0, maxDistance);
+        vfxmesh.SetFloat("ScaleZ", waterScaleZ / 5);
     }
 
     IEnumerator KnockBackForce()
@@ -231,9 +239,11 @@ public class Manguera : MonoBehaviour
     private void ResetWater()
     {
         weakWaterTransform.localPosition = startPosition;
-        strongWaterTransform.localPosition = startPosition;
-        waterMeshScaleZ = 0f;
-        waterWeakMesh.SetFloat("ScaleZ", waterMeshScaleZ / 5);
+        //strongWaterTransform.localPosition = startPosition;
+        weakWaterMeshScaleZ = 0f;
+        //strongWaterMeshScaleZ = 0f;
+        waterWeakMesh.SetFloat("ScaleZ", weakWaterMeshScaleZ / 5);
+        //waterStrongMesh.SetFloat("ScaleZ", strongWaterMeshScaleZ / 5);
     }
 
 }

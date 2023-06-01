@@ -68,7 +68,7 @@ VisualEffect:
         m_Overridden: 0
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 0, y: 0.007007221, z: 0.16862746, w: 1}
+      - m_Value: {x: 0.008997798, y: 0, z: 0.16862746, w: 1}
         m_Name: MainColor
         m_Overridden: 1
     m_Uint:
@@ -332,7 +332,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659171714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.604, y: 2.13, z: 0.79}
+  m_LocalPosition: {x: -0.745, y: 1.904, z: 0.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -383,7 +383,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3529871429895015119}
   m_Enabled: 1
-  m_Asset: {fileID: 0}
+  m_Asset: {fileID: 8926484042661614526, guid: a79be5c193512014eaa8246d69c6864a, type: 3}
   m_InitialEventName: 
   m_InitialEventNameOverriden: 1
   m_StartSeed: 0
@@ -656,7 +656,7 @@ MonoBehaviour:
   CanExtract: 0
   CanPickup: 0
   playerInput: {fileID: 4657523373009156720}
-  prefabPoseKid: {fileID: 0}
+  prefabPoseKid: {fileID: 1722170699133360205}
 --- !u!114 &4657523373009156724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -673,7 +673,9 @@ MonoBehaviour:
   Vida: 0
   Fire: {fileID: 0}
   YouDied: {fileID: 0}
-  burnIndicatorTime: 0
+  burnIndicatorTime: 0.5
+  invulnearabilityDuration: 1
+  isTakingDamage: 0
 --- !u!114 &4657523373009156725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,10 +708,12 @@ MonoBehaviour:
   weakWaterTransform: {fileID: 507835569}
   strongWaterTransform: {fileID: 139040498}
   mangueraObject: {fileID: 1659171715}
-  waterMeshScaleZ: 1
+  weakWaterMeshScaleZ: 1
+  strongWaterMeshScaleZ: 1
   distanceHitPlayerWeak: 0
   distanceHitPlayerStrong: 0
-  waterVelocity: 50
+  weakWaterVelocity: 40
+  strongWaterVelocity: 100
 --- !u!114 &4657523373009156723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1010,6 +1014,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1722170699402308125, guid: bd3d5ba68c508e34a9e0f012c433f5a6,
         type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1722170699402308125, guid: bd3d5ba68c508e34a9e0f012c433f5a6,
+        type: 3}
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
@@ -1023,6 +1032,12 @@ PrefabInstance:
 --- !u!4 &1722170699133360203 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1722170699402308123, guid: bd3d5ba68c508e34a9e0f012c433f5a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 807137872}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1722170699133360205 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1722170699402308125, guid: bd3d5ba68c508e34a9e0f012c433f5a6,
     type: 3}
   m_PrefabInstance: {fileID: 807137872}
   m_PrefabAsset: {fileID: 0}
