@@ -30,7 +30,7 @@ Transform:
   m_Children:
   - {fileID: 896385329660243167}
   m_Father: {fileID: 5134156031258072046}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2566491096756280066
 GameObject:
@@ -4968,8 +4968,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1663719382565531031}
   - {fileID: 4554408100524240228}
+  - {fileID: 1663719382565531031}
   - {fileID: 8639193575812138336}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -5030,6 +5030,7 @@ MonoBehaviour:
   fireParticles: []
   startRoomFires: 0
   redMaterial: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
+  burnedMaterial: {fileID: 0}
 --- !u!114 &8825640296828448467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5285,7 +5286,7 @@ PrefabInstance:
     - target: {fileID: 6675893458143112111, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6675893458143112111, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
