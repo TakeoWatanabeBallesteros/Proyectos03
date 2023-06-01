@@ -80,19 +80,20 @@ public class Manguera : MonoBehaviour
         waterStrongMesh.SetFloat("ScaleZ", strongWaterMeshScaleZ);
         startPosition = weakWaterTransform.localPosition;
 
+        weakSplash.Stop();
+        strongSplash.Stop();    
+
     }
     private void Update()
     {
         if (playerInput.shoot && WaterAmount > 0 && !playerInput.secondaryShoot)
         {
-            Debug.Log("1");
             StandardShootPerformed();
             if(fireExtinguish.distancePlayerRaycastHitWeak != fireExtinguish.WeakRayLenght && weakWaterMeshScaleZ >= distanceHitPlayerWeak - 1f) weakSplash.Play();
         }
 
         else if ((!playerInput.shoot || WaterAmount <= 0) && weakWaterMeshScaleZ > 0 && !playerInput.secondaryShoot)
         {
-            Debug.Log("2");
             weakSplash.Stop();
             StandardShootCancelled();
         }
@@ -101,7 +102,6 @@ public class Manguera : MonoBehaviour
 
         if (playerInput.secondaryShoot && WaterAmount > 0 && !Kid.HasKid() && !playerInput.shoot)
         {
-            Debug.Log("3");
             StrongShootPerformed();
             StartCoroutine(KnockBackForce()); //Hay que tocar esto para mirar de tener un valor decente para el movimiento para atrás
             if (fireExtinguish.distancePlayerRaycastHitWeak != fireExtinguish.WeakRayLenght && strongWaterMeshScaleZ >= distanceHitPlayerStrong - 1f) strongSplash.Play();
@@ -109,7 +109,6 @@ public class Manguera : MonoBehaviour
 
         else if ((!playerInput.secondaryShoot || WaterAmount <= 0) && strongWaterMeshScaleZ > 0 && !playerInput.shoot)
         {
-            Debug.Log("4");
             StrongShootCancelled();
             timerKnockback = initialTimer;
             strongSplash.Stop();
