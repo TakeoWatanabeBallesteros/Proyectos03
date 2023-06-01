@@ -75,6 +75,8 @@ public class FirePropagation : MonoBehaviour
                 transform.GetChild(0).gameObject.SetActive(false);
                 StopAllCoroutines();
                 StartCoroutine(SmokeWork());
+                PointsBehavior.AddPointsFire();
+                PointsBehavior.IncreaseCombo();
             }
 
             if (fireHP > 0 && DamageTimer > 0)
