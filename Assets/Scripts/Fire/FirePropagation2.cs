@@ -102,7 +102,10 @@ public class FirePropagation2 : MonoBehaviour
             {
                 transform.GetChild(0).gameObject.SetActive(false);
                 StopAllCoroutines();
-                StartCoroutine(SmokeWork());
+                transform.GetChild(1).gameObject.SetActive(true);
+                PointsBehavior.AddPointsFire();
+                PointsBehavior.IncreaseCombo();
+                this.enabled = false;
             }
 
             if (nearFiresExplosion.Count >= 1)
@@ -230,12 +233,6 @@ public class FirePropagation2 : MonoBehaviour
         camController.shakeDuration = 1f;
         yield return new WaitForSeconds(1.5f);
         
-    }
-
-    IEnumerator SmokeWork()
-    {
-        transform.GetChild(1).gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
     }
 }
 
