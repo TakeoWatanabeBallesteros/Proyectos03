@@ -119,6 +119,7 @@ public class Manguera : MonoBehaviour
         if (playerInput.reacharge && canRecharge)
         {
             WaterAmount += waterReload * Time.deltaTime;
+            blackboardUI.SetWaterBar(WaterAmount / 100);
         }
 
         if (playerInput.interact)
@@ -192,7 +193,6 @@ public class Manguera : MonoBehaviour
         if (other.tag == "Recharge")
         {
             blackboardUI.ReloadText.SetActive(true);
-            ChargeText.enabled = true;
             canRecharge = true;
         }
     }
