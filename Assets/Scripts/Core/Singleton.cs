@@ -39,13 +39,13 @@ public class Singleton : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
         Instance = this;
-        UIManager = FindObjectOfType<FSM_UIManager>();
+        _uiManager = FindObjectOfType<FSM_UIManager>();
         Player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void LoadPlayer(Scene scene, LoadSceneMode mode)
     {
-        UIManager = FindObjectOfType<FSM_UIManager>();
+        _uiManager = FindObjectOfType<FSM_UIManager>();
         Player = GameObject.FindGameObjectWithTag("Player");
     }
 }
