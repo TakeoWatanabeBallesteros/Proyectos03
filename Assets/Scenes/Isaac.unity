@@ -20896,12 +20896,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 355553215}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &356175939 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1722170699133360205, guid: 38542bac2387436449dc2f0519cfcf07,
-    type: 3}
-  m_PrefabInstance: {fileID: 4657523373011137941}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &356749259
 GameObject:
   m_ObjectHideFlags: 0
@@ -117687,33 +117681,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 139040500, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.x
-      value: 0.008997798
-      objectReference: {fileID: 0}
-    - target: {fileID: 139040500, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1659171715, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.745
-      objectReference: {fileID: 0}
-    - target: {fileID: 1659171715, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.904
-      objectReference: {fileID: 0}
-    - target: {fileID: 1722170699133360205, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4334808371477387079, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: m_Asset
-      value: 
-      objectReference: {fileID: 8926484042661614526, guid: a79be5c193512014eaa8246d69c6864a,
-        type: 3}
     - target: {fileID: 4657523373009156682, guid: 38542bac2387436449dc2f0519cfcf07,
         type: 3}
       propertyPath: m_RootOrder
@@ -117789,36 +117756,11 @@ PrefabInstance:
       propertyPath: YouDied
       value: 
       objectReference: {fileID: 1938046185}
-    - target: {fileID: 4657523373009156724, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: burnIndicatorTime
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657523373009156724, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: invulnearabilityDuration
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
         type: 3}
       propertyPath: ChargeText
       value: 
       objectReference: {fileID: 1394159434}
-    - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: waterVelocity
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: weakWaterVelocity
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 4657523373009156725, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: strongWaterVelocity
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 4657523373009156727, guid: 38542bac2387436449dc2f0519cfcf07,
         type: 3}
       propertyPath: DropText
@@ -117834,10 +117776,5 @@ PrefabInstance:
       propertyPath: PickupText
       value: 
       objectReference: {fileID: 1394159432}
-    - target: {fileID: 4657523373009156727, guid: 38542bac2387436449dc2f0519cfcf07,
-        type: 3}
-      propertyPath: prefabPoseKid
-      value: 
-      objectReference: {fileID: 356175939}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38542bac2387436449dc2f0519cfcf07, type: 3}
