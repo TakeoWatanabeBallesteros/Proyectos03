@@ -56,7 +56,7 @@ public class PlayerHealth : MonoBehaviour
         //StopAllCoroutines();
         StartCoroutine(ShowBurnIndicator());
             
-        if (Vida <= 0.00f && Dead == false && !immortal)
+        if (Vida <= 0.00f && Dead == false)
         {
             die();
         }
