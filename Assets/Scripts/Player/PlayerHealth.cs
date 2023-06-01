@@ -45,7 +45,6 @@ public class PlayerHealth : MonoBehaviour
         inputPlayer.enabled = true;
         playerMovement.enabled = true;
         Dead = false;
-        GM.AddTime(999f);
     }
     public void TakeDamage()
     {

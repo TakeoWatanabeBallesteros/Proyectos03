@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,10 @@ public class PointsBehavior : MonoBehaviour
 
     public static int Combo;
 
+    public int pointsToWin;
+
+    private Blackboard_UIManager blackboardUI;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +22,10 @@ public class PointsBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // if (Int32.Parse(blackboardUI.pointsText.text) != Points)
+        // {
+        //     blackboardUI.pointsText.text = Points.ToString();
+        // }
     }
 
     public static void IncreaseCombo() => Combo = Combo < 10 ? Combo + 1 : Combo;

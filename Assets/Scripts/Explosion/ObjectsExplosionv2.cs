@@ -54,15 +54,16 @@ public class ObjectsExplosionv2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isOneLoopDone == false)
+        if(!isOneLoopDone)
         {
-            if (preExplosion == true)
+            if (preExplosion)
             {
                 animator.SetTrigger("Explote");
                 CalculateExpansion();
+                PointsBehavior.AddPointsExplosion();
             }
 
-            if (doExplote == true && expansionExplosionTimer >= 0f)
+            if (doExplote && expansionExplosionTimer >= 0f)
             {
                 Debug.Log("Expansion on explosion");
                 preExplosion = false;

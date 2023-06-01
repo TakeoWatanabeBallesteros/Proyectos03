@@ -51,7 +51,6 @@ public class Collectable : MonoBehaviour
         {
             Destroy(gameObject);
             Destroyed = true;
-            GM.AddCollectable();
         }
     }
 }
