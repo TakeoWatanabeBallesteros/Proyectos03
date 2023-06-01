@@ -1,11 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class KidsManager : MonoBehaviour
 {
     // Start is called before the first frame update
     Blackboard_UIManager UI_Blackboard;
+    [SerializeField] private int SavedKids = 0;
+    [SerializeField] private GameObject[] Kids;
+    [SerializeField] private int TotalKids = 0;
+
+    [SerializeField] private int Collected = 0;
+    [SerializeField] private GameObject[] Collectables;
+    [SerializeField] private int TotalCollectables = 0;
+
+    public TMP_Text NumberOfkids;
+    public TMP_Text NumberOfCollectables;
 
     void Start()
     {
@@ -46,6 +57,10 @@ public class KidsManager : MonoBehaviour
     public void AddChild()
     {
         SavedKids++;
+    }
+    public void AddCollectable()
+    {
+        Collected++;
     }
 
 }

@@ -14,23 +14,7 @@ public class GameManager : MonoBehaviour
     //TODO: Collectables should be in another component.
 
     public GameState gameState { get; private set; }
-    
-    [SerializeField] private int SavedKids = 0;
-    [SerializeField] private GameObject[] Kids;
-    [SerializeField] private int TotalKids = 0;
 
-    [SerializeField] private int Collected = 0;
-    [SerializeField] private GameObject[] Collectables;
-    [SerializeField] private int TotalCollectables = 0;
-
-    PlayerHealth PH;
-    public TMP_Text NumberOfkids;
-    public TMP_Text NumberOfCollectables;
-    public TMP_Text TimeLeftText;
-    [SerializeField] private float TimerEnSegundos;
-    int minutes, seconds, cents;
-    public GameObject winScreen;
-    
     // That maybe should not be here
     private PlayerControls controls = null;
 
@@ -53,39 +37,18 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         
-        /*
-        Collectables = GameObject.FindGameObjectsWithTag("Collectable");
-        TotalCollectables = Collectables.Length;
- 
-        winScreen.SetActive(false);
-        */
     }
     
     // Update is called once per frame
     private void Update()
     {
-        /*
-        NumberOfCollectables.text = ("Collectables: " + Collected + "/" + TotalCollectables);
-    
-        if(TimerEnSegundos>0 && SavedKids >= TotalKids)
-        {
-            Win();
-        }
-        */
-        
+
     }
-    public void AddCollectable()
-    {
-        Collected++;
-    }
-    public void AddTime(float Time)
-    {
-        TimerEnSegundos += Time;
-    }
+   
 
     public void Win()
     {
-        winScreen.SetActive(true);
+
     }
 
     public void StartLevelPreview()
