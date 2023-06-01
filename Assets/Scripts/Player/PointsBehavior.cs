@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PointsBehavior : MonoBehaviour
 {
+    public int ExtinguishFirePoints;
+    
     public static int Points;
 
     public static int Combo;

@@ -34,16 +34,18 @@ public class Singleton : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
         DontDestroyOnLoad(gameObject);
         Instance = this;
+        UIManager = FindObjectOfType<FSM_UIManager>();
         Player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void LoadPlayer(Scene scene, LoadSceneMode mode)
     {
+        UIManager = FindObjectOfType<FSM_UIManager>();
         Player = GameObject.FindGameObjectWithTag("Player");
     }
 }

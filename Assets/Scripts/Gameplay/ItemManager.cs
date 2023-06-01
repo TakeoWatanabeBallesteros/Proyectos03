@@ -13,9 +13,22 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private int Collected = 0;
     [SerializeField] private int TotalCollectables = 0;
 
+    private InputPlayerController input;
+    private MovementPlayerController move;
+    private FSM_UIManager uiManager;
+    
+    [ContextMenu("Do Something")]
+    void DoSomething()
+    {
+        uiManager.uiManager_FSM.Trigger("Playing-Win");
+    }
+    
     void Start()
     {
         UI_Blackboard = Singleton.Instance.UIManager.blackboard_UIManager;
+        uiManager = Singleton.Instance.UIManager;
+        input = Singleton.Instance.Player.GetComponent<InputPlayerController>();
+        move = Singleton.Instance.Player.GetComponent<MovementPlayerController>();
         SavedKids = 0;
         UI_Blackboard.SetKids(SavedKids, TotalKids);
         Collected = 0;
@@ -23,24 +36,13 @@ public class ItemManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-        /*
-        if(TimerEnSegundos>0 && SavedKids >= TotalKids)
-        {
-            Win();
-        }
-        */
-
-    }
     public void AddChild()
     {
         SavedKids++;
         UI_Blackboard.SetKids(SavedKids, TotalKids);
         PointsBehavior.AddPointsSaveZone();
         if(SavedKids == TotalKids) {
-            //win
+            uiManager.uiManager_FSM.Trigger("Playing-Win");
         }
     }
 
