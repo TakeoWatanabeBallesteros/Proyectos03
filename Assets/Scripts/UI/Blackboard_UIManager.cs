@@ -32,6 +32,7 @@ public class Blackboard_UIManager : DynamicBlackboard
     [Header("Gameplay Objects")] 
     public Slider lifeBar;
     public Slider waterBar;
+    public Slider forceBar;
     public TMP_Text TimeLeftText;
     public TMP_Text NumberOfKids;
     public TMP_Text NumberOfColectables;
