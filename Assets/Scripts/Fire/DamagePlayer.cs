@@ -25,7 +25,7 @@ public class DamagePlayer : MonoBehaviour
         {
             Timer -= Time.deltaTime;
         }
-        else if(OnDamageZone)
+        else if(OnDamageZone && !PH.isTakingDamage)
         {
             PH.TakeDamage();
             Timer = 1f;

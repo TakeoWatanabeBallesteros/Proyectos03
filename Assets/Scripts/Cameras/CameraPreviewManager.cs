@@ -9,15 +9,12 @@ public class CameraPreviewManager : MonoBehaviour
     private PreviewCamera [] cameraList; // All the Preview Cameras on the scene
     private Camera playerCamera; // Main Camera
 
-    private void OnEnable()
+    private void OnDisable()
     {
-        if(Singleton.Instance == null) return;
-        Singleton.Instance.GameManager.LevelPreviewStartEvent += LoadPreviewCameras;
     }
 
     void Start()
     {
-        Singleton.Instance.GameManager.LevelPreviewStartEvent += LoadPreviewCameras;
         // playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         // cameraList = FindObjectsOfType<PreviewCamera>();
         // Array.Reverse(cameraList);
@@ -36,9 +33,18 @@ public class CameraPreviewManager : MonoBehaviour
             yield return new WaitForSeconds(camera.animationLenght);
             camera.Stop();
         }
-        playerCamera.enabled = true;
+        EndPreview();
+    }
 
-        Singleton.Instance.GameManager.LevelPreviewEnded();
+    public void EndPreview()
+    {
+        StopAllCoroutines();
+        playerCamera.enabled = true;
+        foreach (PreviewCamera camera in cameraList)
+        {
+            camera.Stop();
+        }
+        Singleton.Instance.UIManager.uiManager_FSM.Trigger("LevelPreview-Playing");
     }
     
     /// <summary>

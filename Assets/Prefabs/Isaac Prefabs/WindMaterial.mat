@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: WindMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: ca62e6aaca782874394a8ab24c4f94b1,
+  m_Shader: {fileID: -6465566751694194690, guid: af6a3efd974d80b48a566360d3b4d8bd,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -36,16 +36,33 @@ Material:
     m_Ints: []
     m_Floats:
     - _Dissolve: 0.907
+    - _Metallic: 0.5
     - _NoisePower: 1
     - _NoiseScale: 35
+    - _NormalStrength: 0.1
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Smoothness: 1
+    - _Transparency: 0
+    - _TransparencyMask: 0
     - _TwirlAmount: 2
+    - _VoronoiAgitation: 1
+    - _VoronoiPower: 2
+    - _VoronoiScale: 5
+    - _WobbleAmount: 1
+    - _WobbleHeight: 1
+    - _WobbleSpeed: 1
+    - _WobleFrequency: 1
     m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 766.9961, g: 766.9961, b: 766.9961, a: 1}
     - _NoiseSpeed: {r: 0, g: 0.56, b: 0, a: 0}
+    - _NormalsSpeed: {r: 0, g: -0.2, b: 0, a: 0}
     - _TwirlCenter: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _TwirlSpeed: {r: 0, g: 2.55, b: 0, a: 0}
+    - _VoronoiColor: {r: 1, g: 1, b: 1, a: 1}
+    - _VoronoiSpeed: {r: 0, g: -0.5, b: 0, a: 0}
+    - _VoronoiTiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &822826195303212701
 MonoBehaviour:

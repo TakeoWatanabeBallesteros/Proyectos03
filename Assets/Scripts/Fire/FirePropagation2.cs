@@ -13,11 +13,8 @@ public class FirePropagation2 : MonoBehaviour
     public GameObject explosive;
     public float nearDistance;
 
-    public int highPercentage;
-    public int lowPercentage;
-
     [SerializeField] float fireHP;
-    [SerializeField] float timeToBurn;
+    [SerializeField] public float timeToBurn;
     float timeToExplote;
 
     public bool onFire = false;
@@ -37,10 +34,12 @@ public class FirePropagation2 : MonoBehaviour
 
     CameraController camController;
 
-    public Material objMaterial;
-    public Material redMaterial;
-
     public bool startRoomFires;
+
+    bool canLerpMaterials;
+    Material _objectMaterial;
+    public Material redMaterial;
+    public Material burnedMaterial;
 
     private void Awake()
     {
@@ -62,6 +61,10 @@ public class FirePropagation2 : MonoBehaviour
         expansionTimer = delay;
         DamageTimer = delayFire;
         fireHP = 100f;
+
+        canLerpMaterials = false;
+        _objectMaterial = GetComponentInChildren<MeshRenderer>().material;
+        _objectMaterial.EnableKeyword("_EMISSION");
 
         if (!onFire)
         {
@@ -88,7 +91,7 @@ public class FirePropagation2 : MonoBehaviour
     {
         if (onFire)
         {
-            CalculateFirePropagation();
+            CalculateFirePropagation();           
 
             if (fireHP > 0 && DamageTimer > 0)
             {
@@ -106,6 +109,8 @@ public class FirePropagation2 : MonoBehaviour
             {
                 CalculateExplosiveFire();
             }
+
+            _objectMaterial.Lerp(_objectMaterial, burnedMaterial, Time.deltaTime / 2);
         }
 
         if (timeToBurn <= 0)
@@ -172,16 +177,20 @@ public class FirePropagation2 : MonoBehaviour
                     fire = x.gameObject;
                     //x.transform.GetChild(0).gameObject.SetActive(true);
                     fire.GetComponent<FirePropagation2>().timeToBurn -= Time.deltaTime;
-                    fire.GetComponent<MaterialLerping>().canLerpMaterials = true;
+                    fire.GetComponent<FirePropagation2>().canLerpMaterials = true;
+                    fire.GetComponent<FirePropagation2>().MaterialLerping(fire.GetComponent<FirePropagation2>().timeToBurn);
+                    //fire.GetComponent<MaterialLerping>().canLerpMaterials = true;
                     //nearObjectsOnFire.Remove(x);
                     //break;
                 }
-                else if (x.fireType == FireType2.LowFlammability && x.fireHP >= 0f)
+                else if (x.fireType == FireType2.LowFlammability && x.timeToBurn >= 0f)
                 {
                     fire = x.gameObject;
                     //x.transform.GetChild(0).gameObject.SetActive(true);
                     fire.GetComponent<FirePropagation2>().timeToBurn -= Time.deltaTime;
-                    fire.GetComponent<MaterialLerping>().canLerpMaterials = true;
+                    fire.GetComponent<FirePropagation2>().canLerpMaterials = true;
+                    fire.GetComponent<FirePropagation2>().MaterialLerping(fire.GetComponent<FirePropagation2>().timeToBurn);
+                    //fire.GetComponent<MaterialLerping>().canLerpMaterials = true;
                     //nearObjectsOnFire.Remove(x);
                     //break;
                 }
@@ -199,6 +208,14 @@ public class FirePropagation2 : MonoBehaviour
         {
             fire.transform.GetChild(0).gameObject.SetActive(true);
             fire.GetComponent<FirePropagation2>().onFire = true;
+        }
+    }
+
+    public void MaterialLerping(float timeBurning)
+    {
+        if (canLerpMaterials)
+        {
+            _objectMaterial.Lerp(_objectMaterial, redMaterial, Time.deltaTime / timeBurning);
         }
     }
 
