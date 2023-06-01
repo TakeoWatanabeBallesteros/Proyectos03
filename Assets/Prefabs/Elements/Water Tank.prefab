@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7477609211032389495}
   - component: {fileID: 7477609211032389488}
+  - component: {fileID: 658047868995804518}
   m_Layer: 0
   m_Name: Water Tank
   m_TagString: Untagged
@@ -41,11 +42,24 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7477609211032389494}
   m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.2691145, y: 4.9766393, z: 6.91399}
+  m_Center: {x: 0.1641984, y: 2.8883197, z: 0.011457443}
+--- !u!65 &658047868995804518
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7477609211032389494}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.1494675, y: 1.7999997, z: 1.0701971}
-  m_Center: {x: -0.072444916, y: 1.3, z: -0.007763386}
+  m_Size: {x: 3.72534, y: 5.468868, z: 3.486084}
+  m_Center: {x: -0.11900997, y: 2.234434, z: -0.027767181}
 --- !u!1 &7477609211051257189
 GameObject:
   m_ObjectHideFlags: 0
