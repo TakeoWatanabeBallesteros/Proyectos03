@@ -84,8 +84,6 @@ MonoBehaviour:
   fire: {fileID: 0}
   explosive: {fileID: 0}
   nearDistance: 5
-  highPercentage: 70
-  lowPercentage: 40
   fireHP: 100
   timeToBurn: 0
   onFire: 1
@@ -94,9 +92,9 @@ MonoBehaviour:
   delayFire: 0.2
   CanBurn: 0
   fireParticles: []
-  objMaterial: {fileID: 2100000, guid: a025e66a34175f846950f62c70916ed7, type: 2}
-  redMaterial: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
   startRoomFires: 0
+  redMaterial: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
+  burnedMaterial: {fileID: 2100000, guid: 0e9168e47f005f7468aa7407ed8bf563, type: 2}
 --- !u!114 &120730388442104966
 MonoBehaviour:
   m_ObjectHideFlags: 0
