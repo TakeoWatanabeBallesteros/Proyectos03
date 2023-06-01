@@ -18,6 +18,8 @@ public class PlayerHealth : MonoBehaviour
     float Alfa;
     GameManager GM;
     private Blackboard_UIManager blackboardUI;
+    public float invulnearabilityDuration;
+    public bool isTakingDamage = false;
 
     // Start is called before the first frame update
     void Start()
@@ -28,9 +30,9 @@ public class PlayerHealth : MonoBehaviour
         playerMovement = GetComponent<MovementPlayerController>();
         initialPos = transform.position;
         Dead = false;
-        //Fire.color = new Color(1f, 1f, 1f, 0f);
         Vida = 1.00f;
         blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
+        immortal = false;
     }
     
     IEnumerator Respawn()
@@ -48,9 +50,10 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage()
     {
         if (Dead) return;
-        Vida -= 0.10f;
+        if(!immortal) Vida -= 0.10f; isTakingDamage = true;
+        StartCoroutine(Becomeinvulnerable());
         blackboardUI.SetLifeBar(Vida);
-        StopAllCoroutines();
+        //StopAllCoroutines();
         StartCoroutine(ShowBurnIndicator());
             
         if (Vida <= 0.00f && Dead == false && !immortal)
@@ -63,7 +66,15 @@ public class PlayerHealth : MonoBehaviour
     {
         Fire.SetActive(true);
         yield return new WaitForSeconds(burnIndicatorTime);
+        isTakingDamage = false;
         Fire.SetActive(false);
+    }
+
+    IEnumerator Becomeinvulnerable()
+    {
+        immortal = true;
+        yield return new WaitForSeconds(invulnearabilityDuration);
+        immortal = false;
     }
 
     private void die()
