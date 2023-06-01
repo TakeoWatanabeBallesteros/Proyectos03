@@ -64,10 +64,10 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator ShowBurnIndicator()
     {
-        Fire.SetActive(true);
+        blackboardUI.Fire.SetActive(true);
         yield return new WaitForSeconds(burnIndicatorTime);
         isTakingDamage = false;
-        Fire.SetActive(false);
+        blackboardUI.Fire.SetActive(false);
     }
 
     IEnumerator Becomeinvulnerable()

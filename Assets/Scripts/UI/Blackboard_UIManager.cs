@@ -39,6 +39,7 @@ public class Blackboard_UIManager : DynamicBlackboard
     public TMP_Text pointsWinText;
     public GameObject PickUpText;
     public GameObject ReloadText;
+    public GameObject Fire;
     
     
     private PlayerControls controls = null;
