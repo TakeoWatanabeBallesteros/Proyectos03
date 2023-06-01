@@ -54,11 +54,6 @@ public class GameManager : MonoBehaviour
     {
         
         /*
-        PH = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
- 
-        Kids = GameObject.FindGameObjectsWithTag("Kid");
-        TotalKids = Kids.Length;
-
         Collectables = GameObject.FindGameObjectsWithTag("Collectable");
         TotalCollectables = Collectables.Length;
  
@@ -70,7 +65,6 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         /*
-        NumberOfkids.text = ("Kids saved: " + SavedKids + "/" + TotalKids);
         NumberOfCollectables.text = ("Collectables: " + Collected + "/" + TotalCollectables);
     
         if(TimerEnSegundos>0 && SavedKids >= TotalKids)
@@ -79,18 +73,6 @@ public class GameManager : MonoBehaviour
         }
         */
         
-    }
-    public int GetTotalKids()
-    {
-        return TotalKids;
-    }
-    public int GetSavedKids()
-    {
-        return TotalKids;
-    }
-    public void AddChild()
-    {
-        SavedKids++;
     }
     public void AddCollectable()
     {

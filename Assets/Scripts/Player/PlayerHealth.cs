@@ -12,10 +12,9 @@ public class PlayerHealth : MonoBehaviour
     MovementPlayerController playerMovement;
     PickupKid Kid;
     public GameObject Fire;
-    public Image YouDied;
     bool Dead;
     [SerializeField] private float burnIndicatorTime;
-    float Alfa;
+
     GameManager GM;
     private Blackboard_UIManager blackboardUI;
     public float invulnearabilityDuration;
@@ -39,9 +38,10 @@ public class PlayerHealth : MonoBehaviour
     {
         yield return new WaitForSeconds(4.5f);
         transform.position = initialPos;
+
         yield return new WaitForSeconds(.5f);
         Vida = 1;
-        YouDied.color = new Color(1f, 1f, 1f, 0f);
+        blackboardUI.YouDiedImage.color = new Color(1f, 1f, 1f, 0f);
         inputPlayer.enabled = true;
         playerMovement.enabled = true;
         Dead = false;
@@ -82,17 +82,8 @@ public class PlayerHealth : MonoBehaviour
         Dead = true;
         inputPlayer.enabled = false;
         playerMovement.enabled = false;
-        StartCoroutine(FadeIN(YouDied));
+        StartCoroutine(blackboardUI.FadeIN());
         StartCoroutine(Respawn());
     }
-    IEnumerator FadeIN(Image image)
-    {
-        Alfa += .1f;
-        image.color = new Color(1f, 1f, 1f, Alfa);
-        yield return new WaitForSeconds(.1f);
-        if (Alfa < 1)
-        {
-            StartCoroutine(FadeIN(image));
-        }
-    }
+    
 }

@@ -20,9 +20,12 @@ public class AnimatorController : MonoBehaviour
     {
         CharacterAnimator.SetTrigger("PickChild");
     }
-    public void PrepareChild()
+    public void PrepareChild(bool value)
     {
-        CharacterAnimator.SetTrigger("PrepareChild");
+        if (CharacterAnimator.GetBool("PrepareChild") != value)
+        {
+            CharacterAnimator.SetBool("PrepareChild", value);
+        }
     }
     public void YeetChild()
     {

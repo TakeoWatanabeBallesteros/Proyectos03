@@ -13835,7 +13835,7 @@ MonoBehaviour:
   P3: {fileID: 7537760272656196668}
   P4: {fileID: 2088184233391791992}
   Fuegos: []
-  smokeMultiplier: 1.1
+  smokeMultiplier: 0.5
 --- !u!1 &8294207567736752110
 GameObject:
   m_ObjectHideFlags: 0
@@ -14760,7 +14760,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -14870,7 +14870,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 15
+        scalar: 0
         minScalar: 15
         maxCurve:
           serializedVersion: 2
@@ -14920,9 +14920,9 @@ ParticleSystem:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      cycleCount: 1
+      cycleCount: 0
       repeatInterval: 0.01
-      probability: 1
+      probability: 0
   SizeModule:
     enabled: 1
     curve:

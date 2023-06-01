@@ -9,7 +9,6 @@ public class PickupKid : MonoBehaviour
     AnimatorController CharacterAnim;
     public GameManager GM;
     public Transform Shoulder;
-    public Transform DropPoint;
     public GameObject PickupText;
     public GameObject DropText;
     private bool CarringKid;
@@ -41,7 +40,7 @@ public class PickupKid : MonoBehaviour
         if (CanPickup && playerInput.interact)
         {
             PickupText.SetActive(false);
-            TargetKid.SetActive(false);
+            Destroy(TargetKid);
             prefabPoseKid.SetActive(true);     
             CarringKid = true;
             CanPickup = false;
