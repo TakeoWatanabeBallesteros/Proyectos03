@@ -87,7 +87,7 @@ public class Manguera : MonoBehaviour
         {
             Debug.Log("1");
             StandardShootPerformed();
-            if(fireExtinguish.distancePlayerRaycastHitWeak != fireExtinguish.WeakRayLenght) weakSplash.Play();
+            if(fireExtinguish.distancePlayerRaycastHitWeak != fireExtinguish.WeakRayLenght && weakWaterMeshScaleZ >= distanceHitPlayerWeak - 1f) weakSplash.Play();
         }
 
         else if ((!playerInput.shoot || WaterAmount <= 0) && weakWaterMeshScaleZ > 0 && !playerInput.secondaryShoot)
@@ -104,7 +104,7 @@ public class Manguera : MonoBehaviour
             Debug.Log("3");
             StrongShootPerformed();
             StartCoroutine(KnockBackForce()); //Hay que tocar esto para mirar de tener un valor decente para el movimiento para atrás
-            if (fireExtinguish.distancePlayerRaycastHitWeak != fireExtinguish.WeakRayLenght) strongSplash.Play();
+            if (fireExtinguish.distancePlayerRaycastHitWeak != fireExtinguish.WeakRayLenght && strongWaterMeshScaleZ >= distanceHitPlayerStrong - 1f) strongSplash.Play();
         }
 
         else if ((!playerInput.secondaryShoot || WaterAmount <= 0) && strongWaterMeshScaleZ > 0 && !playerInput.shoot)
