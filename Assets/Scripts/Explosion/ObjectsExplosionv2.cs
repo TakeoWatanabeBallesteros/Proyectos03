@@ -169,7 +169,6 @@ public class ObjectsExplosionv2 : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         isOneLoopDone = true;
         doExplosion = false; 
-        PointsBehavior.AddPointsExplosion();
     }
 
 }

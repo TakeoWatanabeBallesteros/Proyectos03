@@ -24,6 +24,7 @@ public class Blackboard_UIManager : DynamicBlackboard
     public GameObject PauseMenuCanvas;
     public GameObject SettingPauseMenuCanvas;
     public GameObject RestartLevelCanvas;
+    public GameObject WinCanvas;
     public GameObject GoMainMenuCanvas;
     #endregion
     
@@ -35,6 +36,7 @@ public class Blackboard_UIManager : DynamicBlackboard
     public TMP_Text NumberOfKids;
     public TMP_Text NumberOfColectables;
     public TMP_Text pointsText;
+    public TMP_Text pointsWinText;
     public GameObject PickUpText;
     public GameObject ReloadText;
     
@@ -124,6 +126,7 @@ public class Blackboard_UIManager : DynamicBlackboard
     public void SetPoints(int points, int pointsToWin)
     {
         pointsText.text = points + " / " + pointsToWin;
+        pointsWinText.text = points + " / " + pointsToWin;
     }
     
     public IEnumerator FadeIN()

@@ -44,7 +44,7 @@ public class FSM_UIManager : MonoBehaviour
 
     private void AddTransitions()
     {
-        
+        uiManager_FSM.AddTriggerTransition("InGame-MainMenu","InGame_FSM", "MainMenu_FSM", t => true);
     }
 
     #endregion
@@ -80,6 +80,11 @@ public class FSM_UIManager : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void GoMainMenu()
+    {
+        SceneManager.LoadSceneAsync(0);
     }
 
     public void WantToExit()

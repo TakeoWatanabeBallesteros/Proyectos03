@@ -8,11 +8,6 @@ using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
-    
-    //TODO: The timer should be in another component.
-    //TODO: Kids counter should be in another component.
-    //TODO: Collectables should be in another component.
-
     public GameState gameState { get; private set; }
 
     // That maybe should not be here
@@ -48,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     public void Win()
     {
-
+        
     }
 
     public void StartLevelPreview()
@@ -89,6 +84,7 @@ public enum GameState{
     LvlInfo,
     LevelPreview,
     Playing,
+    Win,
     PauseMenu,
     SettingPause,
     RestartLvl
