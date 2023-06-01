@@ -16,6 +16,7 @@ public class PointsBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
         Points = 0;
         blackboardUI.SetPoints(Points, pointsToWin);
     }
