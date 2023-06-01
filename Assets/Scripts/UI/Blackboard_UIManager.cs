@@ -32,11 +32,15 @@ public class Blackboard_UIManager : DynamicBlackboard
     public Slider lifeBar;
     public Slider waterBar;
     public TMP_Text TimeLeftText;
+    public TMP_Text NumberOfKids;
     
     
     private PlayerControls controls = null;
     private GameManager gameManager;
     private FSM_UIManager uiManager;
+
+    float DeathscreenAlfa;
+    public Image YouDiedImage;
 
     // Start is called before the first frame update
     void Start()
@@ -103,5 +107,21 @@ public class Blackboard_UIManager : DynamicBlackboard
     public void SetTimer(string time)
     {
         TimeLeftText.text = time;
+    }
+
+    public void SetKids(int kids)
+    {
+        NumberOfKids.text = kids.ToString();
+    }
+
+    public IEnumerator FadeIN()
+    {
+        DeathscreenAlfa += .1f;
+        YouDiedImage.color = new Color(1f, 1f, 1f, DeathscreenAlfa);
+        yield return new WaitForSeconds(.1f);
+        if (DeathscreenAlfa < 1)
+        {
+            StartCoroutine(FadeIN());
+        }
     }
 }

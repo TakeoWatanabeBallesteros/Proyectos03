@@ -59,13 +59,13 @@ public class ThrowKid : MonoBehaviour
         {
             ForceBar.gameObject.SetActive(true);
             Fuerza = Mathf.Clamp(Fuerza += FuerzaPerSecond * Time.deltaTime, 0, MaxFuerza);
-            CharacterAnim.PrepareChild();
         }
         else
         {
             ForceBar.gameObject.SetActive(false);
             Fuerza = 0;
         }
+        CharacterAnim.PrepareChild(Holding);
         ForceBar.value = Fuerza;
     }
 }

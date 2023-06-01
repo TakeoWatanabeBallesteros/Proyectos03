@@ -47,7 +47,7 @@ public class WallDisapear : MonoBehaviour
         {
             StartCoroutine(OcludeWall(OP));
         }
-        if (OP == -1 && WallOpacity > .3f)
+        if (OP == -1 && WallOpacity > .15f)
         {
             StartCoroutine(OcludeWall(OP));
         }
