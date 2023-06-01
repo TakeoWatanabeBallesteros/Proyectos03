@@ -81,7 +81,7 @@ public class PlayerHealth : MonoBehaviour
     {
         Dead = true;
         inputPlayer.enabled = false;
-        playerMovement.enabled = false;
+        playerMovement.Stop();
         StartCoroutine(blackboardUI.FadeIN());
         StartCoroutine(Respawn());
     }

@@ -60,12 +60,10 @@ public class ObjectsExplosionv2 : MonoBehaviour
             {
                 animator.SetTrigger("Explote");
                 CalculateExpansion();
-                PointsBehavior.AddPointsExplosion();
             }
 
             if (doExplote && expansionExplosionTimer >= 0f)
             {
-                Debug.Log("Expansion on explosion");
                 preExplosion = false;
                 expansionExplosionTimer -= Time.deltaTime;
                 
@@ -170,7 +168,8 @@ public class ObjectsExplosionv2 : MonoBehaviour
         camController.shakeDuration = 0.5f;
         yield return new WaitForSeconds(0.1f);
         isOneLoopDone = true;
-        doExplosion = false;
+        doExplosion = false; 
+        PointsBehavior.AddPointsExplosion();
     }
 
 }
