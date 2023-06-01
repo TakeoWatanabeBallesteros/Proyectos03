@@ -75,7 +75,7 @@ public class TransformRecorder : MonoBehaviour
 
 public class MyEditorWindow : EditorWindow
 {
-    [MenuItem("Window/Transform Recorder")]
+    [MenuItem("Tools/Transform Recorder")]
     public static void ShowWindow()
     {
         GetWindow<MyEditorWindow>("Transform Recorder");
@@ -94,3 +94,4 @@ public class MyEditorWindow : EditorWindow
         }
     }
 }
+
