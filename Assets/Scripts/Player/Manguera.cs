@@ -144,6 +144,7 @@ public class Manguera : MonoBehaviour
         particlesWater.Stop();
         weakWaterMeshScaleZ = Mathf.Clamp(weakWaterMeshScaleZ - Time.deltaTime * weakWaterVelocity, 0, distanceHitPlayerWeak);
         waterWeakMesh.SetFloat("ScaleZ", weakWaterMeshScaleZ / 5);
+        PointsBehavior.ResetCombo();
     }
 
     private void StrongShootPerformed()
@@ -178,6 +179,7 @@ public class Manguera : MonoBehaviour
         particlesWater.Stop();
         strongWaterMeshScaleZ = Mathf.Clamp(strongWaterMeshScaleZ - Time.deltaTime * strongWaterVelocity, 0, distanceHitPlayerStrong);
         waterStrongMesh.SetFloat("ScaleZ", strongWaterMeshScaleZ / 5);
+        PointsBehavior.ResetCombo();
     }
 
     private void OnTriggerEnter(Collider other)
