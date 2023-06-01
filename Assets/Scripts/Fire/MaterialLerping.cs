@@ -13,7 +13,7 @@ public class MaterialLerping : MonoBehaviour
     void Start()
     {
         canLerpMaterials = false;
-        _objectMaterial = GetComponent<MeshRenderer>().material;
+        _objectMaterial = GetComponentInChildren<MeshRenderer>().material;
         _objectMaterial.EnableKeyword("_EMISSION");
     }
 
