@@ -11,6 +11,7 @@ public class Collectable : MonoBehaviour
     MeshRenderer texture;
     public GameObject Sparks;
     ItemManager Items;
+    public GameObject Luz;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,7 @@ public class Collectable : MonoBehaviour
             Destroyed = true;
             texture.material.color = new Color(0f, 0f, 0f, 1f);
             Sparks.SetActive(true);
+            Destroy(Luz);
         }
         if (HP > 0 && DamageTimer > 0)
         {
