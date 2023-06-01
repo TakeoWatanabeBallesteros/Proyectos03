@@ -191,7 +191,7 @@ public class Manguera : MonoBehaviour
     {
         if (other.tag == "Recharge")
         {
-            ChargeText.text = "Press R to Recharge Water";
+            blackboardUI.ReloadText.SetActive(true);
             ChargeText.enabled = true;
             canRecharge = true;
         }
@@ -200,7 +200,7 @@ public class Manguera : MonoBehaviour
     {
         if (other.tag == "Recharge")
         {
-            ChargeText.enabled = false;
+            blackboardUI.ReloadText.SetActive(false);
             canRecharge = false;
         }
     }
