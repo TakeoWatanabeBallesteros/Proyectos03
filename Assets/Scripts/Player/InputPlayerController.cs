@@ -21,7 +21,6 @@ public class InputPlayerController : MonoBehaviour
     {
         controls = controls ?? new PlayerControls();
         controls.Enable();
-        
     }
 
     private void OnDisable()
