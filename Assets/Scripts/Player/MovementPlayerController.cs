@@ -119,4 +119,9 @@ public class MovementPlayerController : MonoBehaviour
     {
         rb.AddForce(-transform.forward.normalized*0.1f);
     }
+
+    public void Stop()
+    {
+        rb.velocity = Vector3.zero;
+    }
 }
