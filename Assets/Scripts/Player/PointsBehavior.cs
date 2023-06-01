@@ -33,6 +33,7 @@ public class PointsBehavior : MonoBehaviour
     public static void ResetCombo() => Combo = 1;
     public static void AddPointsFire() => Points += 10 * Combo;
     public static void AddPointsSaveZone(int attempts, int distance) => Points += 1000 + (200 / attempts) + 10 * distance;
+    public static void AddPointsSaveZone() => Points += 1000;
     public static void AddPointsExplosion() => Points += 750;
     public static void AddPointsCollectable() => Points += 500;
     public static void AddPointsSeconds(int seconds) => Points += 50 * seconds;
