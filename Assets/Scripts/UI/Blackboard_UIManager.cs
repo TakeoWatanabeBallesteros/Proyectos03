@@ -33,6 +33,7 @@ public class Blackboard_UIManager : DynamicBlackboard
     public Slider waterBar;
     public TMP_Text TimeLeftText;
     public TMP_Text NumberOfKids;
+    public TMP_Text pointsText;
     
     
     private PlayerControls controls = null;
