@@ -33,6 +33,7 @@ public class Blackboard_UIManager : DynamicBlackboard
     public Slider waterBar;
     public TMP_Text TimeLeftText;
     public TMP_Text NumberOfKids;
+    public TMP_Text NumberOfColectables;
     public TMP_Text pointsText;
     
     
@@ -113,7 +114,10 @@ public class Blackboard_UIManager : DynamicBlackboard
     public void SetKids(int kids, int totalKids)
     {
         NumberOfKids.text = kids+" / "+totalKids;
-
+    }
+    public void SetColectables(int colectables, int totalColectables)
+    {
+        NumberOfColectables.text = colectables + " / " + totalColectables;
     }
 
 
