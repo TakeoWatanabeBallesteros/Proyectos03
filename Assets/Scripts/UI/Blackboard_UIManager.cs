@@ -119,8 +119,11 @@ public class Blackboard_UIManager : DynamicBlackboard
     {
         NumberOfColectables.text = colectables + " / " + totalColectables;
     }
-
-
+    public void SetPoints(int points, int pointsToWin)
+    {
+        pointsText.text = points + " / " + pointsToWin;
+    }
+    
     public IEnumerator FadeIN()
     {
         DeathscreenAlfa += .1f;
