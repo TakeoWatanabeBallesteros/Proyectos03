@@ -25,7 +25,7 @@ public class ThrowKid : MonoBehaviour
         pickupKid = GetComponent<PickupKid>();
         Input = GetComponent<InputPlayerController>();
         Fuerza = 0;
-        ForceBar = GameObject.Find("ForceBar").GetComponent<Slider>();
+        ForceBar = Singleton.Instance.UIManager.blackboard_UIManager.forceBar;
         ForceBar.gameObject.SetActive(false);
     }
 
