@@ -34,24 +34,21 @@ public class ItemManager : MonoBehaviour
         */
 
     }
-    public int GetTotalKids()
-    {
-        return TotalKids;
-    }
-    public int GetSavedKids()
-    {
-        return TotalKids;
-    }
     public void AddChild()
     {
         SavedKids++;
         UI_Blackboard.SetKids(SavedKids, TotalKids);
+        PointsBehavior.AddPointsSaveZone();
+        if(SavedKids == TotalKids) {
+            //win
+        }
     }
 
     public void AddCollectable()
     {
         Collected++;
         UI_Blackboard.SetColectables(Collected, TotalCollectables);
+        PointsBehavior.AddPointsCollectable();
     }
 
 }
