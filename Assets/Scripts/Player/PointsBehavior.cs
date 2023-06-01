@@ -24,10 +24,7 @@ public class PointsBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Int32.Parse(blackboardUI.pointsText.text) != Points)
-        {
-            blackboardUI.SetPoints(Points, pointsToWin);
-        }
+        blackboardUI.SetPoints(Points, pointsToWin);
     }
 
     public static void IncreaseCombo() => Combo = Combo < 10 ? Combo + 1 : Combo;
