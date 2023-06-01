@@ -41,6 +41,7 @@ public class PlayerHealth : MonoBehaviour
 
         yield return new WaitForSeconds(.5f);
         Vida = 1;
+        blackboardUI.SetLifeBar(Vida);
         blackboardUI.YouDiedImage.color = new Color(1f, 1f, 1f, 0f);
         inputPlayer.enabled = true;
         playerMovement.enabled = true;

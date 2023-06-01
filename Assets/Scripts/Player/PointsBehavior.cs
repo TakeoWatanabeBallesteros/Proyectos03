@@ -16,7 +16,8 @@ public class PointsBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Points = 0;
+        blackboardUI.SetPoints(Points, pointsToWin);
     }
 
     // Update is called once per frame
@@ -24,7 +25,7 @@ public class PointsBehavior : MonoBehaviour
     {
         if (Int32.Parse(blackboardUI.pointsText.text) != Points)
         {
-            blackboardUI.pointsText.text = Points.ToString();
+            blackboardUI.SetPoints(Points, pointsToWin);
         }
     }
 

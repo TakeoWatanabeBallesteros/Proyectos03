@@ -10,12 +10,11 @@ public class Collectable : MonoBehaviour
     public bool Destroyed;
     MeshRenderer texture;
     public GameObject Sparks;
-    GameManager GM;
-
+    ItemManager Items;
     // Start is called before the first frame update
     void Start()
     {
-        GM = FindObjectOfType<GameManager>();
+        Items = FindObjectOfType<ItemManager>();
         texture = GetComponent<MeshRenderer>();
         Destroyed = false;
     }
@@ -49,6 +48,7 @@ public class Collectable : MonoBehaviour
     {
         if (other.tag == "Player" && !Destroyed)
         {
+            Items.AddCollectable();
             Destroy(gameObject);
             Destroyed = true;
         }

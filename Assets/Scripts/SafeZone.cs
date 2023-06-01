@@ -5,9 +5,11 @@ using UnityEngine;
 public class SafeZone : MonoBehaviour
 {
     public GameObject mykid;
+    ItemManager Kids;
     // Start is called before the first frame update
     void Start()
     {
+        Kids = FindObjectOfType<ItemManager>();
         mykid.SetActive(false);
     }
 
@@ -22,6 +24,7 @@ public class SafeZone : MonoBehaviour
         {
             Destroy(other.transform.parent.gameObject);
             mykid.SetActive(true);
+            Kids.AddChild();
         }
     }
 }
