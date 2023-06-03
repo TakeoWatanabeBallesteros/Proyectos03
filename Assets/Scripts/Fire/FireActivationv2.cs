@@ -32,11 +32,9 @@ public class FireActivationv2 : MonoBehaviour
             foreach (ObjectsExplosionv2 o in _explosions)
             {
                 o.enabled = true;
-                //o.preExplosion = true;
             }
             foreach (MaterialLerping m in _materialLerping)
             {
-                //m.canLerpMaterials = true;
                 m.enabled = true;
             }
         }
@@ -49,7 +47,6 @@ public class FireActivationv2 : MonoBehaviour
             foreach (ObjectsExplosionv2 o in _explosions)
             {
                 o.enabled = false;
-                o.preExplosion = false;
             }
             foreach (MaterialLerping m in _materialLerping)
             {
@@ -58,19 +55,6 @@ public class FireActivationv2 : MonoBehaviour
             }
         }
     }
-
-    /*
-    void MyCollisions()
-    {
-        Collider[] hitcolliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, m_LayerMask);
-        int i = 0;
-        while (i < hitcolliders.Length)
-        {
-            i++;
-            _fires.Add(hitcolliders[i].gameObject.GetComponent<FirePropagation2>());
-            _explosions.Add(hitcolliders[i].gameObject.GetComponent<ObjectsExplosionv2>());
-        }
-    }*/
 
     private void OnDrawGizmos()
     {
@@ -83,10 +67,9 @@ public class FireActivationv2 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             playerIn = true;
-            Debug.Log("Ha entrado el player");
         }
     }
 }
