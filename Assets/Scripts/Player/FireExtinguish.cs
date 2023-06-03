@@ -99,9 +99,9 @@ public class FireExtinguish : MonoBehaviour
             {
                 hit.collider.GetComponentInParent<Collectable>().TakeDamage(25);
             } 
-            if (hit.collider.gameObject.GetComponentInParent<ObjectsExplosionv2>())
+            if (hit.collider.gameObject.TryGetComponent(out ObjectsExplosionv2 explosion))
             {
-                hit.collider.GetComponentInParent<ObjectsExplosionv2>().doExplosion = true;
+                StartCoroutine(explosion.Explode());
             }   
             
             distancePlayerRaycastHitWeak = Vector3.Distance(hit.transform.position, LasserOrigin.transform.position);
@@ -130,9 +130,9 @@ public class FireExtinguish : MonoBehaviour
             {
                 hit.collider.GetComponentInParent<Collectable>().TakeDamage(50);
             }
-            if (hit.collider.gameObject.GetComponentInParent<ObjectsExplosionv2>())
+            if (hit.collider.gameObject.TryGetComponent(out ObjectsExplosionv2 explosion))
             {
-                hit.collider.GetComponentInParent<ObjectsExplosionv2>().doExplosion = true;
+                StartCoroutine(explosion.Explode());
             }
 
             distancePlayerRaycastHitStrong = Vector3.Distance(hit.transform.position, LasserOrigin.transform.position);
