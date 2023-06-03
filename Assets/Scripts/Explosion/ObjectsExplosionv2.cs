@@ -20,9 +20,9 @@ public class ObjectsExplosionv2 : MonoBehaviour
     public float knockBackRadius;
     public float explosionForce;
     public LayerMask explosionMask;
-    public LayerMask playerMask;
 
     CameraController camController;
+    
     void Start()
     {
         nearObjectsOnFire = FindObjectsOfType<FirePropagation2>().ToList<FirePropagation2>();
@@ -37,7 +37,7 @@ public class ObjectsExplosionv2 : MonoBehaviour
         yield return new WaitForSeconds(2f);
         transform.GetChild(1).gameObject.SetActive(true);
         CalculateExpansion();
-        ExplosionKnockBackCor();
+        ExplosionKnockBack();
         camController.shakeDuration = 1f;
         this.enabled = false;
     }
@@ -68,19 +68,10 @@ public class ObjectsExplosionv2 : MonoBehaviour
         }
     }  
     
-    private void ExplosionKnockBackCor() //Apply force in x sphere radius
+    private void ExplosionKnockBack() //Apply force in x sphere radius
     {
         var colliders = Physics.OverlapSphere(transform.position, knockBackRadius, explosionMask);
         foreach (Collider target in colliders)
-        {
-            Rigidbody rb = target.GetComponentInParent<Rigidbody>();
-            if (rb == null) continue;
-            rb.AddExplosionForce(explosionForce, transform.position, knockBackRadius);
-
-        }
-
-        var playerCollider = Physics.OverlapSphere(transform.position, knockBackRadius, playerMask);
-        foreach (Collider target in playerCollider)
         {
             Rigidbody rb = target.GetComponentInParent<Rigidbody>();
             if (rb == null) continue;
