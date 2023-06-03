@@ -234,6 +234,22 @@ public class FirePropagation2 : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Kid"))
+        {
+            other.GetComponent<HealthSystem>().TakeDamage();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Kid"))
+        {
+            other.GetComponent<HealthSystem>().RestartTimer();
+        }
+    }
 }
 
 public enum FireType2
