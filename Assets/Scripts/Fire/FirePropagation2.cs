@@ -7,7 +7,7 @@ using UnityEngine;
 public class FirePropagation2 : MonoBehaviour
 {
     public List<FirePropagation2> nearObjectsOnFire;
-    public List<ObjectsExplosionv2> nearFiresExplosion;
+    public List<ExplosionBehavior> nearFiresExplosion;
 
     public GameObject fire;
     public GameObject explosive;
@@ -55,7 +55,7 @@ public class FirePropagation2 : MonoBehaviour
         nearObjectsOnFire = FindObjectsOfType<FirePropagation2>().ToList();
         nearObjectsOnFire.RemoveAll(item => item.onFire == true);
 
-        nearFiresExplosion = FindObjectsOfType<ObjectsExplosionv2>().ToList();
+        nearFiresExplosion = FindObjectsOfType<ExplosionBehavior>().ToList();
 
         expansionTimer = delay;
         DamageTimer = delayFire;
