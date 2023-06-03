@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -9,36 +10,21 @@ using UnityEditor;
 
 public class ObjectsExplosionv2 : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-    public bool doExplote = false;
-    public bool preExplosion = false;
-    public List<FirePropagation2> nearObjectsOnFire = new List<FirePropagation2>();
-    public List<FirePropagation2> closestObjects = new List<FirePropagation2>();
-    public List<FirePropagation2> secondObjects = new List<FirePropagation2>();
-    public List<FirePropagation2> farestObjects = new List<FirePropagation2>();
+    public List<FirePropagation2> nearObjectsOnFire;
+    public List<FirePropagation2> closestObjects;
+    public List<FirePropagation2> secondObjects;
+    public List<FirePropagation2> farestObjects;
 
     public float closeRange;
     public float midRange;
     public float highRange;
 
-    float expansionTimer;
-    public float delay;
-    float expansionExplosionTimer;
-    public float delayExplosionTimer;
-
-    public float maxRangeExplosion;
-
     public Animator animator;
 
-    public float knockbackRadius;
+    public float knockBackRadius;
     public float explosionForce;
-    [SerializeField] Collider[] colliders;
-    [SerializeField] Collider[] playerCollider;
     public LayerMask explosionMask;
     public LayerMask playerMask;
-
-    public bool isOneLoopDone = false;
 
     CameraController camController;
     public bool doExplosion = false;
@@ -46,129 +32,67 @@ public class ObjectsExplosionv2 : MonoBehaviour
     {
         nearObjectsOnFire = FindObjectsOfType<FirePropagation2>().ToList<FirePropagation2>();
         nearObjectsOnFire.RemoveAll(item => item.onFire == true);
-        expansionTimer = delay;
-        expansionExplosionTimer = delayExplosionTimer;
         camController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public IEnumerator ExplosionThings()
     {
-        if(!isOneLoopDone)
-        {
-            if (preExplosion)
-            {
-                animator.SetTrigger("Explote");
-                CalculateExpansion();
-            }
-
-            if (doExplote && expansionExplosionTimer >= 0f)
-            {
-                preExplosion = false;
-                expansionExplosionTimer -= Time.deltaTime;
-                
-                /*
-                if (expansionTimer >= 0f)
-                {
-                    expansionTimer -= Time.deltaTime;
-                }
-                else
-                {
-                    Debug.Log("Expansion");
-                    expansionTimer = delay;
-                    
-                }*/
-            }
-            else
-            {
-                expansionExplosionTimer = delayExplosionTimer;
-                doExplote = false;
-            }
-
-        }  
-        
-        if(doExplosion && !isOneLoopDone)
-        {
-            StartCoroutine(ExplosionCoroutine());
-        }
-
+        animator.SetTrigger("Explote");
+        yield return new WaitForSeconds(2f);
+        transform.GetChild(1).gameObject.SetActive(true);
+        CalculateExpansion();
+        ExplosionKnockBackCor();
+        camController.shakeDuration = 1f;
     }
-
+    
     void CalculateExpansion()
     {
         foreach (var x in nearObjectsOnFire)
         {
             float distance = Vector3.Distance(transform.position, x.transform.position);
 
-            if (distance < maxRangeExplosion && !x.onFire)
+            if (x.onFire) continue;
+            if (distance <= closeRange) //if it's too close you get on fire instant
             {
-                if (distance <= midRange && distance > closeRange) //if it's between close and mid range then it's flammability increases
-                {
-                    //Debug.Log("medium range");
-                    //x.transform.GetChild(0).gameObject.SetActive(true);
-                    //x.onFire = true;
-                    x.IncrementHeat(60);
-                    nearObjectsOnFire.Remove(x);
-                    secondObjects.Add(x);
-                    //break;
-                }
-                if (distance <= highRange && distance > midRange) //if it's between mid and far range then it's flammability increases
-                {
-                    //Debug.Log("far range");
-                    //x.transform.GetChild(0).gameObject.SetActive(true);
-                    //x.onFire = true;
-                    x.IncrementHeat(30);
-                    nearObjectsOnFire.Remove(x);
-                    farestObjects.Add(x);
-                    //break;
-                }
-                if (distance <= closeRange) //if it's too close you get on fire instant
-                {
-                    x.transform.GetChild(0).gameObject.SetActive(true);
-                    x.onFire = true;
-                    nearObjectsOnFire.Remove(x);
-                    closestObjects.Add(x);
-                    //break;
-                }
+                x.transform.GetChild(0).gameObject.SetActive(true);
+                x.onFire = true;
+                nearObjectsOnFire.Remove(x);
+                closestObjects.Add(x);
+            }
+            else if (distance <= midRange) //if it's between close and mid range then it's flammability increases
+            {
+                x.IncrementHeat(60);
+                nearObjectsOnFire.Remove(x);
+                secondObjects.Add(x);
+            }
+            else if (distance <= highRange) //if it's between mid and far range then it's flammability increases
+            {
+                x.IncrementHeat(30);
+                nearObjectsOnFire.Remove(x);
+                farestObjects.Add(x);
             }
         }
     }  
     
-    public IEnumerator ExplosionKnockBackCor() //Apply force in x sphere radius
+    private void ExplosionKnockBackCor() //Apply force in x sphere radius
     {
-        colliders = Physics.OverlapSphere(transform.position, knockbackRadius, explosionMask);
+        var colliders = Physics.OverlapSphere(transform.position, knockBackRadius, explosionMask);
         foreach (Collider target in colliders)
         {
             Rigidbody rb = target.GetComponentInParent<Rigidbody>();
             if (rb == null) continue;
-            rb.AddExplosionForce(explosionForce, transform.position, knockbackRadius);
+            rb.AddExplosionForce(explosionForce, transform.position, knockBackRadius);
 
         }
 
-        playerCollider = Physics.OverlapSphere(transform.position, knockbackRadius, playerMask);
+        var playerCollider = Physics.OverlapSphere(transform.position, knockBackRadius, playerMask);
         foreach (Collider target in playerCollider)
         {
             Rigidbody rb = target.GetComponentInParent<Rigidbody>();
             if (rb == null) continue;
-            rb.AddExplosionForce(explosionForce, transform.position, knockbackRadius);
+            rb.AddExplosionForce(explosionForce, transform.position, knockBackRadius);
 
         }
-
-        yield return null;
-    }
-
-    public IEnumerator ExplosionCoroutine()
-    {
-        Debug.Log("Preexplosion!");
-        preExplosion = true;
-        yield return new WaitForSeconds(2f);
-        transform.GetChild(1).gameObject.SetActive(true);
-        doExplote = true;
-        StartCoroutine(ExplosionKnockBackCor());
-        camController.shakeDuration = 0.5f;
-        yield return new WaitForSeconds(0.1f);
-        isOneLoopDone = true;
-        doExplosion = false; 
     }
 
 }
@@ -183,7 +107,7 @@ public class HandlessDemoEditor : Editor
     {
         var linkedObject = target as ObjectsExplosion;
 
-        Handles.color = Color.green;
+        Handles.color = new Color(1, 0, 0, .3f);
         Handles.DrawSolidDisc(linkedObject.transform.position, Vector3.up, linkedObject.closeRange);
     }
 }

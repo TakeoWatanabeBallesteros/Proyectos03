@@ -143,7 +143,7 @@ public class FirePropagation2 : MonoBehaviour
                 if (x.isOneLoopDone == false)
                 {
                     explosive = x.gameObject;
-                    StartCoroutine(ExplosionThings());
+                    StartCoroutine(x.ExplosionThings());
                     x.enabled = false;
                     nearFiresExplosion.Remove(x);                    
                     break;
@@ -220,19 +220,6 @@ public class FirePropagation2 : MonoBehaviour
         {
             _objectMaterial.Lerp(_objectMaterial, redMaterial, Time.deltaTime / timeBurning);
         }
-    }
-
-    public IEnumerator ExplosionThings()
-    {
-        Debug.Log("Preexplosion!");
-        explosive.GetComponent<ObjectsExplosionv2>().preExplosion = true;
-        yield return new WaitForSeconds(2f);
-        explosive.transform.GetChild(1).gameObject.SetActive(true);
-        explosive.GetComponent<ObjectsExplosionv2>().doExplote = true;
-        StartCoroutine(explosive.GetComponent<ObjectsExplosionv2>().ExplosionKnockBackCor());
-        camController.shakeDuration = 1f;
-        yield return new WaitForSeconds(1.5f);
-        
     }
 }
 
