@@ -8,7 +8,7 @@ public class FireActivationv2 : MonoBehaviour
     bool m_Started;
     public LayerMask m_LayerMask;
     public List<FirePropagation2> _fires = new List<FirePropagation2>();
-    public List<ObjectsExplosionv2> _explosions = new List<ObjectsExplosionv2>();
+    public List<ExplosionBehavior> _explosions = new List<ExplosionBehavior>();
     public List<MaterialLerping> _materialLerping = new List<MaterialLerping>();
     bool playerIn;
     // Start is called before the first frame update
@@ -29,7 +29,7 @@ public class FireActivationv2 : MonoBehaviour
             {
                 f.enabled = true;
             }
-            foreach (ObjectsExplosionv2 o in _explosions)
+            foreach (ExplosionBehavior o in _explosions)
             {
                 o.enabled = true;
             }
@@ -44,7 +44,7 @@ public class FireActivationv2 : MonoBehaviour
             {
                 f.enabled = false;
             }
-            foreach (ObjectsExplosionv2 o in _explosions)
+            foreach (ExplosionBehavior o in _explosions)
             {
                 o.enabled = false;
             }

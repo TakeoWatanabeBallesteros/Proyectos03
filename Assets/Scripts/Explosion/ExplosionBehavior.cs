@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 using UnityEditor;
 #endif 
 
-public class ObjectsExplosionv2 : MonoBehaviour
+public class ExplosionBehavior : MonoBehaviour
 {
     private List<FirePropagation2> nearObjectsOnFire;
     public float closeRange;
@@ -84,12 +84,12 @@ public class ObjectsExplosionv2 : MonoBehaviour
 //how to make a solid disc to check radius from an object 
 //
 #if UNITY_EDITOR
-[CustomEditor(typeof(ObjectsExplosion))]
+[CustomEditor(typeof(ExplosionBehavior))]
 public class HandlessDemoEditor : Editor
 {
     public void OnSceneGUI()
     {
-        var linkedObject = target as ObjectsExplosion;
+        var linkedObject = target as ExplosionBehavior;
 
         Handles.color = new Color(1, 0, 0, .3f);
         Handles.DrawSolidDisc(linkedObject.transform.position, Vector3.up, linkedObject.closeRange);

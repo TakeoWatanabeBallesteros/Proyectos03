@@ -99,7 +99,7 @@ public class FireExtinguish : MonoBehaviour
             {
                 hit.collider.GetComponentInParent<Collectable>().TakeDamage(25);
             } 
-            if (hit.collider.gameObject.TryGetComponent(out ObjectsExplosionv2 explosion))
+            if (hit.collider.gameObject.TryGetComponent(out ExplosionBehavior explosion))
             {
                 StartCoroutine(explosion.Explode());
             }   
@@ -130,7 +130,7 @@ public class FireExtinguish : MonoBehaviour
             {
                 hit.collider.GetComponentInParent<Collectable>().TakeDamage(50);
             }
-            if (hit.collider.gameObject.TryGetComponent(out ObjectsExplosionv2 explosion))
+            if (hit.collider.gameObject.TryGetComponent(out ExplosionBehavior explosion))
             {
                 StartCoroutine(explosion.Explode());
             }
