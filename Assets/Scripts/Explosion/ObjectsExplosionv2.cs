@@ -10,11 +10,7 @@ using UnityEditor;
 
 public class ObjectsExplosionv2 : MonoBehaviour
 {
-    public List<FirePropagation2> nearObjectsOnFire;
-    public List<FirePropagation2> closestObjects;
-    public List<FirePropagation2> secondObjects;
-    public List<FirePropagation2> farestObjects;
-
+    private List<FirePropagation2> nearObjectsOnFire;
     public float closeRange;
     public float midRange;
     public float highRange;
@@ -27,22 +23,23 @@ public class ObjectsExplosionv2 : MonoBehaviour
     public LayerMask playerMask;
 
     CameraController camController;
-    public bool doExplosion = false;
     void Start()
     {
         nearObjectsOnFire = FindObjectsOfType<FirePropagation2>().ToList<FirePropagation2>();
         nearObjectsOnFire.RemoveAll(item => item.onFire == true);
-        camController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
+        camController = Camera.main.GetComponent<CameraController>();
     }
 
-    public IEnumerator ExplosionThings()
+    public IEnumerator Explode()
     {
+        gameObject.tag = "Untagged";
         animator.SetTrigger("Explote");
         yield return new WaitForSeconds(2f);
         transform.GetChild(1).gameObject.SetActive(true);
         CalculateExpansion();
         ExplosionKnockBackCor();
         camController.shakeDuration = 1f;
+        this.enabled = false;
     }
     
     void CalculateExpansion()
@@ -57,19 +54,16 @@ public class ObjectsExplosionv2 : MonoBehaviour
                 x.transform.GetChild(0).gameObject.SetActive(true);
                 x.onFire = true;
                 nearObjectsOnFire.Remove(x);
-                closestObjects.Add(x);
             }
             else if (distance <= midRange) //if it's between close and mid range then it's flammability increases
             {
                 x.IncrementHeat(60);
                 nearObjectsOnFire.Remove(x);
-                secondObjects.Add(x);
             }
             else if (distance <= highRange) //if it's between mid and far range then it's flammability increases
             {
                 x.IncrementHeat(30);
                 nearObjectsOnFire.Remove(x);
-                farestObjects.Add(x);
             }
         }
     }  
@@ -91,7 +85,6 @@ public class ObjectsExplosionv2 : MonoBehaviour
             Rigidbody rb = target.GetComponentInParent<Rigidbody>();
             if (rb == null) continue;
             rb.AddExplosionForce(explosionForce, transform.position, knockBackRadius);
-
         }
     }
 

@@ -56,7 +56,6 @@ public class FirePropagation2 : MonoBehaviour
         nearObjectsOnFire.RemoveAll(item => item.onFire == true);
 
         nearFiresExplosion = FindObjectsOfType<ObjectsExplosionv2>().ToList();
-        nearFiresExplosion.RemoveAll(item => item.doExplote == true);
 
         expansionTimer = delay;
         DamageTimer = delayFire;
@@ -135,20 +134,8 @@ public class FirePropagation2 : MonoBehaviour
     {
         foreach (var x in nearFiresExplosion)
         {
-            float distance = Vector3.Distance(transform.position, x.transform.position);
-            //nearFiresExplosion.RemoveAll(x => !x);
-
-            if (distance < nearDistance && !x.preExplosion)
-            {
-                if (x.isOneLoopDone == false)
-                {
-                    explosive = x.gameObject;
-                    StartCoroutine(x.ExplosionThings());
-                    x.enabled = false;
-                    nearFiresExplosion.Remove(x);                    
-                    break;
-                }                
-            }            
+            StartCoroutine(x.Explode());
+            nearFiresExplosion.Remove(x);
         }
     }
 
