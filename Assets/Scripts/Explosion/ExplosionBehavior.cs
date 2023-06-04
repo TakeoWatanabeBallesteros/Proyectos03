@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
-
-#if UNITY_EDITOR
 using UnityEditor;
-#endif 
 
 public class ExplosionBehavior : MonoBehaviour
 {
-    private List<FirePropagation2> nearObjectsOnFire;
+    private List<FireBehavior> nearObjectsOnFire = new List<FireBehavior>();
     public float closeRange;
     public float midRange;
     public float highRange;
@@ -23,11 +20,15 @@ public class ExplosionBehavior : MonoBehaviour
 
     CameraController camController;
     private static readonly int ExplodeId = Animator.StringToHash("Explode");
+    
+    [ContextMenu("Do Something")]
+    void DoSomething()
+    {
+        StartCoroutine(Explode());
+    }
 
     void Start()
     {
-        nearObjectsOnFire = FindObjectsOfType<FirePropagation2>().ToList<FirePropagation2>();
-        nearObjectsOnFire.RemoveAll(item => item.onFire == true);
         camController = Camera.main.GetComponent<CameraController>();
     }
 
@@ -40,7 +41,7 @@ public class ExplosionBehavior : MonoBehaviour
         CalculateExpansion();
         ExplosionKnockBack();
         camController.shakeDuration = 1f;
-        this.enabled = false;
+        enabled = false;
     }
     
     void CalculateExpansion()
@@ -52,18 +53,17 @@ public class ExplosionBehavior : MonoBehaviour
             if (x.onFire) continue;
             if (distance <= closeRange) //if it's too close you get on fire instant
             {
-                x.transform.GetChild(0).gameObject.SetActive(true);
-                x.onFire = true;
+                x.AddHeat(100);
                 nearObjectsOnFire.Remove(x);
             }
             else if (distance <= midRange) //if it's between close and mid range then it's flammability increases
             {
-                x.IncrementHeat(60);
+                x.AddHeat(60);
                 nearObjectsOnFire.Remove(x);
             }
             else if (distance <= highRange) //if it's between mid and far range then it's flammability increases
             {
-                x.IncrementHeat(30);
+                x.AddHeat(30);
                 nearObjectsOnFire.Remove(x);
             }
         }
