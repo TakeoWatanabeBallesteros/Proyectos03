@@ -34,7 +34,7 @@ public class ItemManager : MonoBehaviour
         SavedKids = 0;
         UI_Blackboard.SetKids(SavedKids, TotalKids);
         Collected = 0;
-        UI_Blackboard.SetColectables(Collected, TotalCollectables);
+        UI_Blackboard.SetCollectables(Collected, TotalCollectables);
 
     }
 
@@ -51,7 +51,7 @@ public class ItemManager : MonoBehaviour
     public void AddCollectable()
     {
         Collected++;
-        UI_Blackboard.SetColectables(Collected, TotalCollectables);
+        UI_Blackboard.SetCollectables(Collected, TotalCollectables);
         pointsManager.AddPoints(500);
     }
 

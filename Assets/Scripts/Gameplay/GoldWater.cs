@@ -25,8 +25,9 @@ public class GoldWater : MonoBehaviour
     public Transform R3;
     public Transform R4;
 
-    List<GameObject> Fires;
-
+    List<FireBehavior> Fires;
+    private PointsBehavior pointsBehavior;
+    
     private void Awake()
     {
         Controls = Controls ?? new PlayerControls();
@@ -37,26 +38,26 @@ public class GoldWater : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Fires = new List<GameObject>();
+        Fires = new List<FireBehavior>();
         colider.SetActive(false);
         water.Stop();
+        pointsBehavior = Singleton.Instance.PointsManager;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         distance = ObjectiveDistance();
-        SetParticlelength();
-        SetColiderScale();
+        SetParticleLength();
+        SetColliderScale();
     }
 
-    private void SetParticlelength()
+    private void SetParticleLength()
     {
         var WeakMain = water.main;
         WeakMain.startLifetime = distance / WeakMain.startSpeed.constant;
     }
-    private void SetColiderScale()
+    private void SetColliderScale()
     {
         cilinderOrigin.localScale = new Vector3(1,1, distance/ScaleFactor);
     }
@@ -98,14 +99,14 @@ public class GoldWater : MonoBehaviour
     {
         if (other.CompareTag("Fire"))
         {
-            Fires.Add(other.gameObject);
+            Fires.Add(other.GetComponent<FireBehavior>());
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Fire"))
         {
-            Fires.Remove(other.gameObject);
+            Fires.Remove(other.GetComponent<FireBehavior>());
         }
     }
 
@@ -121,5 +122,14 @@ public class GoldWater : MonoBehaviour
         waterCone.gameObject.SetActive(false);
         colider.SetActive(false);
         Fires.Clear();
+        pointsBehavior.ResetCombo();
+    }
+
+    private void PuttingOutFires()
+    {
+        foreach (var fire in Fires)
+        {
+            fire.PuttingOut();
+        }
     }
 }

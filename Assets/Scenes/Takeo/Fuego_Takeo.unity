@@ -271,6 +271,12 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!198 &695606364 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5036511499479532117, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 2064080278}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &708147169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -509,6 +515,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &775767159 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1875405032623501574, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 2064080278}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1139864682
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,6 +777,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f40f1e3f841b244bc83fec71381262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!198 &1353333511 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 26682863144241023, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 2064080278}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1659867373
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,6 +881,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1936709950 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5089999183849714400, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 2064080278}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1936709955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936709950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 218074dde59dab9448d797f652ae5e49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fire: {fileID: 0}
+  fireHP: 0
+  heatDistance: 0
+  heat: 0
+  heatPerSecond: 33.3
+  fireParticles:
+  - {fileID: 775767159}
+  - {fileID: 695606364}
+  - {fileID: 1353333511}
+  burnedMaterial: {fileID: 0}
 --- !u!1001 &2009763991
 PrefabInstance:
   m_ObjectHideFlags: 0
