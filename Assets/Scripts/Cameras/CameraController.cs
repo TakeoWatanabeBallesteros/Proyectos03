@@ -31,7 +31,7 @@ public class CameraController : MonoBehaviour
     {
         cam = Camera.main;
         timer = delay;
-        target = Singleton.Instance.Player.transform;
+        //target = Singleton.Instance.Player.transform;
     }
 
     private void Update()
