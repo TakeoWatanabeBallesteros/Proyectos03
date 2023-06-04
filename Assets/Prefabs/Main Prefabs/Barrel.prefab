@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 4987591370901259350}
   m_Layer: 7
   m_Name: Barrel
-  m_TagString: Explosive
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -190,10 +190,10 @@ MonoBehaviour:
   highRange: 10
   animator: {fileID: 6512377001676888078}
   knockBackRadius: 5
-  explosionForce: 2000
+  explosionForce: 1000
   explosionMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 65
 --- !u!65 &4987591370901259350
 BoxCollider:
   m_ObjectHideFlags: 0

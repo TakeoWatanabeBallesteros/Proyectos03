@@ -132,9 +132,9 @@ public class Blackboard_UIManager : DynamicBlackboard
     {
         NumberOfKids.text = kids+"/"+totalKids;
     }
-    public void SetColectables(int colectables, int totalColectables)
+    public void SetCollectables(int collectables, int totalCollectables)
     {
-        NumberOfColectables.text = colectables + "/" + totalColectables;
+        NumberOfColectables.text = collectables + "/" + totalCollectables;
     }
     public void SetPoints(int points, int pointsToWin)
     {
@@ -143,7 +143,7 @@ public class Blackboard_UIManager : DynamicBlackboard
         if(points !=0) PointPopUp(points);
     }
 
-    public void PointPopUp(int points)
+    private void PointPopUp(int points)
     {
         GameObject pref = Instantiate(PointsPrefab, PontPopUpOrigin.transform);
         pref.GetComponent<TextMeshProUGUI>().text = "+" + points;
@@ -166,7 +166,7 @@ public class Blackboard_UIManager : DynamicBlackboard
     {
         StartCoroutine(ChildSwitchFace());
     }
-    public IEnumerator ChildSwitchFace()
+    private IEnumerator ChildSwitchFace()
     {
         ChildHappyFaceSprite.enabled = true;
         ChildSadFaceSprite.enabled = false;
