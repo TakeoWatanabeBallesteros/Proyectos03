@@ -21,18 +21,15 @@ public class DamagePlayer : MonoBehaviour
         if(OnDamageZone && !PH.isTakingDamage)
         {
             PH.TakeDamage();
-            Debug.Log("AU!");
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) OnDamageZone = true;
-        Debug.Log("IN");
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player")) OnDamageZone = false;
-        Debug.Log("OUT");
     }
 }
