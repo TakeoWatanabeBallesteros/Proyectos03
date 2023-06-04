@@ -16,6 +16,7 @@ public class ItemManager : MonoBehaviour
     private InputPlayerController input;
     private MovementPlayerController move;
     private FSM_UIManager uiManager;
+    private PointsBehavior pointsManager;
     
     [ContextMenu("Do Something")]
     void DoSomething()
@@ -27,6 +28,7 @@ public class ItemManager : MonoBehaviour
     {
         UI_Blackboard = Singleton.Instance.UIManager.blackboard_UIManager;
         uiManager = Singleton.Instance.UIManager;
+        pointsManager = Singleton.Instance.PointsManager;
         input = Singleton.Instance.Player.GetComponent<InputPlayerController>();
         move = Singleton.Instance.Player.GetComponent<MovementPlayerController>();
         SavedKids = 0;
@@ -40,7 +42,7 @@ public class ItemManager : MonoBehaviour
     {
         SavedKids++;
         UI_Blackboard.SetKids(SavedKids, TotalKids);
-        PointsBehavior.AddPointsSaveZone();
+        pointsManager.AddPoints(1000);
         if(SavedKids == TotalKids) {
             uiManager.uiManager_FSM.Trigger("Playing-Win");
         }
@@ -50,7 +52,7 @@ public class ItemManager : MonoBehaviour
     {
         Collected++;
         UI_Blackboard.SetColectables(Collected, TotalCollectables);
-        PointsBehavior.AddPointsCollectable();
+        pointsManager.AddPoints(500);
     }
 
 }

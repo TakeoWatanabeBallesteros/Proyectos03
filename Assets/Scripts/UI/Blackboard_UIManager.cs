@@ -44,7 +44,9 @@ public class Blackboard_UIManager : DynamicBlackboard
     public Image ChildHappyFaceSprite;
     public Image ChildSadFaceSprite;
     public GameObject FireHandle;
-    
+    public GameObject PontPopUpOrigin;
+    public GameObject PointsPrefab;
+
     private PlayerControls controls = null;
     private GameManager gameManager;
     private FSM_UIManager uiManager;
@@ -99,7 +101,6 @@ public class Blackboard_UIManager : DynamicBlackboard
         ChildHappyFaceSprite.enabled = false;
         ChildSadFaceSprite.enabled = true;
         FireHandle.SetActive(false);
-
     }
 
     // Update is called once per frame
@@ -139,8 +140,17 @@ public class Blackboard_UIManager : DynamicBlackboard
     {
         pointsText.text = points + "/" + pointsToWin;
         pointsWinText.text = points + "/" + pointsToWin;
+        if(points !=0) PointPopUp(points);
     }
-    
+
+    public void PointPopUp(int points)
+    {
+        GameObject pref = Instantiate(PointsPrefab, PontPopUpOrigin.transform);
+        pref.GetComponent<TextMeshProUGUI>().text = "+" + points;
+        pref.transform.position = PontPopUpOrigin.transform.position;
+        Destroy(pref, pref.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+    }
+
     public IEnumerator FadeIN()
     {
         DeathscreenAlfa += .1f;
