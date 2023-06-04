@@ -8951,6 +8951,9 @@ MonoBehaviour:
   ChildHappyFaceSprite: {fileID: 2082529838848474232}
   ChildSadFaceSprite: {fileID: 303640533}
   FireHandle: {fileID: 8770520824927755118}
+  PontPopUpOrigin: {fileID: 8638826994987196955}
+  PointsPrefab: {fileID: 3130979249246296625, guid: e77bd04074c1c7f429bbeab99f5c286d,
+    type: 3}
   YouDiedImage: {fileID: 339695507516386004}
 --- !u!114 &535826417151956738
 MonoBehaviour:
@@ -9578,6 +9581,7 @@ RectTransform:
   - {fileID: 2057571996}
   - {fileID: 1259378296}
   - {fileID: 4779693231038252445}
+  - {fileID: 5062873116206016526}
   m_Father: {fileID: 5657449724511252089}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10158,6 +10162,42 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &8638826994987196955
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5062873116206016526}
+  m_Layer: 0
+  m_Name: PointsPopUp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5062873116206016526
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8638826994987196955}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6931471138173761998}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 298, y: -19}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8770520824927755118
 GameObject:
   m_ObjectHideFlags: 0
