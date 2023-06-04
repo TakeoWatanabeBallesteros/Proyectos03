@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraPreviewManager : MonoBehaviour
@@ -54,6 +55,12 @@ public class CameraPreviewManager : MonoBehaviour
     {
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         cameraList = FindObjectsOfType<PreviewCamera>();
+        if(!cameraList.Any()) 
+        {
+            Debug.Log("Yep");
+            Singleton.Instance.UIManager.uiManager_FSM.Trigger("LevelPreview-Playing");
+            return;
+        }
         Array.Reverse(cameraList);
         playerCamera.enabled = false;
         StartCoroutine(StartPreview());

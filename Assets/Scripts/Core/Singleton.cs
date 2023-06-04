@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,16 +19,31 @@ public class Singleton : MonoBehaviour
     [SerializeField] private FSM_UIManager _uiManager;
     #endregion
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += LoadPlayer;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= LoadPlayer;
+    }
+
     // public AudioManager AudioManager { get; private set; }
     private void Awake()
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
         DontDestroyOnLoad(gameObject);
         Instance = this;
+        Player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    private void LoadPlayer(Scene scene, LoadSceneMode mode)
+    {
         Player = GameObject.FindGameObjectWithTag("Player");
     }
 }

@@ -24,6 +24,7 @@ public class Blackboard_UIManager : DynamicBlackboard
     public GameObject PauseMenuCanvas;
     public GameObject SettingPauseMenuCanvas;
     public GameObject RestartLevelCanvas;
+    public GameObject WinCanvas;
     public GameObject GoMainMenuCanvas;
     #endregion
     
@@ -31,11 +32,18 @@ public class Blackboard_UIManager : DynamicBlackboard
     [Header("Gameplay Objects")] 
     public Slider lifeBar;
     public Slider waterBar;
+    public Slider forceBar;
     public TMP_Text TimeLeftText;
     public TMP_Text NumberOfKids;
     public TMP_Text NumberOfColectables;
     public TMP_Text pointsText;
-    
+    public TMP_Text pointsWinText;
+    public GameObject PickUpText;
+    public GameObject ReloadText;
+    public GameObject Fire;
+    public Image ChildHappyFaceSprite;
+    public Image ChildSadFaceSprite;
+    public GameObject FireHandle;
     
     private PlayerControls controls = null;
     private GameManager gameManager;
@@ -88,6 +96,10 @@ public class Blackboard_UIManager : DynamicBlackboard
                     break;
             }
         };
+        ChildHappyFaceSprite.enabled = false;
+        ChildSadFaceSprite.enabled = true;
+        FireHandle.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -99,6 +111,10 @@ public class Blackboard_UIManager : DynamicBlackboard
     public void SetLifeBar(float value)
     {
         lifeBar.value = value;
+        if (value < 0.5 && !FireHandle.activeSelf)
+        {
+            FireHandle.SetActive(true);
+        }
     }
 
     public void SetWaterBar(float value)
@@ -113,14 +129,18 @@ public class Blackboard_UIManager : DynamicBlackboard
 
     public void SetKids(int kids, int totalKids)
     {
-        NumberOfKids.text = kids+" / "+totalKids;
+        NumberOfKids.text = kids+"/"+totalKids;
     }
     public void SetColectables(int colectables, int totalColectables)
     {
-        NumberOfColectables.text = colectables + " / " + totalColectables;
+        NumberOfColectables.text = colectables + "/" + totalColectables;
     }
-
-
+    public void SetPoints(int points, int pointsToWin)
+    {
+        pointsText.text = points + "/" + pointsToWin;
+        pointsWinText.text = points + "/" + pointsToWin;
+    }
+    
     public IEnumerator FadeIN()
     {
         DeathscreenAlfa += .1f;
@@ -130,5 +150,18 @@ public class Blackboard_UIManager : DynamicBlackboard
         {
             StartCoroutine(FadeIN());
         }
+    }
+
+    public void ChildFace()
+    {
+        StartCoroutine(ChildSwitchFace());
+    }
+    public IEnumerator ChildSwitchFace()
+    {
+        ChildHappyFaceSprite.enabled = true;
+        ChildSadFaceSprite.enabled = false;
+        yield return new WaitForSeconds(3f);
+        ChildHappyFaceSprite.enabled = false;
+        ChildSadFaceSprite.enabled = true;
     }
 }

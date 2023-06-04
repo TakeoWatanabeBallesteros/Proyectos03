@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PointsBehavior : MonoBehaviour
 {
+    public int ExtinguishFirePoints;
+    
     public static int Points;
 
     public static int Combo;
@@ -16,22 +18,22 @@ public class PointsBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
+        Points = 0;
+        blackboardUI.SetPoints(Points, pointsToWin);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Int32.Parse(blackboardUI.pointsText.text) != Points)
-        {
-            blackboardUI.pointsText.text = Points.ToString();
-        }
+        blackboardUI.SetPoints(Points, pointsToWin);
     }
 
     public static void IncreaseCombo() => Combo = Combo < 10 ? Combo + 1 : Combo;
     public static void ResetCombo() => Combo = 1;
-    public static void AddPointsFire() => Points += 10 * Combo;
+    public static void AddPointsFire() => Points += 0 * Combo;
     public static void AddPointsSaveZone(int attempts, int distance) => Points += 1000 + (200 / attempts) + 10 * distance;
+    public static void AddPointsSaveZone() => Points += 1000;
     public static void AddPointsExplosion() => Points += 750;
     public static void AddPointsCollectable() => Points += 500;
     public static void AddPointsSeconds(int seconds) => Points += 50 * seconds;

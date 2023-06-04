@@ -17,10 +17,20 @@ public class InputPlayerController : MonoBehaviour
     public Vector2 zoom { get; private set; }
 
 
+    private void OnEnable()
+    {
+        controls = controls ?? new PlayerControls();
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
+    }
+
     private void Awake()
     {
-        controls = new PlayerControls();
-        controls.Enable();
+        controls = controls ?? new PlayerControls();
         controls.Player.Movement.performed += ctx => movement = ctx.ReadValue<Vector2>();
         controls.Player.Movement.canceled += ctx => movement = ctx.ReadValue<Vector2>();
         controls.Player.Shoot.performed += ctx => shoot = ctx.ReadValueAsButton();
@@ -33,6 +43,7 @@ public class InputPlayerController : MonoBehaviour
         controls.Player.Recharge.canceled += ctx => reacharge = ctx.ReadValueAsButton();
         controls.Player.Zoom.performed += ctx => zoom = ctx.ReadValue<Vector2>();
         controls.Player.Zoom.canceled += ctx => zoom = ctx.ReadValue<Vector2>();
+        
     }
 
     // Start is called before the first frame update

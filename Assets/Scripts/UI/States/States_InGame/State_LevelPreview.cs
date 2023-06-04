@@ -13,11 +13,11 @@ public class State_LevelPreview  : StateBase
     
     public override void OnEnter()
     {
+        base.OnEnter();
         singleton = Singleton.Instance;
-        singleton.CameraPreviewManager.LoadPreviewCameras();
         singleton.GameManager.ChangeGameState(GameState.LevelPreview);
         singleton.UIManager.blackboard_UIManager.LevelPreviewCanvas.SetActive(true);
-        base.OnEnter();
+        singleton.CameraPreviewManager.LoadPreviewCameras();
     }
     
     public override void OnLogic()

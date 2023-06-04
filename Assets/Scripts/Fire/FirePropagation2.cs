@@ -7,7 +7,7 @@ using UnityEngine;
 public class FirePropagation2 : MonoBehaviour
 {
     public List<FirePropagation2> nearObjectsOnFire;
-    public List<ObjectsExplosionv2> nearFiresExplosion;
+    public List<ExplosionBehavior> nearFiresExplosion;
 
     public GameObject fire;
     public GameObject explosive;
@@ -55,8 +55,7 @@ public class FirePropagation2 : MonoBehaviour
         nearObjectsOnFire = FindObjectsOfType<FirePropagation2>().ToList();
         nearObjectsOnFire.RemoveAll(item => item.onFire == true);
 
-        nearFiresExplosion = FindObjectsOfType<ObjectsExplosionv2>().ToList();
-        nearFiresExplosion.RemoveAll(item => item.doExplote == true);
+        nearFiresExplosion = FindObjectsOfType<ExplosionBehavior>().ToList();
 
         expansionTimer = delay;
         DamageTimer = delayFire;
@@ -102,7 +101,10 @@ public class FirePropagation2 : MonoBehaviour
             {
                 transform.GetChild(0).gameObject.SetActive(false);
                 StopAllCoroutines();
-                StartCoroutine(SmokeWork());
+                transform.GetChild(1).gameObject.SetActive(true);
+                PointsBehavior.AddPointsFire();
+                PointsBehavior.IncreaseCombo();
+                this.enabled = false;
             }
 
             if (nearFiresExplosion.Count >= 1)
@@ -132,20 +134,8 @@ public class FirePropagation2 : MonoBehaviour
     {
         foreach (var x in nearFiresExplosion)
         {
-            float distance = Vector3.Distance(transform.position, x.transform.position);
-            //nearFiresExplosion.RemoveAll(x => !x);
-
-            if (distance < nearDistance && !x.preExplosion)
-            {
-                if (x.isOneLoopDone == false)
-                {
-                    explosive = x.gameObject;
-                    StartCoroutine(ExplosionThings());
-                    x.enabled = false;
-                    nearFiresExplosion.Remove(x);                    
-                    break;
-                }                
-            }            
+            StartCoroutine(x.Explode());
+            nearFiresExplosion.Remove(x);
         }
     }
 
@@ -217,25 +207,6 @@ public class FirePropagation2 : MonoBehaviour
         {
             _objectMaterial.Lerp(_objectMaterial, redMaterial, Time.deltaTime / timeBurning);
         }
-    }
-
-    public IEnumerator ExplosionThings()
-    {
-        Debug.Log("Preexplosion!");
-        explosive.GetComponent<ObjectsExplosionv2>().preExplosion = true;
-        yield return new WaitForSeconds(2f);
-        explosive.transform.GetChild(1).gameObject.SetActive(true);
-        explosive.GetComponent<ObjectsExplosionv2>().doExplote = true;
-        StartCoroutine(explosive.GetComponent<ObjectsExplosionv2>().ExplosionKnockBackCor());
-        camController.shakeDuration = 1f;
-        yield return new WaitForSeconds(1.5f);
-        
-    }
-
-    IEnumerator SmokeWork()
-    {
-        transform.GetChild(1).gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
     }
 }
 

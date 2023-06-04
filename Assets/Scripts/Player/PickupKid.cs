@@ -9,7 +9,6 @@ public class PickupKid : MonoBehaviour
     AnimatorController CharacterAnim;
     public GameManager GM;
     public Transform Shoulder;
-    public GameObject PickupText;
     public GameObject DropText;
     private bool CarringKid;
     [SerializeField] private bool CanExtract;
@@ -20,6 +19,8 @@ public class PickupKid : MonoBehaviour
     private MovementPlayerController movementPlayerController;
     public GameObject prefabPoseKid;
 
+    private Blackboard_UIManager blackboardUI;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +32,7 @@ public class PickupKid : MonoBehaviour
         movementPlayerController = GetComponent<MovementPlayerController>();
         prefabPoseKid.SetActive(false);
 
-        GM = FindObjectOfType<GameManager>();
+        blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
     }
 
     // Update is called once per frame
@@ -39,13 +40,14 @@ public class PickupKid : MonoBehaviour
     {
         if (CanPickup && playerInput.interact)
         {
-            PickupText.SetActive(false);
+            blackboardUI.PickUpText.SetActive(false);
             Destroy(TargetKid);
             prefabPoseKid.SetActive(true);     
             CarringKid = true;
             CanPickup = false;
             movementPlayerController.speed *= 1.2f;
             CharacterAnim.PickChild();
+            blackboardUI.ChildFace();
 
         }
     }
@@ -54,7 +56,7 @@ public class PickupKid : MonoBehaviour
     {
         if (other.tag == "Kid" && !CarringKid)
         {
-            PickupText.SetActive(true);
+            blackboardUI.PickUpText.SetActive(false);
             CanPickup = true;
             TargetKid = other.transform.parent.gameObject;
         }
@@ -63,8 +65,7 @@ public class PickupKid : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.tag != "Kid") return;
-        PickupText.SetActive(false);
-        PickupText.SetActive(false);
+        blackboardUI.PickUpText.SetActive(false);
         CanPickup = false;
         CanExtract = false;
     }
