@@ -41,7 +41,9 @@ public class Blackboard_UIManager : DynamicBlackboard
     public GameObject PickUpText;
     public GameObject ReloadText;
     public GameObject Fire;
-    
+    public Image ChildHappyFaceSprite;
+    public Image ChildSadFaceSprite;
+    public GameObject FireHandle;
     
     private PlayerControls controls = null;
     private GameManager gameManager;
@@ -94,6 +96,9 @@ public class Blackboard_UIManager : DynamicBlackboard
                     break;
             }
         };
+        ChildHappyFaceSprite.enabled = false;
+        FireHandle.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -105,6 +110,10 @@ public class Blackboard_UIManager : DynamicBlackboard
     public void SetLifeBar(float value)
     {
         lifeBar.value = value;
+        if (value < 0.5 && !FireHandle.activeSelf)
+        {
+            FireHandle.SetActive(true);
+        }
     }
 
     public void SetWaterBar(float value)
@@ -119,16 +128,17 @@ public class Blackboard_UIManager : DynamicBlackboard
 
     public void SetKids(int kids, int totalKids)
     {
-        NumberOfKids.text = kids+" / "+totalKids;
+        NumberOfKids.text = kids+"/"+totalKids;
+        StartCoroutine(ChildSwitchFace());
     }
     public void SetColectables(int colectables, int totalColectables)
     {
-        NumberOfColectables.text = colectables + " / " + totalColectables;
+        NumberOfColectables.text = colectables + "/" + totalColectables;
     }
     public void SetPoints(int points, int pointsToWin)
     {
-        pointsText.text = points + " / " + pointsToWin;
-        pointsWinText.text = points + " / " + pointsToWin;
+        pointsText.text = points + "/" + pointsToWin;
+        pointsWinText.text = points + "/" + pointsToWin;
     }
     
     public IEnumerator FadeIN()
@@ -140,5 +150,14 @@ public class Blackboard_UIManager : DynamicBlackboard
         {
             StartCoroutine(FadeIN());
         }
+    }
+
+    public IEnumerator ChildSwitchFace()
+    {
+        ChildHappyFaceSprite.enabled = true;
+        ChildSadFaceSprite.enabled = false;
+        yield return new WaitForSeconds(3f);
+        ChildHappyFaceSprite.enabled = false;
+        ChildSadFaceSprite.enabled = true;
     }
 }
