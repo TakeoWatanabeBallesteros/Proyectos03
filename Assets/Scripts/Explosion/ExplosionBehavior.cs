@@ -22,7 +22,8 @@ public class ExplosionBehavior : MonoBehaviour
     public LayerMask explosionMask;
 
     CameraController camController;
-    
+    private static readonly int ExplodeId = Animator.StringToHash("Explode");
+
     void Start()
     {
         nearObjectsOnFire = FindObjectsOfType<FirePropagation2>().ToList<FirePropagation2>();
@@ -33,7 +34,7 @@ public class ExplosionBehavior : MonoBehaviour
     public IEnumerator Explode()
     {
         gameObject.tag = "Untagged";
-        animator.SetTrigger("Explote");
+        animator.SetTrigger(ExplodeId);
         yield return new WaitForSeconds(2f);
         transform.GetChild(1).gameObject.SetActive(true);
         CalculateExpansion();
