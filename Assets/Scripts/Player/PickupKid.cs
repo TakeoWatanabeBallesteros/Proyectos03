@@ -47,6 +47,7 @@ public class PickupKid : MonoBehaviour
             CanPickup = false;
             movementPlayerController.speed *= 1.2f;
             CharacterAnim.PickChild();
+            blackboardUI.ChildFace();
 
         }
     }

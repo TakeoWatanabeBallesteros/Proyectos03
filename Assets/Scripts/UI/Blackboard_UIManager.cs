@@ -97,6 +97,7 @@ public class Blackboard_UIManager : DynamicBlackboard
             }
         };
         ChildHappyFaceSprite.enabled = false;
+        ChildSadFaceSprite.enabled = true;
         FireHandle.SetActive(false);
 
     }
@@ -129,7 +130,6 @@ public class Blackboard_UIManager : DynamicBlackboard
     public void SetKids(int kids, int totalKids)
     {
         NumberOfKids.text = kids+"/"+totalKids;
-        StartCoroutine(ChildSwitchFace());
     }
     public void SetColectables(int colectables, int totalColectables)
     {
@@ -152,6 +152,10 @@ public class Blackboard_UIManager : DynamicBlackboard
         }
     }
 
+    public void ChildFace()
+    {
+        StartCoroutine(ChildSwitchFace());
+    }
     public IEnumerator ChildSwitchFace()
     {
         ChildHappyFaceSprite.enabled = true;
