@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -50,7 +51,7 @@ public class GoldWater : MonoBehaviour
         distance = ObjectiveDistance();
         SetParticleLength();
         SetColliderScale();
-        PuttingOutFires(); //Provisional, no sé si esto es lo que quieres Takeo?
+        if(!Fires.Any()) PuttingOutFires();
     }
 
     private void SetParticleLength()
@@ -100,14 +101,14 @@ public class GoldWater : MonoBehaviour
     {
         if (other.CompareTag("Fire"))
         {
-            Fires.Add(other.GetComponentInParent<FireBehavior>());
+            Fires.Add(other.GetComponent<FireBehavior>());
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Fire"))
         {
-            Fires.Remove(other.GetComponentInParent<FireBehavior>());
+            Fires.Remove(other.GetComponent<FireBehavior>());
         }
     }
 

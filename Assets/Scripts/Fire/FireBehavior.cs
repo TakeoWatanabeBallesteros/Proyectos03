@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -13,9 +14,9 @@ public class FireBehavior : MonoBehaviour
     public bool isWet { get; private set; }
 
     private List<FireBehavior> nearObjects = new List<FireBehavior>();
+    private List<ChildrenHealthSystem> childrens = new List<ChildrenHealthSystem>();
+    private PlayerHealth playerHealth;
 
-    [SerializeField] private GameObject fire;
-    
     [SerializeField] float fireHP;
     [SerializeField] private float timeToPutOut;
 
@@ -32,7 +33,6 @@ public class FireBehavior : MonoBehaviour
     Material _objectMaterial;
     public Material burnedMaterial;
     
-    private PlayerHealth playerHealth;
 
     private int objectsHeatingCount = 0;
     private static readonly int Heat = Shader.PropertyToID("_Heat");
@@ -52,33 +52,19 @@ public class FireBehavior : MonoBehaviour
 
         originalFireSize = fireParticles[0].gameObject.transform.localScale.x;
         
-        pointsBehavior = Singleton.Instance.PointsManager;
+        // pointsBehavior = Singleton.Instance.PointsManager;
     }
 
     // Update is called once per frame
     void Update()
     {
-        _objectMaterial.SetFloat(Heat, Scale(0, 100, heat));
-        // if (onFire)
-        // {
-        //     if (fireHP <= 0)
-        //     {
-        //         transform.GetChild(0).gameObject.SetActive(false);
-        //         StopAllCoroutines();
-        //         transform.GetChild(1).gameObject.SetActive(true);
-        //         PointsBehavior.AddPointsFire();
-        //         PointsBehavior.IncreaseCombo();
-        //         this.enabled = false;
-        //     }
-// 
-        //     _objectMaterial.Lerp(_objectMaterial, burnedMaterial, Time.deltaTime / 2);
-        // }
+        ApplyHeat();
 
-        if(!nearObjects.Any()) ApplyHeat();
-        // if (!onHeating && heat > 0) heat -= heatPerSecond * Time.deltaTime;
+        ApplyDamage();
+        
+        // CoolDown();
     }
     
-    // TODO: Set player health condition
     private void OnTriggerEnter(Collider other)
     {
         switch (other.tag)
@@ -95,10 +81,11 @@ public class FireBehavior : MonoBehaviour
                 break;
             case "Player":
                 // Set Player health burning
+                var health = other.GetComponent<PlayerHealth>();
+                playerHealth = health.isTakingDamage ? null : health ;
                 break;
             case "Kid":
-                // Set kid burning
-                other.GetComponent<ChildrenHealthSystem>().TakeDamage();
+                childrens.Add(other.GetComponent<ChildrenHealthSystem>());
                 break;
         }
     }
@@ -113,11 +100,13 @@ public class FireBehavior : MonoBehaviour
                 fire.onHeating = fire.objectsHeatingCount == 0;
                 break;
             case "Player":
-                // Set Player health not burning
+                playerHealth.isTakingDamage = false;
+                playerHealth = null;
                 break;
             case "Kid":
-                // Set kid not burning
-                other.GetComponent<ChildrenHealthSystem>().StopBeingBurned();
+                var children = other.GetComponent<ChildrenHealthSystem>();
+                children.StopBeingBurned();
+                childrens.Remove(children);
                 break;
         }
     }
@@ -133,35 +122,56 @@ public class FireBehavior : MonoBehaviour
             fireParticle.transform.localScale = new Vector3(scale, scale, scale);
         }
 
-        if (!(fireHP <= 0)) return;
+        if (fireHP > 0) return;
+        
         transform.GetChild(0).gameObject.SetActive(false);
         StopAllCoroutines();
         transform.GetChild(1).gameObject.SetActive(true);
-        pointsBehavior.AddPointsCombo();
-        pointsBehavior.AddCombo();
+        // pointsBehavior.AddPointsCombo();
+        // pointsBehavior.AddCombo();
             
-        this.enabled = false;
+        enabled = false;
     }
 
     private void AddHeat()
     {
-        heat += heatPerSecond * Time.deltaTime; 
+        heat += heatPerSecond * Time.deltaTime;
+        _objectMaterial.SetFloat(Heat, Scale(0, 100, heat));
+        if (!(this.heat >= 100)) return;
+        onFire = true;
+        transform.GetChild(0).gameObject.SetActive(true);
     }
     public void AddHeat(float heat)
     {
         this.heat += heat;
-        if (this.heat >= 100) transform.GetChild(0).gameObject.SetActive(true);
+        _objectMaterial.SetFloat(Heat, Scale(0, 100, heat));
+        if (!(this.heat >= 100)) return;
+        onFire = true;
+        transform.GetChild(0).gameObject.SetActive(true);
     }
+
+    private void CoolDown() { if (onFire && !onHeating && heat > 0) heat -= heatPerSecond * Time.deltaTime; }
 
     private void ApplyHeat()
     {
+        if(!nearObjects.Any()) return;
+        
         foreach (var fire in nearObjects)
         {
+            if(fire.heat >= 100 || fire.onFire) nearObjects.Remove(fire);
             fire.AddHeat();
-            if(fire.heat >= 100) nearObjects.Remove(fire);
         }
     }
 
+    private void ApplyDamage()
+    {
+        if (playerHealth) playerHealth?.TakeDamage();
+        if(!childrens.Any()) return;
+        foreach (var children in childrens)
+        {
+            children.TakeDamage();
+        }
+    }
 
     private static float Scale(float min, float max, float value)
     {

@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private bool immortal;
+    [SerializeField] private bool canDamaged;
     Vector3 initialPos;
     [SerializeField] private float Vida;
     InputPlayerController inputPlayer;
@@ -16,8 +17,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float burnIndicatorTime;
 
     GameManager GM;
-    private Blackboard_UIManager blackboardUI;
-    public float invulnearabilityDuration;
+    private Blackboard_UIManager blackboardUI; 
+    public float damageCoolDown;
     public bool isTakingDamage = false;
 
     // Start is called before the first frame update
@@ -31,7 +32,7 @@ public class PlayerHealth : MonoBehaviour
         Dead = false;
         Vida = 1.00f;
         blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
-        immortal = false;
+        canDamaged = false;
     }
     
     IEnumerator Respawn()
@@ -50,15 +51,18 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage()
     {
         if (Dead) return;
-        if(!immortal) Vida -= 0.10f; isTakingDamage = true;
-        StartCoroutine(Becomeinvulnerable());
-        blackboardUI.SetLifeBar(Vida);
-        //StopAllCoroutines();
-        StartCoroutine(ShowBurnIndicator());
-            
-        if (Vida <= 0.00f && Dead == false)
+        if(!canDamaged)
         {
-            die();
+            Vida -= 0.10f;
+            isTakingDamage = true;
+            StartCoroutine(DamageCooldown());
+            blackboardUI.SetLifeBar(Vida);
+            StartCoroutine(ShowBurnIndicator());
+        }
+            
+        if (Vida <= 0.00f)
+        {
+            Die();
         }
     }
 
@@ -66,18 +70,17 @@ public class PlayerHealth : MonoBehaviour
     {
         blackboardUI.Fire.SetActive(true);
         yield return new WaitForSeconds(burnIndicatorTime);
-        isTakingDamage = false;
         blackboardUI.Fire.SetActive(false);
     }
 
-    IEnumerator Becomeinvulnerable()
+    private IEnumerator DamageCooldown()
     {
-        immortal = true;
-        yield return new WaitForSeconds(invulnearabilityDuration);
-        immortal = false;
+        canDamaged = true;
+        yield return new WaitForSeconds(damageCoolDown);
+        canDamaged = false;
     }
 
-    private void die()
+    private void Die()
     {
         Dead = true;
         inputPlayer.enabled = false;

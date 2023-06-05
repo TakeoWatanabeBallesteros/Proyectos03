@@ -7,7 +7,7 @@ using UnityEditor;
 
 public class ExplosionBehavior : MonoBehaviour
 {
-    //private List<FireBehavior> nearObjectsOnFire = new List<FireBehavior>();
+    private List<FireBehavior> nearObjectsOnFire = new List<FireBehavior>();
     public float closeRange;
     public float midRange;
     public float highRange;
@@ -40,63 +40,34 @@ public class ExplosionBehavior : MonoBehaviour
         animator.SetTrigger(ExplodeId);
         yield return new WaitForSeconds(2f);
         explosionParticles.gameObject.SetActive(true);
-        //CalculateExpansion();  
-        ExplosionKnockBack();
+        CalculateExpansion();  
+        // ExplosionKnockBack();
         camController.shakeDuration = 1f;
         enabled = false;
     }
-    // TODO: Revisar esto por si se puede hacer como antes 
-
-    /*
+    
     void CalculateExpansion()
     {
-        foreach (var x in nearObjectsOnFire)
+        List<FireBehavior> clone = new List<FireBehavior>(nearObjectsOnFire);
+        foreach (var x in clone)
         {
-            Debug.Log("Objeto alcanzado:" + x.name);
             float distance = Vector3.Distance(transform.position, x.transform.position);
 
             if (x.onFire) continue;
-            if (distance <= closeRange) //if it's too close you get on fire instant
+            if (distance <= closeRange)
             {
                 x.AddHeat(100);
                 nearObjectsOnFire.Remove(x);
             }
-            else if (distance <= midRange) //if it's between close and mid range then it's flammability increases
+            else if (distance <= midRange)
             {
                 x.AddHeat(60);
                 nearObjectsOnFire.Remove(x);
             }
-            else if (distance <= highRange) //if it's between mid and far range then it's flammability increases
+            else if (distance <= highRange)
             {
                 x.AddHeat(30);
                 nearObjectsOnFire.Remove(x);
-            }
-        }
-       
-        for (int x = 0; x < nearObjectsOnFire.Count; x++)
-        {
-            Debug.Log(nearObjectsOnFire[x]);
-            //Debug.Log("Objeto alcanzado:" + nearObjectsOnFire[x].name);
-            float distance = Vector3.Distance(transform.position, nearObjectsOnFire[x].transform.position);
-
-            if (nearObjectsOnFire[x].onFire) continue;
-            nearObjectsOnFire[x].AddHeat(100);
-            nearObjectsOnFire.Remove(nearObjectsOnFire[x]);
-            
-            if (distance <= closeRange) //if it's too close you get on fire instant
-            {
-                nearObjectsOnFire[x].AddHeat(100);
-                nearObjectsOnFire.Remove(nearObjectsOnFire[x]);
-            }            
-            else if (distance <= midRange) //if it's between close and mid range then it's flammability increases
-            {
-                nearObjectsOnFire[x].AddHeat(60);
-                nearObjectsOnFire.Remove(nearObjectsOnFire[x]);
-            }
-            else if (distance <= highRange) //if it's between mid and far range then it's flammability increases
-            {
-                nearObjectsOnFire[x].AddHeat(30);
-                nearObjectsOnFire.Remove(nearObjectsOnFire[x]);
             }
         }
     }
@@ -115,7 +86,6 @@ public class ExplosionBehavior : MonoBehaviour
             nearObjectsOnFire.Remove(other.GetComponentInParent<FireBehavior>());
         }
     }
-    */
     
     private void ExplosionKnockBack() //Apply force in x sphere radius
     {
@@ -125,24 +95,18 @@ public class ExplosionBehavior : MonoBehaviour
             Rigidbody rb = target.GetComponentInParent<Rigidbody>();
             if (rb == null) continue;
             rb.AddExplosionForce(explosionForce, transform.position, knockBackRadius);
-            target.gameObject.GetComponentInParent<FireBehavior>().AddHeat(100);
         }
     }
-
-}
-
-//how to make a solid disc to check radius from an object 
-//
-#if UNITY_EDITOR
-[CustomEditor(typeof(ExplosionBehavior))]
-public class HandlessDemoEditor : Editor
-{
-    public void OnSceneGUI()
+    
+    void OnDrawGizmosSelected()
     {
-        var linkedObject = target as ExplosionBehavior;
-
-        Handles.color = new Color(1, 0, 0, .3f);
-        Handles.DrawSolidDisc(linkedObject.transform.position, Vector3.up, linkedObject.closeRange);
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = new Color(1, 0, 0, 0.3f);
+        Gizmos.DrawSphere(transform.position, closeRange);
+        Gizmos.color = new Color(1, 0.57f, 0, 0.3f);
+        Gizmos.DrawSphere(transform.position, midRange);
+        Gizmos.color = new Color(1, 0.97f, 0, 0.3f);
+        Gizmos.DrawSphere(transform.position, highRange);
     }
+
 }
-#endif
