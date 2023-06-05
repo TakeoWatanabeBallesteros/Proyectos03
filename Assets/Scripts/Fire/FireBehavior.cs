@@ -137,7 +137,7 @@ public class FireBehavior : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(false);
         StopAllCoroutines();
         transform.GetChild(1).gameObject.SetActive(true);
-        pointsBehavior.AddPoints(10);
+        pointsBehavior.AddPointsCombo();
         pointsBehavior.AddCombo();
             
         this.enabled = false;
