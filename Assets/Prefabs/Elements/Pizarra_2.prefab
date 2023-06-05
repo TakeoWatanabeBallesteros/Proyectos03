@@ -4915,8 +4915,6 @@ GameObject:
   - component: {fileID: 4308886169729148471}
   - component: {fileID: 4308886169729148467}
   - component: {fileID: 4308886169729148464}
-  - component: {fileID: 4308886169729148465}
-  - component: {fileID: 4308886169729148470}
   m_Layer: 0
   m_Name: Pizarra_2
   m_TagString: Untagged
@@ -4953,8 +4951,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.7073154, y: 0.8462784, z: 3.5513878}
-  m_Center: {x: 0.025261879, y: 0.22857606, z: 0.050519943}
+  m_Size: {x: 2.2040827, y: 0.8462784, z: 5.0560265}
+  m_Center: {x: -0.22312224, y: 0.22857721, z: -0.058871035}
 --- !u!54 &4308886169729148464
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4971,49 +4969,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4308886169729148465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4308886169729148468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3913268077a5f346ac49d3375f64bea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nearObjectsOnFire: []
-  nearFiresExplosion: []
-  fire: {fileID: 0}
-  explosive: {fileID: 0}
-  nearDistance: 5
-  fireHP: 100
-  timeToBurn: 10
-  onFire: 0
-  fireType: 2
-  delay: 8
-  delayFire: 0.2
-  CanBurn: 0
-  fireParticles: []
-  startRoomFires: 0
-  redMaterial: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
-  burnedMaterial: {fileID: 2100000, guid: 0e9168e47f005f7468aa7407ed8bf563, type: 2}
---- !u!114 &4308886169729148470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4308886169729148468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2701286541c26c14483e25445c26c3c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canLerpMaterials: 0
-  materialRed: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
-  timeThatIsBurning: 5
 --- !u!1 &4308886169806089877
 GameObject:
   m_ObjectHideFlags: 0
