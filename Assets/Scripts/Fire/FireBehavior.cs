@@ -3,19 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
+using System.Xml;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class FireBehavior : MonoBehaviour
 {
-    public bool onFire { get; private set; }
+    public bool onFire;
     public bool onHeating { get; private set; }
     public bool isWet { get; private set; }
 
     private List<FireBehavior> nearObjects = new List<FireBehavior>();
     private List<ChildrenHealthSystem> childrens = new List<ChildrenHealthSystem>();
     private PlayerHealth playerHealth;
+    [SerializeField] private float damageRadius;
 
     [SerializeField] float fireHP;
     [SerializeField] private float timeToPutOut;
@@ -43,7 +45,6 @@ public class FireBehavior : MonoBehaviour
     void Start()
     {
         fireHP = 100f;
-        heat = 0;
         isWet = false;
 
         _objectMaterial = GetComponentInChildren<MeshRenderer>().material;
@@ -52,6 +53,8 @@ public class FireBehavior : MonoBehaviour
 
         originalFireSize = fireParticles[0].gameObject.transform.localScale.x;
         
+        heat = 0;
+        if(onFire) AddHeat(100);
         // pointsBehavior = Singleton.Instance.PointsManager;
     }
 
@@ -62,7 +65,7 @@ public class FireBehavior : MonoBehaviour
 
         ApplyDamage();
         
-        // CoolDown();
+        CoolDown();
     }
     
     private void OnTriggerEnter(Collider other)
@@ -80,9 +83,7 @@ public class FireBehavior : MonoBehaviour
                 StartCoroutine(other.GetComponent<ExplosionBehavior>().Explode());
                 break;
             case "Player":
-                // Set Player health burning
-                var health = other.GetComponent<PlayerHealth>();
-                playerHealth = health.isTakingDamage ? null : health ;
+                playerHealth = other.GetComponent<PlayerHealth>();
                 break;
             case "Kid":
                 childrens.Add(other.GetComponent<ChildrenHealthSystem>());
@@ -129,7 +130,6 @@ public class FireBehavior : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(true);
         // pointsBehavior.AddPointsCombo();
         // pointsBehavior.AddCombo();
-            
         enabled = false;
     }
 
@@ -137,7 +137,7 @@ public class FireBehavior : MonoBehaviour
     {
         heat += heatPerSecond * Time.deltaTime;
         _objectMaterial.SetFloat(Heat, Scale(0, 100, heat));
-        if (!(this.heat >= 100)) return;
+        if (!(heat > 100)) return;
         onFire = true;
         transform.GetChild(0).gameObject.SetActive(true);
     }
@@ -150,14 +150,21 @@ public class FireBehavior : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(true);
     }
 
-    private void CoolDown() { if (onFire && !onHeating && heat > 0) heat -= heatPerSecond * Time.deltaTime; }
+    private void CoolDown() 
+    { 
+        if (!onFire && !onHeating && heat > 0) heat -= heatPerSecond * Time.deltaTime;
+        _objectMaterial.SetFloat(Heat, Scale(0, 100, heat));
+    }
 
     private void ApplyHeat()
     {
         if(!nearObjects.Any()) return;
-        
-        foreach (var fire in nearObjects)
+
+        List<FireBehavior> clone = new List<FireBehavior>(nearObjects);
+
+        foreach (var fire in clone)
         {
+            if(Vector3.Distance(fire.transform.position, transform.position) > heatDistance) continue;
             if(fire.heat >= 100 || fire.onFire) nearObjects.Remove(fire);
             fire.AddHeat();
         }
@@ -165,10 +172,14 @@ public class FireBehavior : MonoBehaviour
 
     private void ApplyDamage()
     {
-        if (playerHealth) playerHealth?.TakeDamage();
+        if (playerHealth != null && Vector3.Distance(playerHealth.transform.position, transform.position) < damageRadius)
+        {
+            playerHealth.TakeDamage();
+        }
         if(!childrens.Any()) return;
         foreach (var children in childrens)
         {
+            if (Vector3.Distance(children.transform.position, transform.position) > damageRadius) continue;
             children.TakeDamage();
         }
     }

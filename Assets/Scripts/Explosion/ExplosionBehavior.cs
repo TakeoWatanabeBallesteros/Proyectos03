@@ -21,6 +21,8 @@ public class ExplosionBehavior : MonoBehaviour
     CameraController camController;
     private static readonly int ExplodeId = Animator.StringToHash("Explode");
     public GameObject explosionParticles;
+
+    private FireBehavior fireBehavior;
     
     [ContextMenu("Do Something")]
     void DoSomething()
@@ -32,6 +34,7 @@ public class ExplosionBehavior : MonoBehaviour
     {
         camController = Camera.main.GetComponent<CameraController>();
         explosionParticles.gameObject.SetActive(false);
+        fireBehavior = GetComponent<FireBehavior>();
     }
 
     public IEnumerator Explode()
@@ -41,8 +44,9 @@ public class ExplosionBehavior : MonoBehaviour
         yield return new WaitForSeconds(2f);
         explosionParticles.gameObject.SetActive(true);
         CalculateExpansion();  
-        // ExplosionKnockBack();
+        ExplosionKnockBack();
         camController.shakeDuration = 1f;
+        fireBehavior.enabled = true;
         enabled = false;
     }
     

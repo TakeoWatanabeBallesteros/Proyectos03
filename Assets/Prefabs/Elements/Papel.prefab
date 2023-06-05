@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5089999183849714429}
   - component: {fileID: 5089999183849714431}
-  - component: {fileID: 686943025321467288}
   - component: {fileID: 1326149009}
+  - component: {fileID: 7939038777154272911}
   m_Layer: 0
   m_Name: Papel
   m_TagString: Fire
@@ -53,19 +53,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!65 &686943025321467288
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5089999183849714400}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.60212326, y: 0.46542645, z: 0.7}
-  m_Center: {x: -0.011964798, y: 0.009825587, z: 0}
 --- !u!114 &1326149009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,10 +65,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 218074dde59dab9448d797f652ae5e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fire: {fileID: 0}
+  onFire: 0
+  damageRadius: 0.7
   fireHP: 100
   timeToPutOut: 0
-  heatDistance: 0
+  heatDistance: 2
   heat: 0
   heatPerSecond: 33.3
   fireParticles:
@@ -89,6 +77,19 @@ MonoBehaviour:
   - {fileID: 5036511499479532117}
   - {fileID: 26682863144241023}
   burnedMaterial: {fileID: 0}
+--- !u!135 &7939038777154272911
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5089999183849714400}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5089999184175621580
 GameObject:
   m_ObjectHideFlags: 0

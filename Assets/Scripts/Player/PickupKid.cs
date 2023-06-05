@@ -54,7 +54,7 @@ public class PickupKid : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Kid" && !CarringKid)
+        if (other.CompareTag("Kid") && !CarringKid)
         {
             blackboardUI.PickUpText.SetActive(false);
             CanPickup = true;
@@ -64,7 +64,7 @@ public class PickupKid : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag != "Kid") return;
+        if (!other.CompareTag("Kid")) return;
         blackboardUI.PickUpText.SetActive(false);
         CanPickup = false;
         CanExtract = false;

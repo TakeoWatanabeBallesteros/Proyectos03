@@ -54,7 +54,6 @@ public class PlayerHealth : MonoBehaviour
         if(!canDamaged)
         {
             Vida -= 0.10f;
-            isTakingDamage = true;
             StartCoroutine(DamageCooldown());
             blackboardUI.SetLifeBar(Vida);
             StartCoroutine(ShowBurnIndicator());

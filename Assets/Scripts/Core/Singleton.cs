@@ -14,7 +14,7 @@ public class Singleton : MonoBehaviour
     public PointsBehavior PointsManager { get => _pointsManager; set => _pointsManager = null; }
 
 #region SerializeFields
-[SerializeField] private GameManager _gameManager;
+    [SerializeField] private GameManager _gameManager;
     [SerializeField] private CameraPreviewManager _cameraPreviewManager;
     [SerializeField] private FSM_UIManager _uiManager;
     [SerializeField] private PointsBehavior _pointsManager;
