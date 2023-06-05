@@ -42,7 +42,7 @@ public class ItemManager : MonoBehaviour
     {
         SavedKids++;
         UI_Blackboard.SetKids(SavedKids, TotalKids);
-        pointsManager.AddPoints(1000);
+        pointsManager.AddPointsSafeZone();
         if(SavedKids == TotalKids) {
             uiManager.uiManager_FSM.Trigger("Playing-Win");
         }
@@ -52,7 +52,7 @@ public class ItemManager : MonoBehaviour
     {
         Collected++;
         UI_Blackboard.SetCollectables(Collected, TotalCollectables);
-        pointsManager.AddPoints(500);
+        pointsManager.AddPointsCollectable();
     }
 
 }
