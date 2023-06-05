@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FMODUnity;
 
 public class GoldWater : MonoBehaviour
 {
@@ -10,7 +12,8 @@ public class GoldWater : MonoBehaviour
     [SerializeField] float distance;
     public LayerMask HitLayer;
     public float ScaleFactor;
-
+    
+    [Space(5f)]
     [Header("Componentes")]
     [SerializeField] Transform cilinderOrigin;
     [SerializeField] ParticleSystem water;
@@ -18,6 +21,7 @@ public class GoldWater : MonoBehaviour
     [SerializeField] PlayerControls Controls;
     public GameObject colider;
 
+    [Space(5f)]
     [Header("Raycast Origins")]
     public Transform R0;
     public Transform R1;
@@ -25,8 +29,13 @@ public class GoldWater : MonoBehaviour
     public Transform R3;
     public Transform R4;
 
-    List<GameObject> Fires;
-
+    [Space(5f)] 
+    [Header("Sounds")] 
+    [SerializeField] private GameObject waterSound;
+    
+    List<FireBehavior> Fires;
+    private PointsBehavior pointsBehavior;
+    
     private void Awake()
     {
         Controls = Controls ?? new PlayerControls();
@@ -37,26 +46,27 @@ public class GoldWater : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Fires = new List<GameObject>();
+        Fires = new List<FireBehavior>();
         colider.SetActive(false);
         water.Stop();
+        pointsBehavior = Singleton.Instance.PointsManager;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         distance = ObjectiveDistance();
-        SetParticlelength();
-        SetColiderScale();
+        SetParticleLength();
+        SetColliderScale();
+        if(!Fires.Any()) PuttingOutFires();
     }
 
-    private void SetParticlelength()
+    private void SetParticleLength()
     {
         var WeakMain = water.main;
         WeakMain.startLifetime = distance / WeakMain.startSpeed.constant;
     }
-    private void SetColiderScale()
+    private void SetColliderScale()
     {
         cilinderOrigin.localScale = new Vector3(1,1, distance/ScaleFactor);
     }
@@ -98,14 +108,14 @@ public class GoldWater : MonoBehaviour
     {
         if (other.CompareTag("Fire"))
         {
-            Fires.Add(other.gameObject);
+            Fires.Add(other.GetComponent<FireBehavior>());
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Fire"))
         {
-            Fires.Remove(other.gameObject);
+            Fires.Remove(other.GetComponent<FireBehavior>());
         }
     }
 
@@ -114,6 +124,7 @@ public class GoldWater : MonoBehaviour
         water.Play();
         waterCone.gameObject.SetActive(true);
         colider.SetActive(true);
+        waterSound.SetActive(true);
     }
     private void StopShoot(InputAction.CallbackContext context)
     {
@@ -121,5 +132,15 @@ public class GoldWater : MonoBehaviour
         waterCone.gameObject.SetActive(false);
         colider.SetActive(false);
         Fires.Clear();
+        pointsBehavior.ResetCombo();
+        waterSound.SetActive(false);
+    }
+
+    private void PuttingOutFires()
+    {
+        foreach (var fire in Fires)
+        {
+            fire.PuttingOut();
+        }
     }
 }

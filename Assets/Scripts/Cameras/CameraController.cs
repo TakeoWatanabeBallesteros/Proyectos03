@@ -7,7 +7,6 @@ public class CameraController : MonoBehaviour
 {
     private Transform target;
     public float distance = 10f;
-    [SerializeField] private InputPlayerController controller;
     private Camera cam;
 
     public float maxCamSize;
@@ -27,18 +26,19 @@ public class CameraController : MonoBehaviour
 
     public Vector3 addPosition;
 
+    private Vector3 startPos;
+
     private void Start()
     {
         cam = Camera.main;
         timer = delay;
-        //target = Singleton.Instance.Player.transform;
+        target = Singleton.Instance.Player.transform;
     }
 
     private void Update()
     {
         if (target != null)
-        {            
-            // transform.position = Vector3.Lerp(transform.position, target.position, 10f * Time.deltaTime);
+        {
             transform.position = target.position + addPosition;
         }            
 

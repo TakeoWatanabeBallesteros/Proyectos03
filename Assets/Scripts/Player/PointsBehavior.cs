@@ -5,10 +5,17 @@ using UnityEngine;
 
 public class PointsBehavior : MonoBehaviour
 {
-    public int ExtinguishFirePoints;
     
     public static int Points;
 
+    [Header("Points by action")]
+    public int SafeZonePoints;
+    public int ExplosionPoints;
+    public int CollectablePoints;
+    public int PointsPerSecond;
+    public int ExtinguishFirePoints;
+
+    [Header("Win")]
     public static int Combo;
 
     public int pointsToWin;
@@ -26,16 +33,17 @@ public class PointsBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        blackboardUI.SetPoints(Points, pointsToWin);
+        //blackboardUI.SetPoints(Points, pointsToWin);
     }
+    public void AddPointsSafeZone() { Points += SafeZonePoints; blackboardUI.SetPoints( Points, pointsToWin); }
+    public void AddPointsExplosion() { Points += ExplosionPoints; blackboardUI.SetPoints( Points, pointsToWin); }
+    public void AddPointsCollectable() { Points += CollectablePoints; blackboardUI.SetPoints( Points, pointsToWin); }
+    public void AddPointsSeconds() { Points += PointsPerSecond; blackboardUI.SetPoints( Points, pointsToWin); }
+    public void AddPointsCombo() { Points += ExtinguishFirePoints * Combo; blackboardUI.SetPoints( Points, pointsToWin); }
+    public void AddCombo() => Combo++; 
+    public void ResetCombo() => Combo = 1;
+/*  
 
-    public static void IncreaseCombo() => Combo = Combo < 10 ? Combo + 1 : Combo;
-    public static void ResetCombo() => Combo = 1;
-    public static void AddPointsFire() => Points += 0 * Combo;
-    public static void AddPointsSaveZone(int attempts, int distance) => Points += 1000 + (200 / attempts) + 10 * distance;
-    public static void AddPointsSaveZone() => Points += 1000;
-    public static void AddPointsExplosion() => Points += 750;
-    public static void AddPointsCollectable() => Points += 500;
-    public static void AddPointsSeconds(int seconds) => Points += 50 * seconds;
-    public static void ResetPints() => Points = 0;
+*/
+    public void ResetPoints() => Points = 0;
 }

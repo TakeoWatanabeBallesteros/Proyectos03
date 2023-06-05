@@ -29,6 +29,7 @@ public class MovementPlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cam = Camera.main;
         CharacterAnim = GetComponent<AnimatorController>();
         speed = Maxspeed;
         rb = GetComponent<Rigidbody>();
