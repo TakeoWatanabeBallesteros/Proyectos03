@@ -78,7 +78,7 @@ public class FireBehavior : MonoBehaviour
         // if (!onHeating && heat > 0) heat -= heatPerSecond * Time.deltaTime;
     }
     
-    // TODO: Set player and kid health condition
+    // TODO: Set player health condition
     private void OnTriggerEnter(Collider other)
     {
         switch (other.tag)
@@ -98,6 +98,7 @@ public class FireBehavior : MonoBehaviour
                 break;
             case "Kid":
                 // Set kid burning
+                other.GetComponent<ChildrenHealthSystem>().TakeDamage();
                 break;
         }
     }
@@ -116,6 +117,7 @@ public class FireBehavior : MonoBehaviour
                 break;
             case "Kid":
                 // Set kid not burning
+                other.GetComponent<ChildrenHealthSystem>().StopBeingBurned();
                 break;
         }
     }
@@ -148,6 +150,7 @@ public class FireBehavior : MonoBehaviour
     public void AddHeat(float heat)
     {
         this.heat += heat;
+        if (this.heat >= 100) transform.GetChild(0).gameObject.SetActive(true);
     }
 
     private void ApplyHeat()

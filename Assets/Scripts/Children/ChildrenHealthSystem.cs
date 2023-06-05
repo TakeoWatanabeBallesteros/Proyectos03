@@ -1,31 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class HealthSystem : MonoBehaviour
+public class ChildrenHealthSystem : MonoBehaviour
 {
 
     [SerializeField] float childHP = 100;
     bool isInmortal = false;
     float timer;
     public float delay = 1;
-    public bool startTimer;
-    public bool isGettingDamaged;
+    public bool isGettingBurned;
     // Start is called before the first frame update
     void Start()
     {
         timer = delay;
-        isGettingDamaged = false;
+        isGettingBurned = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (childHP <= 0)
-        {
-            Debug.Log("Estoy muerto vivo");
-        }
-        if (startTimer && isGettingDamaged)
+        if (isGettingBurned)
         {
             if (timer > 0)
             {
@@ -39,23 +35,24 @@ public class HealthSystem : MonoBehaviour
                 childHP -= 10;
             }
         }
-
     }
 
     public void TakeDamage()
     {
-        startTimer = true;
-        isGettingDamaged = true;
+        isGettingBurned = true;
         if (!isInmortal)
         {
             childHP -= 10f;
-        }        
+        }  
+        if (childHP <= 0)
+        {
+            Debug.Log("Estoy muerto vivo"); //Do some particles or whatever animation and then disable kid
+        }
     }
 
-    public void RestartTimer()
+    public void StopBeingBurned()
     {
-        startTimer = false;
-        isGettingDamaged = false;
+        isGettingBurned = false;
         timer = 0;
     }
 

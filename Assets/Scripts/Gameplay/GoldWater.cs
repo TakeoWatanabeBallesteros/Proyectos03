@@ -50,6 +50,7 @@ public class GoldWater : MonoBehaviour
         distance = ObjectiveDistance();
         SetParticleLength();
         SetColliderScale();
+        PuttingOutFires(); //Provisional, no sé si esto es lo que quieres Takeo?
     }
 
     private void SetParticleLength()
@@ -99,14 +100,14 @@ public class GoldWater : MonoBehaviour
     {
         if (other.CompareTag("Fire"))
         {
-            Fires.Add(other.GetComponent<FireBehavior>());
+            Fires.Add(other.GetComponentInParent<FireBehavior>());
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Fire"))
         {
-            Fires.Remove(other.GetComponent<FireBehavior>());
+            Fires.Remove(other.GetComponentInParent<FireBehavior>());
         }
     }
 
