@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FMODUnity;
 
 public class GoldWater : MonoBehaviour
 {
@@ -10,7 +12,8 @@ public class GoldWater : MonoBehaviour
     [SerializeField] float distance;
     public LayerMask HitLayer;
     public float ScaleFactor;
-
+    
+    [Space(5f)]
     [Header("Componentes")]
     [SerializeField] Transform cilinderOrigin;
     [SerializeField] ParticleSystem water;
@@ -18,6 +21,7 @@ public class GoldWater : MonoBehaviour
     [SerializeField] PlayerControls Controls;
     public GameObject colider;
 
+    [Space(5f)]
     [Header("Raycast Origins")]
     public Transform R0;
     public Transform R1;
@@ -25,6 +29,10 @@ public class GoldWater : MonoBehaviour
     public Transform R3;
     public Transform R4;
 
+    [Space(5f)] 
+    [Header("Sounds")] 
+    [SerializeField] private GameObject waterSound;
+    
     List<FireBehavior> Fires;
     private PointsBehavior pointsBehavior;
     
@@ -50,7 +58,7 @@ public class GoldWater : MonoBehaviour
         distance = ObjectiveDistance();
         SetParticleLength();
         SetColliderScale();
-        PuttingOutFires(); //Provisional, no sé si esto es lo que quieres Takeo?
+        if(!Fires.Any()) PuttingOutFires();
     }
 
     private void SetParticleLength()
@@ -100,14 +108,14 @@ public class GoldWater : MonoBehaviour
     {
         if (other.CompareTag("Fire"))
         {
-            Fires.Add(other.GetComponentInParent<FireBehavior>());
+            Fires.Add(other.GetComponent<FireBehavior>());
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Fire"))
         {
-            Fires.Remove(other.GetComponentInParent<FireBehavior>());
+            Fires.Remove(other.GetComponent<FireBehavior>());
         }
     }
 
@@ -116,6 +124,7 @@ public class GoldWater : MonoBehaviour
         water.Play();
         waterCone.gameObject.SetActive(true);
         colider.SetActive(true);
+        waterSound.SetActive(true);
     }
     private void StopShoot(InputAction.CallbackContext context)
     {
@@ -124,6 +133,7 @@ public class GoldWater : MonoBehaviour
         colider.SetActive(false);
         Fires.Clear();
         pointsBehavior.ResetCombo();
+        waterSound.SetActive(false);
     }
 
     private void PuttingOutFires()

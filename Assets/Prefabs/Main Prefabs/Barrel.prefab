@@ -131,9 +131,11 @@ GameObject:
   - component: {fileID: 2493191778936274755}
   - component: {fileID: 2493191778936274759}
   - component: {fileID: 662141225387826415}
+  - component: {fileID: 553687936486545728}
+  - component: {fileID: 8490179429507760360}
   m_Layer: 7
   m_Name: Barrel
-  m_TagString: Untagged
+  m_TagString: Explosive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,8 +172,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!114 &662141225387826415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +196,42 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65
   explosionParticles: {fileID: 4981798426171415981}
+--- !u!135 &553687936486545728
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2493191778936274758}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &8490179429507760360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2493191778936274758}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 218074dde59dab9448d797f652ae5e49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onFire: 1
+  damageRadius: 0.7
+  fireHP: 100
+  timeToPutOut: 0
+  heatDistance: 2
+  heat: 0
+  heatPerSecond: 33.3
+  fireParticles:
+  - {fileID: 6252905235515683950}
+  - {fileID: 6252905236465301074}
+  burnedMaterial: {fileID: 0}
 --- !u!1001 &2493191778741776801
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -325,6 +363,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2493191778741776801}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &6252905235515683950 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8385509645653132751, guid: eeebe77c1c8542e4b953d98a574f492a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2493191778741776801}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6252905236465301074 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8385509646854670323, guid: eeebe77c1c8542e4b953d98a574f492a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2493191778741776801}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4982212176881369023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -335,6 +385,10 @@ PrefabInstance:
     - target: {fileID: 1892078723244562, guid: 46876a2780737ec45a19d62f88e5ce56, type: 3}
       propertyPath: m_Name
       value: CFX_Explosion_B_Smoke+Text
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892078723244562, guid: 46876a2780737ec45a19d62f88e5ce56, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4977646799359860, guid: 46876a2780737ec45a19d62f88e5ce56, type: 3}
       propertyPath: m_RootOrder
