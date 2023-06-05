@@ -7,7 +7,6 @@ public class CameraController : MonoBehaviour
 {
     private Transform target;
     public float distance = 10f;
-    [SerializeField] private InputPlayerController controller;
     private Camera cam;
 
     public float maxCamSize;
