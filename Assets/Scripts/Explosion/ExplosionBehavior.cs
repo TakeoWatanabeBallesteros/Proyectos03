@@ -7,7 +7,7 @@ using UnityEditor;
 
 public class ExplosionBehavior : MonoBehaviour
 {
-    private List<FireBehavior> nearObjectsOnFire = new List<FireBehavior>();
+    //private List<FireBehavior> nearObjectsOnFire = new List<FireBehavior>();
     public float closeRange;
     public float midRange;
     public float highRange;
@@ -20,6 +20,7 @@ public class ExplosionBehavior : MonoBehaviour
 
     CameraController camController;
     private static readonly int ExplodeId = Animator.StringToHash("Explode");
+    public GameObject explosionParticles;
     
     [ContextMenu("Do Something")]
     void DoSomething()
@@ -30,6 +31,7 @@ public class ExplosionBehavior : MonoBehaviour
     void Start()
     {
         camController = Camera.main.GetComponent<CameraController>();
+        explosionParticles.gameObject.SetActive(false);
     }
 
     public IEnumerator Explode()
@@ -37,17 +39,20 @@ public class ExplosionBehavior : MonoBehaviour
         gameObject.tag = "Untagged";
         animator.SetTrigger(ExplodeId);
         yield return new WaitForSeconds(2f);
-        transform.GetChild(1).gameObject.SetActive(true);
-        CalculateExpansion();
+        explosionParticles.gameObject.SetActive(true);
+        //CalculateExpansion();  
         ExplosionKnockBack();
         camController.shakeDuration = 1f;
         enabled = false;
     }
-    
+    // TODO: Revisar esto por si se puede hacer como antes 
+
+    /*
     void CalculateExpansion()
     {
         foreach (var x in nearObjectsOnFire)
         {
+            Debug.Log("Objeto alcanzado:" + x.name);
             float distance = Vector3.Distance(transform.position, x.transform.position);
 
             if (x.onFire) continue;
@@ -67,7 +72,50 @@ public class ExplosionBehavior : MonoBehaviour
                 nearObjectsOnFire.Remove(x);
             }
         }
-    }  
+       
+        for (int x = 0; x < nearObjectsOnFire.Count; x++)
+        {
+            Debug.Log(nearObjectsOnFire[x]);
+            //Debug.Log("Objeto alcanzado:" + nearObjectsOnFire[x].name);
+            float distance = Vector3.Distance(transform.position, nearObjectsOnFire[x].transform.position);
+
+            if (nearObjectsOnFire[x].onFire) continue;
+            nearObjectsOnFire[x].AddHeat(100);
+            nearObjectsOnFire.Remove(nearObjectsOnFire[x]);
+            
+            if (distance <= closeRange) //if it's too close you get on fire instant
+            {
+                nearObjectsOnFire[x].AddHeat(100);
+                nearObjectsOnFire.Remove(nearObjectsOnFire[x]);
+            }            
+            else if (distance <= midRange) //if it's between close and mid range then it's flammability increases
+            {
+                nearObjectsOnFire[x].AddHeat(60);
+                nearObjectsOnFire.Remove(nearObjectsOnFire[x]);
+            }
+            else if (distance <= highRange) //if it's between mid and far range then it's flammability increases
+            {
+                nearObjectsOnFire[x].AddHeat(30);
+                nearObjectsOnFire.Remove(nearObjectsOnFire[x]);
+            }
+        }
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Fire"))
+        {
+            nearObjectsOnFire.Add(other.GetComponentInParent<FireBehavior>());
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Fire"))
+        {
+            nearObjectsOnFire.Remove(other.GetComponentInParent<FireBehavior>());
+        }
+    }
+    */
     
     private void ExplosionKnockBack() //Apply force in x sphere radius
     {
@@ -77,6 +125,7 @@ public class ExplosionBehavior : MonoBehaviour
             Rigidbody rb = target.GetComponentInParent<Rigidbody>();
             if (rb == null) continue;
             rb.AddExplosionForce(explosionForce, transform.position, knockBackRadius);
+            target.gameObject.GetComponentInParent<FireBehavior>().AddHeat(100);
         }
     }
 
