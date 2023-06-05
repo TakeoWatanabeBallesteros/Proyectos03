@@ -570,10 +570,8 @@ GameObject:
   - component: {fileID: 4657523373009156722}
   - component: {fileID: 4657523373009156727}
   - component: {fileID: 4657523373009156724}
-  - component: {fileID: 4657523373009156725}
   - component: {fileID: 4657523373009156723}
   - component: {fileID: 4657523373009156720}
-  - component: {fileID: 4657523373009156721}
   - component: {fileID: 1888043538}
   - component: {fileID: 8029553183952119491}
   m_Layer: 6
@@ -675,46 +673,6 @@ MonoBehaviour:
   burnIndicatorTime: 0.5
   invulnearabilityDuration: 1
   isTakingDamage: 0
---- !u!114 &4657523373009156725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4657523373009156683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0468bfdf9eab4448b4bd5fe25ca2da4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerInput: {fileID: 4657523373009156720}
-  fireExtinguish: {fileID: 0}
-  PreWater: {fileID: 6853058489556740141}
-  StrongWater: {fileID: 6853058490083562528}
-  WeakWater: {fileID: 6853058490486500645}
-  WaterAmount: 0
-  NormalWaterConsumption: 3
-  StrongWaterConsumption: 7
-  ChargeText: {fileID: 0}
-  StartWater: 100
-  waterReload: 50
-  timerKnockback: 0
-  divisionForce: 5000
-  waitTime: 0.15
-  waterWeakMesh: {fileID: 507835571}
-  waterStrongMesh: {fileID: 139040500}
-  particlesWater: {fileID: 4334808371477387079}
-  weakWaterTransform: {fileID: 507835569}
-  strongWaterTransform: {fileID: 139040498}
-  mangueraObject: {fileID: 1659171715}
-  weakWaterMeshScaleZ: 1
-  strongWaterMeshScaleZ: 1
-  distanceHitPlayerWeak: 0
-  distanceHitPlayerStrong: 0
-  weakWaterVelocity: 40
-  strongWaterVelocity: 100
-  weakSplash: {fileID: 3564862282838916988}
-  strongSplash: {fileID: 6260826433133062867}
 --- !u!114 &4657523373009156723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -742,33 +700,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bedd741704ec3e0459cd821e842a6c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4657523373009156721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4657523373009156683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fae12579b9b5a749b2ed1cc6243097e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ColisionLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  FireLayer:
-    serializedVersion: 2
-    m_Bits: 137
-  WeakRayLenght: 15
-  StrongRayLenght: 40
-  playerInput: {fileID: 4657523373009156720}
-  WeakWater: {fileID: 6853058490486500645}
-  LasserOrigin: {fileID: 4657523372121006129}
-  fireWeakExtinguishPower: 10
-  fireStrongExtinguishPower: 50
-  distancePlayerRaycastHitWeak: 0
-  distancePlayerRaycastHitStrong: 0
 --- !u!114 &1888043538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1577,12 +1508,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77c69ec12208c4c4380d15e30b6f8f68, type: 3}
---- !u!198 &3564862282838916988 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 198039942544698878, guid: 77c69ec12208c4c4380d15e30b6f8f68,
-    type: 3}
-  m_PrefabInstance: {fileID: 3731086178963296898}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3731679002392245788 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4201597293143198, guid: 77c69ec12208c4c4380d15e30b6f8f68,
@@ -1881,12 +1806,6 @@ PrefabInstance:
 --- !u!4 &6853058489556740140 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2285625977606670805, guid: e9170f64dfc564745a573e4d5b2b2ab7,
-    type: 3}
-  m_PrefabInstance: {fileID: 4657523372310635001}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &6853058489556740141 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2285625977606670804, guid: e9170f64dfc564745a573e4d5b2b2ab7,
     type: 3}
   m_PrefabInstance: {fileID: 4657523372310635001}
   m_PrefabAsset: {fileID: 0}
@@ -2319,12 +2238,6 @@ PrefabInstance:
       objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9170f64dfc564745a573e4d5b2b2ab7, type: 3}
---- !u!198 &6853058490083562528 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2285625977606670804, guid: e9170f64dfc564745a573e4d5b2b2ab7,
-    type: 3}
-  m_PrefabInstance: {fileID: 4657523372832415220}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6853058490083562529 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2285625977606670805, guid: e9170f64dfc564745a573e4d5b2b2ab7,
@@ -2701,12 +2614,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4657523373235676401}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &6853058490486500645 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2285625977606670804, guid: e9170f64dfc564745a573e4d5b2b2ab7,
-    type: 3}
-  m_PrefabInstance: {fileID: 4657523373235676401}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6079147285910030125
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3015,12 +2922,6 @@ PrefabInstance:
 --- !u!4 &6076364613003715507 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4201597293143198, guid: 77c69ec12208c4c4380d15e30b6f8f68,
-    type: 3}
-  m_PrefabInstance: {fileID: 6079147285910030125}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &6260826433133062867 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 198039942544698878, guid: 77c69ec12208c4c4380d15e30b6f8f68,
     type: 3}
   m_PrefabInstance: {fileID: 6079147285910030125}
   m_PrefabAsset: {fileID: 0}
