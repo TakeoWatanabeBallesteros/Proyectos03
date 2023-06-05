@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2493191778936274758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.67, y: 2.37, z: -36.62}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -168,10 +168,15 @@ MonoBehaviour:
   knockbackRadius: 5
   explosionForce: 2000
   colliders: []
+  playerCollider: []
   explosionMask:
     serializedVersion: 2
     m_Bits: 1
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 0
   isOneLoopDone: 0
+  doExplosion: 0
 --- !u!1 &2493191779592335729
 GameObject:
   m_ObjectHideFlags: 0
