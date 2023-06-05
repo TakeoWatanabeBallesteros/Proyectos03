@@ -7,9 +7,8 @@ public class FireActivationv2 : MonoBehaviour
 {
     bool m_Started;
     public LayerMask m_LayerMask;
-    public List<FirePropagation2> _fires = new List<FirePropagation2>();
-    public List<ObjectsExplosionv2> _explosions = new List<ObjectsExplosionv2>();
-    public List<MaterialLerping> _materialLerping = new List<MaterialLerping>();
+    public List<FireBehavior> _fires = new List<FireBehavior>();
+    public List<ExplosionBehavior> _explosions = new List<ExplosionBehavior>();
     bool playerIn;
     // Start is called before the first frame update
     void Start()
@@ -25,52 +24,27 @@ public class FireActivationv2 : MonoBehaviour
 
         if (playerIn == true)
         {
-            foreach (FirePropagation2 f in _fires)
+            foreach (FireBehavior f in _fires)
             {
                 f.enabled = true;
             }
-            foreach (ObjectsExplosionv2 o in _explosions)
+            foreach (ExplosionBehavior o in _explosions)
             {
                 o.enabled = true;
-                //o.preExplosion = true;
-            }
-            foreach (MaterialLerping m in _materialLerping)
-            {
-                //m.canLerpMaterials = true;
-                m.enabled = true;
             }
         }
         else
         {
-            foreach (FirePropagation2 f in _fires)
+            foreach (FireBehavior f in _fires)
             {
                 f.enabled = false;
             }
-            foreach (ObjectsExplosionv2 o in _explosions)
+            foreach (ExplosionBehavior o in _explosions)
             {
                 o.enabled = false;
-                o.preExplosion = false;
-            }
-            foreach (MaterialLerping m in _materialLerping)
-            {
-                m.canLerpMaterials = false;
-                m.enabled = false;
             }
         }
     }
-
-    /*
-    void MyCollisions()
-    {
-        Collider[] hitcolliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, m_LayerMask);
-        int i = 0;
-        while (i < hitcolliders.Length)
-        {
-            i++;
-            _fires.Add(hitcolliders[i].gameObject.GetComponent<FirePropagation2>());
-            _explosions.Add(hitcolliders[i].gameObject.GetComponent<ObjectsExplosionv2>());
-        }
-    }*/
 
     private void OnDrawGizmos()
     {
@@ -83,10 +57,9 @@ public class FireActivationv2 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             playerIn = true;
-            Debug.Log("Ha entrado el player");
         }
     }
 }

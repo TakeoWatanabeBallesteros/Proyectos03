@@ -11,12 +11,13 @@ public class Singleton : MonoBehaviour
     public GameManager GameManager { get => _gameManager; set => _gameManager = null; }
     public CameraPreviewManager CameraPreviewManager { get => _cameraPreviewManager; set => _cameraPreviewManager = null; }
     public FSM_UIManager UIManager { get => _uiManager; set => _uiManager = null; }
-    
+    public PointsBehavior PointsManager { get => _pointsManager; set => _pointsManager = null; }
 
-    #region SerializeFields
-    [SerializeField] private GameManager _gameManager;
+#region SerializeFields
+[SerializeField] private GameManager _gameManager;
     [SerializeField] private CameraPreviewManager _cameraPreviewManager;
     [SerializeField] private FSM_UIManager _uiManager;
+    [SerializeField] private PointsBehavior _pointsManager;
     #endregion
 
     private void OnEnable()

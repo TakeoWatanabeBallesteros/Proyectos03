@@ -27,11 +27,13 @@ public class CameraController : MonoBehaviour
 
     public Vector3 addPosition;
 
+    private Vector3 startPos;
+
     private void Start()
     {
         cam = Camera.main;
         timer = delay;
-        target = Singleton.Instance.Player.transform;
+        //target = Singleton.Instance.Player.transform;
     }
 
     private void Update()
@@ -55,7 +57,7 @@ public class CameraController : MonoBehaviour
     private void LateUpdate()
     {
         if (!(shakeDuration > 0)) return;
-        camTransform.localPosition = target.position + addPosition + Random.insideUnitSphere * shakeAmount;
+        // camTransform.localPosition = target.position + addPosition + Random.insideUnitSphere * shakeAmount;
 
         shakeDuration -= Time.deltaTime * decreaseFactor;
     }

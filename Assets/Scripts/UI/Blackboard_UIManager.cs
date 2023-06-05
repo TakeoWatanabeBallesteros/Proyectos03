@@ -41,8 +41,12 @@ public class Blackboard_UIManager : DynamicBlackboard
     public GameObject PickUpText;
     public GameObject ReloadText;
     public GameObject Fire;
-    
-    
+    public Image ChildHappyFaceSprite;
+    public Image ChildSadFaceSprite;
+    public GameObject FireHandle;
+    public GameObject PontPopUpOrigin;
+    public GameObject PointsPrefab;
+
     private PlayerControls controls = null;
     private GameManager gameManager;
     private FSM_UIManager uiManager;
@@ -94,6 +98,9 @@ public class Blackboard_UIManager : DynamicBlackboard
                     break;
             }
         };
+        ChildHappyFaceSprite.enabled = false;
+        ChildSadFaceSprite.enabled = true;
+        FireHandle.SetActive(false);
     }
 
     // Update is called once per frame
@@ -105,6 +112,10 @@ public class Blackboard_UIManager : DynamicBlackboard
     public void SetLifeBar(float value)
     {
         lifeBar.value = value;
+        if (value < 0.5 && !FireHandle.activeSelf)
+        {
+            FireHandle.SetActive(true);
+        }
     }
 
     public void SetWaterBar(float value)
@@ -119,18 +130,27 @@ public class Blackboard_UIManager : DynamicBlackboard
 
     public void SetKids(int kids, int totalKids)
     {
-        NumberOfKids.text = kids+" / "+totalKids;
+        NumberOfKids.text = kids+"/"+totalKids;
     }
-    public void SetColectables(int colectables, int totalColectables)
+    public void SetCollectables(int collectables, int totalCollectables)
     {
-        NumberOfColectables.text = colectables + " / " + totalColectables;
+        NumberOfColectables.text = collectables + "/" + totalCollectables;
     }
     public void SetPoints(int points, int pointsToWin)
     {
-        pointsText.text = points + " / " + pointsToWin;
-        pointsWinText.text = points + " / " + pointsToWin;
+        pointsText.text = points + "/" + pointsToWin;
+        pointsWinText.text = points + "/" + pointsToWin;
+        if(points !=0) PointPopUp(points);
     }
-    
+
+    private void PointPopUp(int points)
+    {
+        GameObject pref = Instantiate(PointsPrefab, PontPopUpOrigin.transform);
+        pref.GetComponent<TextMeshProUGUI>().text = "+" + points;
+        pref.transform.position = PontPopUpOrigin.transform.position;
+        Destroy(pref, pref.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+    }
+
     public IEnumerator FadeIN()
     {
         DeathscreenAlfa += .1f;
@@ -140,5 +160,18 @@ public class Blackboard_UIManager : DynamicBlackboard
         {
             StartCoroutine(FadeIN());
         }
+    }
+
+    public void ChildFace()
+    {
+        StartCoroutine(ChildSwitchFace());
+    }
+    private IEnumerator ChildSwitchFace()
+    {
+        ChildHappyFaceSprite.enabled = true;
+        ChildSadFaceSprite.enabled = false;
+        yield return new WaitForSeconds(3f);
+        ChildHappyFaceSprite.enabled = false;
+        ChildSadFaceSprite.enabled = true;
     }
 }
