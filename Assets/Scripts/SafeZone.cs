@@ -1,30 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SafeZone : MonoBehaviour
 {
-    public GameObject mykid;
-    ItemManager Kids;
+    ItemManager itemManager;
+
+    private int counter;
+
+    public List<GameObject> childsGameObjects;
     // Start is called before the first frame update
     void Start()
     {
-        Kids = FindObjectOfType<ItemManager>();
-        mykid.SetActive(false);
+        itemManager = FindObjectOfType<ItemManager>();
+        counter = 0;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Kid")
+        if(other.CompareTag("Kid"))
         {
             Destroy(other.transform.parent.gameObject);
-            mykid.SetActive(true);
-            Kids.AddChild();
+            if(counter < 5) childsGameObjects[counter++].SetActive(true);
+            itemManager.AddChild();
         }
     }
 }
