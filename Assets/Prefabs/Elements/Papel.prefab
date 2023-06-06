@@ -68,15 +68,16 @@ MonoBehaviour:
   onFire: 1
   damageRadius: 0.7
   fireHP: 100
-  timeToPutOut: 0
-  heatDistance: 2
+  timeToPutOut: 100
+  heatDistance: 3
   heat: 0
   heatPerSecond: 33.3
   fireParticles:
   - {fileID: 1875405032623501574}
   - {fileID: 5036511499479532117}
   - {fileID: 26682863144241023}
-  burnedMaterial: {fileID: 0}
+  DecalPrefab: {fileID: 6232130073354221700, guid: e3b14aa7a8d01e843afe149e49db4685,
+    type: 3}
 --- !u!135 &7939038777154272911
 SphereCollider:
   m_ObjectHideFlags: 0
