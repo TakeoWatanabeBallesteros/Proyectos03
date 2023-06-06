@@ -61,6 +61,8 @@ public class FireBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!onFire) return;
+        
         ApplyHeat();
 
         ApplyDamage();
@@ -70,7 +72,6 @@ public class FireBehavior : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if(!onFire) return;
         switch (other.tag)
         {
             case "Fire":
@@ -93,7 +94,6 @@ public class FireBehavior : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if(!onFire) return;
         switch (other.tag)
         {
             case "Fire":
