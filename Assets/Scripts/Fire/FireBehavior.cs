@@ -20,7 +20,7 @@ public class FireBehavior : MonoBehaviour
     [SerializeField] private float damageRadius;
 
     [SerializeField] float fireHP;
-    [SerializeField] private float timeToPutOut;
+    public float timeToPutOut;
 
     [SerializeField] private float heatDistance;
     [SerializeField]
@@ -32,12 +32,11 @@ public class FireBehavior : MonoBehaviour
     [SerializeField] private List<ParticleSystem> fireParticles;
     private float originalFireSize;
 
-    Material _objectMaterial;
-    public Material burnedMaterial;
-    
+    private Material _objectMaterial;
 
     private int objectsHeatingCount = 0;
     private static readonly int Heat = Shader.PropertyToID("_Heat");
+    private static readonly int EmissiveColor = Shader.PropertyToID("_EmissiveColor");
 
     private PointsBehavior pointsBehavior;
 
@@ -127,9 +126,10 @@ public class FireBehavior : MonoBehaviour
 
         if (fireHP > 0) return;
         
-        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(0).gameObject.SetActive(false); //Disable fire
         StopAllCoroutines();
-        transform.GetChild(1).gameObject.SetActive(true);
+        transform.GetChild(1).gameObject.SetActive(true); //Enable smoke
+        SetBurnedMaterial(); 
         // pointsBehavior.AddPointsCombo();
         // pointsBehavior.AddCombo();
         enabled = false;
@@ -190,6 +190,12 @@ public class FireBehavior : MonoBehaviour
     {
         // max - min / bla bla bla + max
         return Mathf.Clamp(2 / (max - min) * (value - max) + 3, 1, 3);
+    }
+
+    public void SetBurnedMaterial()
+    {
+        _objectMaterial.DisableKeyword("_EMISSION");
+        _objectMaterial.SetColor(EmissiveColor, Color.black);
     }
 }
 
