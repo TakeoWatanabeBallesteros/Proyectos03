@@ -1580,7 +1580,8 @@ GameObject:
   - component: {fileID: 2386903958627716242}
   - component: {fileID: 5349274686634155740}
   - component: {fileID: 3933144438309485281}
-  - component: {fileID: 2190502481071088389}
+  - component: {fileID: 1309206854}
+  - component: {fileID: 1309206853}
   m_Layer: 0
   m_Name: Root
   m_TagString: Kid
@@ -1635,8 +1636,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &2190502481071088389
-BoxCollider:
+--- !u!135 &1309206854
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1646,8 +1647,24 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 4, z: 4}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.91
+  m_Center: {x: -0.18, y: 0, z: 0}
+--- !u!114 &1309206853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6825950202159497200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da6529cc1d3bef45b1b5faf46e534a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  childHP: 100
+  canDamaged: 0
+  delay: 1.5
+  isGettingBurned: 0
 --- !u!1 &7185397186434616374
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ public class PickupKid : MonoBehaviour
     AnimatorController CharacterAnim;
     public GameManager GM;
     public Transform Shoulder;
-    public GameObject DropText;
+    public GameObject PickupText;
     private bool CarringKid;
     [SerializeField] private bool CanExtract;
     [SerializeField] private bool CanPickup;
@@ -33,6 +33,7 @@ public class PickupKid : MonoBehaviour
         prefabPoseKid.SetActive(false);
 
         blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
+        PickupText = blackboardUI.PickUpText;
     }
 
     // Update is called once per frame
@@ -54,20 +55,20 @@ public class PickupKid : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Kid" && !CarringKid)
-        {
-            blackboardUI.PickUpText.SetActive(false);
-            CanPickup = true;
-            TargetKid = other.transform.parent.gameObject;
-        }
+        if (!other.CompareTag("Kid")) return;
+        blackboardUI.PickUpText.SetActive(false);
+        CanPickup = true;
+        PickupText.SetActive(true);
+        TargetKid = other.transform.parent.gameObject;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag != "Kid") return;
+        if (!other.CompareTag("Kid")) return;
         blackboardUI.PickUpText.SetActive(false);
         CanPickup = false;
         CanExtract = false;
+        PickupText.SetActive(false);
     }
     public bool HasKid()
     {

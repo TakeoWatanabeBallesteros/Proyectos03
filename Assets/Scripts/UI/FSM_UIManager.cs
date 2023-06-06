@@ -9,10 +9,10 @@ using FSM;
 public class FSM_UIManager : MonoBehaviour
 {
     public StateMachine uiManager_FSM { get; private set; }
-    public Blackboard_UIManager blackboard_UIManager { get; private set; }
+    public Blackboard_UIManager blackboard_UIManager;
 
     public bool testingLevel = false;
-
+    
     private void Awake()
     {
         blackboard_UIManager = GetComponent<Blackboard_UIManager>();

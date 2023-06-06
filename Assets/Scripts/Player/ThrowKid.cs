@@ -32,17 +32,9 @@ public class ThrowKid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!pickupKid.HasKid())
-        {
-            return;
-        }
-        else
-        {
-            ThrowTheKid();
-        }
-
-
+        ThrowTheKid();
     }
+    
     public void ThrowTheKid()
     {
         if (Holding && !Input.secondaryShoot && pickupKid.HasKid())

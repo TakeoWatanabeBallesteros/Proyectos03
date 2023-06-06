@@ -3,19 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
+using System.Xml;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class FireBehavior : MonoBehaviour
 {
-    public bool onFire { get; private set; }
+    public bool onFire;
     public bool onHeating { get; private set; }
     public bool isWet { get; private set; }
 
     private List<FireBehavior> nearObjects = new List<FireBehavior>();
+    private List<ChildrenHealthSystem> childrens = new List<ChildrenHealthSystem>();
+    private PlayerHealth playerHealth;
+    [SerializeField] private float damageRadius;
 
-    [SerializeField] private GameObject fire;
-    
     [SerializeField] float fireHP;
     [SerializeField] private float timeToPutOut;
 
@@ -32,7 +35,6 @@ public class FireBehavior : MonoBehaviour
     Material _objectMaterial;
     public Material burnedMaterial;
     
-    private PlayerHealth playerHealth;
 
     private int objectsHeatingCount = 0;
     private static readonly int Heat = Shader.PropertyToID("_Heat");
@@ -43,7 +45,6 @@ public class FireBehavior : MonoBehaviour
     void Start()
     {
         fireHP = 100f;
-        heat = 0;
         isWet = false;
 
         _objectMaterial = GetComponentInChildren<MeshRenderer>().material;
@@ -52,33 +53,23 @@ public class FireBehavior : MonoBehaviour
 
         originalFireSize = fireParticles[0].gameObject.transform.localScale.x;
         
-        pointsBehavior = Singleton.Instance.PointsManager;
+        heat = 0;
+        if(onFire) AddHeat(100);
+        // pointsBehavior = Singleton.Instance.PointsManager;
     }
 
     // Update is called once per frame
     void Update()
     {
-        _objectMaterial.SetFloat(Heat, Scale(0, 100, heat));
-        // if (onFire)
-        // {
-        //     if (fireHP <= 0)
-        //     {
-        //         transform.GetChild(0).gameObject.SetActive(false);
-        //         StopAllCoroutines();
-        //         transform.GetChild(1).gameObject.SetActive(true);
-        //         PointsBehavior.AddPointsFire();
-        //         PointsBehavior.IncreaseCombo();
-        //         this.enabled = false;
-        //     }
-// 
-        //     _objectMaterial.Lerp(_objectMaterial, burnedMaterial, Time.deltaTime / 2);
-        // }
+        if(!onFire) return;
+        
+        ApplyHeat();
 
-        if(!nearObjects.Any()) ApplyHeat();
-        // if (!onHeating && heat > 0) heat -= heatPerSecond * Time.deltaTime;
+        ApplyDamage();
+        
+        CoolDown();
     }
     
-    // TODO: Set player and kid health condition
     private void OnTriggerEnter(Collider other)
     {
         switch (other.tag)
@@ -94,10 +85,10 @@ public class FireBehavior : MonoBehaviour
                 StartCoroutine(other.GetComponent<ExplosionBehavior>().Explode());
                 break;
             case "Player":
-                // Set Player health burning
+                playerHealth = other.GetComponent<PlayerHealth>();
                 break;
             case "Kid":
-                // Set kid burning
+                childrens.Add(other.GetComponent<ChildrenHealthSystem>());
                 break;
         }
     }
@@ -112,10 +103,13 @@ public class FireBehavior : MonoBehaviour
                 fire.onHeating = fire.objectsHeatingCount == 0;
                 break;
             case "Player":
-                // Set Player health not burning
+                playerHealth.isTakingDamage = false;
+                playerHealth = null;
                 break;
             case "Kid":
-                // Set kid not burning
+                var children = other.GetComponent<ChildrenHealthSystem>();
+                children.StopBeingBurned();
+                childrens.Remove(children);
                 break;
         }
     }
@@ -131,34 +125,66 @@ public class FireBehavior : MonoBehaviour
             fireParticle.transform.localScale = new Vector3(scale, scale, scale);
         }
 
-        if (!(fireHP <= 0)) return;
+        if (fireHP > 0) return;
+        
         transform.GetChild(0).gameObject.SetActive(false);
         StopAllCoroutines();
         transform.GetChild(1).gameObject.SetActive(true);
-        pointsBehavior.AddPoints(10);
-        pointsBehavior.AddCombo();
-            
-        this.enabled = false;
+        // pointsBehavior.AddPointsCombo();
+        // pointsBehavior.AddCombo();
+        enabled = false;
     }
 
     private void AddHeat()
     {
-        heat += heatPerSecond * Time.deltaTime; 
+        heat += heatPerSecond * Time.deltaTime;
+        _objectMaterial.SetFloat(Heat, Scale(0, 100, heat));
+        if (!(heat > 100)) return;
+        onFire = true;
+        transform.GetChild(0).gameObject.SetActive(true);
     }
     public void AddHeat(float heat)
     {
         this.heat += heat;
+        _objectMaterial.SetFloat(Heat, Scale(0, 100, heat));
+        if (this.heat < 100) return;
+        onFire = true;
+        transform.GetChild(0).gameObject.SetActive(true);
+    }
+
+    private void CoolDown()
+    {
+        if (!onFire && !onHeating && heat > 0) heat = Mathf.Clamp(heat -(heatPerSecond * Time.deltaTime), 0, 100);
+        _objectMaterial.SetFloat(Heat, Scale(0, 100, heat));
     }
 
     private void ApplyHeat()
     {
-        foreach (var fire in nearObjects)
+        if(!nearObjects.Any()) return;
+
+        List<FireBehavior> clone = new List<FireBehavior>(nearObjects);
+
+        foreach (var fire in clone)
         {
+            if(Vector3.Distance(fire.transform.position, transform.position) > heatDistance) continue;
+            if(fire.heat >= 100 || fire.onFire) nearObjects.Remove(fire);
             fire.AddHeat();
-            if(fire.heat >= 100) nearObjects.Remove(fire);
         }
     }
 
+    private void ApplyDamage()
+    {
+        if (playerHealth != null && Vector3.Distance(playerHealth.transform.position, transform.position) < damageRadius)
+        {
+            playerHealth.TakeDamage();
+        }
+        if(!childrens.Any()) return;
+        foreach (var children in childrens)
+        {
+            if (Vector3.Distance(children.transform.position, transform.position) > damageRadius) continue;
+            children.TakeDamage();
+        }
+    }
 
     private static float Scale(float min, float max, float value)
     {
