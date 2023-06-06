@@ -70,6 +70,7 @@ public class FireBehavior : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        if(!onFire) return;
         switch (other.tag)
         {
             case "Fire":
@@ -92,6 +93,7 @@ public class FireBehavior : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
+        if(!onFire) return;
         switch (other.tag)
         {
             case "Fire":
