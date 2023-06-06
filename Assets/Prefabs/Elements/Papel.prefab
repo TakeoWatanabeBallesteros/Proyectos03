@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 218074dde59dab9448d797f652ae5e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onFire: 0
+  onFire: 1
   damageRadius: 0.7
   fireHP: 100
   timeToPutOut: 0
@@ -5047,6 +5047,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5089999183849714429}
     m_Modifications:
+    - target: {fileID: 235884603822162813, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 235884603822162813, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: NoiseModule.quality
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 235884603822162813, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 235884603822162813, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 235884603822162813, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: -0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 661020124134275789, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
       propertyPath: m_Size.x
@@ -5125,12 +5150,12 @@ PrefabInstance:
     - target: {fileID: 5037866352400002968, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00000007947285
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5037866352400002968, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.16666655
+      value: 0.069
       objectReference: {fileID: 0}
     - target: {fileID: 5115390600801519191, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
@@ -5235,12 +5260,37 @@ PrefabInstance:
     - target: {fileID: 6675893457974259756, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.000000019868212
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6675893457974259756, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.16666666
+      value: 0.018
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675893457974259758, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675893457974259758, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: NoiseModule.quality
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675893457974259758, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675893457974259758, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675893457974259758, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6675893458143112108, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
@@ -5280,7 +5330,7 @@ PrefabInstance:
     - target: {fileID: 6675893458143112109, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6675893458143112111, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
