@@ -7,7 +7,6 @@ public class CameraController : MonoBehaviour
 {
     private Transform target;
     public float distance = 10f;
-    [SerializeField] private InputPlayerController controller;
     private Camera cam;
 
     public float maxCamSize;
@@ -33,7 +32,7 @@ public class CameraController : MonoBehaviour
     {
         cam = Camera.main;
         timer = delay;
-        // target = Singleton.Instance.Player.transform;
+        target = Singleton.Instance.Player.transform;
     }
 
     private void Update()
@@ -56,7 +55,7 @@ public class CameraController : MonoBehaviour
     private void LateUpdate()
     {
         if (!(shakeDuration > 0)) return;
-        // camTransform.localPosition = target.position + addPosition + Random.insideUnitSphere * shakeAmount;
+        camTransform.localPosition = target.position + addPosition + Random.insideUnitSphere * shakeAmount;
 
         shakeDuration -= Time.deltaTime * decreaseFactor;
     }

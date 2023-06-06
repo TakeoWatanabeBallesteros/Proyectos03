@@ -12,6 +12,7 @@ public class MovementPlayerController : MonoBehaviour
     public float speed;
     float currentSpeed;
     public Camera cam;
+    //private CameraController mainCamera; pensaba que era un singleton
     
     private Rigidbody rb;
     private Vector3 direction;
@@ -29,6 +30,8 @@ public class MovementPlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cam = GameObject.Find("===Main Camera===").GetComponent<Camera>();
+        //cam = Camera.main;
         CharacterAnim = GetComponent<AnimatorController>();
         speed = Maxspeed;
         rb = GetComponent<Rigidbody>();
