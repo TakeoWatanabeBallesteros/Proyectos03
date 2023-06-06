@@ -30,8 +30,8 @@ public class MovementPlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //mainCamera = Singleton.Instance.;
         cam = GameObject.Find("===Main Camera===").GetComponent<Camera>();
+        //cam = Camera.main;
         CharacterAnim = GetComponent<AnimatorController>();
         speed = Maxspeed;
         rb = GetComponent<Rigidbody>();
