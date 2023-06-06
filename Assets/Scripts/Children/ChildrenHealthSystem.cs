@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,7 @@ public class ChildrenHealthSystem : MonoBehaviour
         if (!canDamaged) return;
         childHP -= 10f;
         StartCoroutine(DamageCooldown());
+        childHP = Mathf.Clamp(childHP, 0, 100);
     }
 
     public void StopBeingBurned()
