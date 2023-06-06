@@ -150,9 +150,9 @@ public class FireBehavior : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(true);
     }
 
-    private void CoolDown() 
-    { 
-        if (!onFire && !onHeating && heat > 0) heat -= heatPerSecond * Time.deltaTime;
+    private void CoolDown()
+    {
+        if (!onFire && !onHeating && heat > 0) heat = Mathf.Clamp(heat -(heatPerSecond * Time.deltaTime), 0, 100);
         _objectMaterial.SetFloat(Heat, Scale(0, 100, heat));
     }
 
