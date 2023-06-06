@@ -33,7 +33,7 @@ public class GoldWater : MonoBehaviour
     [Header("Sounds")] 
     [SerializeField] private GameObject waterSound;
     
-    List<FireBehavior> Fires;
+    [SerializeField] List<FireBehavior> Fires;
     private PointsBehavior pointsBehavior;
     
     private void Awake()
@@ -58,7 +58,7 @@ public class GoldWater : MonoBehaviour
         distance = ObjectiveDistance();
         SetParticleLength();
         SetColliderScale();
-        if(!Fires.Any()) PuttingOutFires();
+        if(Fires.Any()) PuttingOutFires();
     }
 
     private void SetParticleLength()
@@ -106,16 +106,16 @@ public class GoldWater : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Fire"))
+        if (other.CompareTag("FireSource"))
         {
-            Fires.Add(other.GetComponent<FireBehavior>());
+            Fires.Add(other.GetComponentInParent<FireBehavior>());
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Fire"))
+        if (other.CompareTag("FireSource"))
         {
-            Fires.Remove(other.GetComponent<FireBehavior>());
+            Fires.Remove(other.GetComponentInParent<FireBehavior>());
         }
     }
 
