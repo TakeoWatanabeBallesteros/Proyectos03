@@ -145,7 +145,7 @@ public class FireBehavior : MonoBehaviour
     {
         this.heat += heat;
         _objectMaterial.SetFloat(Heat, Scale(0, 100, heat));
-        if (!(this.heat >= 100)) return;
+        if (this.heat < 100) return;
         onFire = true;
         transform.GetChild(0).gameObject.SetActive(true);
     }

@@ -54,7 +54,7 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!(shakeDuration > 0)) return;
+        if (!(shakeDuration > 0) || target == null) return;
         camTransform.localPosition = target.position + addPosition + Random.insideUnitSphere * shakeAmount;
 
         shakeDuration -= Time.deltaTime * decreaseFactor;
