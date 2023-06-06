@@ -2248,7 +2248,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 10
-  controller: {fileID: 0}
   maxCamSize: 20
   minCamSize: 7
   timer: 1
@@ -2928,26 +2927,14 @@ PrefabInstance:
         type: 3}
       propertyPath: fireParticles.Array.data[0]
       value: 
-      objectReference: {fileID: 603226599}
+      objectReference: {fileID: 0}
     - target: {fileID: 2493191778936274766, guid: 1076d262b9a5cf8429243ba293471d78,
         type: 3}
       propertyPath: fireParticles.Array.data[1]
       value: 
-      objectReference: {fileID: 603226598}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1076d262b9a5cf8429243ba293471d78, type: 3}
---- !u!198 &603226598 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6252905236465301074, guid: 1076d262b9a5cf8429243ba293471d78,
-    type: 3}
-  m_PrefabInstance: {fileID: 603226597}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &603226599 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6252905235515683950, guid: 1076d262b9a5cf8429243ba293471d78,
-    type: 3}
-  m_PrefabInstance: {fileID: 603226597}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &678735510
 GameObject:
   m_ObjectHideFlags: 0
