@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -130,6 +130,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1326149009, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1, type: 3}
+      propertyPath: onFire
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326149009, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1, type: 3}
+      propertyPath: burnedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 0e9168e47f005f7468aa7407ed8bf563, type: 2}
     - target: {fileID: 5089999183849714400, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
       propertyPath: m_Name
@@ -143,7 +151,7 @@ PrefabInstance:
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 40.84
+      value: 36.12
       objectReference: {fileID: 0}
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
@@ -153,7 +161,7 @@ PrefabInstance:
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -53.64
+      value: -69.45
       objectReference: {fileID: 0}
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
@@ -376,10 +384,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1326149009, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1, type: 3}
+      propertyPath: onFire
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326149009, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1, type: 3}
+      propertyPath: burnedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 0e9168e47f005f7468aa7407ed8bf563, type: 2}
     - target: {fileID: 5089999183849714400, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
       propertyPath: m_Name
       value: Papel (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5089999183849714400, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
@@ -445,10 +466,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1326149009, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1, type: 3}
+      propertyPath: onFire
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326149009, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1, type: 3}
+      propertyPath: burnedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 0e9168e47f005f7468aa7407ed8bf563, type: 2}
     - target: {fileID: 5089999183849714400, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
       propertyPath: m_Name
       value: Papel (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5089999183849714400, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
@@ -458,7 +492,7 @@ PrefabInstance:
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 40.07
+      value: 37.19
       objectReference: {fileID: 0}
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
@@ -468,7 +502,7 @@ PrefabInstance:
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -64.67
+      value: -62.96
       objectReference: {fileID: 0}
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
@@ -574,6 +608,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Ni\xF1aRagdoll"
       objectReference: {fileID: 0}
+    - target: {fileID: 1134897882703293851, guid: 9577b4c21df70b348bba972499710564,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9577b4c21df70b348bba972499710564, type: 3}
 --- !u!1001 &911583276
@@ -583,10 +622,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1326149009, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1, type: 3}
+      propertyPath: onFire
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326149009, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1, type: 3}
+      propertyPath: burnedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 0e9168e47f005f7468aa7407ed8bf563, type: 2}
     - target: {fileID: 5089999183849714400, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
       propertyPath: m_Name
       value: Papel (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5089999183849714400, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
@@ -596,7 +648,7 @@ PrefabInstance:
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 38.18
+      value: 36.76
       objectReference: {fileID: 0}
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
@@ -606,7 +658,7 @@ PrefabInstance:
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -61.49
+      value: -61.06
       objectReference: {fileID: 0}
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
@@ -798,6 +850,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1326149009, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1, type: 3}
+      propertyPath: onFire
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326149009, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1, type: 3}
+      propertyPath: burnedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 0e9168e47f005f7468aa7407ed8bf563, type: 2}
     - target: {fileID: 5089999183849714400, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
       propertyPath: m_Name
@@ -811,7 +871,7 @@ PrefabInstance:
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 32.67
+      value: 36.48
       objectReference: {fileID: 0}
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
@@ -821,7 +881,7 @@ PrefabInstance:
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -55.18
+      value: -67.06
       objectReference: {fileID: 0}
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
@@ -965,6 +1025,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1326149009, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1, type: 3}
+      propertyPath: onFire
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326149009, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1, type: 3}
+      propertyPath: burnedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 0e9168e47f005f7468aa7407ed8bf563, type: 2}
     - target: {fileID: 5089999183849714400, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
       propertyPath: m_Name
@@ -978,7 +1046,7 @@ PrefabInstance:
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 31.63
+      value: 36.65
       objectReference: {fileID: 0}
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
@@ -988,7 +1056,7 @@ PrefabInstance:
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -60.01
+      value: -65.17
       objectReference: {fileID: 0}
     - target: {fileID: 5089999183849714429, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1,
         type: 3}
@@ -1046,6 +1114,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 662141225387826415, guid: 1076d262b9a5cf8429243ba293471d78,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2004787669239033654, guid: 1076d262b9a5cf8429243ba293471d78,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2493191778936274755, guid: 1076d262b9a5cf8429243ba293471d78,
         type: 3}
       propertyPath: m_RootOrder
@@ -1106,6 +1184,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barrel
       objectReference: {fileID: 0}
+    - target: {fileID: 2493191778936274758, guid: 1076d262b9a5cf8429243ba293471d78,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490179429507760360, guid: 1076d262b9a5cf8429243ba293471d78,
+        type: 3}
+      propertyPath: onFire
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490179429507760360, guid: 1076d262b9a5cf8429243ba293471d78,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490179429507760360, guid: 1076d262b9a5cf8429243ba293471d78,
+        type: 3}
+      propertyPath: burnedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 0e9168e47f005f7468aa7407ed8bf563, type: 2}
     - target: {fileID: 8490179429507760360, guid: 1076d262b9a5cf8429243ba293471d78,
         type: 3}
       propertyPath: fireParticles.Array.data[2]
