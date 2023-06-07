@@ -12,8 +12,7 @@ using Random = UnityEngine.Random;
 public class FireBehavior : MonoBehaviour
 {
     public bool onFire;
-    public bool onHeating { get; private set; }
-    public bool isWet { get; private set; }
+    [SerializeField] private bool onHeating;
 
     private List<FireBehavior> nearObjects = new List<FireBehavior>();
     private List<ChildrenHealthSystem> childrens = new List<ChildrenHealthSystem>();
@@ -35,20 +34,18 @@ public class FireBehavior : MonoBehaviour
 
     private Material _objectMaterial;
 
-    private int objectsHeatingCount = 0;
     private static readonly int Heat = Shader.PropertyToID("_Heat");
     private static readonly int EmissiveColor = Shader.PropertyToID("_EmissiveColor");
 
-    public List<Texture> burnSprites;
+    [SerializeField] private List<Texture> burnSprites;
     [SerializeField] private GameObject decalPrefab;
 
     private PointsBehavior pointsBehavior;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         fireHP = 100f;
-        isWet = false;
 
         _objectMaterial = GetComponentInChildren<MeshRenderer>().material;
 
@@ -59,7 +56,7 @@ public class FireBehavior : MonoBehaviour
         heat = 0;
         if (onFire)
         {
-            AddHeat(100);
+            heat = 100;
             CreateBurnDecal();
         }
 
@@ -67,15 +64,16 @@ public class FireBehavior : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        CoolDown();
+        
         if(!onFire) return;
         
         ApplyHeat();
 
         ApplyDamage();
         
-        CoolDown();
     }
     
     private void OnTriggerEnter(Collider other)
@@ -85,7 +83,6 @@ public class FireBehavior : MonoBehaviour
             case "Fire":
                 var fire = other.GetComponent<FireBehavior>();
                 if(fire.onFire) break;
-                fire.onHeating = true;
                 nearObjects.Add(fire);
                 break;
             case "Explosive":
@@ -106,8 +103,7 @@ public class FireBehavior : MonoBehaviour
             case "Fire":
                 var fire = other.GetComponent<FireBehavior>();
                 nearObjects.Remove(fire);
-                fire.objectsHeatingCount--;
-                fire.onHeating = fire.objectsHeatingCount == 0;
+                fire.onHeating = false;
                 break;
             case "Player":
                 playerHealth.isTakingDamage = false;
@@ -124,39 +120,31 @@ public class FireBehavior : MonoBehaviour
     public void PuttingOut()
     {
         // Damage
-        fireHP -= timeToPutOut * Time.deltaTime;
+        fireHP = Mathf.Clamp(fireHP -= timeToPutOut * Time.deltaTime, 0, 100);
         
         foreach (ParticleSystem fireParticle in fireParticles)
         {
-            float scale = (fireHP / 100) * originalFireSize;
+            var scale = (fireHP / 100) * originalFireSize;
             fireParticle.transform.localScale = new Vector3(scale, scale, scale);
         }
 
         if (fireHP > 0) return;
         
         transform.GetChild(0).gameObject.SetActive(false); //Disable fire
-        StopAllCoroutines();
         transform.GetChild(1).gameObject.SetActive(true); //Enable smoke
         SetBurnedMaterial();
-        enabled = false;
+        StopHeating();
         pointsBehavior.AddPointsCombo();
         pointsBehavior.AddCombo();
+        enabled = false;
     }
 
-    private void AddHeat()
+    public void AddHeat(float heat = 0)
     {
-        heat = Mathf.Clamp(heat + (heatPerSecond * Time.deltaTime), 0, 100);
-        _objectMaterial.SetFloat(Heat, Scale(0, 100, heat));
-        if (heat < 100 || onFire) return;
-        onFire = true;
-        transform.GetChild(0).gameObject.SetActive(true);
-        CreateBurnDecal();
-    }
-    public void AddHeat(float heat)
-    {
-        heat = Mathf.Clamp( this.heat += heat, 0, 100);
-        _objectMaterial.SetFloat(Heat, Scale(0, 100, heat));
-        if (this.heat < 100 || onFire) return;
+        onHeating = true;
+        this.heat = heat == 0 ? Mathf.Clamp(this.heat + (heatPerSecond * Time.deltaTime), 0, 100) : Mathf.Clamp( this.heat += heat, 0, 100);
+        _objectMaterial.SetFloat(Heat, Scale(0, 100, this.heat));
+        if (this.heat < 100) return;
         onFire = true;
         transform.GetChild(0).gameObject.SetActive(true);
         CreateBurnDecal();
@@ -170,7 +158,8 @@ public class FireBehavior : MonoBehaviour
 
     private void CoolDown()
     {
-        if (!onFire && !onHeating && heat > 0) heat = Mathf.Clamp(heat -(heatPerSecond * Time.deltaTime), 0, 100);
+        if (onHeating || heat == 0) return;
+        heat = Mathf.Clamp(heat - (heatPerSecond * Time.deltaTime), 0, 100);
         _objectMaterial.SetFloat(Heat, Scale(0, 100, heat));
     }
 
@@ -186,16 +175,36 @@ public class FireBehavior : MonoBehaviour
             var firePosition = fire.transform.position;
             position.y = 0;
             firePosition.y = 0;
-            Debug.Log(Vector3.Distance(position, firePosition));
-            if(Vector3.Distance(position, firePosition) > heatDistance) continue;
-            if(fire.heat >= 100 || fire.onFire) nearObjects.Remove(fire);
+            if(Vector3.Distance(position, firePosition) > heatDistance)
+            {
+                fire.onHeating = false;
+                continue;
+            }
+            if(fire.heat >= 100 || fire.onFire)
+            {
+                nearObjects.Remove(fire);
+                fire.onHeating = false;
+                continue;
+            }
             fire.AddHeat();
+        }
+    }
+
+    private void StopHeating()
+    {
+        if(!nearObjects.Any()) return;
+
+        List<FireBehavior> clone = new List<FireBehavior>(nearObjects);
+
+        foreach (var fire in clone)
+        {
+            fire.onHeating = false;
         }
     }
 
     private void ApplyDamage()
     {
-        if (playerHealth != null && Vector3.Distance(playerHealth.transform.position, transform.position) < damageRadius)
+        if (playerHealth != null && Vector3.Distance(playerHealth.transform.position, transform.position) <= damageRadius)
         {
             playerHealth.TakeDamage();
         }
@@ -219,7 +228,7 @@ public class FireBehavior : MonoBehaviour
         _objectMaterial.SetColor(EmissiveColor, Color.black);
     }
     
-    void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         // Draw a yellow sphere at the transform's position
         Gizmos.color = new Color(1, 0, 0, 0.3f);
