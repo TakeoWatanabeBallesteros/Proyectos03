@@ -136,10 +136,10 @@ public class Blackboard_UIManager : DynamicBlackboard
     {
         NumberOfColectables.text = collectables + "/" + totalCollectables;
     }
-    public void SetPoints(int points, int pointsToWin)
+    public void SetPoints(int points, int pointsToWin, int currentPoints)
     {
-        pointsText.text = points + "/" + pointsToWin;
-        pointsWinText.text = points + "/" + pointsToWin;
+        pointsText.text = currentPoints + "/" + pointsToWin;
+        pointsWinText.text = currentPoints + "/" + pointsToWin;
         if(points !=0) PointPopUp(points);
     }
 
