@@ -153,7 +153,8 @@ public class FireBehavior : MonoBehaviour
 
     private void CreateBurnDecal()
     {
-        var decal = Instantiate(decalPrefab, transform.position, Quaternion.Euler(Vector3.up)); 
+        var position = new Vector3(transform.position.x,0,transform.position.z);
+        var decal = Instantiate(decalPrefab, position, Quaternion.Euler(Vector3.up)); 
         decal.GetComponentInChildren<MeshRenderer>().material.SetTexture("_BaseMap", burnSprites[Random.Range(0, burnSprites.Count)]);
     }
 
