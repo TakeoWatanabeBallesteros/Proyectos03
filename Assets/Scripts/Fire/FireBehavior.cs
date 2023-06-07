@@ -39,11 +39,10 @@ public class FireBehavior : MonoBehaviour
     private static readonly int Heat = Shader.PropertyToID("_Heat");
     private static readonly int EmissiveColor = Shader.PropertyToID("_EmissiveColor");
 
-    public List<GameObject> decalsPrefabs;
-    private bool isDecalOff;
+    public List<Texture> burnSprites;
+    [SerializeField] private GameObject decalPrefab;
 
     private PointsBehavior pointsBehavior;
-    private bool isPointsAdded;
 
     // Start is called before the first frame update
     void Start()
@@ -61,13 +60,10 @@ public class FireBehavior : MonoBehaviour
         if (onFire)
         {
             AddHeat(100);
-            int count = Random.Range(0, decalsPrefabs.Count);
-            var decal = Instantiate(decalsPrefabs[count]); decal.transform.position = transform.position; isDecalOff = false;
+            CreateBurnDecal();
         }
 
         pointsBehavior = Singleton.Instance.PointsManager;
-        isDecalOff = true;
-        isPointsAdded = true;
     }
 
     // Update is called once per frame
@@ -88,8 +84,7 @@ public class FireBehavior : MonoBehaviour
         {
             case "Fire":
                 var fire = other.GetComponent<FireBehavior>();
-                if(fire.onFire)
-                    break;
+                if(fire.onFire) break;
                 fire.onHeating = true;
                 nearObjects.Add(fire);
                 break;
@@ -144,38 +139,33 @@ public class FireBehavior : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(true); //Enable smoke
         SetBurnedMaterial();
         enabled = false;
-        if (!isPointsAdded) return;
         pointsBehavior.AddPointsCombo();
         pointsBehavior.AddCombo();
-        isPointsAdded = false;
-
     }
 
     private void AddHeat()
     {
-        heat += heatPerSecond * Time.deltaTime;
+        heat = Mathf.Clamp(heat + (heatPerSecond * Time.deltaTime), 0, 100);
         _objectMaterial.SetFloat(Heat, Scale(0, 100, heat));
-        if (!(heat > 100)) return;
+        if (heat < 100 || onFire) return;
         onFire = true;
         transform.GetChild(0).gameObject.SetActive(true);
-        if (isDecalOff)
-        {
-            int count = Random.Range(0, decalsPrefabs.Count);
-            var decal = Instantiate(decalsPrefabs[count]); decal.transform.position = transform.position; isDecalOff = false;
-        }
+        CreateBurnDecal();
     }
     public void AddHeat(float heat)
     {
-        this.heat += heat;
+        heat = Mathf.Clamp( this.heat += heat, 0, 100);
         _objectMaterial.SetFloat(Heat, Scale(0, 100, heat));
-        if (this.heat < 100) return;
+        if (this.heat < 100 || onFire) return;
         onFire = true;
         transform.GetChild(0).gameObject.SetActive(true);
-        if (isDecalOff)
-        {
-            int count = Random.Range(0, decalsPrefabs.Count);
-            var decal = Instantiate(decalsPrefabs[count]); decal.transform.position = transform.position; isDecalOff = false;
-        }
+        CreateBurnDecal();
+    }
+
+    private void CreateBurnDecal()
+    {
+        var decal = Instantiate(decalPrefab, transform.position, Quaternion.Euler(Vector3.up)); 
+        decal.GetComponentInChildren<MeshRenderer>().material.SetTexture("_BaseMap", burnSprites[Random.Range(0, burnSprites.Count)]);
     }
 
     private void CoolDown()
