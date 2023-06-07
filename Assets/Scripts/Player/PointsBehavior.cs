@@ -27,6 +27,7 @@ public class PointsBehavior : MonoBehaviour
     {
         blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
         Points = 0;
+        Combo = 1;
         blackboardUI.SetPoints(Points, pointsToWin, Points);
     }
 

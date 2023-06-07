@@ -66,14 +66,14 @@ public class FireBehavior : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        CoolDown();
-        
-        if(!onFire) return;
-        
-        ApplyHeat();
+        if(!onFire) CoolDown();
 
-        ApplyDamage();
-        
+        else
+        {
+            ApplyHeat();
+
+            ApplyDamage();
+        }
     }
     
     private void OnTriggerEnter(Collider other)
@@ -119,7 +119,6 @@ public class FireBehavior : MonoBehaviour
 
     public void PuttingOut()
     {
-        // Damage
         fireHP = Mathf.Clamp(fireHP -= timeToPutOut * Time.deltaTime, 0, 100);
         
         foreach (ParticleSystem fireParticle in fireParticles)
@@ -129,14 +128,16 @@ public class FireBehavior : MonoBehaviour
         }
 
         if (fireHP > 0) return;
+
+        pointsBehavior.AddPointsCombo();
+        pointsBehavior.AddCombo();
+        
+        onFire = false;
         
         transform.GetChild(0).gameObject.SetActive(false); //Disable fire
         transform.GetChild(1).gameObject.SetActive(true); //Enable smoke
         SetBurnedMaterial();
         StopHeating();
-        pointsBehavior.AddPointsCombo();
-        pointsBehavior.AddCombo();
-        enabled = false;
     }
 
     public void AddHeat(float heat = 0)
