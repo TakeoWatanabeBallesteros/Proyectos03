@@ -4864,6 +4864,7 @@ GameObject:
   - component: {fileID: 2350524891206690496}
   - component: {fileID: 2350524891206690498}
   - component: {fileID: 2350524891206690497}
+  - component: {fileID: 4308461355722474642}
   m_Layer: 0
   m_Name: Renderer
   m_TagString: Untagged
@@ -4936,6 +4937,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2350524891206690511}
   m_Mesh: {fileID: 3465615297516336310, guid: 38aa840bbd59e9446857b3682c024e77, type: 3}
+--- !u!65 &4308461355722474642
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2350524891206690511}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.395439, y: 4.5509434, z: 5.9084344}
+  m_Center: {x: 0, y: -0.030457672, z: 3.186785}
 --- !u!1 &2350524891805519161
 GameObject:
   m_ObjectHideFlags: 0
@@ -4945,13 +4959,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2350524891805519166}
-  - component: {fileID: 2350524891805519165}
   - component: {fileID: 2350524891805519164}
-  - component: {fileID: 2350524891805519163}
-  - component: {fileID: 2350524891805519162}
-  m_Layer: 0
+  - component: {fileID: 4700992216520882957}
+  - component: {fileID: 7913796234839342682}
+  m_Layer: 2
   m_Name: TrashCan
-  m_TagString: Untagged
+  m_TagString: Fire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4974,19 +4987,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2350524891805519165
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2350524891805519161}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.7906227, y: 2.5260482, z: 1.8557339}
-  m_Center: {x: -0.013952255, y: 1.2295868, z: 0.018603325}
 --- !u!54 &2350524891805519164
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5003,7 +5003,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2350524891805519163
+--- !u!114 &4700992216520882957
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5012,40 +5012,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 2350524891805519161}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3913268077a5f346ac49d3375f64bea, type: 3}
+  m_Script: {fileID: 11500000, guid: 218074dde59dab9448d797f652ae5e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nearObjectsOnFire: []
-  nearFiresExplosion: []
-  fire: {fileID: 0}
-  explosive: {fileID: 0}
-  nearDistance: 5
-  fireHP: 100
-  timeToBurn: 10
   onFire: 0
-  fireType: 2
-  delay: 8
-  delayFire: 0.2
-  CanBurn: 0
+  damageRadius: 0.7
+  fireHP: 100
+  timeToPutOut: 100
+  heatDistance: 3
+  heat: 0
+  heatPerSecond: 33.3
   fireParticles: []
-  startRoomFires: 0
-  redMaterial: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
-  burnedMaterial: {fileID: 2100000, guid: 0e9168e47f005f7468aa7407ed8bf563, type: 2}
---- !u!114 &2350524891805519162
-MonoBehaviour:
+  decalsPrefabs:
+  - {fileID: 6232130073354221700, guid: e3b14aa7a8d01e843afe149e49db4685, type: 3}
+  - {fileID: 6232130073354221700, guid: 17dfb17867f2efc44ba1db2a4b4c7d65, type: 3}
+  - {fileID: 6232130073354221700, guid: 7ca4ad2cd63683042adeb3cdda6ffe59, type: 3}
+  - {fileID: 6232130073354221700, guid: d85916caa02e8ab4f8d694df9b14fe00, type: 3}
+--- !u!135 &7913796234839342682
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2350524891805519161}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2701286541c26c14483e25445c26c3c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canLerpMaterials: 0
-  materialRed: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
-  timeThatIsBurning: 5
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2350524890146117568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5347,6 +5342,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.9999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 1.961106
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 7.3777815e-15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.79055417
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5b85f8f958fc144e8d556a417a36bbb, type: 3}
