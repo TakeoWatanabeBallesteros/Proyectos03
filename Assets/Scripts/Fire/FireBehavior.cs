@@ -7,7 +7,6 @@ using System.Xml;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Debug = FMOD.Debug;
 using Random = UnityEngine.Random;
 
 public class FireBehavior : MonoBehaviour
@@ -165,7 +164,6 @@ public class FireBehavior : MonoBehaviour
 
     private void CreateBurnDecal()
     {
-        UnityEngine.Debug.Log("Isaac");
         var decal = Instantiate(decalPrefab, transform.position, Quaternion.Euler(Vector3.up)); 
         decal.GetComponentInChildren<MeshRenderer>().material.SetTexture("_BaseMap", burnSprites[Random.Range(0, burnSprites.Count)]);
     }
