@@ -57,7 +57,13 @@ public class FireBehavior : MonoBehaviour
         originalFireSize = fireParticles[0].gameObject.transform.localScale.x;
         
         heat = 0;
-        if(onFire) AddHeat(100);
+        if (onFire)
+        {
+            AddHeat(100);
+            int count = Random.Range(0, decalsPrefabs.Count);
+            var decal = Instantiate(decalsPrefabs[count]); decal.transform.position = transform.position; decalOff = false;
+        }
+
         // pointsBehavior = Singleton.Instance.PointsManager;
         decalOff = true;
     }
