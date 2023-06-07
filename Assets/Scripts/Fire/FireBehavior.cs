@@ -182,7 +182,12 @@ public class FireBehavior : MonoBehaviour
 
         foreach (var fire in clone)
         {
-            if(Vector3.Distance(fire.transform.position, transform.position) > heatDistance) continue;
+            var position = transform.position;
+            var firePosition = fire.transform.position;
+            position.y = 0;
+            firePosition.y = 0;
+            Debug.Log(Vector3.Distance(position, firePosition));
+            if(Vector3.Distance(position, firePosition) > heatDistance) continue;
             if(fire.heat >= 100 || fire.onFire) nearObjects.Remove(fire);
             fire.AddHeat();
         }
@@ -212,6 +217,15 @@ public class FireBehavior : MonoBehaviour
     {
         _objectMaterial.DisableKeyword("_EMISSION");
         _objectMaterial.SetColor(EmissiveColor, Color.black);
+    }
+    
+    void OnDrawGizmosSelected()
+    {
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = new Color(1, 0, 0, 0.3f);
+        Gizmos.DrawSphere(transform.position, damageRadius);
+        Gizmos.color = new Color(1, 0.97f, 0, 0.3f);
+        Gizmos.DrawSphere(transform.position, heatDistance);
     }
 }
 
