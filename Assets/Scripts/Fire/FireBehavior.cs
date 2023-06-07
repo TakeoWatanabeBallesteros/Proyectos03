@@ -7,6 +7,7 @@ using System.Xml;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class FireBehavior : MonoBehaviour
 {
@@ -38,10 +39,11 @@ public class FireBehavior : MonoBehaviour
     private static readonly int Heat = Shader.PropertyToID("_Heat");
     private static readonly int EmissiveColor = Shader.PropertyToID("_EmissiveColor");
 
-    public GameObject DecalPrefab;
-    bool Off;
+    public List<GameObject> decalsPrefabs;
+    private bool isDecalOff;
 
     private PointsBehavior pointsBehavior;
+    private bool isPointsAdded;
 
     // Start is called before the first frame update
     void Start()
@@ -56,9 +58,16 @@ public class FireBehavior : MonoBehaviour
         originalFireSize = fireParticles[0].gameObject.transform.localScale.x;
         
         heat = 0;
-        if(onFire) AddHeat(100);
-        // pointsBehavior = Singleton.Instance.PointsManager;
-        Off = true;
+        if (onFire)
+        {
+            AddHeat(100);
+            int count = Random.Range(0, decalsPrefabs.Count);
+            var decal = Instantiate(decalsPrefabs[count]); decal.transform.position = transform.position; isDecalOff = false;
+        }
+
+        pointsBehavior = Singleton.Instance.PointsManager;
+        isDecalOff = true;
+        isPointsAdded = true;
     }
 
     // Update is called once per frame
@@ -133,10 +142,13 @@ public class FireBehavior : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(false); //Disable fire
         StopAllCoroutines();
         transform.GetChild(1).gameObject.SetActive(true); //Enable smoke
-        SetBurnedMaterial(); 
-        // pointsBehavior.AddPointsCombo();
-        // pointsBehavior.AddCombo();
+        SetBurnedMaterial();
         enabled = false;
+        if (!isPointsAdded) return;
+        pointsBehavior.AddPointsCombo();
+        pointsBehavior.AddCombo();
+        isPointsAdded = false;
+
     }
 
     private void AddHeat()
@@ -146,7 +158,11 @@ public class FireBehavior : MonoBehaviour
         if (!(heat > 100)) return;
         onFire = true;
         transform.GetChild(0).gameObject.SetActive(true);
-        if (Off) { var decal = Instantiate(DecalPrefab); decal.transform.position = transform.position; Off = false; }
+        if (isDecalOff)
+        {
+            int count = Random.Range(0, decalsPrefabs.Count);
+            var decal = Instantiate(decalsPrefabs[count]); decal.transform.position = transform.position; isDecalOff = false;
+        }
     }
     public void AddHeat(float heat)
     {
@@ -155,7 +171,11 @@ public class FireBehavior : MonoBehaviour
         if (this.heat < 100) return;
         onFire = true;
         transform.GetChild(0).gameObject.SetActive(true);
-        if (Off) { Debug.Log("Encendio"); Off = false; }
+        if (isDecalOff)
+        {
+            int count = Random.Range(0, decalsPrefabs.Count);
+            var decal = Instantiate(decalsPrefabs[count]); decal.transform.position = transform.position; isDecalOff = false;
+        }
     }
 
     private void CoolDown()
@@ -198,7 +218,7 @@ public class FireBehavior : MonoBehaviour
         return Mathf.Clamp(2 / (max - min) * (value - max) + 3, 1, 3);
     }
 
-    public void SetBurnedMaterial()
+    private void SetBurnedMaterial()
     {
         _objectMaterial.DisableKeyword("_EMISSION");
         _objectMaterial.SetColor(EmissiveColor, Color.black);

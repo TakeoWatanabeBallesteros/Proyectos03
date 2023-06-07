@@ -27,7 +27,7 @@ public class PointsBehavior : MonoBehaviour
     {
         blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
         Points = 0;
-        blackboardUI.SetPoints(Points, pointsToWin);
+        blackboardUI.SetPoints(Points, pointsToWin, Points);
     }
 
     // Update is called once per frame
@@ -35,11 +35,11 @@ public class PointsBehavior : MonoBehaviour
     {
         //blackboardUI.SetPoints(Points, pointsToWin);
     }
-    public void AddPointsSafeZone() { Points += SafeZonePoints; blackboardUI.SetPoints( Points, pointsToWin); }
-    public void AddPointsExplosion() { Points += ExplosionPoints; blackboardUI.SetPoints( Points, pointsToWin); }
-    public void AddPointsCollectable() { Points += CollectablePoints; blackboardUI.SetPoints( Points, pointsToWin); }
-    public void AddPointsSeconds() { Points += PointsPerSecond; blackboardUI.SetPoints( Points, pointsToWin); }
-    public void AddPointsCombo() { Points += ExtinguishFirePoints * Combo; blackboardUI.SetPoints( Points, pointsToWin); }
+    public void AddPointsSafeZone() { Points += SafeZonePoints; blackboardUI.SetPoints( SafeZonePoints, pointsToWin, Points); }
+    public void AddPointsExplosion() { Points += ExplosionPoints; blackboardUI.SetPoints( ExplosionPoints, pointsToWin, Points); }
+    public void AddPointsCollectable() { Points += CollectablePoints; blackboardUI.SetPoints( CollectablePoints, pointsToWin, Points); }
+    public void AddPointsSeconds() { Points += PointsPerSecond; blackboardUI.SetPoints( PointsPerSecond, pointsToWin, Points); }
+    public void AddPointsCombo() { Points += ExtinguishFirePoints * Combo; blackboardUI.SetPoints( ExtinguishFirePoints * Combo, pointsToWin, Points); }
     public void AddCombo() => Combo++; 
     public void ResetCombo() => Combo = 1;
 /*  
