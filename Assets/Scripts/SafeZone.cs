@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 public class SafeZone : MonoBehaviour
 {
     ItemManager itemManager;
+    private PointsBehavior pointsManager;
 
     private int counter;
 
@@ -13,7 +14,8 @@ public class SafeZone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        itemManager = FindObjectOfType<ItemManager>();
+        itemManager = Singleton.Instance.ItemsManager;
+        pointsManager = Singleton.Instance.PointsManager;
         counter = 0;
     }
 
@@ -24,6 +26,7 @@ public class SafeZone : MonoBehaviour
             Destroy(other.transform.parent.gameObject);
             if(counter < 5) childsGameObjects[counter++].SetActive(true);
             itemManager.AddChild();
+            pointsManager.AddPointsSafeZone();
         }
     }
 }
