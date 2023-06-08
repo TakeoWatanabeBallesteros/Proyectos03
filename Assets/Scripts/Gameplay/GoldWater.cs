@@ -138,9 +138,16 @@ public class GoldWater : MonoBehaviour
 
     private void PuttingOutFires()
     {
-        foreach (var fire in Fires)
+        List<FireBehavior> clone = new List<FireBehavior>(Fires);
+        foreach (var fire in clone)
         {
             fire.PuttingOut();
+            if (!fire.onFire)
+            {
+                Fires.Remove(fire);
+                fire.enabled = false;
+                // Valiendo
+            }
         }
     }
 }

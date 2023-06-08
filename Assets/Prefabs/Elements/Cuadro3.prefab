@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8092993398395433939}
   - component: {fileID: 8092993398395433941}
   - component: {fileID: 8092993398395433938}
+  - component: {fileID: 1354204327150398362}
   m_Layer: 0
   m_Name: Renderer
   m_TagString: Untagged
@@ -83,6 +84,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8092993398395433936}
   m_Mesh: {fileID: -8366183600774674403, guid: ecad7bee96b9fa6479a52da50b03e29f, type: 3}
+--- !u!65 &1354204327150398362
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8092993398395433936}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.615595, y: 4.839299, z: 0.33918923}
+  m_Center: {x: 0.17990291, y: -0.13096705, z: 0.16959462}
 --- !u!1 &8092993399623881674
 GameObject:
   m_ObjectHideFlags: 0
@@ -4945,13 +4959,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8092993400205522183}
-  - component: {fileID: 8092993400205522180}
   - component: {fileID: 8092993400205522181}
-  - component: {fileID: 8092993400205522178}
-  - component: {fileID: 8092993400205522179}
-  m_Layer: 0
+  - component: {fileID: 8438763714373425846}
+  - component: {fileID: 1082406146775936946}
+  m_Layer: 2
   m_Name: Cuadro3
-  m_TagString: Untagged
+  m_TagString: Fire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4974,19 +4987,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8092993400205522180
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8092993400205522176}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4.7201614, y: 0.43272567, z: 4.913559}
-  m_Center: {x: 0.15625, y: 0.13565266, z: 0.15035248}
 --- !u!54 &8092993400205522181
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5003,7 +5003,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8092993400205522178
+--- !u!114 &8438763714373425846
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5012,40 +5012,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 8092993400205522176}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3913268077a5f346ac49d3375f64bea, type: 3}
+  m_Script: {fileID: 11500000, guid: 218074dde59dab9448d797f652ae5e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nearObjectsOnFire: []
-  nearFiresExplosion: []
-  fire: {fileID: 0}
-  explosive: {fileID: 0}
-  nearDistance: 5
-  fireHP: 100
-  timeToBurn: 10
   onFire: 0
-  fireType: 2
-  delay: 8
-  delayFire: 0.2
-  CanBurn: 0
-  fireParticles: []
-  startRoomFires: 0
-  redMaterial: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
-  burnedMaterial: {fileID: 2100000, guid: 0e9168e47f005f7468aa7407ed8bf563, type: 2}
---- !u!114 &8092993400205522179
-MonoBehaviour:
+  onHeating: 0
+  damageRadius: 0.7
+  fireHP: 100
+  timeToPutOut: 100
+  heatDistance: 3
+  heat: 0
+  heatPerSecond: 33.3
+  fireParticles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  burnSprites:
+  - {fileID: 2800000, guid: 47a0c2050f43c72498e0733451895b34, type: 3}
+  - {fileID: 2800000, guid: e25ab5804ecb77f4a8a3372828b03584, type: 3}
+  - {fileID: 2800000, guid: 53ecce8a6096028448b7bd12fc7954c6, type: 3}
+  - {fileID: 2800000, guid: c967a6138f158a54982476c89fd11d29, type: 3}
+  decalPrefab: {fileID: 6232130073354221700, guid: e3b14aa7a8d01e843afe149e49db4685,
+    type: 3}
+--- !u!135 &1082406146775936946
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8092993400205522176}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2701286541c26c14483e25445c26c3c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canLerpMaterials: 0
-  materialRed: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
-  timeThatIsBurning: 5
+  serializedVersion: 2
+  m_Radius: 3.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8092993399737601919
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5347,6 +5348,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 2.3220372
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2.647771
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 1.9806464
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.16651902
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.43326068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.80032414
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5b85f8f958fc144e8d556a417a36bbb, type: 3}

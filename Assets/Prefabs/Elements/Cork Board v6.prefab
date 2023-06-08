@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1580737052569659637}
   - component: {fileID: 6606986140584047078}
   - component: {fileID: 4840093277146895781}
+  - component: {fileID: 8421416415126539168}
   m_Layer: 0
   m_Name: Renderer
   m_TagString: Untagged
@@ -83,6 +84,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4324099366793351391}
   m_Mesh: {fileID: 180201363491517350, guid: efe653d5edfc69d4e9e85194bbb613fa, type: 3}
+--- !u!65 &8421416415126539168
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4324099366793351391}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.7827773, y: 10.251306, z: 0.33918935}
+  m_Center: {x: -0.25944352, y: 0.5536517, z: 0.16959468}
 --- !u!1 &4879292970561981990
 GameObject:
   m_ObjectHideFlags: 0
@@ -4945,13 +4959,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5505344949518218355}
-  - component: {fileID: 3969634539580493683}
   - component: {fileID: 35219954129154632}
-  - component: {fileID: 460578211248077725}
-  - component: {fileID: 1859465726566072702}
-  m_Layer: 0
+  - component: {fileID: 5541328346714328886}
+  - component: {fileID: 554613421917102398}
+  m_Layer: 2
   m_Name: Cork Board v6
-  m_TagString: Untagged
+  m_TagString: Fire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4974,19 +4987,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3969634539580493683
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8443698838019236128}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.9510298, y: 0.39277047, z: 4.274338}
-  m_Center: {x: -0.12724066, y: 0.040481955, z: -0.19510269}
 --- !u!54 &35219954129154632
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5003,7 +5003,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &460578211248077725
+--- !u!135 &5541328346714328886
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8443698838019236128}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &554613421917102398
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5012,40 +5025,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 8443698838019236128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3913268077a5f346ac49d3375f64bea, type: 3}
+  m_Script: {fileID: 11500000, guid: 218074dde59dab9448d797f652ae5e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nearObjectsOnFire: []
-  nearFiresExplosion: []
-  fire: {fileID: 0}
-  explosive: {fileID: 0}
-  nearDistance: 5
-  fireHP: 100
-  timeToBurn: 10
   onFire: 0
-  fireType: 2
-  delay: 8
-  delayFire: 0.2
-  CanBurn: 0
-  fireParticles: []
-  startRoomFires: 0
-  redMaterial: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
-  burnedMaterial: {fileID: 2100000, guid: 0e9168e47f005f7468aa7407ed8bf563, type: 2}
---- !u!114 &1859465726566072702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8443698838019236128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2701286541c26c14483e25445c26c3c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canLerpMaterials: 0
-  materialRed: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
-  timeThatIsBurning: 5
+  onHeating: 0
+  damageRadius: 0.7
+  fireHP: 100
+  timeToPutOut: 100
+  heatDistance: 3
+  heat: 0
+  heatPerSecond: 33.3
+  fireParticles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  burnSprites:
+  - {fileID: 2800000, guid: 47a0c2050f43c72498e0733451895b34, type: 3}
+  - {fileID: 2800000, guid: e25ab5804ecb77f4a8a3372828b03584, type: 3}
+  - {fileID: 2800000, guid: 53ecce8a6096028448b7bd12fc7954c6, type: 3}
+  - {fileID: 2800000, guid: c967a6138f158a54982476c89fd11d29, type: 3}
+  decalPrefab: {fileID: 6232130073354221700, guid: e3b14aa7a8d01e843afe149e49db4685,
+    type: 3}
 --- !u!1001 &2451949674488140792
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5347,6 +5348,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.1119945
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.3070416
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 1.2839178
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -0.04634857
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.05944934
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.4519591
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5b85f8f958fc144e8d556a417a36bbb, type: 3}
