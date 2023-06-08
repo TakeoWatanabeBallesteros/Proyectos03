@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onFire: 0
+  onHeating: 0
   damageRadius: 0.7
   fireHP: 100
   timeToPutOut: 100
@@ -89,11 +90,8 @@ MonoBehaviour:
   - {fileID: 6133018181792886218}
   - {fileID: 792446600879529625}
   - {fileID: 5711926167784364979}
-  decalsPrefabs:
-  - {fileID: 6232130073354221700, guid: e3b14aa7a8d01e843afe149e49db4685, type: 3}
-  - {fileID: 6232130073354221700, guid: 17dfb17867f2efc44ba1db2a4b4c7d65, type: 3}
-  - {fileID: 6232130073354221700, guid: 7ca4ad2cd63683042adeb3cdda6ffe59, type: 3}
-  - {fileID: 6232130073354221700, guid: d85916caa02e8ab4f8d694df9b14fe00, type: 3}
+  burnSprites: []
+  decalPrefab: {fileID: 0}
 --- !u!1 &700681584353414967
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,7 +151,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 700681584641755178}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2.84, y: 0, z: 1.02}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.493818, y: 0.048494, z: 0.59376675}
   m_ConstrainProportionsScale: 0
   m_Children: []
