@@ -87,6 +87,7 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         Dead = true;
+        pointsManager.RemovePointsDead();
         inputPlayer.enabled = false;
         playerMovement.Stop();
         StartCoroutine(blackboardUI.FadeIN());

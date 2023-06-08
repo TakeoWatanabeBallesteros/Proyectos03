@@ -48,7 +48,7 @@ public class PointsBehavior : MonoBehaviour
     public void RemovePointsChildBurned() { Points -= BurnedChild; blackboardUI.SetPoints( -BurnedChild, pointsToWin, Points); }
     public void RemovePointsCollectable() { Points -= DestroyedCollectable; blackboardUI.SetPoints( -DestroyedCollectable, pointsToWin, Points); }
     public void RemovePointsGettingBurned() { Points -= GetBurned; blackboardUI.SetPoints( -GetBurned, pointsToWin, Points); }
-    public void RemovePointDead() { Points -= Die; blackboardUI.SetPoints( -Die, pointsToWin, Points); }
+    public void RemovePointsDead() { Points -= Die; blackboardUI.SetPoints( -Die, pointsToWin, Points); }
     public void AddCombo() => Combo++; 
     public void ResetCombo() => Combo = 1;
 /*  
