@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4747324253704172578}
   - component: {fileID: 4747324253704172576}
   - component: {fileID: 4747324253704172579}
+  - component: {fileID: 9182321271538046355}
   m_Layer: 0
   m_Name: Renderer
   m_TagString: Untagged
@@ -83,6 +84,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4747324253704172589}
   m_Mesh: {fileID: 973877516759717424, guid: 1ef8b16810f708842a286efc2f94b066, type: 3}
+--- !u!135 &9182321271538046355
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4747324253704172589}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.4484596
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4747324254032095334
 GameObject:
   m_ObjectHideFlags: 0
@@ -4947,11 +4961,10 @@ GameObject:
   - component: {fileID: 4747324254903227547}
   - component: {fileID: 4747324254903227546}
   - component: {fileID: 4747324254903227525}
-  - component: {fileID: 4747324254903227524}
-  - component: {fileID: 4747324254903227527}
-  m_Layer: 0
+  - component: {fileID: 8082027971777358228}
+  m_Layer: 2
   m_Name: ExerciseBall_1
-  m_TagString: Untagged
+  m_TagString: Fire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4982,10 +4995,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4747324254903227526}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.229784
+  m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4747324254903227525
 Rigidbody:
@@ -5003,7 +5016,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4747324254903227524
+--- !u!114 &8082027971777358228
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5012,40 +5025,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 4747324254903227526}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3913268077a5f346ac49d3375f64bea, type: 3}
+  m_Script: {fileID: 11500000, guid: 218074dde59dab9448d797f652ae5e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nearObjectsOnFire: []
-  nearFiresExplosion: []
-  fire: {fileID: 0}
-  explosive: {fileID: 0}
-  nearDistance: 5
-  fireHP: 100
-  timeToBurn: 10
   onFire: 0
-  fireType: 2
-  delay: 8
-  delayFire: 0.2
-  CanBurn: 0
-  fireParticles: []
-  startRoomFires: 0
-  redMaterial: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
-  burnedMaterial: {fileID: 2100000, guid: 0e9168e47f005f7468aa7407ed8bf563, type: 2}
---- !u!114 &4747324254903227527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4747324254903227526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2701286541c26c14483e25445c26c3c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canLerpMaterials: 0
-  materialRed: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
-  timeThatIsBurning: 5
+  onHeating: 0
+  damageRadius: 0.7
+  fireHP: 100
+  timeToPutOut: 100
+  heatDistance: 3
+  heat: 0
+  heatPerSecond: 33.3
+  fireParticles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  burnSprites:
+  - {fileID: 2800000, guid: 47a0c2050f43c72498e0733451895b34, type: 3}
+  - {fileID: 2800000, guid: e25ab5804ecb77f4a8a3372828b03584, type: 3}
+  - {fileID: 2800000, guid: 53ecce8a6096028448b7bd12fc7954c6, type: 3}
+  - {fileID: 2800000, guid: c967a6138f158a54982476c89fd11d29, type: 3}
+  decalPrefab: {fileID: 6232130073354221700, guid: e3b14aa7a8d01e843afe149e49db4685,
+    type: 3}
 --- !u!1001 &4747324254456035339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5347,6 +5348,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.2995098
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.3798797
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 1.954932
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -0.02735134
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.0029253156
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.5304225
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5b85f8f958fc144e8d556a417a36bbb, type: 3}
