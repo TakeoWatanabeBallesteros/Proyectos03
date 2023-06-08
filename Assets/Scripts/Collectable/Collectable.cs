@@ -15,7 +15,7 @@ public class Collectable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Items = FindObjectOfType<ItemManager>();
+        Items = Singleton.Instance.ItemsManager;
         texture = GetComponent<MeshRenderer>();
         Destroyed = false;
     }
@@ -48,7 +48,7 @@ public class Collectable : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && !Destroyed)
+        if (other.CompareTag("Player") && !Destroyed)
         {
             Items.AddCollectable();
             Destroy(gameObject);
