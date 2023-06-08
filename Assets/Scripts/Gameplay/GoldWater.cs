@@ -110,6 +110,11 @@ public class GoldWater : MonoBehaviour
         {
             Fires.Add(other.GetComponentInParent<FireBehavior>());
         }
+        else if (other.CompareTag("Collectable"))
+        {
+            other.GetComponentInParent<Collectable>().TakeDamage(75);
+            pointsBehavior.RemovePointsCollectable();
+        }
     }
     private void OnTriggerExit(Collider other)
     {

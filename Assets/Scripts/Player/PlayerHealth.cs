@@ -21,6 +21,8 @@ public class PlayerHealth : MonoBehaviour
     public float damageCoolDown;
     public bool isTakingDamage = false;
 
+    private PointsBehavior pointsManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,7 @@ public class PlayerHealth : MonoBehaviour
         Dead = false;
         Vida = 1.00f;
         blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
+        pointsManager = Singleton.Instance.PointsManager;
         canBeDamaged = true;
     }
     
@@ -58,6 +61,7 @@ public class PlayerHealth : MonoBehaviour
             StartCoroutine(DamageCooldown());
             blackboardUI.SetLifeBar(Vida);
             StartCoroutine(ShowBurnIndicator());
+            pointsManager.RemovePointsGettingBurned();
         }
             
         if (Vida <= 0.00f)
