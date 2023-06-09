@@ -105,8 +105,15 @@ MonoBehaviour:
   heatDistance: 3
   heat: 0
   heatPerSecond: 33.3
-  fireParticles: []
-  burnSprites: []
+  fireParticles:
+  - {fileID: 3637949460908810842}
+  - {fileID: 7899060534369980681}
+  - {fileID: 2892607140974187555}
+  burnSprites:
+  - {fileID: 2800000, guid: 47a0c2050f43c72498e0733451895b34, type: 3}
+  - {fileID: 2800000, guid: 53ecce8a6096028448b7bd12fc7954c6, type: 3}
+  - {fileID: 2800000, guid: c967a6138f158a54982476c89fd11d29, type: 3}
+  - {fileID: 2800000, guid: e25ab5804ecb77f4a8a3372828b03584, type: 3}
   decalPrefab: {fileID: 6232130073354221700, guid: e3b14aa7a8d01e843afe149e49db4685,
     type: 3}
 --- !u!135 &7413378290529176429
@@ -5344,9 +5351,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5b85f8f958fc144e8d556a417a36bbb, type: 3}
+--- !u!198 &2892607140974187555 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5115390600801519191, guid: b5b85f8f958fc144e8d556a417a36bbb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7987448916350325364}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3637949460809169371 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6675893458143112111, guid: b5b85f8f958fc144e8d556a417a36bbb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7987448916350325364}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3637949460908810842 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6675893457974259758, guid: b5b85f8f958fc144e8d556a417a36bbb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7987448916350325364}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7899060534369980681 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 235884603822162813, guid: b5b85f8f958fc144e8d556a417a36bbb,
     type: 3}
   m_PrefabInstance: {fileID: 7987448916350325364}
   m_PrefabAsset: {fileID: 0}
