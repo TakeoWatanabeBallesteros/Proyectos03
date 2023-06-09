@@ -1,58 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
     [SerializeField] float HP = 75f;
-    float DamageTimer;
+    private bool canBeDamaged;
     public float delayTimer;
-    public bool Destroyed;
     MeshRenderer texture;
     public GameObject Sparks;
-    ItemManager Items;
+    ItemManager itemsManager;
     public GameObject Luz;
+    public Collider collider;
+    
+    private PointsBehavior pointsBehavior;
+    
     // Start is called before the first frame update
     void Start()
     {
-        Items = Singleton.Instance.ItemsManager;
+        itemsManager = Singleton.Instance.ItemsManager;
         texture = GetComponent<MeshRenderer>();
-        Destroyed = false;
+        canBeDamaged = true;
+        pointsBehavior = Singleton.Instance.PointsManager;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (HP <= 0 && !Destroyed)
-        {
-            HP = 0;
-            Destroyed = true;
-            texture.material.color = new Color(0f, 0f, 0f, 1f);
-            Sparks.SetActive(true);
-            Destroy(Luz);
-        }
-        if (HP > 0 && DamageTimer > 0)
-        {
-            DamageTimer -= Time.deltaTime;
-        }
-
-    }
     public void TakeDamage(float DMG)
     {
-        if (DamageTimer > 0)
-        {
-            return;
-        }
-        HP -= DMG;
-        DamageTimer = delayTimer;
+        if(!canBeDamaged) return;
+        StartCoroutine(DamageCoolDown());
+        HP = Mathf.Clamp(HP -= DMG, 0, 75);
+        if (HP != 0) return;
+        texture.material.color = new Color(0f, 0f, 0f, 1f);
+        Sparks.SetActive(true);
+        pointsBehavior.RemovePointsCollectable();
+        Destroy(Luz);
+        enabled = false;
+        collider.enabled = false;
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !Destroyed)
+        if (other.CompareTag("Player"))
         {
-            Items.AddCollectable();
+            itemsManager.AddCollectable();
             Destroy(gameObject);
-            Destroyed = true;
         }
+    }
+
+    private IEnumerator DamageCoolDown()
+    {
+        canBeDamaged = false;
+        yield return new WaitForSeconds(delayTimer);
+        canBeDamaged = true;
     }
 }

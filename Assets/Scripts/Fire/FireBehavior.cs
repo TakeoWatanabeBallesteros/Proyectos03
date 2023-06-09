@@ -71,7 +71,6 @@ public class FireBehavior : MonoBehaviour
         else
         {
             ApplyHeat();
-
             ApplyDamage();
         }
     }
