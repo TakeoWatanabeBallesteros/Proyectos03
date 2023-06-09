@@ -141,6 +141,7 @@ public class Blackboard_UIManager : DynamicBlackboard
         pointsText.text = currentPoints + "/" + pointsToWin;
         pointsWinText.text = currentPoints + "/" + pointsToWin;
         if(points !=0) PointsPopUp(points);
+
     }
 
     private void PointsPopUp(int points)
@@ -148,7 +149,8 @@ public class Blackboard_UIManager : DynamicBlackboard
         GameObject pref = Instantiate(PointsPrefab, PontPopUpOrigin.transform); 
         pref.GetComponent<TextMeshProUGUI>().text = points < 0 ?  "" + points : "+" + points;
         pref.transform.position = PontPopUpOrigin.transform.position;
-       
+        Destroy(pref, pref.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length - 0.1f);
+
     }
 
     public IEnumerator FadeIN()
