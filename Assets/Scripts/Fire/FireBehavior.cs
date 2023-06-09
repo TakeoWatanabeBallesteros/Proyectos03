@@ -71,7 +71,7 @@ public class FireBehavior : MonoBehaviour
         else
         {
             ApplyHeat();
-
+            _objectMaterial.SetFloat(Heat, Scale(0, 100, this.heat));
             ApplyDamage();
         }
     }

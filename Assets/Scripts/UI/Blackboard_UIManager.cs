@@ -155,7 +155,7 @@ public class Blackboard_UIManager : DynamicBlackboard
             pref.GetComponent<TextMeshProUGUI>().text = "+" + points;
         }
         pref.transform.position = PontPopUpOrigin.transform.position;
-        Destroy(pref, pref.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+       
     }
 
     public IEnumerator FadeIN()
