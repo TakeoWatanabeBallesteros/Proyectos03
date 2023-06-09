@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [FormerlySerializedAs("canDamaged")] [SerializeField] private bool canBeDamaged;
+    [SerializeField] private bool canBeDamaged;
     Vector3 initialPos;
     [SerializeField] private float Vida;
     InputPlayerController inputPlayer;
@@ -56,18 +56,14 @@ public class PlayerHealth : MonoBehaviour
         if (Dead) return;
         if(canBeDamaged)
         {
-            Vida -= 0.10f;
-            Vida = Mathf.Clamp(Vida, 0, 1);
+            Vida = Mathf.Clamp(Vida -= 0.10f, 0, 1);
             StartCoroutine(DamageCooldown());
             blackboardUI.SetLifeBar(Vida);
             StartCoroutine(ShowBurnIndicator());
             pointsManager.RemovePointsGettingBurned();
         }
             
-        if (Vida <= 0.00f)
-        {
-            Die();
-        }
+        if (Vida == 0) Die();
     }
 
     private IEnumerator ShowBurnIndicator()

@@ -21,13 +21,8 @@ public class GoldWater : MonoBehaviour
     [SerializeField] PlayerControls Controls;
     public GameObject colider;
 
-    [Space(5f)]
-    [Header("Raycast Origins")]
-    public Transform R0;
-    public Transform R1;
-    public Transform R2;
-    public Transform R3;
-    public Transform R4;
+    [Space(5f)] [Header("Raycast Origins")] 
+    [SerializeField] private List<Transform> raysOrigins;
 
     [Space(5f)] 
     [Header("Sounds")] 
@@ -72,36 +67,27 @@ public class GoldWater : MonoBehaviour
     }
     private float ObjectiveDistance()
     {
-        float[] Raylengths = new float[5];
-        Raylengths[0] = CastRay(R0);
-        Raylengths[1] = CastRay(R1);
-        Raylengths[2] = CastRay(R2);
-        Raylengths[3] = CastRay(R3);
-        Raylengths[4] = CastRay(R4);
-        float max = Raylengths[0];
-        for (int i = 0; i < Raylengths.Length; i++)
+        float max = 0;
+        foreach (var t in raysOrigins)
         {
-            if (Raylengths[i] > max)
-            {
-                max = Raylengths[i];
-            }
+            float distance = CastRay(t);
+            if (this.distance > max) max = distance;
         }
         return max;
     }
-    private float CastRay(Transform Origin)
+    private float CastRay(Transform origin)
     {
-        Ray ray = new Ray(Origin.position, Origin.forward);
-        float Rdist = 0;
-        if (Physics.Raycast(ray, out RaycastHit hit, maxWaterDistance, HitLayer))
+        float rayDistance = 0;
+        if (Physics.Raycast(new Ray(origin.position, origin.forward), 
+            out RaycastHit hit, maxWaterDistance, HitLayer)) 
         {
-            Rdist = (hit.point - Origin.position).magnitude;
+            rayDistance = (hit.point - origin.position).magnitude;
         }
-        else
-        {
-            Rdist = maxWaterDistance;
+        else {
+            rayDistance = maxWaterDistance;
         }
-        Debug.DrawRay(Origin.position, Origin.forward * Rdist);
-        return Rdist;
+        Debug.DrawRay(origin.position, origin.forward * rayDistance);
+        return rayDistance;
     }
 
     private void OnTriggerEnter(Collider other)
