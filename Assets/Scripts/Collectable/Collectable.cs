@@ -10,7 +10,7 @@ public class Collectable : MonoBehaviour
     public float delayTimer;
     MeshRenderer texture;
     public GameObject Sparks;
-    ItemManager Items;
+    ItemManager itemsManager;
     public GameObject Luz;
     public Collider collider;
     
@@ -19,7 +19,7 @@ public class Collectable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Items = Singleton.Instance.ItemsManager;
+        itemsManager = Singleton.Instance.ItemsManager;
         texture = GetComponent<MeshRenderer>();
         canBeDamaged = true;
         pointsBehavior = Singleton.Instance.PointsManager;
@@ -42,7 +42,7 @@ public class Collectable : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Items.AddCollectable();
+            itemsManager.AddCollectable();
             Destroy(gameObject);
         }
     }
