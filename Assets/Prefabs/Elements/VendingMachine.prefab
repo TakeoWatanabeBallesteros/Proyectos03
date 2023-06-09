@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onFire: 0
+  onHeating: 0
   damageRadius: 0.7
   fireHP: 100
   timeToPutOut: 100
@@ -105,11 +106,9 @@ MonoBehaviour:
   heat: 0
   heatPerSecond: 33.3
   fireParticles: []
-  decalsPrefabs:
-  - {fileID: 6232130073354221700, guid: e3b14aa7a8d01e843afe149e49db4685, type: 3}
-  - {fileID: 6232130073354221700, guid: 17dfb17867f2efc44ba1db2a4b4c7d65, type: 3}
-  - {fileID: 6232130073354221700, guid: 7ca4ad2cd63683042adeb3cdda6ffe59, type: 3}
-  - {fileID: 6232130073354221700, guid: d85916caa02e8ab4f8d694df9b14fe00, type: 3}
+  burnSprites: []
+  decalPrefab: {fileID: 6232130073354221700, guid: e3b14aa7a8d01e843afe149e49db4685,
+    type: 3}
 --- !u!135 &7413378290529176429
 SphereCollider:
   m_ObjectHideFlags: 0
