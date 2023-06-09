@@ -146,7 +146,14 @@ public class Blackboard_UIManager : DynamicBlackboard
     private void PointPopUp(int points)
     {
         GameObject pref = Instantiate(PointsPrefab, PontPopUpOrigin.transform);
-        pref.GetComponent<TextMeshProUGUI>().text = "+" + points;
+        if (points <= 0)
+        {
+            pref.GetComponent<TextMeshProUGUI>().text = "" + points;
+        }
+        else
+        {
+            pref.GetComponent<TextMeshProUGUI>().text = "+" + points;
+        }
         pref.transform.position = PontPopUpOrigin.transform.position;
         Destroy(pref, pref.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
     }
