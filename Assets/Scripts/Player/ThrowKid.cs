@@ -47,7 +47,7 @@ public class ThrowKid : MonoBehaviour
             CharacterAnim.YeetChild();
         }
         Holding = Input.secondaryShoot;
-        if (Holding)
+        if (Holding && pickupKid.HasKid())
         {
             ForceBar.gameObject.SetActive(true);
             Fuerza = Mathf.Clamp(Fuerza += FuerzaPerSecond * Time.deltaTime, 0, MaxFuerza);

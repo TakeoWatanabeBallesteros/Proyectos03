@@ -97,8 +97,6 @@ public class GoldWater : MonoBehaviour
         else if (other.CompareTag("Collectable"))
         {
             other.GetComponentInParent<Collectable>().TakeDamage(75);
-            if (other.GetComponentInParent<Collectable>().Destroyed) return;
-            pointsBehavior.RemovePointsCollectable();
         }
     }
     private void OnTriggerExit(Collider other)
