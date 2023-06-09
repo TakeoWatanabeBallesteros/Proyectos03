@@ -81,13 +81,11 @@ public class GoldWater : MonoBehaviour
         if (Physics.Raycast(new Ray(origin.position, origin.forward), 
             out RaycastHit hit, maxWaterDistance, HitLayer)) 
         {
-            rayDistance = (hit.point - origin.position).magnitude;
-        }
-        else {
-            rayDistance = maxWaterDistance;
+            Debug.DrawRay(origin.position, origin.forward * rayDistance);
+            return (hit.point - origin.position).magnitude;
         }
         Debug.DrawRay(origin.position, origin.forward * rayDistance);
-        return rayDistance;
+        return maxWaterDistance;
     }
 
     private void OnTriggerEnter(Collider other)
