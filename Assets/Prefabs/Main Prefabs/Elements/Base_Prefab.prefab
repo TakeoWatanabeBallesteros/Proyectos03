@@ -4864,6 +4864,7 @@ GameObject:
   - component: {fileID: 9047195520576184841}
   - component: {fileID: 9047195520576184843}
   - component: {fileID: 9047195520576184840}
+  - component: {fileID: 2443877294897259972}
   m_Layer: 0
   m_Name: Renderer
   m_TagString: Untagged
@@ -4936,6 +4937,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9047195520576184950}
   m_Mesh: {fileID: 0}
+--- !u!65 &2443877294897259972
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9047195520576184950}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9047195521204146669
 GameObject:
   m_ObjectHideFlags: 0
@@ -4945,10 +4959,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9047195521204146656}
-  - component: {fileID: 9047195521204146657}
+  - component: {fileID: 1263963004748750127}
   - component: {fileID: 9047195521204146670}
-  - component: {fileID: 9047195521204146671}
-  - component: {fileID: 9047195521204146668}
+  - component: {fileID: 527379890649913832}
   m_Layer: 0
   m_Name: Base_Prefab
   m_TagString: Untagged
@@ -4974,8 +4987,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &9047195521204146657
-BoxCollider:
+--- !u!135 &1263963004748750127
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4985,7 +4998,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &9047195521204146670
 Rigidbody:
@@ -5003,7 +5016,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &9047195521204146671
+--- !u!114 &527379890649913832
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5012,42 +5025,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 9047195521204146669}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3913268077a5f346ac49d3375f64bea, type: 3}
+  m_Script: {fileID: 11500000, guid: 218074dde59dab9448d797f652ae5e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nearObjectsOnFire: []
-  nearFiresExplosion: []
-  fire: {fileID: 0}
-  explosive: {fileID: 0}
-  nearDistance: 5
-  highPercentage: 70
-  lowPercentage: 40
-  fireHP: 100
-  timeToBurn: 10
-  onFire: 1
-  fireType: 2
-  delay: 8
-  delayFire: 0.2
-  CanBurn: 0
+  onFire: 0
+  onHeating: 0
+  damageRadius: 0
+  fireHP: 0
+  timeToPutOut: 0
+  heatDistance: 0
+  heat: 0
+  heatPerSecond: 33.3
   fireParticles: []
-  objMaterial: {fileID: 0}
-  redMaterial: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
-  startRoomFires: 0
---- !u!114 &9047195521204146668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9047195521204146669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2701286541c26c14483e25445c26c3c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canLerpMaterials: 0
-  materialRed: {fileID: 2100000, guid: 034089d314eb156489f3f2ec58c83615, type: 2}
-  timeThatIsBurning: 5
+  burnSprites: []
+  decalPrefab: {fileID: 0}
 --- !u!1001 &9047195519727478123
 PrefabInstance:
   m_ObjectHideFlags: 0
