@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FiresRoomManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class FiresRoomManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _fires = GetComponentsInChildren<FireBehavior>().ToList();
         foreach (FireBehavior f in _fires)
         {
             f.active = false;
