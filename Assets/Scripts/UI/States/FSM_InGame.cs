@@ -21,6 +21,7 @@ public class FSM_InGame : StateMachine
         AddState("Playing", new State_Playing());
         AddState("Win", new State_Win());
         AddState("PauseMenu", new State_PauseMenu());
+        AddState("StarsMenu", new State_WinningStars());
     }
 
     private void AddTransitions()
