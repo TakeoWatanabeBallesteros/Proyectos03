@@ -25,12 +25,6 @@ public class ExplosionBehavior : MonoBehaviour
     private FireBehavior fireBehavior;
 
     private PointsBehavior pointsManager;
-    
-    [ContextMenu("Do Something")]
-    void DoSomething()
-    {
-        StartCoroutine(Explode());
-    }
 
     void Start()
     {
