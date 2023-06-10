@@ -89,7 +89,7 @@ public class FireBehavior : MonoBehaviour
                 nearObjects.Add(fire);
                 break;
             case "Explosive":
-                StartCoroutine(other.GetComponent<ExplosionBehavior>().Explode());
+                if(onFire) StartCoroutine(other.GetComponent<ExplosionBehavior>().Explode());
                 break;
             case "Player":
                 playerHealth = other.GetComponent<PlayerHealth>();
