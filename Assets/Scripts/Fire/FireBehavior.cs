@@ -42,6 +42,8 @@ public class FireBehavior : MonoBehaviour
 
     private PointsBehavior pointsBehavior;
 
+    public bool active = true;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -66,10 +68,11 @@ public class FireBehavior : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(!onFire) CoolDown();
-
-        else
-        {
+        if(!active) return;
+        if(!onFire) {
+            CoolDown();
+        }
+        else {
             ApplyHeat();
             ApplyDamage();
         }
@@ -77,6 +80,7 @@ public class FireBehavior : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        if(!active) return;
         switch (other.tag)
         {
             case "Fire":
@@ -97,6 +101,7 @@ public class FireBehavior : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
+        if(!active) return;
         switch (other.tag)
         {
             case "Fire":
