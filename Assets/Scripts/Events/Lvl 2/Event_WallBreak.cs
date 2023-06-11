@@ -32,3 +32,5 @@ public class Event_WallBreak : MonoBehaviour
         }
     }
 }
+
+//Add this to call the event: ObjectModifier.Instance.BreakWall();
