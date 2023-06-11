@@ -47,6 +47,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
         health = maxHealth;
         blackboardUI.SetLifeBar(health);
         blackboardUI.YouDiedImage.color = new Color(1f, 1f, 1f, 0f);
+        blackboardUI.FireHandle.SetActive(false);
         inputPlayer.enabled = true;
         playerMovement.enabled = true;
         Dead = false;
