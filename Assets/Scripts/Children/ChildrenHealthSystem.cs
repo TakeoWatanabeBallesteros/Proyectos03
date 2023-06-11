@@ -54,5 +54,6 @@ public class ChildrenHealthSystem : MonoBehaviour, IHealth
     {
         pointsManager.RemovePointsChildBurned();
         enabled = false;
+        this.transform.parent.gameObject.SetActive(false);
     }
 }

@@ -109,7 +109,7 @@ public class FireBehavior : MonoBehaviour
                 break;
             case "Kid":
                 var children = other.GetComponentInChildren<ChildrenHealthSystem>();
-                if (onFire) children.StopBeingBurned();
+                if (onFire && children != null) children.StopBeingBurned();
                 childrens.Remove(children);
                 break;
         }
