@@ -109,12 +109,15 @@ public class FireBehavior : MonoBehaviour
                 break;
             case "Player":
                 playerHealth.isTakingDamage = false;
-                playerHealth = null;
+               // playerHealth = null;
                 break;
             case "Kid":
-                var children = other.GetComponent<ChildrenHealthSystem>();
-                children.StopBeingBurned();
-                childrens.Remove(children);
+                if (other.GetComponent<ChildrenHealthSystem>())
+                { 
+                    var children = other.GetComponent<ChildrenHealthSystem>();
+                    children.StopBeingBurned();
+                    childrens.Remove(children);
+                }
                 break;
         }
     }
@@ -215,8 +218,11 @@ public class FireBehavior : MonoBehaviour
         if(!childrens.Any()) return;
         foreach (var children in childrens)
         {
+            if (!children.GetComponent<ChildrenHealthSystem>()) return;
+                
             if (Vector3.Distance(children.transform.position, transform.position) > damageRadius) continue;
             children.TakeDamage();
+            
         }
     }
 
