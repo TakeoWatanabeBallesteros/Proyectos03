@@ -16,7 +16,7 @@ public class FinalScreenManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ShowImages(numberOfImagesToShow);
+        
     }
 
     void ShowImages(int numberOfImages)
