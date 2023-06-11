@@ -12,10 +12,11 @@ public class FinalScreenManager : MonoBehaviour
     [SerializeField] private float shrinkDuration = .25f;
 
     public int numberOfImagesToShow;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        ShowImages(numberOfImagesToShow);
     }
 
     void ShowImages(int numberOfImages)
