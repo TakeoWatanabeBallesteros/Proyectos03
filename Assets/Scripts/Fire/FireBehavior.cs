@@ -15,7 +15,7 @@ public class FireBehavior : MonoBehaviour
     [SerializeField] private bool onHeating;
 
     private List<FireBehavior> nearObjects = new List<FireBehavior>();
-    [SerializeField] private List<ChildrenHealthSystem> childrens = new List<ChildrenHealthSystem>();
+    private List<ChildrenHealthSystem> childrens = new List<ChildrenHealthSystem>();
     private PlayerHealth playerHealth;
     [SerializeField] private float damageRadius;
 
@@ -211,7 +211,8 @@ public class FireBehavior : MonoBehaviour
         if(!childrens.Any()) return;
         foreach (var children in childrens)
         {
-            if (Vector3.Distance(children.transform.position, transform.position) > damageRadius) continue;
+            if (children == null) return;
+            if (Vector3.Distance(children.transform.position, transform.position) > damageRadius && childrens.Any()) continue;
             children.TakeDamage(10);
         }
     }
