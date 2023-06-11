@@ -16,7 +16,6 @@ public class Blackboard_UIManager : DynamicBlackboard
     public GameObject LevelInfoCanvas;
     public GameObject CollectableCanvas;
     public GameObject ExitGameCanvas;
-    public GameObject StarsGameCanvas;
     #endregion
 
     #region InGame
@@ -96,8 +95,6 @@ public class Blackboard_UIManager : DynamicBlackboard
                 case GameState.SettingPause:
                     break;
                 case GameState.RestartLvl:
-                    break;
-                case GameState.StarsMenu:
                     break;
             }
         };
