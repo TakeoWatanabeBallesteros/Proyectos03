@@ -221,7 +221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 218074dde59dab9448d797f652ae5e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onFire: 1
+  onFire: 0
+  onHeating: 0
   damageRadius: 0.7
   fireHP: 100
   timeToPutOut: 0
@@ -231,7 +232,9 @@ MonoBehaviour:
   fireParticles:
   - {fileID: 5721472438524318096}
   - {fileID: 1190444161720591043}
-  burnedMaterial: {fileID: 0}
+  burnSprites: []
+  decalPrefab: {fileID: 0}
+  active: 1
 --- !u!1001 &1424062602275119550
 PrefabInstance:
   m_ObjectHideFlags: 0
