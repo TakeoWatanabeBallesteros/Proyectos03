@@ -8,6 +8,7 @@ using UnityEditor;
 public class ExplosionBehavior : MonoBehaviour
 {
     private List<FireBehavior> nearObjectsOnFire = new List<FireBehavior>();
+    private List<IHealth> healthEntities = new List<IHealth>();
     public float closeRange;
     public float midRange;
     public float highRange;
@@ -78,13 +79,40 @@ public class ExplosionBehavior : MonoBehaviour
                 nearObjectsOnFire.Remove(x);
             }
         }
+
+        foreach (var x in healthEntities)
+        {
+            float distance = Vector3.Distance(transform.position, x.position);
+
+            if (x.health <= 0) continue;
+            if (distance <= closeRange)
+            {
+                x.TakeDamage(100);
+                healthEntities.Remove(x);
+            }
+            else if (distance <= midRange)
+            {
+                x.TakeDamage(60);
+                healthEntities.Remove(x);
+            }
+            else if (distance <= highRange)
+            {
+                x.TakeDamage(30);
+                healthEntities.Remove(x);
+            }
+        }
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Fire"))
         {
             nearObjectsOnFire.Add(other.GetComponentInParent<FireBehavior>());
+        }
+
+        else if (other.TryGetComponent<IHealth>(out var health) && health.health > 0f)
+        {
+            healthEntities.Add(health);
         }
     }
     private void OnTriggerExit(Collider other)
