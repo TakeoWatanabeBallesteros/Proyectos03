@@ -3514,6 +3514,11 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1403782896}
+    - target: {fileID: 8524300891003665043, guid: c7228bc5f04f77e4e88d217efeeea672,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7228bc5f04f77e4e88d217efeeea672, type: 3}
 --- !u!1001 &206534322
@@ -6228,7 +6233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Paredes:
-  - {fileID: 0}
+  - {fileID: 1116740989}
   - {fileID: 1116740989}
   - {fileID: 1466955364}
   - {fileID: 633712525}
@@ -6311,7 +6316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Paredes:
-  - {fileID: 0}
+  - {fileID: 1659203926}
   - {fileID: 1659203926}
   - {fileID: 1896445780}
   - {fileID: 190446198}
@@ -15330,6 +15335,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teacher Table
       objectReference: {fileID: 0}
+    - target: {fileID: 5252759990116175697, guid: bfdfd7e6342b29d41b1e645f4c7e83fe,
+        type: 3}
+      propertyPath: m_Mass
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfdfd7e6342b29d41b1e645f4c7e83fe, type: 3}
 --- !u!4 &1020505361 stripped
@@ -19756,6 +19766,11 @@ PrefabInstance:
     - target: {fileID: 2493191778936274758, guid: 1076d262b9a5cf8429243ba293471d78,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490179429507760360, guid: 1076d262b9a5cf8429243ba293471d78,
+        type: 3}
+      propertyPath: onFire
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8490179429507760360, guid: 1076d262b9a5cf8429243ba293471d78,
@@ -21465,7 +21480,7 @@ PrefabInstance:
     - target: {fileID: 553687936486545728, guid: 1076d262b9a5cf8429243ba293471d78,
         type: 3}
       propertyPath: m_Radius
-      value: 50
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 662141225387826415, guid: 1076d262b9a5cf8429243ba293471d78,
         type: 3}
@@ -21480,7 +21495,7 @@ PrefabInstance:
     - target: {fileID: 662141225387826415, guid: 1076d262b9a5cf8429243ba293471d78,
         type: 3}
       propertyPath: closeRange
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2493191778936274755, guid: 1076d262b9a5cf8429243ba293471d78,
         type: 3}
@@ -21545,6 +21560,11 @@ PrefabInstance:
     - target: {fileID: 2493191778936274758, guid: 1076d262b9a5cf8429243ba293471d78,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490179429507760360, guid: 1076d262b9a5cf8429243ba293471d78,
+        type: 3}
+      propertyPath: onFire
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8490179429507760360, guid: 1076d262b9a5cf8429243ba293471d78,
