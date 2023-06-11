@@ -19,6 +19,7 @@ public class GoldWater : MonoBehaviour
     [SerializeField] ParticleSystem water;
     [SerializeField] ParticleSystem waterCone;
     [SerializeField] PlayerControls Controls;
+    public Animator PlayerAnim;
     public GameObject colider;
 
     [Space(5f)] [Header("Raycast Origins")] 
@@ -131,7 +132,10 @@ public class GoldWater : MonoBehaviour
         {
             other.GetComponentInParent<Collectable>().TakeDamage(75);
         }
-        
+        else if (other.CompareTag("Explosive"))
+        {
+            StartCoroutine(other.GetComponent<ExplosionBehavior>().Explode());
+        }
     }
     private void OnTriggerExit(Collider other)
     {
@@ -139,7 +143,6 @@ public class GoldWater : MonoBehaviour
         {
             Fires.Remove(other.GetComponentInParent<FireBehavior>());
         }
-        
     }
 
     private void Shoot(InputAction.CallbackContext context)
@@ -150,6 +153,7 @@ public class GoldWater : MonoBehaviour
         colider.SetActive(true);
         waterSound.SetActive(true);
         consuming = true;
+        PlayerAnim.SetBool("Shoot",true);
     }
     private void StopShoot(InputAction.CallbackContext context)
     {
@@ -160,6 +164,7 @@ public class GoldWater : MonoBehaviour
         pointsBehavior.ResetCombo();
         waterSound.SetActive(false);
         consuming = false;
+        PlayerAnim.SetBool("Shoot",false);
     }
 
     private void StopShoot()
@@ -171,6 +176,7 @@ public class GoldWater : MonoBehaviour
         pointsBehavior.ResetCombo();
         waterSound.SetActive(false);
         consuming = false;
+        PlayerAnim.SetBool("Shoot",false);
     }
 
     private void PuttingOutFires()

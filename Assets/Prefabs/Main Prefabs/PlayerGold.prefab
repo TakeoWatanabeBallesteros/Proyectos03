@@ -167,11 +167,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canBeDamaged: 0
-  Vida: 100
-  Fire: {fileID: 0}
   burnIndicatorTime: 0.5
   damageCoolDown: 1
-  isTakingDamage: 0
+  _maxHealth: 100
 --- !u!114 &6458635349065966334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,6 +569,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6458635349065966279}
     m_Modifications:
+    - target: {fileID: 4249705574041973016, guid: 0f9ee44c9cec51e42a4cf92d8d2bf98d,
+        type: 3}
+      propertyPath: PlayerAnim
+      value: 
+      objectReference: {fileID: 1282546077844167491}
     - target: {fileID: 4249705574041973016, guid: 0f9ee44c9cec51e42a4cf92d8d2bf98d,
         type: 3}
       propertyPath: ScaleFactor

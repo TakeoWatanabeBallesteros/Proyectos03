@@ -112,7 +112,7 @@ public class Blackboard_UIManager : DynamicBlackboard
     public void SetLifeBar(float value)
     {
         lifeBar.value = value;
-        if (value < 0.5 && !FireHandle.activeSelf)
+        if (value < 50 && !FireHandle.activeSelf)
         {
             FireHandle.SetActive(true);
         }

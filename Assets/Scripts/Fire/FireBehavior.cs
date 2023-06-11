@@ -105,7 +105,6 @@ public class FireBehavior : MonoBehaviour
                 fire.onHeating = false;
                 break;
             case "Player":
-                playerHealth.isTakingDamage = false;
                 playerHealth = null;
                 break;
             case "Kid":
@@ -207,13 +206,13 @@ public class FireBehavior : MonoBehaviour
     {
         if (playerHealth != null && Vector3.Distance(playerHealth.transform.position, transform.position) <= damageRadius)
         {
-            playerHealth.TakeDamage();
+            playerHealth.TakeDamage(10);
         }
         if(!childrens.Any()) return;
         foreach (var children in childrens)
         {
             if (Vector3.Distance(children.transform.position, transform.position) > damageRadius) continue;
-            children.TakeDamage();
+            children.TakeDamage(10);
         }
     }
 
