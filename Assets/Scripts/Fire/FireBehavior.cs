@@ -91,7 +91,7 @@ public class FireBehavior : MonoBehaviour
                 playerHealth = other.GetComponent<PlayerHealth>();
                 break;
             case "Kid":
-                childrens.Add(other.GetComponent<ChildrenHealthSystem>());
+                if(other.GetComponent<ChildrenHealthSystem>()) childrens.Add(other.GetComponent<ChildrenHealthSystem>());
                 break;
         }
     }
