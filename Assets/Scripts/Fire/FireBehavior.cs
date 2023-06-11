@@ -42,8 +42,6 @@ public class FireBehavior : MonoBehaviour
 
     private PointsBehavior pointsBehavior;
 
-    public bool active = true;
-
     // Start is called before the first frame update
     private void Start()
     {
@@ -68,11 +66,10 @@ public class FireBehavior : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(!active) return;
-        if(!onFire) {
-            CoolDown();
-        }
-        else {
+        if(!onFire) CoolDown();
+
+        else
+        {
             ApplyHeat();
             ApplyDamage();
         }
@@ -80,7 +77,6 @@ public class FireBehavior : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if(!active) return;
         switch (other.tag)
         {
             case "Fire":
@@ -89,7 +85,10 @@ public class FireBehavior : MonoBehaviour
                 nearObjects.Add(fire);
                 break;
             case "Explosive":
-                if(onFire) StartCoroutine(other.GetComponent<ExplosionBehavior>().Explode());
+                if (onFire)
+                {
+                    StartCoroutine(other.GetComponent<ExplosionBehavior>().Explode());
+                }
                 break;
             case "Player":
                 playerHealth = other.GetComponent<PlayerHealth>();
@@ -101,7 +100,6 @@ public class FireBehavior : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if(!active) return;
         switch (other.tag)
         {
             case "Fire":
