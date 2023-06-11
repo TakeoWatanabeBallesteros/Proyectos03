@@ -105,16 +105,12 @@ public class FireBehavior : MonoBehaviour
                 fire.onHeating = false;
                 break;
             case "Player":
-                playerHealth.isTakingDamage = false;
-               // playerHealth = null;
+                playerHealth = null;
                 break;
             case "Kid":
-                if (other.GetComponent<ChildrenHealthSystem>())
-                { 
-                    var children = other.GetComponent<ChildrenHealthSystem>();
-                    children.StopBeingBurned();
-                    childrens.Remove(children);
-                }
+                var children = other.GetComponent<ChildrenHealthSystem>();
+                children.StopBeingBurned();
+                childrens.Remove(children);
                 break;
         }
     }
@@ -210,16 +206,13 @@ public class FireBehavior : MonoBehaviour
     {
         if (playerHealth != null && Vector3.Distance(playerHealth.transform.position, transform.position) <= damageRadius)
         {
-            playerHealth.TakeDamage();
+            playerHealth.TakeDamage(10);
         }
         if(!childrens.Any()) return;
         foreach (var children in childrens)
         {
-            if (!children.GetComponent<ChildrenHealthSystem>()) return;
-                
             if (Vector3.Distance(children.transform.position, transform.position) > damageRadius) continue;
-            children.TakeDamage();
-            
+            children.TakeDamage(10);
         }
     }
 

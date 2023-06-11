@@ -131,7 +131,10 @@ public class GoldWater : MonoBehaviour
         {
             other.GetComponentInParent<Collectable>().TakeDamage(75);
         }
-        
+        else if (other.CompareTag("Explosive"))
+        {
+            StartCoroutine(other.GetComponent<ExplosionBehavior>().Explode());
+        }
     }
     private void OnTriggerExit(Collider other)
     {
@@ -139,7 +142,6 @@ public class GoldWater : MonoBehaviour
         {
             Fires.Remove(other.GetComponentInParent<FireBehavior>());
         }
-        
     }
 
     private void Shoot(InputAction.CallbackContext context)

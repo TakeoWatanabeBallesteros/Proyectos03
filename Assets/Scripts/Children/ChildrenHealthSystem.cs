@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class ChildrenHealthSystem : MonoBehaviour
+public class ChildrenHealthSystem : MonoBehaviour, IHealth
 {
-    [SerializeField] float childHP = 100;
     [SerializeField] private bool canBeDamaged = false;
     [SerializeField] float delay = 1;
+    public float _maxHealth;
 
     private PointsBehavior pointsManager;
     // Start is called before the first frame update
@@ -16,15 +16,25 @@ public class ChildrenHealthSystem : MonoBehaviour
     {
         canBeDamaged = true;
         pointsManager = Singleton.Instance.PointsManager;
+        health = maxHealth;
     }
 
-    public void TakeDamage()
+    public float health { get; set; }
+    public float maxHealth
+    {
+        get {return _maxHealth; }
+    }
+    public Vector3 position
+    {
+        get { return transform.position; }
+    }
+
+    public void TakeDamage(float damage)
     {
         if (!canBeDamaged) return;
-        childHP -= 10f;
         StartCoroutine(DamageCooldown());
-        childHP = Mathf.Clamp(childHP, 0, 100);
-        if (childHP == 0) Die();
+        health = Mathf.Clamp(health -= damage, 0, maxHealth);
+        if (health == 0) Die();
     }
 
     public void StopBeingBurned()
