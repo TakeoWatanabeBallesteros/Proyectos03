@@ -87,7 +87,8 @@ public enum GameState{
     Win,
     PauseMenu,
     SettingPause,
-    RestartLvl
+    RestartLvl, 
+    StarsMenu
 }
 
 public enum LoadLevelType
