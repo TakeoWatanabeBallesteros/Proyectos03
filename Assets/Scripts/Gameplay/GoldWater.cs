@@ -39,6 +39,13 @@ public class GoldWater : MonoBehaviour
     private bool consuming;
 
     private Blackboard_UIManager blackboardUIManager;
+
+    private void OnDisable()
+    {
+        Controls.Player.Shoot.started -= Shoot;
+        Controls.Player.Shoot.canceled -= StopShoot;
+    }
+
     private void Awake()
     {
         Controls = Controls ?? new PlayerControls();
