@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     public void Win()
     {
-        
+        Singleton.Instance.FinalScreenManager.CalculateStars();
     }
 
     public void StartLevelPreview()

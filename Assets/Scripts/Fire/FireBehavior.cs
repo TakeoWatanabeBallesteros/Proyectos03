@@ -85,13 +85,13 @@ public class FireBehavior : MonoBehaviour
                 nearObjects.Add(fire);
                 break;
             case "Explosive":
-                StartCoroutine(other.GetComponent<ExplosionBehavior>().Explode());
+                if (onFire) StartCoroutine(other.GetComponent<ExplosionBehavior>().Explode());
                 break;
             case "Player":
                 playerHealth = other.GetComponent<PlayerHealth>();
                 break;
             case "Kid":
-                childrens.Add(other.GetComponent<ChildrenHealthSystem>());
+                if(other.GetComponentInChildren<ChildrenHealthSystem>() && onFire) childrens.Add(other.GetComponentInChildren<ChildrenHealthSystem>());
                 break;
         }
     }
@@ -105,12 +105,11 @@ public class FireBehavior : MonoBehaviour
                 fire.onHeating = false;
                 break;
             case "Player":
-                playerHealth.isTakingDamage = false;
                 playerHealth = null;
                 break;
             case "Kid":
-                var children = other.GetComponent<ChildrenHealthSystem>();
-                children.StopBeingBurned();
+                var children = other.GetComponentInChildren<ChildrenHealthSystem>();
+                if (onFire && children != null) children.StopBeingBurned();
                 childrens.Remove(children);
                 break;
         }
@@ -207,13 +206,14 @@ public class FireBehavior : MonoBehaviour
     {
         if (playerHealth != null && Vector3.Distance(playerHealth.transform.position, transform.position) <= damageRadius)
         {
-            playerHealth.TakeDamage();
+            playerHealth.TakeDamage(10);
         }
         if(!childrens.Any()) return;
         foreach (var children in childrens)
         {
-            if (Vector3.Distance(children.transform.position, transform.position) > damageRadius) continue;
-            children.TakeDamage();
+            if (children == null) return;
+            if (Vector3.Distance(children.transform.position, transform.position) > damageRadius && childrens.Any()) continue;
+            children.TakeDamage(10);
         }
     }
 

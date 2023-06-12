@@ -8,6 +8,7 @@ using UnityEditor;
 public class ExplosionBehavior : MonoBehaviour
 {
     private List<FireBehavior> nearObjectsOnFire = new List<FireBehavior>();
+    private List<IHealth> healthEntities = new List<IHealth>();
     public float closeRange;
     public float midRange;
     public float highRange;
@@ -21,10 +22,14 @@ public class ExplosionBehavior : MonoBehaviour
     CameraController camController;
     private static readonly int ExplodeId = Animator.StringToHash("Explode");
     public GameObject explosionParticles;
+    public Event_WallBreak wallBreakEvent;
 
     private FireBehavior fireBehavior;
 
     private PointsBehavior pointsManager;
+
+    public Collider zoneExpansionCollider;
+    public Collider detectionCollider;
     
     [ContextMenu("Do Something")]
     void DoSomething()
@@ -38,14 +43,19 @@ public class ExplosionBehavior : MonoBehaviour
         explosionParticles.gameObject.SetActive(false);
         fireBehavior = GetComponent<FireBehavior>();
         pointsManager = Singleton.Instance.PointsManager;
+        detectionCollider.enabled = true;
+        zoneExpansionCollider.enabled = false;
     }
 
     public IEnumerator Explode()
     {
         gameObject.tag = "Untagged";
         animator.SetTrigger(ExplodeId);
+        detectionCollider.enabled = false;
+        zoneExpansionCollider.enabled = true;
         yield return new WaitForSeconds(2f);
         explosionParticles.gameObject.SetActive(true);
+        wallBreakEvent.BreakWall();
         pointsManager.AddPointsExplosion();
         CalculateExpansion();  
         ExplosionKnockBack();
@@ -78,13 +88,40 @@ public class ExplosionBehavior : MonoBehaviour
                 nearObjectsOnFire.Remove(x);
             }
         }
+
+        foreach (var x in healthEntities)
+        {
+            float distance = Vector3.Distance(transform.position, x.position);
+
+            if (x.health <= 0) continue;
+            if (distance <= closeRange)
+            {
+                x.TakeDamage(100);
+                healthEntities.Remove(x);
+            }
+            else if (distance <= midRange)
+            {
+                x.TakeDamage(60);
+                healthEntities.Remove(x);
+            }
+            else if (distance <= highRange)
+            {
+                x.TakeDamage(30);
+                healthEntities.Remove(x);
+            }
+        }
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Fire"))
         {
             nearObjectsOnFire.Add(other.GetComponentInParent<FireBehavior>());
+        }
+
+        else if (other.TryGetComponent<IHealth>(out var health) && health.health > 0f)
+        {
+            healthEntities.Add(health);
         }
     }
     private void OnTriggerExit(Collider other)

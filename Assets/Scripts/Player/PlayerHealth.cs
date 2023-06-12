@@ -1,38 +1,38 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, IHealth
 {
     [SerializeField] private bool canBeDamaged;
     Vector3 initialPos;
-    [SerializeField] private float Vida;
     InputPlayerController inputPlayer;
     MovementPlayerController playerMovement;
-    PickupKid Kid;
-    public GameObject Fire;
     bool Dead;
     [SerializeField] private float burnIndicatorTime;
-
-    GameManager GM;
     private Blackboard_UIManager blackboardUI; 
     public float damageCoolDown;
-    public bool isTakingDamage = false;
 
     private PointsBehavior pointsManager;
+
+    public float _maxHealth;
+    
+    public float health { get; set; }
+    public float maxHealth => _maxHealth;
+
+    public Vector3 position => transform.position;
 
     // Start is called before the first frame update
     void Start()
     {
-        Kid = GetComponent<PickupKid>();
-        GM = FindObjectOfType<GameManager>();
         inputPlayer = GetComponent<InputPlayerController>();
         playerMovement = GetComponent<MovementPlayerController>();
         initialPos = transform.position;
         Dead = false;
-        Vida = 1.00f;
+        health = maxHealth;
         blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
         pointsManager = Singleton.Instance.PointsManager;
         canBeDamaged = true;
@@ -44,26 +44,29 @@ public class PlayerHealth : MonoBehaviour
         transform.position = initialPos;
 
         yield return new WaitForSeconds(.5f);
-        Vida = 1;
-        blackboardUI.SetLifeBar(Vida);
+        health = maxHealth;
+        blackboardUI.SetLifeBar(health);
         blackboardUI.YouDiedImage.color = new Color(1f, 1f, 1f, 0f);
+        blackboardUI.FireHandle.SetActive(false);
         inputPlayer.enabled = true;
         playerMovement.enabled = true;
         Dead = false;
     }
-    public void TakeDamage()
+
+
+    public void TakeDamage(float damage)
     {
         if (Dead) return;
         if(canBeDamaged)
         {
-            Vida = Mathf.Clamp(Vida -= 0.10f, 0, 1);
+            health = Mathf.Clamp(health -= damage, 0, maxHealth);
             StartCoroutine(DamageCooldown());
-            blackboardUI.SetLifeBar(Vida);
+            blackboardUI.SetLifeBar(health);
             StartCoroutine(ShowBurnIndicator());
             pointsManager.RemovePointsGettingBurned();
         }
             
-        if (Vida == 0) Die();
+        if (health == 0) Die();
     }
 
     private IEnumerator ShowBurnIndicator()

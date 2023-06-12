@@ -8624,7 +8624,7 @@ ParticleSystem:
     serializedVersion: 4
     type: 1
     collisionMode: 0
-    colliderForce: 10
+    colliderForce: 100
     multiplyColliderForceByParticleSize: 0
     multiplyColliderForceByParticleSpeed: 0
     multiplyColliderForceByCollisionAngle: 1
@@ -9842,12 +9842,13 @@ MonoBehaviour:
   water: {fileID: 6106940246665216524}
   waterCone: {fileID: 3393734584572297904}
   colider: {fileID: 5793723103433161195}
-  R0: {fileID: 7635037641067847125}
-  R1: {fileID: 6759347820110967571}
-  R2: {fileID: 1623028294333242870}
-  R3: {fileID: 5487521779646841984}
-  R4: {fileID: 8782221601364834212}
+  raysOrigins: []
   waterSound: {fileID: 6278548375006816406}
+  Fires: []
+  currentWater: 0
+  maxWater: 100
+  waterConsumption: 10
+  waterPerSecond: 10
 --- !u!54 &1012759667
 Rigidbody:
   m_ObjectHideFlags: 0

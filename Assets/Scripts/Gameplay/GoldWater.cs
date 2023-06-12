@@ -19,6 +19,7 @@ public class GoldWater : MonoBehaviour
     [SerializeField] ParticleSystem water;
     [SerializeField] ParticleSystem waterCone;
     [SerializeField] PlayerControls Controls;
+    public Animator PlayerAnim;
     public GameObject colider;
 
     [Space(5f)] [Header("Raycast Origins")] 
@@ -30,13 +31,21 @@ public class GoldWater : MonoBehaviour
     
     [SerializeField] List<FireBehavior> Fires;
     private PointsBehavior pointsBehavior;
-    
+
+    [SerializeField]float currentWater;
+    public float maxWater;
+    public float waterConsumption;
+    public float waterPerSecond;
+    private bool consuming;
+
+    private Blackboard_UIManager blackboardUIManager;
     private void Awake()
     {
         Controls = Controls ?? new PlayerControls();
         Controls.Player.Shoot.started += Shoot;
         Controls.Player.Shoot.canceled += StopShoot;
         Controls.Enable();
+        blackboardUIManager = Singleton.Instance.UIManager.blackboard_UIManager;
     }
     // Start is called before the first frame update
     void Start()
@@ -45,6 +54,7 @@ public class GoldWater : MonoBehaviour
         colider.SetActive(false);
         water.Stop();
         pointsBehavior = Singleton.Instance.PointsManager;
+        currentWater = maxWater;
     }
 
     // Update is called once per frame
@@ -54,6 +64,30 @@ public class GoldWater : MonoBehaviour
         SetParticleLength();
         SetColliderScale();
         if(Fires.Any()) PuttingOutFires();
+        if (currentWater == 0)
+        {
+            StopShoot();
+        }
+        ConsumeWater();
+    }
+
+    public float GetCurrentWater()
+    {
+        return currentWater;
+    }
+
+    private void ConsumeWater()
+    {
+        if (!consuming) return;
+        if (currentWater == 0) return;
+        currentWater = Mathf.Clamp( currentWater -= waterConsumption * Time.deltaTime, 0, maxWater);
+        blackboardUIManager.SetWaterBar(currentWater);
+    }
+
+    public void Recharge(float waterAmount)
+    {
+        currentWater = Mathf.Clamp(currentWater += waterAmount, 0, maxWater);
+        blackboardUIManager.SetWaterBar(currentWater);
     }
 
     private void SetParticleLength()
@@ -98,6 +132,10 @@ public class GoldWater : MonoBehaviour
         {
             other.GetComponentInParent<Collectable>().TakeDamage(75);
         }
+        else if (other.CompareTag("Explosive"))
+        {
+            StartCoroutine(other.GetComponent<ExplosionBehavior>().Explode());
+        }
     }
     private void OnTriggerExit(Collider other)
     {
@@ -109,10 +147,13 @@ public class GoldWater : MonoBehaviour
 
     private void Shoot(InputAction.CallbackContext context)
     {
+        if (currentWater == 0)return;
         water.Play();
         waterCone.gameObject.SetActive(true);
         colider.SetActive(true);
         waterSound.SetActive(true);
+        consuming = true;
+        PlayerAnim.SetBool("Shoot",true);
     }
     private void StopShoot(InputAction.CallbackContext context)
     {
@@ -122,6 +163,20 @@ public class GoldWater : MonoBehaviour
         Fires.Clear();
         pointsBehavior.ResetCombo();
         waterSound.SetActive(false);
+        consuming = false;
+        PlayerAnim.SetBool("Shoot",false);
+    }
+
+    private void StopShoot()
+    {
+        water.Stop();
+        waterCone.gameObject.SetActive(false);
+        colider.SetActive(false);
+        Fires.Clear();
+        pointsBehavior.ResetCombo();
+        waterSound.SetActive(false);
+        consuming = false;
+        PlayerAnim.SetBool("Shoot",false);
     }
 
     private void PuttingOutFires()
