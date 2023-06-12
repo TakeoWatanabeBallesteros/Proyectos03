@@ -14,6 +14,9 @@ public class FinalScreenManager : MonoBehaviour
     public int numberOfImagesToShow;
 
     private PointsBehavior pointsManager;
+    public int maxPointsShow1;
+    public int maxPointsShow2;
+    public int maxPointsShow3;
     
     // Start is called before the first frame update
     void Start()
@@ -64,9 +67,9 @@ public class FinalScreenManager : MonoBehaviour
 
     public void CalculateStars()
     {
-        if (pointsManager.Points < 100) ShowImages(0);
-        else if(pointsManager.Points > 1000) ShowImages(1);
-        else if(pointsManager.Points > 2000) ShowImages(2);
-        else ShowImages(3);
+        if (pointsManager.Points < maxPointsShow1) ShowImages(1);
+        else if(pointsManager.Points > maxPointsShow2) ShowImages(2);
+        else if(pointsManager.Points > maxPointsShow3) ShowImages(3);
+        else ShowImages(0);
     }
 }
