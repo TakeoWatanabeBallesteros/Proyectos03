@@ -7,14 +7,16 @@ using UnityEngine.SceneManagement;
 public class Singleton : MonoBehaviour
 {
     public static Singleton Instance { get; private set; }
-    public GameObject Player { get; private set; }
+    public GameObject Player { get => _player; set => _player = null; }
     public GameManager GameManager { get => _gameManager; set => _gameManager = null; }
     public CameraPreviewManager CameraPreviewManager { get => _cameraPreviewManager; set => _cameraPreviewManager = null; }
     public FSM_UIManager UIManager { get => _uiManager; set => _uiManager = null; }
     public PointsBehavior PointsManager { get => _pointsManager; set => _pointsManager = null; }
     public ItemManager ItemsManager { get => _itemsManager; set => _itemsManager = null; }
 
-#region SerializeFields
+    #region SerializeFields
+
+    [SerializeField] private GameObject _player;
     [SerializeField] private GameManager _gameManager;
     [SerializeField] private CameraPreviewManager _cameraPreviewManager;
     [SerializeField] private FSM_UIManager _uiManager;
@@ -42,11 +44,13 @@ public class Singleton : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
         Instance = this;
-        Player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _itemsManager = GameObject.FindGameObjectWithTag("ItemsManager").GetComponent<ItemManager>();
     }
 
     private void LoadPlayer(Scene scene, LoadSceneMode mode)
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _itemsManager = GameObject.FindGameObjectWithTag("ItemsManager").GetComponent<ItemManager>();
     }
 }
