@@ -2627,7 +2627,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1326149009, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1, type: 3}
       propertyPath: onFire
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1326149009, guid: 56669fd70bcc8434ab5ff2c9f8d9f7f1, type: 3}
       propertyPath: timeToPutOut
@@ -4577,6 +4577,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 553687936486545728, guid: 1076d262b9a5cf8429243ba293471d78,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 662141225387826415, guid: 1076d262b9a5cf8429243ba293471d78,
+        type: 3}
+      propertyPath: detectionCollider
+      value: 
+      objectReference: {fileID: 1429400561}
+    - target: {fileID: 662141225387826415, guid: 1076d262b9a5cf8429243ba293471d78,
+        type: 3}
+      propertyPath: zoneExpansionCollider
+      value: 
+      objectReference: {fileID: 1429400563}
     - target: {fileID: 2493191778936274755, guid: 1076d262b9a5cf8429243ba293471d78,
         type: 3}
       propertyPath: m_RootOrder
@@ -4644,6 +4659,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8490179429507760360, guid: 1076d262b9a5cf8429243ba293471d78,
         type: 3}
+      propertyPath: onFire
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490179429507760360, guid: 1076d262b9a5cf8429243ba293471d78,
+        type: 3}
       propertyPath: decalPrefab
       value: 
       objectReference: {fileID: 6232130073354221700, guid: e3b14aa7a8d01e843afe149e49db4685,
@@ -4680,6 +4700,32 @@ PrefabInstance:
       objectReference: {fileID: 2800000, guid: 47a0c2050f43c72498e0733451895b34, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1076d262b9a5cf8429243ba293471d78, type: 3}
+--- !u!1 &1429400560 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2493191778936274758, guid: 1076d262b9a5cf8429243ba293471d78,
+    type: 3}
+  m_PrefabInstance: {fileID: 1429400559}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &1429400561
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429400560}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.64
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.77, z: 0}
+--- !u!135 &1429400563 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 553687936486545728, guid: 1076d262b9a5cf8429243ba293471d78,
+    type: 3}
+  m_PrefabInstance: {fileID: 1429400559}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1452766515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4687,6 +4733,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1956757080, guid: d19414d2909beec48a84c91a21356c23, type: 3}
+      propertyPath: onFire
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1956757080, guid: d19414d2909beec48a84c91a21356c23, type: 3}
       propertyPath: decalPrefab
       value: 
@@ -5694,6 +5744,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 795625847, guid: 4757b7825bed2104cbfadac074326d61, type: 3}
+      propertyPath: onFire
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4981490252944408913, guid: 4757b7825bed2104cbfadac074326d61,
         type: 3}
       propertyPath: m_RootOrder

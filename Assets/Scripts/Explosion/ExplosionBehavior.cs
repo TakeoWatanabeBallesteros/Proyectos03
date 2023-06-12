@@ -27,6 +27,9 @@ public class ExplosionBehavior : MonoBehaviour
     private FireBehavior fireBehavior;
 
     private PointsBehavior pointsManager;
+
+    public Collider zoneExpansionCollider;
+    public Collider detectionCollider;
     
     [ContextMenu("Do Something")]
     void DoSomething()
@@ -40,12 +43,16 @@ public class ExplosionBehavior : MonoBehaviour
         explosionParticles.gameObject.SetActive(false);
         fireBehavior = GetComponent<FireBehavior>();
         pointsManager = Singleton.Instance.PointsManager;
+        detectionCollider.enabled = true;
+        zoneExpansionCollider.enabled = false;
     }
 
     public IEnumerator Explode()
     {
         gameObject.tag = "Untagged";
         animator.SetTrigger(ExplodeId);
+        detectionCollider.enabled = false;
+        zoneExpansionCollider.enabled = true;
         yield return new WaitForSeconds(2f);
         explosionParticles.gameObject.SetActive(true);
         wallBreakEvent.BreakWall();

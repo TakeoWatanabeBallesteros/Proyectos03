@@ -41,21 +41,22 @@ public class PickupKid : MonoBehaviour
     {
         if (CanPickup && playerInput.interact)
         {
+            if (CarringKid) return;
             blackboardUI.PickUpText.SetActive(false);
             Destroy(TargetKid);
             prefabPoseKid.SetActive(true);     
             CarringKid = true;
             CanPickup = false;
             movementPlayerController.speed *= 1.2f;
-            CharacterAnim.PickChild();
             blackboardUI.ChildFace();
+            CharacterAnim.PickChild();
 
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Kid")) return;
+        if (!other.CompareTag("Kid") || CarringKid) return;
         blackboardUI.PickUpText.SetActive(false);
         CanPickup = true;
         PickupText.SetActive(true);
