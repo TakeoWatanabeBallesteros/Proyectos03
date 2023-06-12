@@ -11018,6 +11018,60 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 98715507, guid: b77edb7ab9214384b8b5b80accfc4494, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 253315168, guid: b77edb7ab9214384b8b5b80accfc4494, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 253315168, guid: b77edb7ab9214384b8b5b80accfc4494, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 898118973, guid: b77edb7ab9214384b8b5b80accfc4494, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 898118973, guid: b77edb7ab9214384b8b5b80accfc4494, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1151001935, guid: b77edb7ab9214384b8b5b80accfc4494, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1151001935, guid: b77edb7ab9214384b8b5b80accfc4494, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277399096, guid: b77edb7ab9214384b8b5b80accfc4494, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277399096, guid: b77edb7ab9214384b8b5b80accfc4494, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1510813278, guid: b77edb7ab9214384b8b5b80accfc4494, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1510813278, guid: b77edb7ab9214384b8b5b80accfc4494, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 331361689742295434, guid: b77edb7ab9214384b8b5b80accfc4494,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1364416853875244000, guid: b77edb7ab9214384b8b5b80accfc4494,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2140780110982003724, guid: b77edb7ab9214384b8b5b80accfc4494,
         type: 3}
       propertyPath: m_RootOrder
@@ -11083,7 +11137,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1444682212, guid: b77edb7ab9214384b8b5b80accfc4494, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b77edb7ab9214384b8b5b80accfc4494, type: 3}
 --- !u!1 &1454669966
 GameObject:
@@ -12346,6 +12401,28 @@ Transform:
   m_Father: {fileID: 282834588}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1638534613 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5980592120118240245, guid: b77edb7ab9214384b8b5b80accfc4494,
+    type: 3}
+  m_PrefabInstance: {fileID: 1444682209}
+  m_PrefabAsset: {fileID: 0}
+--- !u!111 &1638534615
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638534613}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 7921d008338eb9548a1d92bc64c110df, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 7921d008338eb9548a1d92bc64c110df, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1639271836
 GameObject:
   m_ObjectHideFlags: 0
