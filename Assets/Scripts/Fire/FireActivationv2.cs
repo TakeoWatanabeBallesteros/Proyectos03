@@ -11,23 +11,40 @@ public class FireActivationv2 : MonoBehaviour
     public List<ExplosionBehavior> _explosions = new List<ExplosionBehavior>();
     bool playerIn;
 
-    private void Awake()
-    {
-        foreach (FireBehavior f in _fires)
-        {
-            f.enabled = false;
-        }
-        foreach (ExplosionBehavior o in _explosions)
-        {
-            o.enabled = false;
-        }
-    }
     // Start is called before the first frame update
     void Start()
     {
         m_Started = true;
         playerIn = false;
         //MyCollisions();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {       
+
+        if (playerIn == true)
+        {
+            foreach (FireBehavior f in _fires)
+            {
+                f.enabled = true;
+            }
+            foreach (ExplosionBehavior o in _explosions)
+            {
+                o.enabled = true;
+            }
+        }
+        else
+        {
+            foreach (FireBehavior f in _fires)
+            {
+                f.enabled = false;
+            }
+            foreach (ExplosionBehavior o in _explosions)
+            {
+                o.enabled = false;
+            }
+        }
     }
 
     private void OnDrawGizmos()
@@ -43,14 +60,7 @@ public class FireActivationv2 : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            foreach (FireBehavior f in _fires)
-            {
-                f.enabled = true;
-            }
-            foreach (ExplosionBehavior o in _explosions)
-            {
-                o.enabled = true;
-            }
+            playerIn = true;
         }
     }
 }
