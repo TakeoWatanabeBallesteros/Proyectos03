@@ -12,11 +12,13 @@ public class FinalScreenManager : MonoBehaviour
     [SerializeField] private float shrinkDuration = .25f;
 
     public int numberOfImagesToShow;
+
+    private PointsBehavior pointsManager;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        pointsManager = Singleton.Instance.PointsManager;
     }
 
     void ShowImages(int numberOfImages)
@@ -58,5 +60,13 @@ public class FinalScreenManager : MonoBehaviour
         }
 
         img.winImage.transform.localScale = finalScale;
+    }
+
+    public void CalculateStars()
+    {
+        if (pointsManager.Points < 100) ShowImages(0);
+        else if(pointsManager.Points > 1000) ShowImages(1);
+        else if(pointsManager.Points > 2000) ShowImages(2);
+        else ShowImages(3);
     }
 }
