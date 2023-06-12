@@ -13,6 +13,7 @@ public class Singleton : MonoBehaviour
     public FSM_UIManager UIManager { get => _uiManager; set => _uiManager = null; }
     public PointsBehavior PointsManager { get => _pointsManager; set => _pointsManager = null; }
     public ItemManager ItemsManager { get => _itemsManager; set => _itemsManager = null; }
+    public FinalScreenManager FinalScreenManager { get => _finalScreenManager; set => _finalScreenManager = null; }
 
     #region SerializeFields
 
@@ -22,16 +23,17 @@ public class Singleton : MonoBehaviour
     [SerializeField] private FSM_UIManager _uiManager;
     [SerializeField] private PointsBehavior _pointsManager;
     [SerializeField] private ItemManager _itemsManager;
+    [SerializeField] private FinalScreenManager _finalScreenManager;
     #endregion
 
     private void OnEnable()
     {
-        SceneManager.sceneLoaded += LoadPlayer;
+        SceneManager.sceneLoaded += LoadSingletones;
     }
 
     private void OnDisable()
     {
-        SceneManager.sceneLoaded -= LoadPlayer;
+        SceneManager.sceneLoaded -= LoadSingletones;
     }
 
     // public AudioManager AudioManager { get; private set; }
@@ -48,7 +50,7 @@ public class Singleton : MonoBehaviour
         _itemsManager = GameObject.FindGameObjectWithTag("ItemsManager").GetComponent<ItemManager>();
     }
 
-    private void LoadPlayer(Scene scene, LoadSceneMode mode)
+    private void LoadSingletones(Scene scene, LoadSceneMode mode)
     {
         _player = GameObject.FindGameObjectWithTag("Player");
         _itemsManager = GameObject.FindGameObjectWithTag("ItemsManager").GetComponent<ItemManager>();
