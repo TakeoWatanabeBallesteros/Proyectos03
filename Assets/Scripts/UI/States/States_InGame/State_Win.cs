@@ -26,7 +26,6 @@ public class State_Win : StateBase
     public override void OnExit()
     {
         singleton.UIManager.blackboard_UIManager.WinCanvas.SetActive(false);
-        Debug.Log("Win state Exit");
         base.OnExit();
     }
 }

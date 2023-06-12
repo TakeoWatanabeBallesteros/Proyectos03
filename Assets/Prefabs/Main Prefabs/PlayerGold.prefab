@@ -4982,6 +4982,9 @@ MonoBehaviour:
   canBeDamaged: 0
   burnIndicatorTime: 0.5
   damageCoolDown: 1
+  PlayerRender: {fileID: 5505501718713293699}
+  DustPile: {fileID: 7864795408357074185, guid: 78355594cb0dcf54e8a420ad49f3a690,
+    type: 3}
   _maxHealth: 100
 --- !u!114 &6458635349065966334
 MonoBehaviour:
@@ -5591,6 +5594,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BomberoTPoseV2
+      objectReference: {fileID: 0}
+    - target: {fileID: 623268896905245530, guid: a7186d33bb27f6e4ba3b40a905c2b72d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7186d33bb27f6e4ba3b40a905c2b72d, type: 3}
