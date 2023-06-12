@@ -10,6 +10,7 @@ public class FireActivationv2 : MonoBehaviour
     public List<FireBehavior> _fires = new List<FireBehavior>();
     public List<ExplosionBehavior> _explosions = new List<ExplosionBehavior>();
     bool playerIn;
+
     // Start is called before the first frame update
     void Start()
     {

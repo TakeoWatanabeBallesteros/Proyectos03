@@ -17,6 +17,7 @@ public class ItemManager : MonoBehaviour
     private MovementPlayerController move;
     private FSM_UIManager uiManager;
     private PointsBehavior pointsManager;
+    private FinalScreenManager finalScreenManager;
     
     [ContextMenu("Do Something")]
     void DoSomething()
@@ -54,5 +55,4 @@ public class ItemManager : MonoBehaviour
         UI_Blackboard.SetCollectables(Collected, TotalCollectables);
         pointsManager.AddPointsCollectable();
     }
-
 }

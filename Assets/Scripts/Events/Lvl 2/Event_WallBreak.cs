@@ -5,6 +5,8 @@ public class Event_WallBreak : MonoBehaviour
     public GameObject prefabToActivate;
     public GameObject prefabToDeactivate;
 
+    public GameObject eplosionPrefab;
+
     public void BreakWall()
     {
         if (prefabToActivate != null && prefabToDeactivate != null)
