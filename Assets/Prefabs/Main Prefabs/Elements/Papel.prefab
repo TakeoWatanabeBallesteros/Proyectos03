@@ -67,7 +67,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onFire: 0
   onHeating: 0
-  damageRadius: 0.7
+  damageRadius: 1.5
   fireHP: 100
   timeToPutOut: 100
   heatDistance: 3
@@ -5056,6 +5056,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 235884603822162813, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
+      propertyPath: lengthInSec
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 235884603822162813, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
       propertyPath: NoiseModule.enabled
       value: 0
       objectReference: {fileID: 0}
@@ -5276,6 +5281,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6675893457974259758, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
+      propertyPath: lengthInSec
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675893457974259758, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
       propertyPath: NoiseModule.enabled
       value: 0
       objectReference: {fileID: 0}
@@ -5403,6 +5413,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 1.178938
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -0.000000013492901
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.000000015207915
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027970886485952511, guid: b5b85f8f958fc144e8d556a417a36bbb,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.2205306
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 661020124134275789, guid: b5b85f8f958fc144e8d556a417a36bbb, type: 3}
