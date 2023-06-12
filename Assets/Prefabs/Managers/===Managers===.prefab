@@ -232,6 +232,7 @@ MonoBehaviour:
   _uiManager: {fileID: 535826417066168047}
   _pointsManager: {fileID: 5076495488919057823}
   _itemsManager: {fileID: 0}
+  _finalScreenManager: {fileID: 0}
 --- !u!1001 &98769389
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -302,6 +303,10 @@ PrefabInstance:
     - target: {fileID: 89758, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 89758, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 44016989, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_LocalScale.y
@@ -399,7 +404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 184177037, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_Interactable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 184177037, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
@@ -456,6 +461,10 @@ PrefabInstance:
     - target: {fileID: 184177037, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 184177037, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 213541622, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_LocalScale.y
@@ -675,7 +684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 812330192, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_Interactable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 812330192, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
@@ -732,6 +741,10 @@ PrefabInstance:
     - target: {fileID: 812330192, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 812330192, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 815353679, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_margin.x
@@ -797,7 +810,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1098513570, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_Interactable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1098513570, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
@@ -854,6 +867,10 @@ PrefabInstance:
     - target: {fileID: 1098513570, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098513570, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1182100462, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_LocalScale.y
@@ -903,7 +920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1237354965, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_Interactable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1237354965, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
@@ -960,6 +977,10 @@ PrefabInstance:
     - target: {fileID: 1237354965, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1237354965, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1258843593, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_LocalScale.x
@@ -1075,7 +1096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1609447347, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_Interactable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1609447347, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
@@ -1132,6 +1153,10 @@ PrefabInstance:
     - target: {fileID: 1609447347, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609447347, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1649151419, guid: b9351c41c82d7654cb8b5760deb84c34, type: 3}
       propertyPath: m_LocalScale.x
@@ -2302,27 +2327,22 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 98769389}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1444682212
-Animator:
-  serializedVersion: 5
+--- !u!111 &1638534615
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5980592120118240245}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3346520a4aa0a844f8641d2a138c28a3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 7921d008338eb9548a1d92bc64c110df, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 7921d008338eb9548a1d92bc64c110df, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &1747923996
 PrefabInstance:
   m_ObjectHideFlags: 0
