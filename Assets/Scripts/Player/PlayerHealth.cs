@@ -15,6 +15,8 @@ public class PlayerHealth : MonoBehaviour, IHealth
     [SerializeField] private float burnIndicatorTime;
     private Blackboard_UIManager blackboardUI; 
     public float damageCoolDown;
+    public GameObject PlayerRender;
+    public GameObject DustPile;
 
     private PointsBehavior pointsManager;
 
@@ -42,11 +44,12 @@ public class PlayerHealth : MonoBehaviour, IHealth
     {
         yield return new WaitForSeconds(4.5f);
         transform.position = initialPos;
-
+        //reactivar modelo
+        PlayerRender.SetActive(true);
         yield return new WaitForSeconds(.5f);
         health = maxHealth;
         blackboardUI.SetLifeBar(health);
-        blackboardUI.YouDiedImage.color = new Color(1f, 1f, 1f, 0f);
+        StartCoroutine(blackboardUI.FadeOut());
         blackboardUI.FireHandle.SetActive(false);
         inputPlayer.enabled = true;
         playerMovement.enabled = true;
@@ -91,6 +94,12 @@ public class PlayerHealth : MonoBehaviour, IHealth
         playerMovement.Stop();
         StartCoroutine(blackboardUI.FadeIN());
         StartCoroutine(Respawn());
+        //activar polvo
+        GameObject polvo = Instantiate(DustPile);
+        polvo.transform.position = transform.position;
+        Destroy(polvo,4f);
+        //desactivar modelo
+        PlayerRender.SetActive(false);
     }
     
 }

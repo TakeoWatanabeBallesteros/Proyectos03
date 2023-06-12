@@ -64,7 +64,7 @@ public class FireBehavior : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    public void FireUpdate()
     {
         if(!onFire) CoolDown();
 
