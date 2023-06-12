@@ -39,9 +39,9 @@ public class RandomCloneWindow : EditorWindow
                 GameObject clone = Instantiate(randomObject, centerObject.transform.position, randomObject.transform.rotation, centerObject.transform);
 
                 // For random position around the original object.
-                float randomX = Random.Range(-3.0f, 3.0f);
-                float randomY = Random.Range(-3.0f, 3.0f);
-                float randomZ = Random.Range(-3.0f, 3.0f);
+                float randomX = Random.Range(-10.0f, 10.0f); 
+                float randomY = Random.Range(-10.0f, 10.0f); 
+                float randomZ = Random.Range(-10.0f, 10.0f);
                 clone.transform.localPosition = clone.transform.localPosition + new Vector3(randomX, randomY, randomZ);
 
                 // For random rotation.
