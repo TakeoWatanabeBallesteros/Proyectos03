@@ -22,6 +22,7 @@ public class ExplosionBehavior : MonoBehaviour
     CameraController camController;
     private static readonly int ExplodeId = Animator.StringToHash("Explode");
     public GameObject explosionParticles;
+    public Event_WallBreak wallBreakEvent;
 
     private FireBehavior fireBehavior;
 
@@ -54,6 +55,7 @@ public class ExplosionBehavior : MonoBehaviour
         zoneExpansionCollider.enabled = true;
         yield return new WaitForSeconds(2f);
         explosionParticles.gameObject.SetActive(true);
+        wallBreakEvent.BreakWall();
         pointsManager.AddPointsExplosion();
         CalculateExpansion();  
         ExplosionKnockBack();
