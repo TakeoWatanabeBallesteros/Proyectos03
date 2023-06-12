@@ -26,6 +26,7 @@ public class MovementPlayerController : MonoBehaviour
     Vector3 forward;
     Vector3 right;
 
+    
 
     // Start is called before the first frame update
     void Start()
@@ -80,7 +81,6 @@ public class MovementPlayerController : MonoBehaviour
 
     private void MovePlayer(Vector3 direction)
     {
-
         currentSpeed = Mathf.Lerp(currentSpeed, speed, Time.deltaTime * 10);
     }
 
