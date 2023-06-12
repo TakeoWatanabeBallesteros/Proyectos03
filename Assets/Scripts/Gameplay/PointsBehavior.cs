@@ -6,7 +6,7 @@ using UnityEngine;
 public class PointsBehavior : MonoBehaviour
 {
     
-    public static int Points;
+    public int Points;
 
     [Header("Points by action")]
     public int SafeZonePoints;
