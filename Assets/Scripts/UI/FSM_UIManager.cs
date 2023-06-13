@@ -85,6 +85,7 @@ public class FSM_UIManager : MonoBehaviour
 
     public void GoMainMenu()
     {
+        Debug.Log("Menu GO");
         uiManager_FSM.Trigger("MainMenu_FSM-InGame_FSM");
         SceneManager.LoadSceneAsync(0);
     }
