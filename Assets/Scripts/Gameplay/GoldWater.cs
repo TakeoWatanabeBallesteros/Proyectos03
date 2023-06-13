@@ -17,7 +17,8 @@ public class GoldWater : MonoBehaviour
     [Header("Componentes")]
     [SerializeField] Transform cilinderOrigin;
     [SerializeField] ParticleSystem water;
-    [SerializeField] ParticleSystem waterCone;
+    [SerializeField] ParticleSystem waterDetails;
+    //[SerializeField] ParticleSystem waterCone;
     [SerializeField] PlayerControls Controls;
     public Animator PlayerAnim;
     public GameObject colider;
@@ -101,6 +102,9 @@ public class GoldWater : MonoBehaviour
     {
         var WeakMain = water.main;
         WeakMain.startLifetime = distance / WeakMain.startSpeed.constant;
+        var WeakDetails = waterDetails.main;
+        WeakDetails.startLifetime = distance / WeakDetails.startSpeed.constant;
+
     }
     private void SetColliderScale()
     {
@@ -156,7 +160,8 @@ public class GoldWater : MonoBehaviour
     {
         if (currentWater == 0)return;
         water.Play();
-        waterCone.gameObject.SetActive(true);
+        waterDetails.Play();
+        //waterCone.gameObject.SetActive(true);
         colider.SetActive(true);
         waterSound.SetActive(true);
         consuming = true;
@@ -165,7 +170,8 @@ public class GoldWater : MonoBehaviour
     private void StopShoot(InputAction.CallbackContext context)
     {
         water.Stop();
-        waterCone.gameObject.SetActive(false);
+        waterDetails.Stop();
+        //waterCone.gameObject.SetActive(false);
         colider.SetActive(false);
         Fires.Clear();
         pointsBehavior.ResetCombo();
@@ -177,7 +183,8 @@ public class GoldWater : MonoBehaviour
     private void StopShoot()
     {
         water.Stop();
-        waterCone.gameObject.SetActive(false);
+        waterDetails.Stop();
+        //waterCone.gameObject.SetActive(false);
         colider.SetActive(false);
         Fires.Clear();
         pointsBehavior.ResetCombo();

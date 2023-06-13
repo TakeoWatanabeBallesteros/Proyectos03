@@ -26,7 +26,7 @@ public class SafeZone : MonoBehaviour
             Destroy(other.transform.parent.gameObject);
             if(counter < 5) childsGameObjects[counter++].SetActive(true);
             itemManager.AddChild();
-            pointsManager.AddPointsSafeZone();
+            //pointsManager.AddPointsSafeZone();
         }
     }
 }
