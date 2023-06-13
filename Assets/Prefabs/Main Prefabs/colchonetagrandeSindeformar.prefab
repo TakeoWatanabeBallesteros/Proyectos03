@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e55fdc78088f9f46a9b67c11146e78a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mykid: {fileID: 5346480574270109530}
+  childsGameObjects: []
 --- !u!1001 &7863190008887245513
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,6 +119,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8672848130712305301}
     m_Modifications:
+    - target: {fileID: 2662982135556617619, guid: ff7a7a40a6fe5a94ba32da1b4d10503c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2822959165767060883, guid: ff7a7a40a6fe5a94ba32da1b4d10503c,
         type: 3}
       propertyPath: m_Name
@@ -189,17 +194,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8828979550507961683, guid: ff7a7a40a6fe5a94ba32da1b4d10503c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff7a7a40a6fe5a94ba32da1b4d10503c, type: 3}
 --- !u!4 &4717893816446954976 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3199520335217743657, guid: ff7a7a40a6fe5a94ba32da1b4d10503c,
-    type: 3}
-  m_PrefabInstance: {fileID: 7863190008887245513}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5346480574270109530 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2822959165767060883, guid: ff7a7a40a6fe5a94ba32da1b4d10503c,
     type: 3}
   m_PrefabInstance: {fileID: 7863190008887245513}
   m_PrefabAsset: {fileID: 0}
