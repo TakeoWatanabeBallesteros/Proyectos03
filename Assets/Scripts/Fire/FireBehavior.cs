@@ -20,7 +20,7 @@ public class FireBehavior : MonoBehaviour
     [SerializeField] private float damageRadius;
 
     [SerializeField] float fireHP;
-    public float timeToPutOut;
+    public float waterDamagePerSecond;
 
     [SerializeField] private float heatDistance;
     [SerializeField]
@@ -42,6 +42,8 @@ public class FireBehavior : MonoBehaviour
 
     private PointsBehavior pointsBehavior;
 
+    private LightFlickering lightFlickering;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -61,6 +63,9 @@ public class FireBehavior : MonoBehaviour
         }
 
         pointsBehavior = Singleton.Instance.PointsManager;
+
+        lightFlickering = GetComponentInChildren<LightFlickering>();
+        
     }
 
     // Update is called once per frame
@@ -117,13 +122,16 @@ public class FireBehavior : MonoBehaviour
 
     public void PuttingOut()
     {
-        fireHP = Mathf.Clamp(fireHP -= timeToPutOut * Time.deltaTime, 0, 100);
+        fireHP = Mathf.Clamp(fireHP -= waterDamagePerSecond * Time.deltaTime, 0, 100);
         
         foreach (ParticleSystem fireParticle in fireParticles)
         {
             var scale = (fireHP / 100) * originalFireSize;
             fireParticle.transform.localScale = new Vector3(scale, scale, scale);
         }
+
+        lightFlickering.maxIntensity = Mathf.Clamp(lightFlickering.maxIntensity -= 0.05f,
+            0, lightFlickering.maxIntensity);
 
         if (fireHP > 0) return;
 

@@ -13485,7 +13485,7 @@ ParticleSystem:
     serializedVersion: 4
     type: 1
     collisionMode: 0
-    colliderForce: 100
+    colliderForce: 200
     multiplyColliderForceByParticleSize: 0
     multiplyColliderForceByParticleSpeed: 0
     multiplyColliderForceByCollisionAngle: 1
@@ -14695,21 +14695,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxWaterDistance: 20
   distance: 1
-  HitLayer:
+  hitLayer:
     serializedVersion: 2
-    m_Bits: 4091
-  ScaleFactor: 0
-  cilinderOrigin: {fileID: 2100060723958526457}
+    m_Bits: 649
+  cylinder: {fileID: 2100060723958526457}
   water: {fileID: 6106940246665216524}
-  waterDetails: {fileID: 0}
-  PlayerAnim: {fileID: 0}
-  colider: {fileID: 5793723103433161195}
+  waterDetails: {fileID: 8252787549459523145}
+  playerAnim: {fileID: 0}
   raysOrigins: []
   waterSound: {fileID: 6278548375006816406}
-  Fires: []
+  fires: []
   currentWater: 0
   maxWater: 100
-  waterConsumption: 10
   waterPerSecond: 10
 --- !u!54 &1012759667
 Rigidbody:
