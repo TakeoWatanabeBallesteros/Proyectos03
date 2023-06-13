@@ -4,24 +4,25 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using FMODUnity;
+using UnityEngine.Serialization;
 
 public class GoldWater : MonoBehaviour
 {
     [Header("Parametros")]
     public float maxWaterDistance;
-    [SerializeField] float distance;
-    public LayerMask HitLayer;
-    public float ScaleFactor;
+    [SerializeField] private float distance;
+    public LayerMask hitLayer;
     
+    [FormerlySerializedAs("collider")]
+    [FormerlySerializedAs("cylinderOrigin")]
+    [FormerlySerializedAs("cilinderOrigin")]
     [Space(5f)]
     [Header("Componentes")]
-    [SerializeField] Transform cilinderOrigin;
-    [SerializeField] ParticleSystem water;
-    [SerializeField] ParticleSystem waterDetails;
-    //[SerializeField] ParticleSystem waterCone;
-    [SerializeField] PlayerControls Controls;
-    public Animator PlayerAnim;
-    public GameObject colider;
+    [SerializeField] private CapsuleCollider cylinder;
+    [SerializeField] private ParticleSystem water;
+    [SerializeField] private ParticleSystem waterDetails;
+    private PlayerControls controls;
+    public Animator playerAnim;
 
     [Space(5f)] [Header("Raycast Origins")] 
     [SerializeField] private List<Transform> raysOrigins;
@@ -30,36 +31,35 @@ public class GoldWater : MonoBehaviour
     [Header("Sounds")] 
     [SerializeField] private GameObject waterSound;
     
-    [SerializeField] List<FireBehavior> Fires;
+    [SerializeField] private List<FireBehavior> fires;
     private PointsBehavior pointsBehavior;
 
-    [SerializeField]float currentWater;
+    [SerializeField] private float currentWater;
     public float maxWater;
-    public float waterConsumption;
     public float waterPerSecond;
-    private bool consuming;
+    private bool isShooting;
 
     private Blackboard_UIManager blackboardUIManager;
 
     private void OnDisable()
     {
-        Controls.Player.Shoot.started -= Shoot;
-        Controls.Player.Shoot.canceled -= StopShoot;
+        controls.Player.Shoot.started -= Shoot;
+        controls.Player.Shoot.canceled -= StopShoot;
     }
 
     private void Awake()
     {
-        Controls = Controls ?? new PlayerControls();
-        Controls.Player.Shoot.started += Shoot;
-        Controls.Player.Shoot.canceled += StopShoot;
-        Controls.Enable();
+        controls = controls ?? new PlayerControls();
+        controls.Player.Shoot.started += Shoot;
+        controls.Player.Shoot.canceled += StopShoot;
+        controls.Enable();
         blackboardUIManager = Singleton.Instance.UIManager.blackboard_UIManager;
     }
     // Start is called before the first frame update
     void Start()
     {
-        Fires = new List<FireBehavior>();
-        colider.SetActive(false);
+        fires = new List<FireBehavior>();
+        cylinder.enabled = false;
         water.Stop();
         pointsBehavior = Singleton.Instance.PointsManager;
         currentWater = maxWater;
@@ -71,7 +71,7 @@ public class GoldWater : MonoBehaviour
         distance = ObjectiveDistance();
         SetParticleLength();
         SetColliderScale();
-        if(Fires.Any()) PuttingOutFires();
+        if(fires.Any()) PuttingOutFires();
         if (currentWater == 0)
         {
             StopShoot();
@@ -86,9 +86,8 @@ public class GoldWater : MonoBehaviour
 
     private void ConsumeWater()
     {
-        if (!consuming) return;
-        if (currentWater == 0) return;
-        currentWater = Mathf.Clamp( currentWater -= waterConsumption * Time.deltaTime, 0, maxWater);
+        if (currentWater == 0 || !isShooting) return;
+        currentWater = Mathf.Clamp( currentWater -= waterPerSecond * Time.deltaTime, 0, maxWater);
         blackboardUIManager.SetWaterBar(currentWater);
     }
 
@@ -100,15 +99,16 @@ public class GoldWater : MonoBehaviour
 
     private void SetParticleLength()
     {
-        var WeakMain = water.main;
-        WeakMain.startLifetime = distance / WeakMain.startSpeed.constant;
-        var WeakDetails = waterDetails.main;
-        WeakDetails.startLifetime = distance / WeakDetails.startSpeed.constant;
+        var weakMain = water.main;
+        weakMain.startLifetime = distance / weakMain.startSpeed.constant;
+        var weakDetails = waterDetails.main;
+        weakDetails.startLifetime = distance / weakDetails.startSpeed.constant;
 
     }
     private void SetColliderScale()
     {
-        cilinderOrigin.localScale = new Vector3(1,1, distance/ScaleFactor);
+        cylinder.height = distance;
+        cylinder.center = new Vector3(cylinder.center.x, distance/2, cylinder.center.z);
     }
     private float ObjectiveDistance()
     {
@@ -124,7 +124,7 @@ public class GoldWater : MonoBehaviour
     {
         float rayDistance = 0;
         if (Physics.Raycast(new Ray(origin.position, origin.forward), 
-            out RaycastHit hit, maxWaterDistance, HitLayer)) 
+            out RaycastHit hit, maxWaterDistance, hitLayer)) 
         {
             Debug.DrawRay(origin.position, origin.forward * rayDistance);
             return (hit.point - origin.position).magnitude;
@@ -137,7 +137,7 @@ public class GoldWater : MonoBehaviour
     {
         if (other.CompareTag("FireSource"))
         {
-            Fires.Add(other.GetComponentInParent<FireBehavior>());
+            fires.Add(other.GetComponentInParent<FireBehavior>());
         }
         else if (other.CompareTag("Collectable"))
         {
@@ -152,56 +152,51 @@ public class GoldWater : MonoBehaviour
     {
         if (other.CompareTag("FireSource"))
         {
-            Fires.Remove(other.GetComponentInParent<FireBehavior>());
+            fires.Remove(other.GetComponentInParent<FireBehavior>());
         }
     }
 
     private void Shoot(InputAction.CallbackContext context)
     {
         if (currentWater == 0)return;
+        playerAnim.SetBool("Shoot",true);
+        StartCoroutine(ShootWater());
+    }
+
+    private IEnumerator ShootWater()
+    {
+        yield return new WaitForSeconds(.3f);
         water.Play();
         waterDetails.Play();
         //waterCone.gameObject.SetActive(true);
-        colider.SetActive(true);
+        cylinder.enabled = true;
         waterSound.SetActive(true);
-        consuming = true;
-        PlayerAnim.SetBool("Shoot",true);
+        isShooting = true;
     }
-    private void StopShoot(InputAction.CallbackContext context)
+    
+    private void StopShoot(InputAction.CallbackContext context = new InputAction.CallbackContext())
     {
+        StopAllCoroutines();
         water.Stop();
         waterDetails.Stop();
         //waterCone.gameObject.SetActive(false);
-        colider.SetActive(false);
-        Fires.Clear();
+        cylinder.enabled = false;
+        fires.Clear();
         pointsBehavior.ResetCombo();
         waterSound.SetActive(false);
-        consuming = false;
-        PlayerAnim.SetBool("Shoot",false);
-    }
-
-    private void StopShoot()
-    {
-        water.Stop();
-        waterDetails.Stop();
-        //waterCone.gameObject.SetActive(false);
-        colider.SetActive(false);
-        Fires.Clear();
-        pointsBehavior.ResetCombo();
-        waterSound.SetActive(false);
-        consuming = false;
-        PlayerAnim.SetBool("Shoot",false);
+        isShooting = false;
+        playerAnim.SetBool("Shoot",false);
     }
 
     private void PuttingOutFires()
     {
-        List<FireBehavior> clone = new List<FireBehavior>(Fires);
+        List<FireBehavior> clone = new List<FireBehavior>(fires);
         foreach (var fire in clone)
         {
             fire.PuttingOut();
             if (!fire.onFire)
             {
-                Fires.Remove(fire);
+                fires.Remove(fire);
                 fire.enabled = false;
                 // Valiendo
             }
