@@ -53,7 +53,6 @@ public class GoldWater : MonoBehaviour
         controls.Player.Shoot.started += Shoot;
         controls.Player.Shoot.canceled += StopShoot;
         controls.Enable();
-        blackboardUIManager = Singleton.Instance.UIManager.blackboard_UIManager;
     }
     // Start is called before the first frame update
     void Start()
@@ -62,6 +61,7 @@ public class GoldWater : MonoBehaviour
         cylinder.enabled = false;
         water.Stop();
         pointsBehavior = Singleton.Instance.PointsManager;
+        blackboardUIManager = Singleton.Instance.UIManager.blackboard_UIManager;
         currentWater = maxWater;
     }
 
