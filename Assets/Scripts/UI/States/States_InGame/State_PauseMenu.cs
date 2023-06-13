@@ -28,6 +28,7 @@ public override void OnLogic()
 public override void OnExit()
 {
     singleton.UIManager.blackboard_UIManager.PauseMenuCanvas.SetActive(false);
+    singleton.GameManager.OnUnpause();
     base.OnExit();
 }
 }
