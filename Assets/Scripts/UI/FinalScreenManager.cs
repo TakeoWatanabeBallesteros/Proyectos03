@@ -12,6 +12,7 @@ public class FinalScreenManager : MonoBehaviour
     [SerializeField] private float shrinkDuration = .25f;
 
     public int numberOfImagesToShow;
+    public InputPlayerController inputPlayer;
 
     private PointsBehavior pointsManager;
     public int maxPointsShow1;
@@ -71,5 +72,14 @@ public class FinalScreenManager : MonoBehaviour
         else if(pointsManager.Points < maxPointsShow2) ShowImages(2);
         else if(pointsManager.Points < maxPointsShow3) ShowImages(3);
         else ShowImages(0);
+
+        inputPlayer.enabled = false;
+        StartCoroutine(OnPause());
+    }
+
+    IEnumerator OnPause()
+    {
+        yield return new WaitForSeconds(2f);
+        Singleton.Instance.GameManager.OnPause();
     }
 }
