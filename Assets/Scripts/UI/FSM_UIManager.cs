@@ -44,7 +44,7 @@ public class FSM_UIManager : MonoBehaviour
 
     private void AddTransitions()
     {
-        uiManager_FSM.AddTwoWayTriggerTransition("MainMenu_FSM-InGame_FSM","MainMenu_FSM", "InGame_FSM", t => Singleton.Instance.GameManager.gameState != GameState.Win);
+        uiManager_FSM.AddTwoWayTriggerTransition("MainMenu_FSM-InGame_FSM","MainMenu_FSM", "InGame_FSM", t => uiManager_FSM.ActiveState.name == "MainMenu_FSM");
     }
 
     #endregion
@@ -85,7 +85,6 @@ public class FSM_UIManager : MonoBehaviour
 
     public void GoMainMenu()
     {
-        Debug.Log("Menu GO");
         uiManager_FSM.Trigger("MainMenu_FSM-InGame_FSM");
         SceneManager.LoadSceneAsync(0);
     }
