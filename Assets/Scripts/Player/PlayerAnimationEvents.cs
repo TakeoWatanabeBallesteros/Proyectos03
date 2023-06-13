@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class PlayerAnimationEvents : MonoBehaviour
 {
-    public ParticleSystem walkingParticles;
+    [SerializeField] private ParticleSystem walkingParticles;
+    [SerializeField] private EventReference playerSteps;
+    
 
     public void OnStep()
     {
         walkingParticles.Play();
+        RuntimeManager.PlayOneShot(playerSteps);
     }
     // Start is called before the first frame update
     void Start()

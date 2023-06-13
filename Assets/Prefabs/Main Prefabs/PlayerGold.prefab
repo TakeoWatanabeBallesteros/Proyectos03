@@ -5265,6 +5265,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 2.35
       objectReference: {fileID: 0}
+    - target: {fileID: 6106940246665216524, guid: 0f9ee44c9cec51e42a4cf92d8d2bf98d,
+        type: 3}
+      propertyPath: CollisionModule.colliderForce
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 6106940246665216525, guid: 0f9ee44c9cec51e42a4cf92d8d2bf98d,
         type: 3}
       propertyPath: m_RootOrder
@@ -5521,6 +5526,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkingParticles: {fileID: 2870716570276282205}
+  playerSteps:
+    Guid:
+      Data1: 1841561728
+      Data2: 1260754780
+      Data3: -183008605
+      Data4: -1436344034
+    Path: event:/Fireman/Steps
 --- !u!4 &6121842095103338263 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1167581937251487694, guid: a7186d33bb27f6e4ba3b40a905c2b72d,

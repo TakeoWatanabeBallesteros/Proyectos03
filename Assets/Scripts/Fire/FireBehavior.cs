@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Xml;
+using FMOD.Studio;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
+using FMODUnity;
+using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public class FireBehavior : MonoBehaviour
 {
@@ -44,6 +47,19 @@ public class FireBehavior : MonoBehaviour
 
     private LightFlickering lightFlickering;
 
+    [SerializeField] private EventReference onFireSound;
+    private EventInstance _onFireSound;
+    [SerializeField] private EventReference putOutSound;
+
+    private void PlayFireSound()
+    {
+        _onFireSound = RuntimeManager.CreateInstance(onFireSound);
+        RuntimeManager.AttachInstanceToGameObject(_onFireSound, transform, GetComponent<Rigidbody>());
+        _onFireSound.start();
+        _onFireSound.release();
+    }
+    
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -60,6 +76,7 @@ public class FireBehavior : MonoBehaviour
         {
             heat = 100;
             CreateBurnDecal();
+            PlayFireSound();
         }
 
         pointsBehavior = Singleton.Instance.PointsManager;
@@ -139,6 +156,8 @@ public class FireBehavior : MonoBehaviour
         pointsBehavior.AddCombo();
         
         onFire = false;
+        _onFireSound.stop(STOP_MODE.IMMEDIATE);
+        RuntimeManager.PlayOneShot(putOutSound, transform.position);
         
         transform.GetChild(0).gameObject.SetActive(false); //Disable fire
         transform.GetChild(1).gameObject.SetActive(true); //Enable smoke
@@ -153,6 +172,7 @@ public class FireBehavior : MonoBehaviour
         _objectMaterial.SetFloat(Heat, Scale(0, 100, this.heat));
         if (this.heat < 100) return;
         onFire = true;
+        PlayFireSound();
         transform.GetChild(0).gameObject.SetActive(true);
         CreateBurnDecal();
     }
