@@ -20,7 +20,7 @@ public class FireBehavior : MonoBehaviour
     [SerializeField] private float damageRadius;
 
     [SerializeField] float fireHP;
-    public float timeToPutOut;
+    public float waterDamagePerSecond;
 
     [SerializeField] private float heatDistance;
     [SerializeField]
@@ -122,7 +122,7 @@ public class FireBehavior : MonoBehaviour
 
     public void PuttingOut()
     {
-        fireHP = Mathf.Clamp(fireHP -= timeToPutOut * Time.deltaTime, 0, 100);
+        fireHP = Mathf.Clamp(fireHP -= waterDamagePerSecond * Time.deltaTime, 0, 100);
         
         foreach (ParticleSystem fireParticle in fireParticles)
         {
