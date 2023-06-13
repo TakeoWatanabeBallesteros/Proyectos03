@@ -97,8 +97,10 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 82dfbd461adb54b49b506c8876897cf3,
+    type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 877c3781f17d4f44c9f51c2a0a468c5a,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -11018,6 +11020,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1005619949, guid: b77edb7ab9214384b8b5b80accfc4494, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 14544e3772bf61646974fe821f4a8ddb,
+        type: 3}
+    - target: {fileID: 1364416853875244000, guid: b77edb7ab9214384b8b5b80accfc4494,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2140780110982003724, guid: b77edb7ab9214384b8b5b80accfc4494,
         type: 3}
       propertyPath: m_RootOrder
@@ -11078,11 +11090,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: ===Managers===
       objectReference: {fileID: 0}
-    - target: {fileID: 5910668756901966651, guid: b77edb7ab9214384b8b5b80accfc4494,
+    - target: {fileID: 7500632052862709505, guid: b77edb7ab9214384b8b5b80accfc4494,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 041809eab9eb3bb4ca2e2ea278109167,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b77edb7ab9214384b8b5b80accfc4494, type: 3}
 --- !u!1 &1454669966
@@ -13711,9 +13724,7 @@ GameObject:
   - component: {fileID: 1814544194}
   - component: {fileID: 1814544193}
   - component: {fileID: 1814544192}
-  - component: {fileID: 1814544191}
   - component: {fileID: 1814544190}
-  - component: {fileID: 1814544189}
   m_Layer: 0
   m_Name: Main Camera (1)
   m_TagString: MainCamera
@@ -13721,18 +13732,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1814544189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814544188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bedd741704ec3e0459cd821e842a6c2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1814544190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13766,27 +13765,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!114 &1814544191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814544188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db089ecfa4523944a0f0d90efd3f34c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: 10
-  maxCamSize: 20
-  minCamSize: 7
-  timer: 1
-  camTransform: {fileID: 0}
-  shakeDuration: 0
-  shakeAmount: 0.7
-  decreaseFactor: 1
-  addPosition: {x: 0, y: 0, z: 0}
 --- !u!81 &1814544192
 AudioListener:
   m_ObjectHideFlags: 0
@@ -14054,6 +14032,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 12d8175c27b05c542a9fa38ede255edc, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 7854f4ca4b235ba46a0f61cfca552046,
+        type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7854f4ca4b235ba46a0f61cfca552046, type: 3}
 --- !u!1 &1875833082

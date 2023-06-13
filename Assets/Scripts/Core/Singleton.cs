@@ -47,12 +47,12 @@ public class Singleton : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         Instance = this;
         _player = GameObject.FindGameObjectWithTag("Player");
-        _itemsManager = GameObject.FindGameObjectWithTag("ItemsManager").GetComponent<ItemManager>();
+        _itemsManager = GameObject.FindGameObjectWithTag("ItemsManager")?.GetComponent<ItemManager>();
     }
 
     private void LoadSingletones(Scene scene, LoadSceneMode mode)
     {
         _player = GameObject.FindGameObjectWithTag("Player");
-        _itemsManager = GameObject.FindGameObjectWithTag("ItemsManager").GetComponent<ItemManager>();
+        _itemsManager = GameObject.FindGameObjectWithTag("ItemsManager")?.GetComponent<ItemManager>();
     }
 }

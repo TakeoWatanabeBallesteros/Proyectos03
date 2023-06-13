@@ -155,13 +155,26 @@ public class Blackboard_UIManager : DynamicBlackboard
 
     public IEnumerator FadeIN()
     {
-        DeathscreenAlfa += .1f;
-        YouDiedImage.color = new Color(1f, 1f, 1f, DeathscreenAlfa);
-        yield return new WaitForSeconds(.1f);
-        if (DeathscreenAlfa < 1)
+        yield return new WaitForSeconds(2f);
+        DeathscreenAlfa = 0;
+        for (float i=0; i <1; i+=.1f)
         {
-            StartCoroutine(FadeIN());
+            DeathscreenAlfa += .1f;
+            YouDiedImage.color = new Color(1f, 1f, 1f, DeathscreenAlfa);
+            yield return new WaitForSeconds(.05f);
         }
+    }
+    public IEnumerator FadeOut()
+    {
+        yield return new WaitForSeconds(1f);
+
+        for (float i = 0; i < 1; i += .1f)
+        {
+            DeathscreenAlfa -= .2f;
+            YouDiedImage.color = new Color(1f, 1f, 1f, DeathscreenAlfa);
+            yield return new WaitForSeconds(.05f);
+        }
+
     }
 
     public void ChildFace()
