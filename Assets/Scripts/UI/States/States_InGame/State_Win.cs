@@ -14,7 +14,8 @@ public class State_Win : StateBase
         singleton = Singleton.Instance;
         Singleton.Instance.GameManager.ChangeGameState(GameState.Win);
         singleton.UIManager.blackboard_UIManager.WinCanvas.SetActive(true);
-        singleton.GameManager.OnPause();
+        singleton.UIManager.blackboard_UIManager.finalScreenManager.CalculateStars();
+        //singleton.GameManager.OnPause();
         base.OnEnter();
     }
     

@@ -68,8 +68,8 @@ public class FinalScreenManager : MonoBehaviour
     public void CalculateStars()
     {
         if (pointsManager.Points < maxPointsShow1) ShowImages(1);
-        else if(pointsManager.Points > maxPointsShow2) ShowImages(2);
-        else if(pointsManager.Points > maxPointsShow3) ShowImages(3);
+        else if(pointsManager.Points < maxPointsShow2) ShowImages(2);
+        else if(pointsManager.Points < maxPointsShow3) ShowImages(3);
         else ShowImages(0);
     }
 }
