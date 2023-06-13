@@ -35,8 +35,11 @@ public class Blackboard_UIManager : DynamicBlackboard
     public Slider forceBar;
     public TMP_Text TimeLeftText;
     public TMP_Text NumberOfKids;
+    public TMP_Text SombraOfKids;
     public TMP_Text NumberOfColectables;
+    public TMP_Text SombraOfColectables;
     public TMP_Text pointsText;
+    public TMP_Text SombraOfPoints;
     public TMP_Text pointsWinText;
     public GameObject PickUpText;
     public GameObject ReloadText;
@@ -133,14 +136,18 @@ public class Blackboard_UIManager : DynamicBlackboard
     public void SetKids(int kids, int totalKids)
     {
         NumberOfKids.text = kids+"/"+totalKids;
+        SombraOfKids.text = kids+"/"+totalKids;
+        
     }
     public void SetCollectables(int collectables, int totalCollectables)
     {
         NumberOfColectables.text = collectables + "/" + totalCollectables;
+        SombraOfColectables.text = collectables + "/" + totalCollectables;
     }
     public void SetPoints(int points, int pointsToWin, int currentPoints)
     {
         pointsText.text = currentPoints + "/" + pointsToWin;
+        SombraOfPoints.text = currentPoints + "/" + pointsToWin;
         pointsWinText.text = currentPoints + "/" + pointsToWin;
         if(points !=0) PointsPopUp(points);
 
