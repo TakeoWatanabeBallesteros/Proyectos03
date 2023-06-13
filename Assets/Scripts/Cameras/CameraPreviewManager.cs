@@ -57,7 +57,7 @@ public class CameraPreviewManager : MonoBehaviour
         cameraList = FindObjectsOfType<PreviewCamera>();
         if(!cameraList.Any()) 
         {
-            Debug.Log("Yep");
+            //Debug.Log("Yep");
             Singleton.Instance.UIManager.uiManager_FSM.Trigger("LevelPreview-Playing");
             return;
         }

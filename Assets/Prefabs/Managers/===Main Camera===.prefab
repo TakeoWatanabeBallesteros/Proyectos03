@@ -13617,7 +13617,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8294207567506343412}
-  - component: {fileID: 8294207567506343415}
   m_Layer: 0
   m_Name: CameraSmoke
   m_TagString: Untagged
@@ -13644,24 +13643,6 @@ Transform:
   m_Father: {fileID: 8294207567736752021}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8294207567506343415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8294207567506343413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71605042a2d54a142b9ca1246cb8008d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  P1: {fileID: 7596506101853298133}
-  P2: {fileID: 4366217529072918693}
-  P3: {fileID: 7537760272656196668}
-  P4: {fileID: 2088184233391791992}
-  Fuegos: []
-  smokeMultiplier: 0.5
 --- !u!1 &8294207567736752110
 GameObject:
   m_ObjectHideFlags: 0
@@ -13754,7 +13735,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 20
-  controller: {fileID: 0}
   maxCamSize: 20
   minCamSize: 7
   timer: 1
