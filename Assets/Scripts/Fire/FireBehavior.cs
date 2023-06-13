@@ -130,8 +130,11 @@ public class FireBehavior : MonoBehaviour
             fireParticle.transform.localScale = new Vector3(scale, scale, scale);
         }
 
-        lightFlickering.maxIntensity = Mathf.Clamp(lightFlickering.maxIntensity -= 0.05f,
-            0, lightFlickering.maxIntensity);
+        if (lightFlickering != null)
+        {
+            lightFlickering.maxIntensity = Mathf.Clamp(lightFlickering.maxIntensity -= 0.05f,
+                0, lightFlickering.maxIntensity);
+        }
 
         if (fireHP > 0) return;
 
