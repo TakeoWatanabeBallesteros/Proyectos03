@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEditor;
@@ -49,18 +50,19 @@ public class ExplosionBehavior : MonoBehaviour
 
     public IEnumerator Explode()
     {
-        gameObject.tag = "Untagged";
         animator.SetTrigger(ExplodeId);
         detectionCollider.enabled = false;
         zoneExpansionCollider.enabled = true;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(2f);
         explosionParticles.gameObject.SetActive(true);
-        wallBreakEvent.BreakWall();
+        if(wallBreakEvent != null) wallBreakEvent.BreakWall();
         pointsManager.AddPointsExplosion();
         CalculateExpansion();  
         ExplosionKnockBack();
         camController.shakeDuration = 1f;
         fireBehavior.enabled = true;
+        yield return new WaitForSecondsRealtime(1f);
+        gameObject.tag = "Untagged";
         enabled = false;
     }
     
