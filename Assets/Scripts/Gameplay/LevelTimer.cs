@@ -17,6 +17,8 @@ public class LevelTimer : MonoBehaviour
     private MovementPlayerController playerMovement;
     private PlayerHealth playerHealth;
     
+    private PlayerControls controls;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +29,9 @@ public class LevelTimer : MonoBehaviour
         playerHealth = Singleton.Instance.Player.GetComponent<PlayerHealth>();
         
         PauseTimer();
+        
+        controls = controls ?? new PlayerControls();
+        controls.Enable();
     }
 
     // Update is called once per frame
@@ -44,6 +49,7 @@ public class LevelTimer : MonoBehaviour
             StartCoroutine(blackboardUI.FadeIN());
             inputPlayer.enabled = false;
             playerMovement.Stop();
+            StartCoroutine(NoTime());
         }
         
         minutes = (int)(TimerEnSegundos / 60f);
@@ -61,4 +67,13 @@ public class LevelTimer : MonoBehaviour
     {
         Paused = false;
     }
+
+    private IEnumerator NoTime()
+    {
+        do {
+            yield return null;
+        } while (!controls.Player.Restart.triggered);
+        Singleton.Instance.UIManager.GoMainMenu();
+    }
+    
 }
