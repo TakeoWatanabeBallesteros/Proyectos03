@@ -11,11 +11,27 @@ public class LevelTimer : MonoBehaviour
     
     private Blackboard_UIManager blackboardUI;
     private bool Paused = true;
+    
+    
+    private InputPlayerController inputPlayer;
+    private MovementPlayerController playerMovement;
+    private PlayerHealth playerHealth;
+    
+    private PlayerControls controls;
+    
     // Start is called before the first frame update
     void Start()
     {
         blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
+
+        inputPlayer = Singleton.Instance.Player.GetComponent<InputPlayerController>();
+        playerMovement = Singleton.Instance.Player.GetComponent<MovementPlayerController>();
+        playerHealth = Singleton.Instance.Player.GetComponent<PlayerHealth>();
+        
         PauseTimer();
+        
+        controls = controls ?? new PlayerControls();
+        controls.Enable();
     }
 
     // Update is called once per frame
@@ -28,8 +44,12 @@ public class LevelTimer : MonoBehaviour
         if (Paused) return;
         TimerEnSegundos = Mathf.Clamp(TimerEnSegundos -= Time.deltaTime, 0, 999);
         if ( TimerEnSegundos == 0) {
+            playerHealth.Dead = true;
             PauseTimer();
-            // Lose event GM
+            StartCoroutine(blackboardUI.FadeIN());
+            inputPlayer.enabled = false;
+            playerMovement.Stop();
+            StartCoroutine(NoTime());
         }
         
         minutes = (int)(TimerEnSegundos / 60f);
@@ -47,4 +67,13 @@ public class LevelTimer : MonoBehaviour
     {
         Paused = false;
     }
+
+    private IEnumerator NoTime()
+    {
+        do {
+            yield return null;
+        } while (!controls.Player.Restart.triggered);
+        Singleton.Instance.UIManager.GoMainMenu();
+    }
+    
 }

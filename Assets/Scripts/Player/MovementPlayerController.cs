@@ -135,6 +135,7 @@ public class MovementPlayerController : MonoBehaviour
 
     public void Stop()
     {
+        canMove = false;
         rb.velocity = Vector3.zero;
     }
 }

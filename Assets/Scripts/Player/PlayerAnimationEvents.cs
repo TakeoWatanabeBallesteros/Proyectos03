@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
+using UnityEngine.Serialization;
 
 public class PlayerAnimationEvents : MonoBehaviour
 {
     [SerializeField] private ParticleSystem walkingParticles;
     [SerializeField] private EventReference playerSteps;
     [SerializeField] private EventReference playerFall;
+    [SerializeField] private EventReference kidThrow;
+    [SerializeField] private EventReference kidPickUp;
     [SerializeField] private MovementPlayerController movementPlayerController;
 
 
@@ -27,5 +30,15 @@ public class PlayerAnimationEvents : MonoBehaviour
     {
         walkingParticles.Play();
         RuntimeManager.PlayOneShot(playerSteps);
+    }
+
+    public void Throw()
+    {
+        RuntimeManager.PlayOneShot(kidThrow);
+    }
+
+    public void Pickup()
+    {
+        RuntimeManager.PlayOneShot(kidPickUp);
     }
 }
