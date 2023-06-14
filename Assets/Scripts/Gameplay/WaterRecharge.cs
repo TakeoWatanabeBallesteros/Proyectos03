@@ -17,8 +17,8 @@ public class WaterRecharge : MonoBehaviour
     private void Start()
     {
         Controls = Controls ?? new PlayerControls();
-        blackboardUIManager = Singleton.Instance.UIManager.blackboard_UIManager;
         Controls.Enable();
+        blackboardUIManager = Singleton.Instance.UIManager.blackboard_UIManager;
         onRecharge = false;
     }
 
@@ -39,7 +39,7 @@ public class WaterRecharge : MonoBehaviour
         {
             blackboardUIManager.ReloadText.SetActive(false);
             Controls.Player.Recharge.started -= Luky;
-            Controls.Player.Recharge.canceled += Ramon;
+            Controls.Player.Recharge.canceled -= Ramon;
             StopAllCoroutines();
         }
     }
