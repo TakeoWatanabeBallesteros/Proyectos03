@@ -24,6 +24,7 @@ public class LevelTimer : MonoBehaviour
         if ( TimerEnSegundos < 0)
         {
             TimerEnSegundos = 0;
+            StartCoroutine(blackboardUI.FadeIN());
             // Lose event GM
         }
         
