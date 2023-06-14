@@ -152,7 +152,7 @@ public class GoldWater : MonoBehaviour
     {
         if (other.CompareTag("FireSource"))
         {
-            fires.Remove(other.GetComponentInParent<FireBehavior>());
+            fires.Remove(other.GetComponentInParent<FireBehavior>());            
         }
     }
 
