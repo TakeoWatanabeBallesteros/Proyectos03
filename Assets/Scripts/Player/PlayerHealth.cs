@@ -11,7 +11,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
     Vector3 initialPos;
     InputPlayerController inputPlayer;
     MovementPlayerController playerMovement;
-    bool Dead;
+    public bool Dead;
     [SerializeField] private float burnIndicatorTime;
     private Blackboard_UIManager blackboardUI; 
     public float damageCoolDown;
@@ -26,6 +26,11 @@ public class PlayerHealth : MonoBehaviour, IHealth
     public float maxHealth => _maxHealth;
 
     public Vector3 position => transform.position;
+    
+    private PlayerControls controls;
+
+    [SerializeField] private AnimatorController animatorController;
+    [SerializeField] private LevelTimer levelTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -38,22 +43,27 @@ public class PlayerHealth : MonoBehaviour, IHealth
         blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
         pointsManager = Singleton.Instance.PointsManager;
         canBeDamaged = true;
+        controls = controls ?? new PlayerControls();
+        controls.Enable();
     }
     
     IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(4.5f);
+        do {
+            yield return null;
+        } while (!controls.Player.Restart.triggered);
+        
         transform.position = initialPos;
-        //reactivar modelo
-        PlayerRender.SetActive(true);
-        yield return new WaitForSeconds(.5f);
         health = maxHealth;
         blackboardUI.SetLifeBar(health);
         StartCoroutine(blackboardUI.FadeOut());
         blackboardUI.FireHandle.SetActive(false);
-        inputPlayer.enabled = true;
-        playerMovement.enabled = true;
         Dead = false;
+        yield return new WaitForSeconds(1f);
+        inputPlayer.enabled = true;
+        levelTimer.UnpauseTimer();
+        PlayerRender.SetActive(true);
+        animatorController.StartAnim();
     }
 
 
@@ -92,6 +102,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
         pointsManager.RemovePointsDead();
         inputPlayer.enabled = false;
         playerMovement.Stop();
+        levelTimer.PauseTimer();
         StartCoroutine(blackboardUI.FadeIN());
         StartCoroutine(Respawn());
         //activar polvo
