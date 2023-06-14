@@ -26,12 +26,15 @@ public class FSM_UIManager : MonoBehaviour
         AddTransitions();
         uiManager_FSM.SetStartState(testingLevel ? "InGame_FSM" : "MainMenu_FSM");
         uiManager_FSM.Init();
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-
+        if (scene.name[0] == 'L')
+        {
+            uiManager_FSM.Trigger("MainMenu_FSM-InGame_FSM");
+        }
     }
 
     #region FSM Initialization
@@ -69,7 +72,6 @@ public class FSM_UIManager : MonoBehaviour
     // The LoadSceneAsync method maybe will be in the GameManager.
     public void GoLevel(int index)
     {
-        uiManager_FSM.Trigger("MainMenu_FSM-InGame_FSM");
         SceneManager.LoadSceneAsync(index);
     }
 

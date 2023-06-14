@@ -4960,6 +4960,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f95eda9eeae2a2646b173d12dbc0629a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterAnim: {fileID: 8533690593573027406}
   GM: {fileID: 0}
   Shoulder: {fileID: 6458635347419970725}
   PickupText: {fileID: 0}
@@ -4986,6 +4987,7 @@ MonoBehaviour:
   DustPile: {fileID: 7864795408357074185, guid: 78355594cb0dcf54e8a420ad49f3a690,
     type: 3}
   _maxHealth: 100
+  animatorController: {fileID: 8533690593573027406}
 --- !u!114 &6458635349065966334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4998,9 +5000,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b3630bb78d1fbc488443962e039e770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canMove: 0
+  characterAnim: {fileID: 8533690593573027406}
   Maxspeed: 15
   speed: 15
   cam: {fileID: 0}
+  timeToRandomIdle: 5
 --- !u!114 &6458635349065966333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5025,6 +5030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed755b063b8929448a7e8526d8051647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterAnim: {fileID: 8533690593573027406}
   MyBalls: {fileID: 1134897882703293851, guid: 9577b4c21df70b348bba972499710564, type: 3}
   Hombro: {fileID: 6458635347419970725}
   Fuerza: 4000
@@ -5042,7 +5048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c893ba59b90fe864099ea1faf8addee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterAnimator: {fileID: 1282546077844167491}
+  characterAnimator: {fileID: 1282546077844167491}
 --- !u!1001 &2408726530503119365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5693,6 +5699,14 @@ MonoBehaviour:
       Data3: -183008605
       Data4: -1436344034
     Path: event:/Fireman/Steps
+  playerFall:
+    Guid:
+      Data1: -1963018326
+      Data2: 1161692604
+      Data3: -720596301
+      Data4: -311163443
+    Path: event:/Fireman/PlayerFall
+  movementPlayerController: {fileID: 6458635349065966334}
 --- !u!4 &6121842095103338263 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1167581937251487694, guid: a7186d33bb27f6e4ba3b40a905c2b72d,

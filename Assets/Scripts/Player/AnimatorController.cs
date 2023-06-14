@@ -1,38 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class AnimatorController : MonoBehaviour
 {
-    public Animator CharacterAnimator;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Animator characterAnimator;
 
-    // Update is called once per frame
-    void Update()
+    public void StartAnim()
     {
-        
+        characterAnimator.SetTrigger("StartAnim");
     }
+    
     public void PickChild()
     {
-        CharacterAnimator.SetTrigger("PickChild");
+        characterAnimator.SetTrigger("PickChild");
     }
     public void PrepareChild(bool value)
     {
-        if (CharacterAnimator.GetBool("PrepareChild") != value)
+        if (characterAnimator.GetBool("PrepareChild") != value)
         {
-            CharacterAnimator.SetBool("PrepareChild", value);
+            characterAnimator.SetBool("PrepareChild", value);
         }
     }
     public void YeetChild()
     {
-        CharacterAnimator.SetTrigger("YeetChild");
+        characterAnimator.SetTrigger("YeetChild");
     }
     public void SetSpeed(int speed)
     {
-        CharacterAnimator.SetFloat("Speed",speed);
+        characterAnimator.SetFloat("Speed",speed);
+    }
+    
+    public void SetRandomIdle()
+    {
+        characterAnimator.SetFloat("IdleID", Random.Range(0, 5));
+        characterAnimator.SetTrigger("RandomIdle");
     }
 }

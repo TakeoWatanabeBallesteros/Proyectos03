@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class MovementPlayerController : MonoBehaviour
 {
-    AnimatorController CharacterAnim;
+    public bool canMove;
+    
+    [SerializeField] private AnimatorController characterAnim;
     public float Maxspeed;
     public float speed;
     float currentSpeed;
@@ -26,14 +29,16 @@ public class MovementPlayerController : MonoBehaviour
     Vector3 forward;
     Vector3 right;
 
-    
+    [SerializeField] private float timeToRandomIdle;
+    private float timeIdle;
 
     // Start is called before the first frame update
     void Start()
     {
+        canMove = false;
+        
         cam = GameObject.Find("===Main Camera===").GetComponent<Camera>();
         //cam = Camera.main;
-        CharacterAnim = GetComponent<AnimatorController>();
         speed = Maxspeed;
         rb = GetComponent<Rigidbody>();
         input = GetComponent<InputPlayerController>();
@@ -51,11 +56,8 @@ public class MovementPlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /// Solo usar cuando disparas
-        // RotatePlayer();
-
+        if(!canMove) return;
         
-
         direction = forward * input.movement.y + right * input.movement.x;
         if (input.shoot || input.secondaryShoot)
         {
@@ -68,15 +70,23 @@ public class MovementPlayerController : MonoBehaviour
         }
         if (input.movement != Vector2.zero)
         {
-            CharacterAnim.SetSpeed(1);
+            timeIdle = 0;
+            characterAnim.SetSpeed(1);
             MovePlayer(direction.normalized);
         }
         else
         {
-            CharacterAnim.SetSpeed(0);
+            characterAnim.SetSpeed(0);
             currentSpeed = 0;
+            timeIdle += Time.deltaTime;
         }
         rb.velocity = direction.normalized * currentSpeed;
+
+        if (timeIdle >= timeToRandomIdle)
+        {
+            characterAnim.SetRandomIdle();
+            timeIdle = 0;
+        }
     }
 
     private void MovePlayer(Vector3 direction)
@@ -125,6 +135,7 @@ public class MovementPlayerController : MonoBehaviour
 
     public void Stop()
     {
+        canMove = false;
         rb.velocity = Vector3.zero;
     }
 }
