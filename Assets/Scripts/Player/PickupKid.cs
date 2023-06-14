@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PickupKid : MonoBehaviour
 {
-    AnimatorController CharacterAnim;
+    [SerializeField] private AnimatorController characterAnim;
     public GameManager GM;
     public Transform Shoulder;
     public GameObject PickupText;
@@ -24,7 +25,6 @@ public class PickupKid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CharacterAnim = GetComponent<AnimatorController>();
         CarringKid = false;
         CanPickup = false;
 
@@ -49,7 +49,7 @@ public class PickupKid : MonoBehaviour
             CanPickup = false;
             movementPlayerController.speed *= 1.2f;
             blackboardUI.ChildFace();
-            CharacterAnim.PickChild();
+            characterAnim.PickChild();
 
         }
     }

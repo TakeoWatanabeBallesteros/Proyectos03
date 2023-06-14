@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 
 public class ThrowKid : MonoBehaviour
 {
-    AnimatorController CharacterAnim;
+    [SerializeField] private AnimatorController characterAnim;
     Slider ForceBar;
     public GameObject MyBalls;
     InputPlayerController Input;
@@ -20,7 +21,6 @@ public class ThrowKid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CharacterAnim = GetComponent<AnimatorController>();
         movementPlayerController = GetComponent<MovementPlayerController>();
         pickupKid = GetComponent<PickupKid>();
         Input = GetComponent<InputPlayerController>();
@@ -44,7 +44,7 @@ public class ThrowKid : MonoBehaviour
             ball.transform.Find("Root").GetComponent<Rigidbody>().AddForce(transform.forward.normalized * Fuerza, ForceMode.Impulse);
             pickupKid.KidYeet();
             movementPlayerController.speed = movementPlayerController.Maxspeed;
-            CharacterAnim.YeetChild();
+            characterAnim.YeetChild();
         }
         Holding = Input.secondaryShoot;
         if (Holding && pickupKid.HasKid())
@@ -57,7 +57,7 @@ public class ThrowKid : MonoBehaviour
             ForceBar.gameObject.SetActive(false);
             Fuerza = 0;
         }
-        CharacterAnim.PrepareChild(Holding);
+        characterAnim.PrepareChild(Holding);
         ForceBar.value = Fuerza;
     }
 }
