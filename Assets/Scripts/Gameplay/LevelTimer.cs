@@ -10,7 +10,7 @@ public class LevelTimer : MonoBehaviour
     
     
     private Blackboard_UIManager blackboardUI;
-    
+    private bool Paused = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +20,11 @@ public class LevelTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        TickTime();
+    }
+    private void TickTime()
+    {
+        if (Paused) return;
         if (TimerEnSegundos > 0) TimerEnSegundos -= Time.deltaTime;
         if ( TimerEnSegundos < 0)
         {
@@ -31,6 +36,15 @@ public class LevelTimer : MonoBehaviour
         seconds = (int)(TimerEnSegundos - minutes * 60f);
         cents = (int)((TimerEnSegundos - (int)TimerEnSegundos) * 100f);
 
-         blackboardUI.SetTimer($"{minutes:00}:{seconds:00}:{cents:00}"); 
+        blackboardUI.SetTimer($"{minutes:00}:{seconds:00}:{cents:00}"); 
+
+    }
+    public void StopTimer()
+    {
+        Paused = true;
+    }
+    public void ReanudateTimer()
+    {
+        Paused = false;
     }
 }
