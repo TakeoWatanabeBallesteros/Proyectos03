@@ -68,10 +68,11 @@ public class FinalScreenManager : MonoBehaviour
 
     public void CalculateStars()
     {
-        if (pointsManager.Points < maxPointsShow1) ShowImages(1);
+        if (pointsManager.Points < 0) ShowImages(0);
+        else if (pointsManager.Points < maxPointsShow1) ShowImages(1);
         else if(pointsManager.Points < maxPointsShow2) ShowImages(2);
         else if(pointsManager.Points < maxPointsShow3) ShowImages(3);
-        else ShowImages(0);
+        else ShowImages(3);
 
         inputPlayer.enabled = false;
         StartCoroutine(OnPause());
