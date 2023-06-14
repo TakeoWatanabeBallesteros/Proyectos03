@@ -39,7 +39,7 @@ public class ExplosionBehavior : MonoBehaviour
 
     void Start()
     {
-        camController = Camera.main.GetComponent<CameraController>();
+        camController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         explosionParticles.gameObject.SetActive(false);
         fireBehavior = GetComponent<FireBehavior>();
         pointsManager = Singleton.Instance.PointsManager;
