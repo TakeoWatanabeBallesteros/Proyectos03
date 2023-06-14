@@ -15,20 +15,20 @@ public class LevelTimer : MonoBehaviour
     void Start()
     {
         blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
+        PauseTimer();
     }
 
     // Update is called once per frame
     void Update()
     {
-        TickTime();
+        UpdateTimer();
     }
-    private void TickTime()
+    private void UpdateTimer()
     {
         if (Paused) return;
-        if (TimerEnSegundos > 0) TimerEnSegundos -= Time.deltaTime;
-        if ( TimerEnSegundos < 0)
-        {
-            TimerEnSegundos = 0;
+        TimerEnSegundos = Mathf.Clamp(TimerEnSegundos -= Time.deltaTime, 0, 999);
+        if ( TimerEnSegundos == 0) {
+            PauseTimer();
             // Lose event GM
         }
         
@@ -39,11 +39,11 @@ public class LevelTimer : MonoBehaviour
         blackboardUI.SetTimer($"{minutes:00}:{seconds:00}:{cents:00}"); 
 
     }
-    public void StopTimer()
+    public void PauseTimer()
     {
         Paused = true;
     }
-    public void ReanudateTimer()
+    public void UnpauseTimer()
     {
         Paused = false;
     }

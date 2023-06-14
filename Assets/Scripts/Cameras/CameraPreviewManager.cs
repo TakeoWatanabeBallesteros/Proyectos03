@@ -45,6 +45,7 @@ public class CameraPreviewManager : MonoBehaviour
         {
             camera.Stop();
         }
+        Singleton.Instance.Player.GetComponent<AnimatorController>().StartAnim();
         Singleton.Instance.UIManager.uiManager_FSM.Trigger("LevelPreview-Playing");
     }
     
@@ -58,7 +59,7 @@ public class CameraPreviewManager : MonoBehaviour
         if(!cameraList.Any()) 
         {
             //Debug.Log("Yep");
-            Singleton.Instance.UIManager.uiManager_FSM.Trigger("LevelPreview-Playing");
+            EndPreview();
             return;
         }
         Array.Reverse(cameraList);
