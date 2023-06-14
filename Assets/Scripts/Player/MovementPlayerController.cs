@@ -29,6 +29,8 @@ public class MovementPlayerController : MonoBehaviour
     Vector3 forward;
     Vector3 right;
 
+    [SerializeField] private float gamePadSensitivity;
+
     [SerializeField] private float timeToRandomIdle;
     private float timeIdle;
 
@@ -94,8 +96,7 @@ public class MovementPlayerController : MonoBehaviour
         currentSpeed = Mathf.Lerp(currentSpeed, speed, Time.deltaTime * 10);
     }
 
-    private void RotatePlayerShooting()
-    {
+    private void RotatePlayerShooting() {
         //Sending a raycast
         camRay = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
 
