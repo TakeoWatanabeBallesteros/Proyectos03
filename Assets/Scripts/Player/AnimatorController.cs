@@ -34,7 +34,7 @@ public class AnimatorController : MonoBehaviour
     
     public void SetRandomIdle()
     {
-        characterAnimator.SetFloat("IdleID", Random.Range(0, 4));
+        characterAnimator.SetFloat("IdleID", Random.Range(0, 5));
         characterAnimator.SetTrigger("RandomIdle");
     }
 }
