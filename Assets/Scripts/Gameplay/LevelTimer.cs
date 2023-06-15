@@ -46,7 +46,7 @@ public class LevelTimer : MonoBehaviour
         if ( TimerEnSegundos == 0) {
             playerHealth.Dead = true;
             PauseTimer();
-            StartCoroutine(blackboardUI.FadeIN());
+            StartCoroutine(blackboardUI.FadeIN(true));
             inputPlayer.enabled = false;
             playerMovement.Stop();
             StartCoroutine(NoTime());

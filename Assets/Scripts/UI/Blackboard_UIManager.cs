@@ -166,14 +166,23 @@ public class Blackboard_UIManager : DynamicBlackboard
 
     }
 
-    public IEnumerator FadeIN()
+    public IEnumerator FadeIN(bool timesup)
     {
         yield return new WaitForSeconds(2f);
         DeathscreenAlfa = 0;
         for (float i=0; i <1; i+=.1f)
         {
             DeathscreenAlfa += .1f;
-            YouDiedImage.color = new Color(1f, 1f, 1f, DeathscreenAlfa);
+            //Takeo perdoname
+            if (timesup)
+            {
+                TimesUpImage.color = new Color(1f, 1f, 1f, DeathscreenAlfa);
+            }
+            else
+            {
+
+                YouDiedImage.color = new Color(1f, 1f, 1f, DeathscreenAlfa);
+            }
             yield return new WaitForSeconds(.05f);
         }
     }
