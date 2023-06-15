@@ -235,21 +235,17 @@ public class Blackboard_UIManager : DynamicBlackboard
     }
 
     public void OnSFXChange(float value) {
-        SFXVoulme = Mathf.Pow(10.0f, value / 20f);
-        SFX.setVolume(SFXVoulme);
+        SFX.setVolume(value);
         SFX_0.value = value;
         SFX_1.value = value;
     }
     public void OnMusicChange(float value) {
-        MusicVoulme = Mathf.Pow(10.0f, value / 20f);
-        Music.setVolume(MusicVoulme);
+        Music.setVolume(value);
         Music_0.value = value;
         Music_1.value = value;
     }
     public void OnAmbientChange(float value) {
-        AmbientVoulme = Mathf.Pow(10.0f, value / 20f);
-        Ambient.setVolume(AmbientVoulme);
-        Debug.Log(AmbientVoulme);
+        Ambient.setVolume(value);
         Ambient_0.value = value;
         Ambient_1.value = value;
     }
