@@ -40,7 +40,7 @@ public class RandomCloneWindow : EditorWindow
 
                 // For random position around the original object.
                 float randomX = Random.Range(-10.0f, 10.0f); 
-                float randomY = Random.Range(-10.0f, 10.0f); 
+                float randomY = Random.Range(0.0f, 10.0f); 
                 float randomZ = Random.Range(-10.0f, 10.0f);
                 clone.transform.localPosition = clone.transform.localPosition + new Vector3(randomX, randomY, randomZ);
 
