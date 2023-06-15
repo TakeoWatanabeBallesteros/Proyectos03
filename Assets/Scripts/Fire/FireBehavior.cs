@@ -75,6 +75,7 @@ public class FireBehavior : MonoBehaviour
         if (onFire)
         {
             heat = 100;
+            _objectMaterial.SetFloat(Heat, Scale(0, 100, heat));
             CreateBurnDecal();
             PlayFireSound();
         }
