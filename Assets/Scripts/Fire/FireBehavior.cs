@@ -51,8 +51,6 @@ public class FireBehavior : MonoBehaviour
     private EventInstance _onFireSound;
     [SerializeField] private EventReference putOutSound;
 
-    public GameObject particlesPuttingOut;
-
     private void PlayFireSound()
     {
         _onFireSound = RuntimeManager.CreateInstance(onFireSound);
@@ -143,8 +141,6 @@ public class FireBehavior : MonoBehaviour
     public void PuttingOut()
     {
         fireHP = Mathf.Clamp(fireHP -= waterDamagePerSecond * Time.deltaTime, 0, 100);
-        
-        particlesPuttingOut.SetActive(true);
         
         foreach (ParticleSystem fireParticle in fireParticles)
         {
