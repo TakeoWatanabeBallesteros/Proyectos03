@@ -166,7 +166,7 @@ public class Blackboard_UIManager : DynamicBlackboard
 
     }
 
-    public IEnumerator FadeIN(bool time)
+    public IEnumerator FadeIN()
     {
         yield return new WaitForSeconds(2f);
         DeathscreenAlfa = 0;
