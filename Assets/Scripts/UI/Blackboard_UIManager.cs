@@ -57,6 +57,7 @@ public class Blackboard_UIManager : DynamicBlackboard
 
     float DeathscreenAlfa;
     public Image YouDiedImage;
+    public Image TimesUpImage;
 
     // Start is called before the first frame update
     void Start()
@@ -165,7 +166,7 @@ public class Blackboard_UIManager : DynamicBlackboard
 
     }
 
-    public IEnumerator FadeIN()
+    public IEnumerator FadeIN(bool time)
     {
         yield return new WaitForSeconds(2f);
         DeathscreenAlfa = 0;
