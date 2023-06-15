@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ActivationFire : MonoBehaviour
 {
-    GameObject Activable;
+    public GameObject[] Activable;
 
     // Start is called before the first frame update
     void Awake()
@@ -20,6 +20,9 @@ public class ActivationFire : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-        Activable.GetComponent<FireBehavior>().onFire = true;
+        foreach (GameObject i in Activable)
+        {
+            i.GetComponent<FireBehavior>().onFire = true;
+        }
     }
 }
