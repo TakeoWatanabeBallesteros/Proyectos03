@@ -55,4 +55,15 @@ public class ItemManager : MonoBehaviour
         UI_Blackboard.SetCollectables(Collected, TotalCollectables);
         pointsManager.AddPointsCollectable();
     }
+
+    public void DeadChild()
+    {
+        TotalKids--;
+        UI_Blackboard.SetKids(SavedKids, TotalKids);
+        pointsManager.RemovePointsChildBurned();
+        if(SavedKids == TotalKids) {
+            uiManager.uiManager_FSM.Trigger("Playing-Win");
+        }
+
+    }
 }

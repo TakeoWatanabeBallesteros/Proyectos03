@@ -51,6 +51,8 @@ public class FireBehavior : MonoBehaviour
     private EventInstance _onFireSound;
     [SerializeField] private EventReference putOutSound;
 
+    public GameObject particlesPuttingOut;
+
     private void PlayFireSound()
     {
         _onFireSound = RuntimeManager.CreateInstance(onFireSound);
@@ -142,6 +144,8 @@ public class FireBehavior : MonoBehaviour
     {
         fireHP = Mathf.Clamp(fireHP -= waterDamagePerSecond * Time.deltaTime, 0, 100);
         
+        particlesPuttingOut.SetActive(true);
+        
         foreach (ParticleSystem fireParticle in fireParticles)
         {
             var scale = (fireHP / 100) * originalFireSize;
@@ -167,6 +171,7 @@ public class FireBehavior : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(true); //Enable smoke
         SetBurnedMaterial();
         StopHeating();
+        
     }
 
     public void AddHeat(float heat = 0)
