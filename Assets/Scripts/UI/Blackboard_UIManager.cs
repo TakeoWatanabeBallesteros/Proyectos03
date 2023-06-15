@@ -59,7 +59,6 @@ public class Blackboard_UIManager : DynamicBlackboard
     private PlayerControls controls = null;
     private GameManager gameManager;
     private FSM_UIManager uiManager;
-    public FinalScreenManager finalScreenManager;
 
     float DeathscreenAlfa;
     public Image YouDiedImage;
@@ -94,7 +93,6 @@ public class Blackboard_UIManager : DynamicBlackboard
     {
         gameManager = Singleton.Instance.GameManager;
         uiManager = Singleton.Instance.UIManager;
-        finalScreenManager = Singleton.Instance.FinalScreenManager;
         controls = new PlayerControls();
         controls.Enable();
         controls.Player.Pause.performed += ctx =>

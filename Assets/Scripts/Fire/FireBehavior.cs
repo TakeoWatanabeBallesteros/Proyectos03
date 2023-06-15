@@ -144,7 +144,7 @@ public class FireBehavior : MonoBehaviour
     {
         fireHP = Mathf.Clamp(fireHP -= waterDamagePerSecond * Time.deltaTime, 0, 100);
         
-        particlesPuttingOut.SetActive(true);
+        // particlesPuttingOut.SetActive(true);
         
         foreach (ParticleSystem fireParticle in fireParticles)
         {
