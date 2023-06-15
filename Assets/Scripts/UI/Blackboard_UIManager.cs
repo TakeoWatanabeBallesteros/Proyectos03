@@ -59,6 +59,8 @@ public class Blackboard_UIManager : DynamicBlackboard
     public Image YouDiedImage;
     public Image TimesUpImage;
 
+    public List<WinningImage> winningImages;
+
     // Start is called before the first frame update
     void Start()
     {

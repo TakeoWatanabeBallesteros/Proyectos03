@@ -11,11 +11,14 @@ public class ChildrenHealthSystem : MonoBehaviour, IHealth
     public float _maxHealth;
 
     private PointsBehavior pointsManager;
+
+    private ItemManager itemsManager;
     // Start is called before the first frame update
     void Start()
     {
         canBeDamaged = true;
         pointsManager = Singleton.Instance.PointsManager;
+        itemsManager = GameObject.FindWithTag("ItemsManager").GetComponent<ItemManager>();
         health = maxHealth;
     }
 
@@ -52,7 +55,7 @@ public class ChildrenHealthSystem : MonoBehaviour, IHealth
 
     private void Die()
     {
-        pointsManager.RemovePointsChildBurned();
+        itemsManager.DeadChild();
         enabled = false;
         this.transform.parent.gameObject.SetActive(false);
     }
