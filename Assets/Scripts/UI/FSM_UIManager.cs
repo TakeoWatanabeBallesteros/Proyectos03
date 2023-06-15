@@ -100,6 +100,10 @@ public class FSM_UIManager : MonoBehaviour
     {
         uiManager_FSM.Trigger("Playing-PauseMenu");
     }
+    public void GoPauseSettings()
+    {
+        uiManager_FSM.Trigger("PauseMenu-PauseMenuSettings");
+    }
 
     public void WantToExit()
     {
