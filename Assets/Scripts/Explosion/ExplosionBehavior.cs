@@ -56,7 +56,7 @@ public class ExplosionBehavior : MonoBehaviour
         gameObject.tag = "Untagged";
         animator.SetTrigger(ExplodeId);
         StartCoroutine(StartExplosion());
-        electricParticles.gameObject.SetActive(false);
+        if(electricParticles!=null) electricParticles.gameObject.SetActive(false);
     }
 
     IEnumerator StartExplosion()
