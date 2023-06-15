@@ -8,11 +8,8 @@ using UnityEngine.Serialization;
 public class PickupKid : MonoBehaviour
 {
     [SerializeField] private AnimatorController characterAnim;
-    public GameManager GM;
-    public Transform Shoulder;
-    public GameObject PickupText;
+    private GameObject pickupText;
     private bool CarringKid;
-    [SerializeField] private bool CanExtract;
     [SerializeField] private bool CanPickup;
     private GameObject TargetKid;
     [SerializeField] private InputPlayerController playerInput;
@@ -33,7 +30,7 @@ public class PickupKid : MonoBehaviour
         prefabPoseKid.SetActive(false);
 
         blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
-        PickupText = blackboardUI.PickUpText;
+        pickupText = blackboardUI.PickUpText;
     }
 
     // Update is called once per frame
@@ -59,7 +56,7 @@ public class PickupKid : MonoBehaviour
         if (!other.CompareTag("Kid") || CarringKid) return;
         blackboardUI.PickUpText.SetActive(false);
         CanPickup = true;
-        PickupText.SetActive(true);
+        pickupText.SetActive(true);
         TargetKid = other.transform.parent.gameObject;
     }
 
@@ -68,8 +65,7 @@ public class PickupKid : MonoBehaviour
         if (!other.CompareTag("Kid")) return;
         blackboardUI.PickUpText.SetActive(false);
         CanPickup = false;
-        CanExtract = false;
-        PickupText.SetActive(false);
+        pickupText.SetActive(false);
     }
     public bool HasKid()
     {
