@@ -189,7 +189,7 @@ public class FireBehavior : MonoBehaviour
 
     private void CoolDown()
     {
-        if (onHeating || heat == 0) return;
+        if (onHeating || heat == 0 || heat == 100) return;
         heat = Mathf.Clamp(heat - (heatPerSecond * Time.deltaTime), 0, 100);
         _objectMaterial.SetFloat(Heat, Scale(0, 100, heat));
     }
