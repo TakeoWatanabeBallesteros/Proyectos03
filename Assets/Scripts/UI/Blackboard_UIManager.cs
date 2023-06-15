@@ -57,6 +57,7 @@ public class Blackboard_UIManager : DynamicBlackboard
 
     float DeathscreenAlfa;
     public Image YouDiedImage;
+    public Image TimesUpImage;
 
     // Start is called before the first frame update
     void Start()
@@ -157,7 +158,10 @@ public class Blackboard_UIManager : DynamicBlackboard
     {
         GameObject pref = Instantiate(PointsPrefab, PontPopUpOrigin.transform); 
         pref.GetComponent<TextMeshProUGUI>().text = points < 0 ?  "" + points : "+" + points;
-        pref.transform.position = PontPopUpOrigin.transform.position;
+        Vector3 a = new Vector3(PontPopUpOrigin.transform.position.x, PontPopUpOrigin.transform.position.y, PontPopUpOrigin.transform.position.z);
+        a.x += Random.Range(-40,40);
+        a.y += Random.Range(-40, 40);
+        pref.transform.position = a;
         Destroy(pref, pref.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length - 0.1f);
 
     }
