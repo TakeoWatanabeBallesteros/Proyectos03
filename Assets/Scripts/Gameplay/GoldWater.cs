@@ -63,6 +63,7 @@ public class GoldWater : MonoBehaviour
         pointsBehavior = Singleton.Instance.PointsManager;
         blackboardUIManager = Singleton.Instance.UIManager.blackboard_UIManager;
         currentWater = maxWater;
+        blackboardUIManager.SetWaterBar(currentWater);
     }
 
     // Update is called once per frame
