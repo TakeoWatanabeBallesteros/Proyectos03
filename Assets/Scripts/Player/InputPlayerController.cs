@@ -8,8 +8,8 @@ using UnityEngine.InputSystem;
 public class InputPlayerController : MonoBehaviour
 {
     public PlayerControls controls { get; private set; }
-    
     public Vector2 movement { get; private set; }
+    public Vector2 look { get; private set; }
     public bool shoot { get; private set; }
     public bool interact { get; private set; }
     public bool secondaryShoot { get; private set; }
@@ -30,7 +30,9 @@ public class InputPlayerController : MonoBehaviour
     {
         controls = controls ?? new PlayerControls();
         controls.Player.Movement.performed += ctx => movement = ctx.ReadValue<Vector2>();
-        controls.Player.Movement.canceled += ctx => movement = ctx.ReadValue<Vector2>();
+        controls.Player.Movement.canceled += ctx => movement = Vector2.zero;
+        controls.Player.Look.performed += ctx => look = ctx.ReadValue<Vector2>();
+        controls.Player.Look.canceled += ctx => look = Vector2.zero;
         controls.Player.Shoot.performed += ctx => shoot = ctx.ReadValueAsButton();
         controls.Player.Shoot.canceled += ctx => shoot = ctx.ReadValueAsButton(); 
         controls.Player.SecondaryShot.performed += ctx => secondaryShoot = ctx.ReadValueAsButton();

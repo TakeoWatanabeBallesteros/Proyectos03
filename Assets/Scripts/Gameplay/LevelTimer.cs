@@ -46,7 +46,7 @@ public class LevelTimer : MonoBehaviour
         if ( TimerEnSegundos == 0) {
             playerHealth.Dead = true;
             PauseTimer();
-            StartCoroutine(blackboardUI.FadeIN());
+            StartCoroutine(blackboardUI.FadeIN(true));
             inputPlayer.enabled = false;
             playerMovement.Stop();
             StartCoroutine(NoTime());
@@ -73,6 +73,7 @@ public class LevelTimer : MonoBehaviour
         do {
             yield return null;
         } while (!controls.Player.Restart.triggered);
+        Singleton.Instance.UIManager.blackboard_UIManager.TimesUpImage.color = new Color(1f, 1f, 1f, 0);
         Singleton.Instance.UIManager.GoMainMenu();
     }
     

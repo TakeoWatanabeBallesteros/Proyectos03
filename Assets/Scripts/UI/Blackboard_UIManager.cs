@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using FMOD.Studio;
+using FMODUnity;
+using Random = UnityEngine.Random;
 
 public class Blackboard_UIManager : DynamicBlackboard
 {
@@ -49,21 +53,46 @@ public class Blackboard_UIManager : DynamicBlackboard
     public GameObject FireHandle;
     public GameObject PontPopUpOrigin;
     public GameObject PointsPrefab;
+    public GameObject RedPointsPrefab;
+    public GameObject GreenPointsPrefab;
 
     private PlayerControls controls = null;
     private GameManager gameManager;
     private FSM_UIManager uiManager;
-    public FinalScreenManager finalScreenManager;
 
     float DeathscreenAlfa;
     public Image YouDiedImage;
+    public Image TimesUpImage;
+
+    public List<WinningImage> winningImages;
+
+    private VCA SFX;
+    private VCA Music;
+    private VCA Ambient;
+
+    private float SFXVoulme;
+    private float MusicVoulme;
+    private float AmbientVoulme;
+
+    public Slider SFX_0;
+    public Slider SFX_1;
+    public Slider Music_0;
+    public Slider Music_1;
+    public Slider Ambient_0;
+    public Slider Ambient_1;
+
+    private void Awake()
+    {
+        SFX = RuntimeManager.GetVCA("vca:/SFX");
+        Music = RuntimeManager.GetVCA("vca:/Music");
+        Ambient = RuntimeManager.GetVCA("vca:/Ambient");
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = Singleton.Instance.GameManager;
         uiManager = Singleton.Instance.UIManager;
-        finalScreenManager = Singleton.Instance.FinalScreenManager;
         controls = new PlayerControls();
         controls.Enable();
         controls.Player.Pause.performed += ctx =>
@@ -108,12 +137,6 @@ public class Blackboard_UIManager : DynamicBlackboard
         FireHandle.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SetLifeBar(float value)
     {
         lifeBar.value = value;
@@ -149,27 +172,64 @@ public class Blackboard_UIManager : DynamicBlackboard
         pointsText.text = currentPoints + "/" + pointsToWin;
         SombraOfPoints.text = currentPoints + "/" + pointsToWin;
         pointsWinText.text = currentPoints + "/" + pointsToWin;
-        if(points !=0) PointsPopUp(points);
+        if (points == 0) return;
+        if (points < 0) RedPointsPopUp(points);
+        else PointsPopUp(points);
 
     }
+
 
     private void PointsPopUp(int points)
     {
         GameObject pref = Instantiate(PointsPrefab, PontPopUpOrigin.transform); 
         pref.GetComponent<TextMeshProUGUI>().text = points < 0 ?  "" + points : "+" + points;
-        pref.transform.position = PontPopUpOrigin.transform.position;
+        Vector3 a = new Vector3(PontPopUpOrigin.transform.position.x, PontPopUpOrigin.transform.position.y, PontPopUpOrigin.transform.position.z);
+        a.x += Random.Range(-40,40);
+        a.y += Random.Range(-40, 40);
+        pref.transform.position = a;
+        Destroy(pref, pref.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length - 0.1f);
+
+    }
+    private void RedPointsPopUp(int points)
+    {
+        GameObject pref = Instantiate(RedPointsPrefab, PontPopUpOrigin.transform);
+        pref.GetComponent<TextMeshProUGUI>().text = points < 0 ? "" + points : "+" + points;
+        Vector3 a = new Vector3(PontPopUpOrigin.transform.position.x, PontPopUpOrigin.transform.position.y, PontPopUpOrigin.transform.position.z);
+        a.x += Random.Range(-40, 40);
+        a.y += Random.Range(-40, 40);
+        pref.transform.position = a;
+        Destroy(pref, pref.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length - 0.1f);
+
+    }
+    private void GreenPointsPopUp(int points)
+    {
+        GameObject pref = Instantiate(GreenPointsPrefab, PontPopUpOrigin.transform);
+        pref.GetComponent<TextMeshProUGUI>().text = points < 0 ? "" + points : "+" + points;
+        Vector3 a = new Vector3(PontPopUpOrigin.transform.position.x, PontPopUpOrigin.transform.position.y, PontPopUpOrigin.transform.position.z);
+        a.x += Random.Range(-40, 40);
+        a.y += Random.Range(-40, 40);
+        pref.transform.position = a;
         Destroy(pref, pref.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length - 0.1f);
 
     }
 
-    public IEnumerator FadeIN()
+    public IEnumerator FadeIN(bool timesup)
     {
         yield return new WaitForSeconds(2f);
         DeathscreenAlfa = 0;
         for (float i=0; i <1; i+=.1f)
         {
             DeathscreenAlfa += .1f;
-            YouDiedImage.color = new Color(1f, 1f, 1f, DeathscreenAlfa);
+            //Takeo perdoname
+            if (timesup)
+            {
+                TimesUpImage.color = new Color(1f, 1f, 1f, DeathscreenAlfa);
+            }
+            else
+            {
+
+                YouDiedImage.color = new Color(1f, 1f, 1f, DeathscreenAlfa);
+            }
             yield return new WaitForSeconds(.05f);
         }
     }
@@ -197,5 +257,21 @@ public class Blackboard_UIManager : DynamicBlackboard
         yield return new WaitForSeconds(3f);
         ChildHappyFaceSprite.enabled = false;
         ChildSadFaceSprite.enabled = true;
+    }
+
+    public void OnSFXChange(float value) {
+        SFX.setVolume(value);
+        SFX_0.value = value;
+        SFX_1.value = value;
+    }
+    public void OnMusicChange(float value) {
+        Music.setVolume(value);
+        Music_0.value = value;
+        Music_1.value = value;
+    }
+    public void OnAmbientChange(float value) {
+        Ambient.setVolume(value);
+        Ambient_0.value = value;
+        Ambient_1.value = value;
     }
 }

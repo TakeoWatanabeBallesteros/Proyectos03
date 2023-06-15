@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FinalScreenManager : MonoBehaviour
 {
-    [SerializeField] WinningImage[] winningImages;
+    WinningImage[] winningImages;
 
     [SerializeField] private float enlargeScale = 1.5f;
     [SerializeField] private float shrinkScale = 1f;
@@ -18,11 +18,14 @@ public class FinalScreenManager : MonoBehaviour
     public int maxPointsShow1;
     public int maxPointsShow2;
     public int maxPointsShow3;
+
+    private Blackboard_UIManager blackboardUIManager;
     
     // Start is called before the first frame update
     void Start()
     {
         pointsManager = Singleton.Instance.PointsManager;
+        blackboardUIManager = Singleton.Instance.UIManager.blackboard_UIManager;
     }
 
     void ShowImages(int numberOfImages)
@@ -32,14 +35,14 @@ public class FinalScreenManager : MonoBehaviour
 
     private IEnumerator ShowImagesRoutine(int numberOfImages)
     {
-        foreach (WinningImage x in winningImages)
+        foreach (WinningImage x in blackboardUIManager.winningImages)
         {
             x.winImage.transform.localScale = Vector3.zero;
         }
 
         for (int i = 0; i < numberOfImages; i++)
         {
-            yield return StartCoroutine(EnlargeAndShrinkImage(winningImages[i]));
+            yield return StartCoroutine(EnlargeAndShrinkImage(blackboardUIManager.winningImages[i]));
         }
     }
 

@@ -5017,7 +5017,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onFire: 0
   onHeating: 0
-  damageRadius: 0.7
+  damageRadius: 1.9
   fireHP: 100
   waterDamagePerSecond: 100
   heatDistance: 3
@@ -5048,6 +5048,7 @@ MonoBehaviour:
       Data3: -1957754738
       Data4: -1803356760
     Path: event:/Fire/Fire being extinguished
+  particlesPuttingOut: {fileID: 8035744886514452412}
 --- !u!135 &6881662661197252693
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5431,6 +5432,12 @@ ParticleSystem:
 --- !u!198 &6717332488553478284 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 235884603822162813, guid: b5b85f8f958fc144e8d556a417a36bbb,
+    type: 3}
+  m_PrefabInstance: {fileID: 6809096852267760625}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8035744886514452412 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3601321577871670349, guid: b5b85f8f958fc144e8d556a417a36bbb,
     type: 3}
   m_PrefabInstance: {fileID: 6809096852267760625}
   m_PrefabAsset: {fileID: 0}

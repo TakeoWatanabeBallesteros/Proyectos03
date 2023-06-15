@@ -63,6 +63,7 @@ public class GoldWater : MonoBehaviour
         pointsBehavior = Singleton.Instance.PointsManager;
         blackboardUIManager = Singleton.Instance.UIManager.blackboard_UIManager;
         currentWater = maxWater;
+        blackboardUIManager.SetWaterBar(currentWater);
     }
 
     // Update is called once per frame
@@ -145,14 +146,16 @@ public class GoldWater : MonoBehaviour
         }
         else if (other.CompareTag("Explosive"))
         {
-            StartCoroutine(other.GetComponent<ExplosionBehavior>().Explode());
+            other.GetComponent<ExplosionBehavior>().MakeItExplote();
+            //StartCoroutine(other.GetComponent<ExplosionBehavior>().Explode());
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("FireSource"))
         {
-            fires.Remove(other.GetComponentInParent<FireBehavior>());
+            fires.Remove(other.GetComponentInParent<FireBehavior>());    
+            // other.GetComponentInParent<FireBehavior>().particlesPuttingOut.SetActive(false);
         }
     }
 
@@ -179,7 +182,6 @@ public class GoldWater : MonoBehaviour
         StopAllCoroutines();
         water.Stop();
         waterDetails.Stop();
-        //waterCone.gameObject.SetActive(false);
         cylinder.enabled = false;
         fires.Clear();
         pointsBehavior.ResetCombo();

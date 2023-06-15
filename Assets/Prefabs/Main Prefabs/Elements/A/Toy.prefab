@@ -4995,7 +4995,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3695602157331688071}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -5048,6 +5048,7 @@ MonoBehaviour:
       Data3: -1957754738
       Data4: -1803356760
     Path: event:/Fire/Fire being extinguished
+  particlesPuttingOut: {fileID: 194530477449485169}
 --- !u!135 &4908425561230502223
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5086,7 +5087,7 @@ PrefabInstance:
     - target: {fileID: 235884603822162813, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
       propertyPath: InitialModule.gravityModifier.scalar
-      value: -0.7
+      value: -0.24
       objectReference: {fileID: 0}
     - target: {fileID: 661020124134275789, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
@@ -5166,12 +5167,12 @@ PrefabInstance:
     - target: {fileID: 5037866352400002968, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.000000039736424
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5037866352400002968, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.3333332
+      value: 0.147
       objectReference: {fileID: 0}
     - target: {fileID: 5115390600801519191, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
@@ -5311,7 +5312,7 @@ PrefabInstance:
     - target: {fileID: 6675893457974259758, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
       propertyPath: InitialModule.gravityModifier.scalar
-      value: -0.7
+      value: -0.24
       objectReference: {fileID: 0}
     - target: {fileID: 6675893458143112108, guid: b5b85f8f958fc144e8d556a417a36bbb,
         type: 3}
@@ -5445,6 +5446,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5b85f8f958fc144e8d556a417a36bbb, type: 3}
+--- !u!1 &194530477449485169 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3601321577871670349, guid: b5b85f8f958fc144e8d556a417a36bbb,
+    type: 3}
+  m_PrefabInstance: {fileID: 3695602156286535484}
+  m_PrefabAsset: {fileID: 0}
 --- !u!198 &3463106865853736001 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 235884603822162813, guid: b5b85f8f958fc144e8d556a417a36bbb,

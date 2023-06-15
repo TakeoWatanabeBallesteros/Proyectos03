@@ -54,5 +54,9 @@ public class Singleton : MonoBehaviour
     {
         _player = GameObject.FindGameObjectWithTag("Player");
         _itemsManager = GameObject.FindGameObjectWithTag("ItemsManager")?.GetComponent<ItemManager>();
+        _pointsManager = null;
+        _pointsManager = FindObjectOfType<PointsBehavior>();
+        PointsManager?.ResetPoints();
+        _finalScreenManager = FindObjectOfType<FinalScreenManager>();
     }
 }

@@ -34,6 +34,7 @@ public class Collectable : MonoBehaviour
         texture.material.color = new Color(0f, 0f, 0f, 1f);
         Sparks.SetActive(true);
         pointsBehavior.RemovePointsCollectable();
+        itemsManager.DeadCollectable();
         Destroy(Luz);
         enabled = false;
         collider.enabled = false;
