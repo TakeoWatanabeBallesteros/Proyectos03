@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using FMOD.Studio;
+using FMODUnity;
+using Random = UnityEngine.Random;
 
 public class Blackboard_UIManager : DynamicBlackboard
 {
@@ -61,6 +65,21 @@ public class Blackboard_UIManager : DynamicBlackboard
 
     public List<WinningImage> winningImages;
 
+    private VCA SFX;
+    private VCA Music;
+    private VCA Ambient;
+
+    private float SFXVoulme;
+    private float MusicVoulme;
+    private float AmbientVoulme;
+
+    private void Awake()
+    {
+        SFX = RuntimeManager.GetVCA("vca:/SFX");
+        Music = RuntimeManager.GetVCA("vca:/Music");
+        Ambient = RuntimeManager.GetVCA("vca:/Ambient");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -109,12 +128,6 @@ public class Blackboard_UIManager : DynamicBlackboard
         ChildHappyFaceSprite.enabled = false;
         ChildSadFaceSprite.enabled = true;
         FireHandle.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void SetLifeBar(float value)
@@ -212,5 +225,18 @@ public class Blackboard_UIManager : DynamicBlackboard
         yield return new WaitForSeconds(3f);
         ChildHappyFaceSprite.enabled = false;
         ChildSadFaceSprite.enabled = true;
+    }
+
+    public void OnSFXChange(float value) {
+        SFXVoulme = Mathf.Pow(10.0f, value / 20f);
+        SFX.setVolume(SFXVoulme);
+    }
+    public void OnMusicChange(float value) {
+        MusicVoulme = Mathf.Pow(10.0f, value / 20f);
+        Music.setVolume(MusicVoulme);
+    }
+    public void OnAmbientChange(float value) {
+        AmbientVoulme = Mathf.Pow(10.0f, value / 20f);
+        Ambient.setVolume(AmbientVoulme);
     }
 }
