@@ -24,6 +24,7 @@ public class ExplosionBehavior : MonoBehaviour
     CameraController camController;
     private static readonly int ExplodeId = Animator.StringToHash("Explode");
     public GameObject explosionParticles;
+    public GameObject electricParticles;
     public Event_WallBreak wallBreakEvent;
 
     private FireBehavior fireBehavior;
@@ -47,6 +48,7 @@ public class ExplosionBehavior : MonoBehaviour
         pointsManager = Singleton.Instance.PointsManager;
         detectionCollider.enabled = true;
         zoneExpansionCollider.enabled = false;
+        electricParticles.gameObject.SetActive(true);
     }
 
     public void MakeItExplote()
@@ -54,6 +56,7 @@ public class ExplosionBehavior : MonoBehaviour
         gameObject.tag = "Untagged";
         animator.SetTrigger(ExplodeId);
         StartCoroutine(StartExplosion());
+        electricParticles.gameObject.SetActive(false);
     }
 
     IEnumerator StartExplosion()
