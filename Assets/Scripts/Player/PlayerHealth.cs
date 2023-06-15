@@ -104,7 +104,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
         inputPlayer.enabled = false;
         playerMovement.Stop();
         levelTimer.PauseTimer();
-        StartCoroutine(blackboardUI.FadeIN());
+        StartCoroutine(blackboardUI.FadeIN(false));
         StartCoroutine(Respawn());
         //activar polvo
         GameObject polvo = Instantiate(DustPile);
