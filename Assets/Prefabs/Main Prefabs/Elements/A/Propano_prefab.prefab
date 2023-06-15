@@ -209,9 +209,24 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65
   explosionParticles: {fileID: 1130103460154112196}
+  electricParticles: {fileID: 0}
   wallBreakEvent: {fileID: 0}
   zoneExpansionCollider: {fileID: 1128248231379764187}
   detectionCollider: {fileID: 1067194839128586390}
+  preExplosion:
+    Guid:
+      Data1: 2047444997
+      Data2: 1136712791
+      Data3: -1960190306
+      Data4: -405236892
+    Path: event:/Explosion/PreExplosion
+  Explosion:
+    Guid:
+      Data1: -1925074171
+      Data2: 1314614490
+      Data3: 840267923
+      Data4: -349423118
+    Path: event:/Explosion/Small explosion
 --- !u!114 &1128248231379764185
 MonoBehaviour:
   m_ObjectHideFlags: 0

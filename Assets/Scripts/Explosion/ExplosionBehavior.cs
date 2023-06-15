@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEditor;
+using FMODUnity;
 
 public class ExplosionBehavior : MonoBehaviour
 {
@@ -34,6 +35,9 @@ public class ExplosionBehavior : MonoBehaviour
     public Collider zoneExpansionCollider;
     public Collider detectionCollider;
     
+    [SerializeField] private EventReference preExplosion;
+    [SerializeField] private EventReference Explosion;
+
     [ContextMenu("Do Something")]
     void DoSomething()
     {
@@ -54,6 +58,7 @@ public class ExplosionBehavior : MonoBehaviour
     public void MakeItExplote()
     {
         gameObject.tag = "Untagged";
+        RuntimeManager.PlayOneShot(preExplosion, transform.position);
         animator.SetTrigger(ExplodeId);
         StartCoroutine(StartExplosion());
         electricParticles.gameObject.SetActive(false);
@@ -67,6 +72,7 @@ public class ExplosionBehavior : MonoBehaviour
         yield return new WaitForSecondsRealtime(.25f);
         explosionParticles.gameObject.SetActive(true);
         if(wallBreakEvent != null) wallBreakEvent.BreakWall();
+        RuntimeManager.PlayOneShot(Explosion, transform.position);
         pointsManager.AddPointsExplosion();
         camController.shakeDuration = 1f;
         CalculateExpansion();  
