@@ -145,7 +145,8 @@ public class GoldWater : MonoBehaviour
         }
         else if (other.CompareTag("Explosive"))
         {
-            StartCoroutine(other.GetComponent<ExplosionBehavior>().Explode());
+            other.GetComponent<ExplosionBehavior>().MakeItExplote();
+            //StartCoroutine(other.GetComponent<ExplosionBehavior>().Explode());
         }
     }
     private void OnTriggerExit(Collider other)
