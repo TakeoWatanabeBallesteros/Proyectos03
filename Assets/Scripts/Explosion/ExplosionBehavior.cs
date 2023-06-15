@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ public class ExplosionBehavior : MonoBehaviour
     [ContextMenu("Do Something")]
     void DoSomething()
     {
-        StartCoroutine(Explode());
+        MakeItExplote();
     }
 
     void Start()
@@ -48,22 +49,26 @@ public class ExplosionBehavior : MonoBehaviour
         zoneExpansionCollider.enabled = false;
     }
 
-    public IEnumerator Explode()
+    public void MakeItExplote()
     {
         gameObject.tag = "Untagged";
-        Debug.Log("Bom");
         animator.SetTrigger(ExplodeId);
+        StartCoroutine(StartExplosion());
+    }
+
+    IEnumerator StartExplosion()
+    {
+        yield return new WaitForSecondsRealtime(1.75f);
         detectionCollider.enabled = false;
         zoneExpansionCollider.enabled = true;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(.25f);
         explosionParticles.gameObject.SetActive(true);
         if(wallBreakEvent != null) wallBreakEvent.BreakWall();
         pointsManager.AddPointsExplosion();
+        camController.shakeDuration = 1f;
         CalculateExpansion();  
         ExplosionKnockBack();
-        camController.shakeDuration = 1f;
         fireBehavior.enabled = true;
-        yield return new WaitForSeconds(1f);
         enabled = false;
     }
     
@@ -92,10 +97,10 @@ public class ExplosionBehavior : MonoBehaviour
             }
         }
 
-        foreach (var x in healthEntities)
+        foreach (var x in healthEntities.ToList())
         {
             float distance = Vector3.Distance(transform.position, x.position);
-
+            
             if (x.health <= 0) continue;
             if (distance <= closeRange)
             {
@@ -126,6 +131,11 @@ public class ExplosionBehavior : MonoBehaviour
         else if (other.TryGetComponent<IHealth>(out var health) && health.health > 0f)
         {
             healthEntities.Add(health);
+        }
+
+        else if (other.CompareTag("Explosive"))
+        {
+            other.GetComponent<ExplosionBehavior>().MakeItExplote();
         }
     }
     private void OnTriggerExit(Collider other)
