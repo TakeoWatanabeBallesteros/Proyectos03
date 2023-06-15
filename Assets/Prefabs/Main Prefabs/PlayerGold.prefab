@@ -4981,6 +4981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canBeDamaged: 0
+  Dead: 0
   burnIndicatorTime: 0.5
   damageCoolDown: 1
   PlayerRender: {fileID: 5505501718713293699}
@@ -4988,6 +4989,7 @@ MonoBehaviour:
     type: 3}
   _maxHealth: 100
   animatorController: {fileID: 8533690593573027406}
+  levelTimer: {fileID: 0}
 --- !u!114 &6458635349065966334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5005,6 +5007,7 @@ MonoBehaviour:
   Maxspeed: 15
   speed: 15
   cam: {fileID: 0}
+  gamePadSensitivity: 1
   timeToRandomIdle: 5
 --- !u!114 &6458635349065966333
 MonoBehaviour:
