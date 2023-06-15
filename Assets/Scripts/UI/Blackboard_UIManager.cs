@@ -20,6 +20,7 @@ public class Blackboard_UIManager : DynamicBlackboard
     public GameObject LevelInfoCanvas;
     public GameObject CollectableCanvas;
     public GameObject ExitGameCanvas;
+    public GameObject HowToPlayCanvas;
     #endregion
 
     #region InGame
@@ -113,6 +114,9 @@ public class Blackboard_UIManager : DynamicBlackboard
                     break;
                 case GameState.Credits:
                     uiManager.uiManager_FSM.Trigger("MainMenu-Credits");
+                    break;
+                case GameState.HowToPlay:
+                    uiManager.uiManager_FSM.Trigger("MainMenu-HowToPlay");
                     break;
                 case GameState.ExitGame:
                     uiManager.NotSureToExit();

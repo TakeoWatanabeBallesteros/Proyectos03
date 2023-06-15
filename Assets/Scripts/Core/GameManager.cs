@@ -79,6 +79,7 @@ public enum GameState{
     MainMenu,
     SettingsMenu,
     Credits,
+    HowToPlay,
     ExitGame,
     LvlsMenu,
     LvlInfo,

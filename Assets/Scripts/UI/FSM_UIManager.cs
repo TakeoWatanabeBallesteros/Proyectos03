@@ -75,6 +75,11 @@ public class FSM_UIManager : MonoBehaviour
         uiManager_FSM.Trigger("MainMenu-Credits");
     }
 
+    public void MainMenuHowToPlay()
+    {
+        uiManager_FSM.Trigger("MainMenu-HowToPlay");
+    }
+
     // The LoadSceneAsync method maybe will be in the GameManager.
     public void GoLevel(int index)
     {
