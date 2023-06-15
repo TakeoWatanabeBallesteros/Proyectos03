@@ -18,6 +18,7 @@ public class State_LevelPreview  : StateBase
         singleton.GameManager.ChangeGameState(GameState.LevelPreview);
         singleton.UIManager.blackboard_UIManager.LevelPreviewCanvas.SetActive(true);
         singleton.CameraPreviewManager.LoadPreviewCameras();
+        singleton.UIManager._inGameMusic.setTimelinePosition(0);
     }
     
     public override void OnLogic()

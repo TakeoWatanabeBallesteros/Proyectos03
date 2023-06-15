@@ -11,16 +11,18 @@ public class State_Playing : StateBase
 
     public State_Playing() : base(needsExitTime: false)
     {
+        singleton = Singleton.Instance;
+        singleton.UIManager._inGameMusic.start();
+        singleton.UIManager._inGameMusic.release();
+        singleton.UIManager._inGameMusic.setPaused(true);
     }
     
     public override void OnEnter()
     {
-        singleton = Singleton.Instance;
         Singleton.Instance.GameManager.ChangeGameState(GameState.Playing);
         singleton.UIManager.blackboard_UIManager.InGameCanvas.SetActive(true);
+        singleton.UIManager._inGameMusic.setPaused(false);
         singleton.GameManager.OnUnpause();
-        singleton.UIManager._inGameMusic.start();
-        singleton.UIManager._inGameMusic.release();
         base.OnEnter();
     }
     
@@ -32,7 +34,7 @@ public class State_Playing : StateBase
     public override void OnExit()
     {
         singleton.UIManager.blackboard_UIManager.InGameCanvas.SetActive(false);
-        singleton.UIManager._inGameMusic.stop(STOP_MODE.ALLOWFADEOUT);
+        singleton.UIManager._inGameMusic.setPaused(true);
         base.OnExit();
     }
 }
