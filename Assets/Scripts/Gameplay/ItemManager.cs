@@ -64,6 +64,12 @@ public class ItemManager : MonoBehaviour
         if(SavedKids == TotalKids) {
             uiManager.uiManager_FSM.Trigger("Playing-Win");
         }
+    }
 
+    public void DeadCollectable()
+    {
+        TotalCollectables--;
+        UI_Blackboard.SetCollectables(Collected, TotalCollectables);
+        pointsManager.RemovePointsCollectable();
     }
 }
