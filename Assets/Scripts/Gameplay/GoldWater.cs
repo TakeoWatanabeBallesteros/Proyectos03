@@ -154,7 +154,8 @@ public class GoldWater : MonoBehaviour
     {
         if (other.CompareTag("FireSource"))
         {
-            fires.Remove(other.GetComponentInParent<FireBehavior>());            
+            other.GetComponentInParent<FireBehavior>().particlesPuttingOut.SetActive(false);
+            fires.Remove(other.GetComponentInParent<FireBehavior>());    
         }
     }
 
@@ -181,7 +182,6 @@ public class GoldWater : MonoBehaviour
         StopAllCoroutines();
         water.Stop();
         waterDetails.Stop();
-        //waterCone.gameObject.SetActive(false);
         cylinder.enabled = false;
         fires.Clear();
         pointsBehavior.ResetCombo();
