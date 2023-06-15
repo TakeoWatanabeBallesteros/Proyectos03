@@ -53,6 +53,8 @@ public class Blackboard_UIManager : DynamicBlackboard
     public GameObject FireHandle;
     public GameObject PontPopUpOrigin;
     public GameObject PointsPrefab;
+    public GameObject RedPointsPrefab;
+    public GameObject GreenPointsPrefab;
 
     private PlayerControls controls = null;
     private GameManager gameManager;
@@ -172,9 +174,12 @@ public class Blackboard_UIManager : DynamicBlackboard
         pointsText.text = currentPoints + "/" + pointsToWin;
         SombraOfPoints.text = currentPoints + "/" + pointsToWin;
         pointsWinText.text = currentPoints + "/" + pointsToWin;
-        if(points !=0) PointsPopUp(points);
+        if (points == 0) return;
+        if (points < 0) RedPointsPopUp(points);
+        else PointsPopUp(points);
 
     }
+
 
     private void PointsPopUp(int points)
     {
@@ -182,6 +187,28 @@ public class Blackboard_UIManager : DynamicBlackboard
         pref.GetComponent<TextMeshProUGUI>().text = points < 0 ?  "" + points : "+" + points;
         Vector3 a = new Vector3(PontPopUpOrigin.transform.position.x, PontPopUpOrigin.transform.position.y, PontPopUpOrigin.transform.position.z);
         a.x += Random.Range(-40,40);
+        a.y += Random.Range(-40, 40);
+        pref.transform.position = a;
+        Destroy(pref, pref.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length - 0.1f);
+
+    }
+    private void RedPointsPopUp(int points)
+    {
+        GameObject pref = Instantiate(RedPointsPrefab, PontPopUpOrigin.transform);
+        pref.GetComponent<TextMeshProUGUI>().text = points < 0 ? "" + points : "+" + points;
+        Vector3 a = new Vector3(PontPopUpOrigin.transform.position.x, PontPopUpOrigin.transform.position.y, PontPopUpOrigin.transform.position.z);
+        a.x += Random.Range(-40, 40);
+        a.y += Random.Range(-40, 40);
+        pref.transform.position = a;
+        Destroy(pref, pref.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length - 0.1f);
+
+    }
+    private void GreenPointsPopUp(int points)
+    {
+        GameObject pref = Instantiate(GreenPointsPrefab, PontPopUpOrigin.transform);
+        pref.GetComponent<TextMeshProUGUI>().text = points < 0 ? "" + points : "+" + points;
+        Vector3 a = new Vector3(PontPopUpOrigin.transform.position.x, PontPopUpOrigin.transform.position.y, PontPopUpOrigin.transform.position.z);
+        a.x += Random.Range(-40, 40);
         a.y += Random.Range(-40, 40);
         pref.transform.position = a;
         Destroy(pref, pref.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length - 0.1f);
@@ -235,21 +262,17 @@ public class Blackboard_UIManager : DynamicBlackboard
     }
 
     public void OnSFXChange(float value) {
-        SFXVoulme = Mathf.Pow(10.0f, value / 20f);
-        SFX.setVolume(SFXVoulme);
+        SFX.setVolume(value);
         SFX_0.value = value;
         SFX_1.value = value;
     }
     public void OnMusicChange(float value) {
-        MusicVoulme = Mathf.Pow(10.0f, value / 20f);
-        Music.setVolume(MusicVoulme);
+        Music.setVolume(value);
         Music_0.value = value;
         Music_1.value = value;
     }
     public void OnAmbientChange(float value) {
-        AmbientVoulme = Mathf.Pow(10.0f, value / 20f);
-        Ambient.setVolume(AmbientVoulme);
-        Debug.Log(AmbientVoulme);
+        Ambient.setVolume(value);
         Ambient_0.value = value;
         Ambient_1.value = value;
     }
