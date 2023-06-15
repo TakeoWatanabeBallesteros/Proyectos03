@@ -4,6 +4,9 @@ using UnityEngine;
 public class State_Win : StateBase
 {
     private Singleton singleton;
+    
+    
+    public FinalScreenManager finalScreenManager;
 
     public State_Win() : base(needsExitTime: false)
     {
@@ -14,7 +17,7 @@ public class State_Win : StateBase
         singleton = Singleton.Instance;
         Singleton.Instance.GameManager.ChangeGameState(GameState.Win);
         singleton.UIManager.blackboard_UIManager.WinCanvas.SetActive(true);
-        singleton.UIManager.blackboard_UIManager.finalScreenManager.CalculateStars();
+        singleton.FinalScreenManager.CalculateStars();
         //singleton.GameManager.OnPause();
         base.OnEnter();
     }
