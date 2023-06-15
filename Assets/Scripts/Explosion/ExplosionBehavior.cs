@@ -50,10 +50,12 @@ public class ExplosionBehavior : MonoBehaviour
 
     public IEnumerator Explode()
     {
+        gameObject.tag = "Untagged";
+        Debug.Log("Bom");
         animator.SetTrigger(ExplodeId);
         detectionCollider.enabled = false;
         zoneExpansionCollider.enabled = true;
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSeconds(2f);
         explosionParticles.gameObject.SetActive(true);
         if(wallBreakEvent != null) wallBreakEvent.BreakWall();
         pointsManager.AddPointsExplosion();
@@ -61,8 +63,7 @@ public class ExplosionBehavior : MonoBehaviour
         ExplosionKnockBack();
         camController.shakeDuration = 1f;
         fireBehavior.enabled = true;
-        yield return new WaitForSecondsRealtime(1f);
-        gameObject.tag = "Untagged";
+        yield return new WaitForSeconds(1f);
         enabled = false;
     }
     
@@ -118,7 +119,8 @@ public class ExplosionBehavior : MonoBehaviour
     {
         if (other.CompareTag("Fire"))
         {
-            nearObjectsOnFire.Add(other.GetComponentInParent<FireBehavior>());
+            var fire = other.GetComponentInParent<FireBehavior>();
+            if(!fire.onFire) nearObjectsOnFire.Add(other.GetComponentInParent<FireBehavior>());
         }
 
         else if (other.TryGetComponent<IHealth>(out var health) && health.health > 0f)
