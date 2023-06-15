@@ -57,5 +57,6 @@ public class Singleton : MonoBehaviour
         _pointsManager = null;
         _pointsManager = FindObjectOfType<PointsBehavior>();
         PointsManager?.ResetPoints();
+        _finalScreenManager = FindObjectOfType<FinalScreenManager>();
     }
 }
