@@ -154,8 +154,8 @@ public class GoldWater : MonoBehaviour
     {
         if (other.CompareTag("FireSource"))
         {
-            other.GetComponentInParent<FireBehavior>().particlesPuttingOut.SetActive(false);
             fires.Remove(other.GetComponentInParent<FireBehavior>());    
+            other.GetComponentInParent<FireBehavior>().particlesPuttingOut.SetActive(false);
         }
     }
 

@@ -209,6 +209,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65
   explosionParticles: {fileID: 1130103460154112196}
+  electricParticles: {fileID: 0}
   wallBreakEvent: {fileID: 0}
   zoneExpansionCollider: {fileID: 1128248231379764187}
   detectionCollider: {fileID: 1067194839128586390}
@@ -257,6 +258,7 @@ MonoBehaviour:
       Data3: -1957754738
       Data4: -1803356760
     Path: event:/Fire/Fire being extinguished
+  particlesPuttingOut: {fileID: 4490688257104493838}
 --- !u!136 &1067194839128586390
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -393,6 +395,12 @@ PrefabInstance:
 --- !u!198 &931770157490733630 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 235884603822162813, guid: b5b85f8f958fc144e8d556a417a36bbb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1128248230195642691}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4490688257104493838 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3601321577871670349, guid: b5b85f8f958fc144e8d556a417a36bbb,
     type: 3}
   m_PrefabInstance: {fileID: 1128248230195642691}
   m_PrefabAsset: {fileID: 0}

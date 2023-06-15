@@ -48,7 +48,7 @@ public class ExplosionBehavior : MonoBehaviour
         pointsManager = Singleton.Instance.PointsManager;
         detectionCollider.enabled = true;
         zoneExpansionCollider.enabled = false;
-        electricParticles.gameObject.SetActive(true);
+        if(electricParticles!=null) electricParticles.gameObject.SetActive(true);
     }
 
     public void MakeItExplote()
