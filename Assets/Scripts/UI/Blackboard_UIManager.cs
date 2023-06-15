@@ -82,6 +82,9 @@ public class Blackboard_UIManager : DynamicBlackboard
     public Slider Ambient_0;
     public Slider Ambient_1;
 
+    public List<GameObject> HowToPlayImages;
+    public int howToPlayIndex;
+
     private void Awake()
     {
         SFX = RuntimeManager.GetVCA("vca:/SFX");
@@ -92,6 +95,7 @@ public class Blackboard_UIManager : DynamicBlackboard
     // Start is called before the first frame update
     void Start()
     {
+        howToPlayIndex = 0;
         gameManager = Singleton.Instance.GameManager;
         uiManager = Singleton.Instance.UIManager;
         controls = new PlayerControls();
@@ -277,5 +281,18 @@ public class Blackboard_UIManager : DynamicBlackboard
         Ambient.setVolume(value);
         Ambient_0.value = value;
         Ambient_1.value = value;
+    }
+
+    public void PreviousImage()
+    {
+        HowToPlayImages[howToPlayIndex].SetActive(false);
+        if (--howToPlayIndex < 0) howToPlayIndex = HowToPlayImages.Count - 1;
+        HowToPlayImages[howToPlayIndex].SetActive(true);
+    }
+    public void NextImage()
+    {
+        HowToPlayImages[howToPlayIndex].SetActive(false);
+        if (++howToPlayIndex == HowToPlayImages.Count) howToPlayIndex = 0;
+        HowToPlayImages[howToPlayIndex].SetActive(true);
     }
 }

@@ -21,12 +21,14 @@ public class FSM_MainMenu : StateMachine
         AddState("MainMenu", new State_MainMenu());
         AddState("SettingsMenu", new State_SettingsMenu());
         AddState("LevelsMenu", new State_LevelsMenu());
+        AddState("HowToPlay", new State_HowToPlay());
         AddState("Credits", new State_Credits());
     }
 
     private void AddTransitions()
     {
         this.AddTwoWayTriggerTransition("MainMenu-SettingsMenu","MainMenu", "SettingsMenu", t => Singleton.Instance.GameManager.gameState == GameState.MainMenu);
+        this.AddTwoWayTriggerTransition("MainMenu-HowToPlay","MainMenu", "HowToPlay", t => Singleton.Instance.GameManager.gameState == GameState.MainMenu);
         this.AddTwoWayTriggerTransition("MainMenu-LevelsMenu","MainMenu", "LevelsMenu", t => Singleton.Instance.GameManager.gameState == GameState.MainMenu);
         this.AddTwoWayTriggerTransition("MainMenu-Credits","MainMenu", "Credits", t => Singleton.Instance.GameManager.gameState == GameState.MainMenu);
     }
