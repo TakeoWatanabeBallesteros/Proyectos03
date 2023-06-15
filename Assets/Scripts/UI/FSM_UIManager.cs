@@ -21,12 +21,12 @@ public class FSM_UIManager : MonoBehaviour
     private void Awake()
     {
         blackboard_UIManager = GetComponent<Blackboard_UIManager>();
-        _inGameMusic = RuntimeManager.CreateInstance(inGameMusic);
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        _inGameMusic = RuntimeManager.CreateInstance(inGameMusic);
         uiManager_FSM = new StateMachine();
         AddStates();
         AddTransitions();
