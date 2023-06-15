@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using FSM;
+using FMODUnity;
 
 [RequireComponent(typeof(Blackboard_UIManager))]
 public class FSM_UIManager : MonoBehaviour
@@ -11,11 +13,15 @@ public class FSM_UIManager : MonoBehaviour
     public StateMachine uiManager_FSM { get; private set; }
     public Blackboard_UIManager blackboard_UIManager;
 
+    [SerializeField] private EventReference inGameMusic;
+    public EventInstance _inGameMusic { get; private set; }
+
     public bool testingLevel = false;
     
     private void Awake()
     {
         blackboard_UIManager = GetComponent<Blackboard_UIManager>();
+        _inGameMusic = RuntimeManager.CreateInstance(inGameMusic);
     }
 
     // Start is called before the first frame update
@@ -89,6 +95,10 @@ public class FSM_UIManager : MonoBehaviour
     {
         uiManager_FSM.Trigger("MainMenu_FSM-InGame_FSM");
         SceneManager.LoadSceneAsync(0);
+    }
+    public void GoInGame()
+    {
+        uiManager_FSM.Trigger("Playing-PauseMenu");
     }
 
     public void WantToExit()

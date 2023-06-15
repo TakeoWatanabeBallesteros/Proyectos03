@@ -41,6 +41,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
         Dead = false;
         health = maxHealth;
         blackboardUI = Singleton.Instance.UIManager.blackboard_UIManager;
+        blackboardUI.SetLifeBar(health);
         pointsManager = Singleton.Instance.PointsManager;
         canBeDamaged = true;
         controls = controls ?? new PlayerControls();
