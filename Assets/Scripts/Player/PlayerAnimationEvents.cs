@@ -11,34 +11,28 @@ public class PlayerAnimationEvents : MonoBehaviour
     [SerializeField] private EventReference playerFall;
     [SerializeField] private EventReference kidThrow;
     [SerializeField] private EventReference kidPickUp;
-    [SerializeField] private MovementPlayerController movementPlayerController;
+    [SerializeField] private PlayerMovementController playerMovementController;
 
-
-    public void PlayerFall()
-    {
+    public void PlayerFall() {
         RuntimeManager.PlayOneShot(playerFall);
-        walkingParticles.Play();
+        Instantiate(walkingParticles, transform);
     }
     
-    public void CanWalk()
-    {
+    public void CanWalk() {
         FindObjectOfType<LevelTimer>().UnpauseTimer();
-        movementPlayerController.canMove = true;
+        playerMovementController.canMove = true;
     }
 
-    public void OnStep()
-    {
-        walkingParticles.Play();
+    public void OnStep() {
+        Instantiate(walkingParticles, transform);
         RuntimeManager.PlayOneShot(playerSteps);
     }
 
-    public void Throw()
-    {
+    public void Throw() {
         RuntimeManager.PlayOneShot(kidThrow);
     }
 
-    public void Pickup()
-    {
+    public void Pickup() {
         RuntimeManager.PlayOneShot(kidPickUp);
     }
 }

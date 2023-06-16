@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class FinalScreenManager : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class FinalScreenManager : MonoBehaviour
     [SerializeField] private float shrinkDuration = .25f;
 
     public int numberOfImagesToShow;
-    public InputPlayerController inputPlayer;
+    public PlayerMovementController playerMovement;
 
     private PointsBehavior pointsManager;
     public int maxPointsShow1;
@@ -77,13 +78,13 @@ public class FinalScreenManager : MonoBehaviour
         else if(pointsManager.Points < maxPointsShow3) ShowImages(3);
         else ShowImages(3);
 
-        inputPlayer.enabled = false;
+        playerMovement.Stop();
         StartCoroutine(OnPause());
     }
 
     IEnumerator OnPause()
     {
         yield return new WaitForSeconds(2f);
-        Singleton.Instance.GameManager.OnPause();
+        GameManager.OnPause();
     }
 }

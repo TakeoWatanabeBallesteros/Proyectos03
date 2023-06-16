@@ -23,10 +23,6 @@ public class AnimatorController : MonoBehaviour
             characterAnimator.SetBool("PrepareChild", value);
         }
     }
-    public void YeetChild()
-    {
-        characterAnimator.SetTrigger("YeetChild");
-    }
     public void SetSpeed(int speed)
     {
         characterAnimator.SetFloat("Speed",speed);

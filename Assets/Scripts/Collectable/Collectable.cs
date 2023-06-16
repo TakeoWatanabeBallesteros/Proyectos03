@@ -12,7 +12,7 @@ public class Collectable : MonoBehaviour
     public GameObject Sparks;
     ItemManager itemsManager;
     public GameObject Luz;
-    public Collider collider;
+    public Collider _collider;
     
     private PointsBehavior pointsBehavior;
     
@@ -37,7 +37,7 @@ public class Collectable : MonoBehaviour
         itemsManager.DeadCollectable();
         Destroy(Luz);
         enabled = false;
-        collider.enabled = false;
+        _collider.enabled = false;
     }
     private void OnTriggerEnter(Collider other)
     {
