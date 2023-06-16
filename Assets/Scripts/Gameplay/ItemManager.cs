@@ -13,8 +13,8 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private int Collected = 0;
     [SerializeField] private int TotalCollectables = 0;
 
-    private InputPlayerController input;
-    private MovementPlayerController move;
+    private PlayerInputController _playerInput;
+    private PlayerMovementController move;
     private FSM_UIManager uiManager;
     private PointsBehavior pointsManager;
     private FinalScreenManager finalScreenManager;
@@ -30,8 +30,8 @@ public class ItemManager : MonoBehaviour
         UI_Blackboard = Singleton.Instance.UIManager.blackboard_UIManager;
         uiManager = Singleton.Instance.UIManager;
         pointsManager = Singleton.Instance.PointsManager;
-        input = Singleton.Instance.Player.GetComponent<InputPlayerController>();
-        move = Singleton.Instance.Player.GetComponent<MovementPlayerController>();
+        _playerInput = Singleton.Instance.Player.GetComponent<PlayerInputController>();
+        move = Singleton.Instance.Player.GetComponent<PlayerMovementController>();
         SavedKids = 0;
         UI_Blackboard.SetKids(SavedKids, TotalKids);
         Collected = 0;

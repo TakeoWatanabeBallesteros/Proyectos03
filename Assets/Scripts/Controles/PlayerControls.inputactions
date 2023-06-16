@@ -33,7 +33,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "SecondaryShot",
+                    "name": "Throw",
                     "type": "Button",
                     "id": "06a5d763-d2cb-4023-8e14-6cc7c719c4ce",
                     "expectedControlType": "Button",
@@ -43,15 +43,15 @@
                 },
                 {
                     "name": "Recharge",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "b1b96303-278e-4d6a-850a-8c2c043cbc5d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
-                    "name": "Pause",
+                    "name": "Esc",
                     "type": "Button",
                     "id": "dbc6a5de-5923-4b8b-96d3-db8a6fd0a081",
                     "expectedControlType": "Button",
@@ -60,7 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Restart",
+                    "name": "Space",
                     "type": "Button",
                     "id": "466553f5-fea6-4ffa-91df-f7a0880007d6",
                     "expectedControlType": "Button",
@@ -196,7 +196,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Pause",
+                    "action": "Esc",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -207,7 +207,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Pause",
+                    "action": "Esc",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -218,7 +218,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "SecondaryShot",
+                    "action": "Throw",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -229,7 +229,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "SecondaryShot",
+                    "action": "Throw",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -262,7 +262,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Restart",
+                    "action": "Space",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -273,7 +273,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Restart",
+                    "action": "Space",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

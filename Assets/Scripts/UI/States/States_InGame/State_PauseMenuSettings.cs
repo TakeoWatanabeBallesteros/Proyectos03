@@ -13,6 +13,7 @@ public class State_PauseMenuSettings : StateBase
         singleton = Singleton.Instance;
         singleton.UIManager.blackboard_UIManager.SettingPauseMenuCanvas.SetActive(true);
         singleton.GameManager.ChangeGameState(GameState.SettingPause);
+        GameManager.OnPause();
         base.OnEnter();
     }
     
@@ -24,6 +25,7 @@ public class State_PauseMenuSettings : StateBase
     public override void OnExit()
     {
         singleton.UIManager.blackboard_UIManager.SettingPauseMenuCanvas.SetActive(false);
+        GameManager.OnUnpause();
         base.OnExit();
     }
 }

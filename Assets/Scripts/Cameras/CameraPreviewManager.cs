@@ -10,22 +10,6 @@ public class CameraPreviewManager : MonoBehaviour
     private PreviewCamera [] cameraList; // All the Preview Cameras on the scene
     private Camera playerCamera; // Main Camera
 
-    private void OnDisable()
-    {
-    }
-
-    void Start()
-    {
-        // playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        // cameraList = FindObjectsOfType<PreviewCamera>();
-        // Array.Reverse(cameraList);
-        // playerCamera.enabled = false;
-        // StartCoroutine(StartPreview());
-    }
-
-    /// <summary>
-    /// Play all the Preview Cameras from the array, then enable the player camera.
-    /// </summary>
     IEnumerator StartPreview()
     {
         foreach (PreviewCamera camera in cameraList)

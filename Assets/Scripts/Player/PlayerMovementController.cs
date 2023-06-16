@@ -6,20 +6,21 @@ using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
-public class MovementPlayerController : MonoBehaviour
+public class PlayerMovementController : MonoBehaviour
 {
-    public bool canMove;
-    
+    [SerializeField] private Camera _camera;
     [SerializeField] private AnimatorController characterAnim;
+    
+    [HideInInspector]public bool canMove;
+    
     public float Maxspeed;
     public float speed;
     float currentSpeed;
-    public Camera cam;
     //private CameraController mainCamera; pensaba que era un singleton
     
-    private Rigidbody rb;
     private Vector3 direction;
-    private InputPlayerController input;
+    [SerializeField]private Rigidbody rb;
+    [SerializeField] private PlayerInputController input;
     
     private Ray camRay;
     private Plane groundPlane;
@@ -39,18 +40,14 @@ public class MovementPlayerController : MonoBehaviour
     {
         canMove = false;
         
-        cam = GameObject.Find("===Main Camera===").GetComponent<Camera>();
-        //cam = Camera.main;
         speed = Maxspeed;
-        rb = GetComponent<Rigidbody>();
-        input = GetComponent<InputPlayerController>();
 
         // Solo usar cuando disparas
-        forward = cam.transform.forward;
+        forward = _camera.transform.forward;
         forward.y = 0;
         forward.Normalize();
 
-        right = cam.transform.right;
+        right = _camera.transform.right;
         right.y = 0;
         right.Normalize();
     }
@@ -98,7 +95,7 @@ public class MovementPlayerController : MonoBehaviour
 
     private void RotatePlayerShooting() {
         //Sending a raycast
-        camRay = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
+        camRay = _camera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
         //Setting groundPlane
         groundPlane = new Plane(Vector3.up, Vector3.zero);

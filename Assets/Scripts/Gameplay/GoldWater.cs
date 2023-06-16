@@ -21,7 +21,6 @@ public class GoldWater : MonoBehaviour
     [SerializeField] private CapsuleCollider cylinder;
     [SerializeField] private ParticleSystem water;
     [SerializeField] private ParticleSystem waterDetails;
-    private PlayerControls controls;
     public Animator playerAnim;
 
     [Space(5f)] [Header("Raycast Origins")] 
@@ -31,7 +30,7 @@ public class GoldWater : MonoBehaviour
     [Header("Sounds")] 
     [SerializeField] private GameObject waterSound;
     
-    [SerializeField] private List<FireBehavior> fires;
+    private List<FireBehavior> fires;
     private PointsBehavior pointsBehavior;
 
     [SerializeField] private float currentWater;
@@ -39,24 +38,14 @@ public class GoldWater : MonoBehaviour
     public float waterPerSecond;
     private bool isShooting;
 
+    [SerializeField] private PlayerInputController input;
+
     private Blackboard_UIManager blackboardUIManager;
-
-    private void OnDisable()
-    {
-        controls.Player.Shoot.started -= Shoot;
-        controls.Player.Shoot.canceled -= StopShoot;
-    }
-
-    private void Awake()
-    {
-        controls = controls ?? new PlayerControls();
-        controls.Player.Shoot.started += Shoot;
-        controls.Player.Shoot.canceled += StopShoot;
-        controls.Enable();
-    }
-    // Start is called before the first frame update
+    
     void Start()
     {
+        input.AddShootFunction(Shoot);
+        input.AddShootCanceledFunction(StopShoot);
         fires = new List<FireBehavior>();
         cylinder.enabled = false;
         water.Stop();
@@ -80,10 +69,7 @@ public class GoldWater : MonoBehaviour
         ConsumeWater();
     }
 
-    public float GetCurrentWater()
-    {
-        return currentWater;
-    }
+    public float GetCurrentWater() => currentWater;
 
     private void ConsumeWater()
     {
@@ -159,7 +145,7 @@ public class GoldWater : MonoBehaviour
         }
     }
 
-    private void Shoot(InputAction.CallbackContext context)
+    private void Shoot(InputAction.CallbackContext ctx)
     {
         if (currentWater == 0)return;
         playerAnim.SetBool("Shoot",true);
@@ -177,7 +163,7 @@ public class GoldWater : MonoBehaviour
         isShooting = true;
     }
     
-    private void StopShoot(InputAction.CallbackContext context = new InputAction.CallbackContext())
+    private void StopShoot(InputAction.CallbackContext ctx = new InputAction.CallbackContext())
     {
         StopAllCoroutines();
         water.Stop();

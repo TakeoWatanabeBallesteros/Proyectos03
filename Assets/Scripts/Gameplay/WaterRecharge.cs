@@ -7,59 +7,49 @@ using UnityEngine.InputSystem;
 
 public class WaterRecharge : MonoBehaviour
 {
-    private Blackboard_UIManager blackboardUIManager;
     public float waterPerSecond;
-    [SerializeField] PlayerControls Controls;
+    
+    private Blackboard_UIManager blackboardUIManager;
     private GoldWater waterPlayer;
-    private bool onRecharge;
+    private PlayerInputController input;
 
-   
-    private void Start()
-    {
-        Controls = Controls ?? new PlayerControls();
-        Controls.Enable();
+    private delegate void RechargeDelegate();
+    private RechargeDelegate recharge;
+
+    private void Start() {
         blackboardUIManager = Singleton.Instance.UIManager.blackboard_UIManager;
-        onRecharge = false;
     }
-
+    
+    private void Update() => recharge?.Invoke();
+    
+    private void GetWater(InputAction.CallbackContext context) {
+        recharge = Recharge;
+    }
+    
+    private void StopGetWater(InputAction.CallbackContext context) {
+        recharge = null;
+    }
+    
+    private void Recharge() {
+        waterPlayer.Recharge(waterPerSecond * Time.deltaTime);
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            blackboardUIManager.ReloadText.SetActive(true);
-            Controls.Player.Recharge.started += Luky;
-            Controls.Player.Recharge.canceled += Ramon; 
-            waterPlayer = waterPlayer ?? other.GetComponentInChildren<GoldWater>();
-        }
+        if (!other.CompareTag("Player")) return;
+        blackboardUIManager.ReloadText.SetActive(true);
+        waterPlayer = waterPlayer ?? other.GetComponentInChildren<GoldWater>();
+        input = input ?? other.GetComponent<PlayerInputController>();
+        input.AddRechargeFunction(GetWater);
+        input.AddRechargeCanceledFunction(StopGetWater);
     }
-
+    
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            blackboardUIManager.ReloadText.SetActive(false);
-            Controls.Player.Recharge.started -= Luky;
-            Controls.Player.Recharge.canceled -= Ramon;
-            StopAllCoroutines();
-        }
-    }
-
-    private void Luky(InputAction.CallbackContext context)
-    {
-        StartCoroutine(GetWater(context)); 
-    }
-
-    private void Ramon(InputAction.CallbackContext context)
-    {
-        StopAllCoroutines();
-    }
-
-    IEnumerator GetWater(InputAction.CallbackContext context)
-    {
-        while (waterPlayer.GetCurrentWater() < 100 && !context.canceled)
-        {
-            waterPlayer.Recharge(waterPerSecond * Time.deltaTime);
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
+        if (!other.CompareTag("Player")) return;
+        blackboardUIManager.ReloadText.SetActive(false);
+        input.RemoveRechargeFunction(GetWater);
+        input.RemoveRechargeCanceledFunction(StopGetWater);
+        recharge = null;
     }
 }

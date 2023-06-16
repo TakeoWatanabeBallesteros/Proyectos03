@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 using FMOD.Studio;
 using FMODUnity;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Blackboard_UIManager : DynamicBlackboard
@@ -22,7 +23,7 @@ public class Blackboard_UIManager : DynamicBlackboard
     public GameObject ExitGameCanvas;
     public GameObject HowToPlayCanvas;
     #endregion
-
+    
     #region InGame
     public GameObject LevelPreviewCanvas;
     public GameObject InGameCanvas;
@@ -34,10 +35,11 @@ public class Blackboard_UIManager : DynamicBlackboard
     #endregion
     
     [Space(5)]
-    [Header("Gameplay Objects")] 
+    [Header("Gameplay Objects")]
+    #region Gameplay Objects
     public Slider lifeBar;
     public Slider waterBar;
-    public Slider forceBar;
+    public Slider powerBar;
     public TMP_Text TimeLeftText;
     public TMP_Text NumberOfKids;
     public TMP_Text SombraOfKids;
@@ -56,10 +58,7 @@ public class Blackboard_UIManager : DynamicBlackboard
     public GameObject PointsPrefab;
     public GameObject RedPointsPrefab;
     public GameObject GreenPointsPrefab;
-
-    private PlayerControls controls = null;
-    private GameManager gameManager;
-    private FSM_UIManager uiManager;
+    #endregion
 
     float DeathscreenAlfa;
     public Image YouDiedImage;
@@ -96,50 +95,6 @@ public class Blackboard_UIManager : DynamicBlackboard
     void Start()
     {
         howToPlayIndex = 0;
-        gameManager = Singleton.Instance.GameManager;
-        uiManager = Singleton.Instance.UIManager;
-        controls = new PlayerControls();
-        controls.Enable();
-        controls.Player.Pause.performed += ctx =>
-        {
-            switch (gameManager.gameState)
-            {
-                case GameState.PauseMenu:
-                    uiManager.uiManager_FSM.Trigger("Playing-PauseMenu");
-                    break;
-                case GameState.Playing: // You trigger between Game & Pause
-                    uiManager.uiManager_FSM.Trigger("Playing-PauseMenu");
-                    break;
-                case GameState.MainMenu:
-                    uiManager.WantToExit();
-                    break;
-                case GameState.SettingsMenu:
-                    uiManager.uiManager_FSM.Trigger("MainMenu-SettingsMenu");
-                    break;
-                case GameState.Credits:
-                    uiManager.uiManager_FSM.Trigger("MainMenu-Credits");
-                    break;
-                case GameState.HowToPlay:
-                    uiManager.uiManager_FSM.Trigger("MainMenu-HowToPlay");
-                    break;
-                case GameState.ExitGame:
-                    uiManager.NotSureToExit();
-                    break;
-                case GameState.LvlsMenu:
-                    uiManager.uiManager_FSM.Trigger("MainMenu-LevelsMenu");
-                    break;
-                case GameState.LvlInfo:
-                    LevelInfoCanvas.SetActive(false);
-                    break;
-                case GameState.LevelPreview:
-                    Singleton.Instance.CameraPreviewManager.EndPreview();
-                    break;
-                case GameState.SettingPause:
-                    break;
-                case GameState.RestartLvl:
-                    break;
-            }
-        };
         ChildHappyFaceSprite.enabled = false;
         ChildSadFaceSprite.enabled = true;
         FireHandle.SetActive(false);
@@ -221,23 +176,14 @@ public class Blackboard_UIManager : DynamicBlackboard
 
     }
 
-    public IEnumerator FadeIN(bool timesup)
+    public IEnumerator FadeIN(Image image)
     {
         yield return new WaitForSeconds(2f);
         DeathscreenAlfa = 0;
         for (float i=0; i <1; i+=.1f)
         {
             DeathscreenAlfa += .1f;
-            //Takeo perdoname
-            if (timesup)
-            {
-                TimesUpImage.color = new Color(1f, 1f, 1f, DeathscreenAlfa);
-            }
-            else
-            {
-
-                YouDiedImage.color = new Color(1f, 1f, 1f, DeathscreenAlfa);
-            }
+            image.color = new Color(1f, 1f, 1f, DeathscreenAlfa);
             yield return new WaitForSeconds(.05f);
         }
     }

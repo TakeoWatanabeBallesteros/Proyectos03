@@ -2,15 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class PlayerHealth : MonoBehaviour, IHealth
 {
     [SerializeField] private bool canBeDamaged;
     Vector3 initialPos;
-    InputPlayerController inputPlayer;
-    MovementPlayerController playerMovement;
+    [SerializeField] private PlayerInputController input;
+    [SerializeField] private PlayerMovementController playerMovement;
     public bool Dead;
     [SerializeField] private float burnIndicatorTime;
     private Blackboard_UIManager blackboardUI; 
@@ -26,8 +25,6 @@ public class PlayerHealth : MonoBehaviour, IHealth
     public float maxHealth => _maxHealth;
 
     public Vector3 position => transform.position;
-    
-    private PlayerControls controls;
 
     [SerializeField] private AnimatorController animatorController;
     [SerializeField] private LevelTimer levelTimer;
@@ -35,8 +32,6 @@ public class PlayerHealth : MonoBehaviour, IHealth
     // Start is called before the first frame update
     void Start()
     {
-        inputPlayer = GetComponent<InputPlayerController>();
-        playerMovement = GetComponent<MovementPlayerController>();
         initialPos = transform.position;
         Dead = false;
         health = maxHealth;
@@ -44,16 +39,13 @@ public class PlayerHealth : MonoBehaviour, IHealth
         blackboardUI.SetLifeBar(health);
         pointsManager = Singleton.Instance.PointsManager;
         canBeDamaged = true;
-        controls = controls ?? new PlayerControls();
-        controls.Enable();
     }
+
+    private void StartRespawn(InputAction.CallbackContext ctx) => StartCoroutine(Respawn());
     
-    IEnumerator Respawn()
+    private IEnumerator Respawn()
     {
-        do {
-            yield return null;
-        } while (!controls.Player.Restart.triggered);
-        
+        input.RemoveSpaceFunction(StartRespawn);
         transform.position = initialPos;
         health = maxHealth;
         blackboardUI.SetLifeBar(health);
@@ -61,7 +53,6 @@ public class PlayerHealth : MonoBehaviour, IHealth
         blackboardUI.FireHandle.SetActive(false);
         Dead = false;
         yield return new WaitForSeconds(1f);
-        inputPlayer.enabled = true;
         levelTimer.UnpauseTimer();
         PlayerRender.SetActive(true);
         animatorController.StartAnim();
@@ -70,16 +61,14 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     public void TakeDamage(float damage)
     {
-        if (Dead) return;
-        if(canBeDamaged)
-        {
-            health = Mathf.Clamp(health -= damage, 0, maxHealth);
-            StartCoroutine(DamageCooldown());
-            blackboardUI.SetLifeBar(health);
-            StartCoroutine(ShowBurnIndicator());
-            pointsManager.RemovePointsGettingBurned();
-        }
-            
+        if (Dead || !canBeDamaged) return;
+        
+        health = Mathf.Clamp(health -= damage, 0, maxHealth);
+        blackboardUI.SetLifeBar(health);
+        pointsManager.RemovePointsGettingBurned();
+        StartCoroutine(DamageCooldown());
+        StartCoroutine(ShowBurnIndicator());
+
         if (health == 0) Die();
     }
 
@@ -97,20 +86,16 @@ public class PlayerHealth : MonoBehaviour, IHealth
         canBeDamaged = true;
     }
 
-    private void Die()
+    private void Die() //TODO: Do in Game Manager
     {
         Dead = true;
+        input.AddSpaceFunction(StartRespawn);
         pointsManager.RemovePointsDead();
-        inputPlayer.enabled = false;
         playerMovement.Stop();
         levelTimer.PauseTimer();
-        StartCoroutine(blackboardUI.FadeIN(false));
-        StartCoroutine(Respawn());
-        //activar polvo
-        GameObject polvo = Instantiate(DustPile);
-        polvo.transform.position = transform.position;
-        Destroy(polvo,4f);
-        //desactivar modelo
+        StartCoroutine(blackboardUI.FadeIN(blackboardUI.YouDiedImage));
+        var ashes = Instantiate(DustPile, transform.position, Quaternion.identity);
+        Destroy(ashes,4f);
         PlayerRender.SetActive(false);
     }
     

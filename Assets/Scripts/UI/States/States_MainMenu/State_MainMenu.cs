@@ -16,7 +16,7 @@ public class State_MainMenu : StateBase
     {
         singleton = Singleton.Instance;
         Singleton.Instance.GameManager.ChangeGameState(GameState.MainMenu);
-        singleton.GameManager.OnUnpause();
+        GameManager.OnUnpause();
         singleton.UIManager.blackboard_UIManager.MainMenuCanvas.SetActive(true);
         base.OnEnter();
     }

@@ -22,7 +22,7 @@ public class State_Playing : StateBase
         Singleton.Instance.GameManager.ChangeGameState(GameState.Playing);
         singleton.UIManager.blackboard_UIManager.InGameCanvas.SetActive(true);
         singleton.UIManager._inGameMusic.setPaused(false);
-        singleton.GameManager.OnUnpause();
+        GameManager.OnUnpause();
         base.OnEnter();
     }
     
