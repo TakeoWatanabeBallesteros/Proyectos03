@@ -93,4 +93,10 @@ public class KidPickAndThrow : MonoBehaviour
         input.RemoveThrowFunction(SetGetPower);
         input.RemoveThrowCanceledFunction(Throw);
     }
+
+    public void ForgetKid() {
+        TargetKid = null;
+        input.RemoveInteractFunction(PickupKid);
+        pickup_Text.SetActive(false);
+    }
 }

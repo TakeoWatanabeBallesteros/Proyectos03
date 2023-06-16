@@ -11,7 +11,9 @@ public class SafeZone : MonoBehaviour
     private int counter;
 
     public List<GameObject> childsGameObjects;
-    // Start is called before the first frame update
+
+    [SerializeField] private KidPickAndThrow pickAndThrow;
+    
     void Start()
     {
         itemManager = Singleton.Instance.ItemsManager;
@@ -26,6 +28,7 @@ public class SafeZone : MonoBehaviour
             Destroy(other.transform.parent.gameObject);
             if(counter < 5) childsGameObjects[counter++].SetActive(true);
             itemManager.AddChild();
+            pickAndThrow.ForgetKid();
             //pointsManager.AddPointsSafeZone();
         }
     }
