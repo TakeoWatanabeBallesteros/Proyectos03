@@ -33,7 +33,6 @@ public class FSM_UIManager : MonoBehaviour
         uiManager_FSM.SetStartState(testingLevel ? "InGame_FSM" : "MainMenu_FSM");
         uiManager_FSM.Init();
         SceneManager.sceneLoaded += OnSceneLoaded;
-        Singleton.Instance.Player.GetComponent<PlayerInputController>().AddEscFunction(OnEscPressed);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
@@ -95,7 +94,7 @@ public class FSM_UIManager : MonoBehaviour
         Singleton.Instance.GameManager.ChangeGameState(GameState.MainMenu);
     }
 
-    private void OnEscPressed(InputAction.CallbackContext ctx) {
+    public void OnEscPressed(InputAction.CallbackContext ctx) {
         switch (gameManager.gameState) {
             case GameState.PauseMenu:
                 uiManager_FSM.Trigger("Playing-PauseMenu");

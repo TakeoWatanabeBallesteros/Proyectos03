@@ -53,6 +53,7 @@ public class Singleton : MonoBehaviour
     private void LoadSingletones(Scene scene, LoadSceneMode mode)
     {
         _player = GameObject.FindGameObjectWithTag("Player");
+        _player?.GetComponent<PlayerInputController>().AddEscFunction(UIManager.OnEscPressed);
         _itemsManager = GameObject.FindGameObjectWithTag("ItemsManager")?.GetComponent<ItemManager>();
         _pointsManager = null;
         _pointsManager = FindObjectOfType<PointsBehavior>();
