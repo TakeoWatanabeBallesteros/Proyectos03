@@ -173,7 +173,7 @@ MonoBehaviour:
   _camera: {fileID: 0}
   characterAnim: {fileID: 8533690593573027406}
   canMove: 0
-  Maxspeed: 10
+  Maxspeed: 15
   speed: 0
   rb: {fileID: 6458635349065966331}
   input: {fileID: 9026089625455589691}
@@ -194,7 +194,7 @@ MonoBehaviour:
   character_Animator: {fileID: 8533690593573027406}
   player_Movement: {fileID: 6458635349065966334}
   input: {fileID: 9026089625455589691}
-  kid_Picked_Prefab: {fileID: 954452544074311148}
+  kid_Picked_Prefab: {fileID: 0}
   kid_Ragdoll_Prefab: {fileID: 1134897882703293851, guid: 9577b4c21df70b348bba972499710564,
     type: 3}
   shoulder: {fileID: 6458635347419970725}
@@ -603,12 +603,6 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7186d33bb27f6e4ba3b40a905c2b72d, type: 3}
---- !u!1 &954452544074311148 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5332216803888663861, guid: a7186d33bb27f6e4ba3b40a905c2b72d,
-    type: 3}
-  m_PrefabInstance: {fileID: 4954297580975778009}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &1282546077844167491 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 6128756679297971098, guid: a7186d33bb27f6e4ba3b40a905c2b72d,
