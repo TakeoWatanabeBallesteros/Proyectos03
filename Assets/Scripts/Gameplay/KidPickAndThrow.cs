@@ -25,6 +25,8 @@ public class KidPickAndThrow : MonoBehaviour
     [SerializeField] private float power_Per_Second;
     private Slider power_Slider;
     private float power;
+
+    private KidType kid_Type;
     
     private Blackboard_UIManager blackboard_UI;
     
@@ -44,6 +46,7 @@ public class KidPickAndThrow : MonoBehaviour
     {
         if (!other.CompareTag("Kid") || carring_Kid || TargetKid != null) return;
         TargetKid = other.transform.parent.gameObject;
+        kid_Type = other.GetComponent<KidHealthBehavior>().kidType;
         input.AddInteractFunction(PickupKid);
         pickup_Text.SetActive(true);
     }
@@ -58,7 +61,14 @@ public class KidPickAndThrow : MonoBehaviour
     private void PickupKid(InputAction.CallbackContext ctx) {
         pickup_Text.SetActive(false);
         Destroy(TargetKid);
+        TargetKid = null;
         kid_Picked_Prefab.SetActive(true); //TODO: Use a function to chose between gender
+        if (kid_Type.gender == KidGender.Male) {
+            Debug.Log(kid_Type.diff == KidDiff.Diff1 ? "Chose male 1" : "Chose male 2");
+        }
+        else {
+            Debug.Log(kid_Type.diff == KidDiff.Diff1 ? "Chose female 1" : "Chose female 2");
+        }
         carring_Kid = true;
         player_Movement.speed *= 1.2f;
         blackboard_UI.ChildFace();

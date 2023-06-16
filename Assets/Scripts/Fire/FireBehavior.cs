@@ -18,7 +18,7 @@ public class FireBehavior : MonoBehaviour
     [SerializeField] private bool onHeating;
 
     private List<FireBehavior> nearObjects = new List<FireBehavior>();
-    private List<ChildrenHealthSystem> childrens = new List<ChildrenHealthSystem>();
+    private List<KidHealthBehavior> childrens = new List<KidHealthBehavior>();
     private PlayerHealth playerHealth;
     [SerializeField] private float damageRadius;
 
@@ -116,7 +116,7 @@ public class FireBehavior : MonoBehaviour
                 playerHealth = other.GetComponent<PlayerHealth>();
                 break;
             case "Kid":
-                if(other.GetComponentInChildren<ChildrenHealthSystem>() && onFire) childrens.Add(other.GetComponentInChildren<ChildrenHealthSystem>());
+                if(other.GetComponentInChildren<KidHealthBehavior>() && onFire) childrens.Add(other.GetComponentInChildren<KidHealthBehavior>());
                 break;
         }
     }
@@ -133,7 +133,7 @@ public class FireBehavior : MonoBehaviour
                 playerHealth = null;
                 break;
             case "Kid":
-                var children = other.GetComponentInChildren<ChildrenHealthSystem>();
+                var children = other.GetComponentInChildren<KidHealthBehavior>();
                 if (onFire && children != null) children.StopBeingBurned();
                 childrens.Remove(children);
                 break;

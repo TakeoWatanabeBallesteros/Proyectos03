@@ -601,6 +601,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2082471364407405186}
   - component: {fileID: 8726589825534015729}
+  - component: {fileID: 4251492206832252804}
   m_Layer: 0
   m_Name: Boy_Root
   m_TagString: Kid
@@ -639,6 +640,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 4, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4251492206832252804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2941572588215967111}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da6529cc1d3bef45b1b5faf46e534a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kidType:
+    _gender: 0
+    _diff: 1
+  canBeDamaged: 0
+  delay: 1
+  _maxHealth: 0
 --- !u!1 &3263705248751931841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,7 +1408,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9120257950781164309
 Transform:
   m_ObjectHideFlags: 0
