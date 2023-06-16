@@ -418,6 +418,7 @@ GameObject:
   - component: {fileID: 5184659070839146897}
   - component: {fileID: 5184659070839146898}
   - component: {fileID: 971149872862751603}
+  - component: {fileID: 5943124221108805081}
   m_Layer: 0
   m_Name: Root
   m_TagString: Kid
@@ -485,6 +486,24 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5943124221108805081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601619479712534362}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da6529cc1d3bef45b1b5faf46e534a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kidType:
+    gender: 0
+    diff: 0
+  canBeDamaged: 0
+  delay: 1
+  _maxHealth: 0
 --- !u!1 &1836002823053790300
 GameObject:
   m_ObjectHideFlags: 0

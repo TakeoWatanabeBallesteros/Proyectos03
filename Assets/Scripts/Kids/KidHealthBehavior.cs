@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class ChildrenHealthSystem : MonoBehaviour, IHealth
+public class KidHealthBehavior : MonoBehaviour, IHealth
 {
+    public KidType kidType;
     [SerializeField] private bool canBeDamaged = false;
     [SerializeField] float delay = 1;
     public float _maxHealth;

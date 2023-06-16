@@ -1534,6 +1534,7 @@ GameObject:
   m_Component:
   - component: {fileID: 688243126311021722}
   - component: {fileID: 3164979089219060793}
+  - component: {fileID: 1699513971703443566}
   m_Layer: 0
   m_Name: Girl_Root
   m_TagString: Kid
@@ -1572,6 +1573,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.0346403, y: 3, z: 4}
   m_Center: {x: -0.9826799, y: -0, z: 0}
+--- !u!114 &1699513971703443566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8514187518212382712}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da6529cc1d3bef45b1b5faf46e534a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kidType:
+    gender: 1
+    diff: 0
+  canBeDamaged: 0
+  delay: 1
+  _maxHealth: 0
 --- !u!1 &8539325312795664864
 GameObject:
   m_ObjectHideFlags: 0
