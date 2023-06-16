@@ -68,6 +68,7 @@ public class KidPickAndThrow : MonoBehaviour
     }
 
     private void SetGetPower(InputAction.CallbackContext ctx) {
+        if(input.shoot) return;
         get_Power = GetPower;
         character_Animator.PrepareChild(true);
     }
@@ -79,6 +80,7 @@ public class KidPickAndThrow : MonoBehaviour
     }
 
     private void Throw(InputAction.CallbackContext ctx) {
+        if(input.shoot) return;
         get_Power = null;
         character_Animator.PrepareChild(false);
         var kid = Instantiate(kid_Ragdoll_Prefab);

@@ -31,6 +31,7 @@ public class FSM_UIManager : MonoBehaviour
         AddStates();
         AddTransitions();
         uiManager_FSM.SetStartState(testingLevel ? "InGame_FSM" : "MainMenu_FSM");
+        if(!testingLevel) Camera.main.gameObject.GetComponent<PlayerInputController>().AddEscFunction(OnEscPressed);
         uiManager_FSM.Init();
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -41,6 +42,7 @@ public class FSM_UIManager : MonoBehaviour
         }
         else {
             uiManager_FSM.Trigger("MainMenu_FSM-InGame_FSM");
+            Camera.main.gameObject.GetComponent<PlayerInputController>().AddEscFunction(OnEscPressed);
         }
     }
 
@@ -65,7 +67,10 @@ public class FSM_UIManager : MonoBehaviour
     
     public void MainMenuHowToPlay() => uiManager_FSM.Trigger("MainMenu-HowToPlay");
     
-    public void GoLevel(int index) => SceneManager.LoadSceneAsync(index);
+    public void GoLevel(int index) {
+        Camera.main.gameObject.GetComponent<PlayerInputController>().RemoveEscFunction(OnEscPressed);
+        SceneManager.LoadSceneAsync(index);
+    }
     
     public void NextLevel() => SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
 

@@ -98,5 +98,8 @@ public class PlayerInputController : MonoBehaviour
     public void AddEscFunction(Action<InputAction.CallbackContext> function) {
         controls.Player.Esc.started += function;
     }
+    public void RemoveEscFunction(Action<InputAction.CallbackContext> function) {
+        controls.Player.Esc.started -= function;
+    }
     #endregion
 }
