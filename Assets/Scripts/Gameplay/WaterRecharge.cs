@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
+using FMODUnity;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,21 +15,26 @@ public class WaterRecharge : MonoBehaviour
     private GoldWater waterPlayer;
     private PlayerInputController input;
 
+    FMOD.Studio.EventInstance waterRecharge;
+
     private delegate void RechargeDelegate();
     private RechargeDelegate recharge;
 
     private void Start() {
         blackboardUIManager = Singleton.Instance.UIManager.blackboard_UIManager;
+        waterRecharge = FMODUnity.RuntimeManager.CreateInstance("event:/Water/Water refilling at Recharging Stations");
     }
     
     private void Update() => recharge?.Invoke();
     
     private void GetWater(InputAction.CallbackContext context) {
         recharge = Recharge;
+        waterRecharge.start();
     }
     
     private void StopGetWater(InputAction.CallbackContext context) {
         recharge = null;
+        waterRecharge.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
     
     private void Recharge() {
