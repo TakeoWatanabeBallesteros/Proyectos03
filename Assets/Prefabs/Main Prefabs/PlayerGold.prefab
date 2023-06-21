@@ -1335,6 +1335,13 @@ MonoBehaviour:
   _maxHealth: 100
   animatorController: {fileID: 8533690593573027406}
   levelTimer: {fileID: 0}
+  damageSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &6458635349065966334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1923,6 +1930,11 @@ PrefabInstance:
       objectReference: {fileID: 6046731801894827084}
     - target: {fileID: 4249705574041973016, guid: 0f9ee44c9cec51e42a4cf92d8d2bf98d,
         type: 3}
+      propertyPath: hitLayer.m_Bits
+      value: 8841
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249705574041973016, guid: 0f9ee44c9cec51e42a4cf92d8d2bf98d,
+        type: 3}
       propertyPath: raysOrigins.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -1960,6 +1972,11 @@ PrefabInstance:
         type: 3}
       propertyPath: CollisionModule.colliderForce
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6106940246665216524, guid: 0f9ee44c9cec51e42a4cf92d8d2bf98d,
+        type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 8379
       objectReference: {fileID: 0}
     - target: {fileID: 6106940246665216525, guid: 0f9ee44c9cec51e42a4cf92d8d2bf98d,
         type: 3}
