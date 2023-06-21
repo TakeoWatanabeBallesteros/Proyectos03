@@ -36,6 +36,8 @@ public class Collectable : MonoBehaviour
         pointsBehavior.RemovePointsCollectable();
         itemsManager.DeadCollectable();
         Destroy(Luz);
+        StopAllCoroutines();
+        canBeDamaged = false;
         enabled = false;
         _collider.enabled = false;
     }
