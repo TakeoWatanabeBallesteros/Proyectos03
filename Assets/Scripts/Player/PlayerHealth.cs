@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,6 +30,8 @@ public class PlayerHealth : MonoBehaviour, IHealth
     [SerializeField] private AnimatorController animatorController;
     [SerializeField] private LevelTimer levelTimer;
 
+    [SerializeField] private EventReference damageSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +53,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
         health = maxHealth;
         blackboardUI.SetLifeBar(health);
         StartCoroutine(blackboardUI.FadeOut());
-        blackboardUI.FireHandle.SetActive(false);
+        //blackboardUI.FireHandle.SetActive(false);
         Dead = false;
         yield return new WaitForSeconds(1f);
         levelTimer.UnpauseTimer();
@@ -65,6 +68,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
         
         health = Mathf.Clamp(health -= damage, 0, maxHealth);
         blackboardUI.SetLifeBar(health);
+        RuntimeManager.PlayOneShot(damageSound);
         pointsManager.RemovePointsGettingBurned();
         StartCoroutine(DamageCooldown());
         StartCoroutine(ShowBurnIndicator());
