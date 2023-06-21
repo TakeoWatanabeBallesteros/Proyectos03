@@ -4933,6 +4933,9 @@ MonoBehaviour:
       Data4: -1803356760
     Path: event:/Fire/Fire being extinguished
   particlesPuttingOut: {fileID: 1290149311087082694}
+  layerWall:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!1 &7956778101970957224
 GameObject:
   m_ObjectHideFlags: 0
@@ -5415,6 +5418,11 @@ PrefabInstance:
         type: 3}
       propertyPath: damageRadius
       value: 1.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 9128679850021671539, guid: cae6ae782bf4fa34cb2a45c8fc080554,
+        type: 3}
+      propertyPath: layerWall.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9128679850021671539, guid: cae6ae782bf4fa34cb2a45c8fc080554,
         type: 3}

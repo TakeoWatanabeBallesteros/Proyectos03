@@ -53,6 +53,8 @@ public class FireBehavior : MonoBehaviour
 
     public GameObject particlesPuttingOut;
 
+    [SerializeField] private LayerMask layerWall;
+
     private void PlayFireSound()
     {
         _onFireSound = RuntimeManager.CreateInstance(onFireSound);
@@ -102,6 +104,8 @@ public class FireBehavior : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        if (Physics.Raycast(new Ray(transform.position, other.transform.position - transform.position), 
+            out RaycastHit hit, Vector3.Distance(other.transform.position, transform.position), layerWall)) return;
         switch (other.tag)
         {
             case "Fire":
