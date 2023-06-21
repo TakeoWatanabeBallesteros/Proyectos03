@@ -53,7 +53,7 @@ public class Blackboard_UIManager : DynamicBlackboard
     public GameObject Fire;
     public Image ChildHappyFaceSprite;
     public Image ChildSadFaceSprite;
-    public GameObject FireHandle;
+    //public GameObject FireHandle;
     public GameObject PontPopUpOrigin;
     public GameObject PointsPrefab;
     public GameObject RedPointsPrefab;
@@ -97,16 +97,18 @@ public class Blackboard_UIManager : DynamicBlackboard
         howToPlayIndex = 0;
         ChildHappyFaceSprite.enabled = false;
         ChildSadFaceSprite.enabled = true;
-        FireHandle.SetActive(false);
+        //FireHandle.SetActive(false);
     }
 
     public void SetLifeBar(float value)
     {
         lifeBar.value = value;
+        /*
         if (value <= 50 && !FireHandle.activeSelf)
         {
             FireHandle.SetActive(true);
         }
+         */
     }
 
     public void SetWaterBar(float value)
