@@ -17,10 +17,12 @@ public class WaterRecharge : MonoBehaviour
 
     FMOD.Studio.EventInstance waterRecharge;
 
+    private Animator Anim;
     private delegate void RechargeDelegate();
     private RechargeDelegate recharge;
 
     private void Start() {
+        Anim = GetComponentInChildren<Animator>();
         blackboardUIManager = Singleton.Instance.UIManager.blackboard_UIManager;
         waterRecharge = FMODUnity.RuntimeManager.CreateInstance("event:/Water/Water refilling at Recharging Stations");
     }
@@ -30,11 +32,13 @@ public class WaterRecharge : MonoBehaviour
     private void GetWater(InputAction.CallbackContext context) {
         recharge = Recharge;
         waterRecharge.start();
+        Anim.SetBool("Recharge", true);
     }
     
     private void StopGetWater(InputAction.CallbackContext context) {
         recharge = null;
         waterRecharge.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        Anim.SetBool("Recharge", false);
     }
     
     private void Recharge() {
