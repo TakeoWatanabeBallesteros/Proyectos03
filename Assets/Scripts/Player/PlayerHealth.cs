@@ -53,7 +53,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
         health = maxHealth;
         blackboardUI.SetLifeBar(health);
         StartCoroutine(blackboardUI.FadeOut());
-        blackboardUI.FireHandle.SetActive(false);
+        //blackboardUI.FireHandle.SetActive(false);
         Dead = false;
         yield return new WaitForSeconds(1f);
         levelTimer.UnpauseTimer();
