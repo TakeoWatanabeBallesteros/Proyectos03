@@ -15,6 +15,7 @@ public class PlayerMovementController : MonoBehaviour
     
     public float Maxspeed;
     public float speed;
+    public float carryingSpeed;
     float currentSpeed;
     //private CameraController mainCamera; pensaba que era un singleton
     

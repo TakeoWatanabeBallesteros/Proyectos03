@@ -70,7 +70,7 @@ public class KidPickAndThrow : MonoBehaviour
             Debug.Log(kid_Type.diff == KidDiff.Diff1 ? "Chose female 1" : "Chose female 2");
         }
         carring_Kid = true;
-        player_Movement.speed *= 1.2f;
+        player_Movement.speed = player_Movement.carryingSpeed;
         blackboard_UI.ChildFace();
         character_Animator.PickChild();
         input.AddThrowFunction(SetGetPower);
