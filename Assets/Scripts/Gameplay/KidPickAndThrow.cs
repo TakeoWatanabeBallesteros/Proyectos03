@@ -59,6 +59,7 @@ public class KidPickAndThrow : MonoBehaviour
     }
 
     private void PickupKid(InputAction.CallbackContext ctx) {
+        if (carring_Kid) return;
         pickup_Text.SetActive(false);
         Destroy(TargetKid);
         TargetKid = null;
